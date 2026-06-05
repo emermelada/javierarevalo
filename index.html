@@ -4,18 +4,17 @@
 		<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<meta name="description" content="Portfolio of Javier Arévalo, Software Developer specialized in Cloud & DevOps.">
-					<title>Javier Arévalo | Software Developer | Cloud & DevOps</title>
+					<title>Javier Arévalo | Software Developer | Nature & Tech</title>
 
 					<script src="https://cdn.tailwindcss.com"></script>
 
 					<link rel="preconnect" href="https://fonts.googleapis.com">
 						<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 							<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 								<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 									<script>
-										// Tailwind Custom Configuration for Premium Dark Tech Theme
+										// Tailwind Custom Configuration for Nature + Tech Theme
 										tailwind.config = {
 										theme: {
 										extend: {
@@ -23,365 +22,329 @@
 										sans: ['Inter', 'sans-serif'],
 										},
 										colors: {
-										darkBg: '#0b0f19',      // Deep slate/carbon matte background
-										darkCard: '#1e293b',    // Slightly lighter card background
-										accentCyan: '#06b6d4',  // Cyan neon highlight
-										accentBlue: '#3b82f6',  // Electric blue hover states
-										silverText: '#94a3b8'   // Muted silver for body text
+										natureBg: '#f4f7f6',      // Light earthy/minty background
+										natureCard: '#ffffff',    // Clean white for cards
+										accentNature: '#10b981',  // Emerald green (Nature)
+										accentTech: '#0ea5e9',    // Sky blue (Tech)
+										textMain: '#1f2937',      // Dark slate for readability
+										textMuted: '#6b7280'      // Gray for secondary text
 										}
 										}
 										}
 										}
 									</script>
 									<style>
-										/* Custom scrollbar matching the dark tech theme */
+										/* Custom scrollbar matching the new nature/tech theme */
 										::-webkit-scrollbar {
 										width: 8px;
 										}
 										::-webkit-scrollbar-track {
-										background: #0b0f19;
+										background: #f4f7f6;
 										}
 										::-webkit-scrollbar-thumb {
-										background: #1e293b;
+										background: #cbd5e1;
 										border-radius: 4px;
 										}
 										::-webkit-scrollbar-thumb:hover {
-										background: #06b6d4;
+										background: #10b981;
+										}
+										/* Gradient text utility */
+										.text-gradient {
+										background-clip: text;
+										-webkit-background-clip: text;
+										-webkit-text-fill-color: transparent;
 										}
 									</style>
 								</head>
-	<body class="bg-darkBg text-slate-100 font-sans antialiased selection:bg-accentCyan selection:text-darkBg">
+	<body class="bg-natureBg text-textMain font-sans antialiased selection:bg-accentNature selection:text-white">
 
-		<header class="sticky top-0 z-50 backdrop-blur-md bg-darkBg/70 border-b border-slate-800/60 transition-all duration-300">
+		<header class="sticky top-0 z-50 backdrop-blur-md bg-natureBg/80 border-b border-gray-200 transition-all duration-300">
 			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-				<a href="#" class="text-xl font-bold tracking-tight bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent hover:from-accentCyan hover:to-accentBlue transition-all duration-300">
-					JA<span class="text-accentCyan">.</span>
+				<a href="#" class="text-xl font-bold tracking-tight text-textMain hover:text-accentNature transition-all duration-300">
+					JA<span class="text-accentNature">.</span>
 				</a>
 				<nav class="hidden md:flex space-x-8 text-sm font-medium">
-					<a href="#about" class="text-silverText hover:text-white transition-colors duration-200">About</a>
-					<a href="#projects" class="text-silverText hover:text-white transition-colors duration-200">Projects</a>
-					<a href="#experience" class="text-silverText hover:text-white transition-colors duration-200">Experience</a>
-					<a href="#skills" class="text-silverText hover:text-white transition-colors duration-200">Skills & Education</a>
+					<a href="#about" class="text-textMuted hover:text-accentNature transition-colors duration-200">About</a>
+					<a href="#projects" class="text-textMuted hover:text-accentNature transition-colors duration-200">Projects</a>
+					<a href="#experience" class="text-textMuted hover:text-accentNature transition-colors duration-200">Experience</a>
+					<a href="#skills" class="text-textMuted hover:text-accentNature transition-colors duration-200">Skills</a>
 				</nav>
-				<button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="md:hidden text-silverText hover:text-white focus:outline-none">
+				<button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="md:hidden text-textMuted hover:text-accentNature focus:outline-none">
 					<i class="fa-solid fa-bars text-xl"></i>
 				</button>
 			</div>
-			<nav id="mobile-menu" class="hidden md:hidden bg-darkBg border-b border-slate-800 px-4 pt-2 pb-4 space-y-3">
-				<a href="#about" class="block text-silverText hover:text-white text-base">About</a>
-				<a href="#projects" class="block text-silverText hover:text-white text-base">Projects</a>
-				<a href="#experience" class="block text-silverText hover:text-white text-base">Experience</a>
-				<a href="#skills" class="block text-silverText hover:text-white text-base">Skills & Education</a>
+			<nav id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-3 shadow-lg">
+				<a href="#about" class="block text-textMuted hover:text-accentNature text-base">About</a>
+				<a href="#projects" class="block text-textMuted hover:text-accentNature text-base">Projects</a>
+				<a href="#experience" class="block text-textMuted hover:text-accentNature text-base">Experience</a>
+				<a href="#skills" class="block text-textMuted hover:text-accentNature text-base">Skills</a>
 			</nav>
 		</header>
 
 		<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-32">
 
+			<!-- HERO SECTION -->
 			<section id="hero" class="min-h-[70vh] flex flex-col-reverse md:flex-row items-center justify-between gap-12 pt-4 md:pt-12">
 				<div class="flex-1 space-y-6 text-center md:text-left">
-					<div class="inline-flex items-center space-x-2 bg-slate-800/50 border border-slate-700/50 rounded-full px-3 py-1 text-xs text-accentCyan">
-						<span class="w-2 h-2 rounded-full bg-accentCyan animate-pulse"></span>
-						<span>Open to research & international engineering roles</span>
+					<div class="inline-flex items-center space-x-2 bg-white shadow-sm border border-green-100 rounded-full px-4 py-1.5 text-xs text-accentNature font-medium">
+						<i class="fa-solid fa-leaf"></i>
+						<span>Connecting Tech & Nature</span>
 					</div>
-					<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white">
-						Hi, I'm <span class="bg-gradient-to-r from-accentCyan to-accentBlue bg-clip-text text-transparent">Javier Arévalo</span>
+					<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-textMain">
+						Hi, I'm <span class="bg-gradient-to-r from-accentNature to-accentTech text-gradient">Javier Arévalo</span>
 					</h1>
-					<p class="text-xl sm:text-2xl font-medium text-slate-400">
+					<p class="text-xl sm:text-2xl font-medium text-textMuted">
 						Software Developer | Cloud & DevOps
 					</p>
 					<div class="flex items-center justify-center md:justify-start gap-4 pt-2">
-						<a href="https://github.com" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-lg bg-slate-800/40 border border-slate-700/50 text-silverText hover:text-accentCyan hover:border-accentCyan transition-all duration-300 group" title="GitHub">
+						<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentNature hover:border-accentNature transition-all duration-300 group">
 							<i class="fa-brands fa-github text-xl group-hover:scale-110 transition-transform"></i>
 						</a>
-						<a href="https://linkedin.com" aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-lg bg-slate-800/40 border border-slate-700/50 text-silverText hover:text-accentCyan hover:border-accentCyan transition-all duration-300 group" title="LinkedIn">
+						<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentTech hover:border-accentTech transition-all duration-300 group">
 							<i class="fa-brands fa-linkedin-in text-xl group-hover:scale-110 transition-transform"></i>
 						</a>
-						<a href="mailto:javier.arevalo.11111@gmail.com" aria-label="Send Email" class="w-11 h-11 flex items-center justify-center rounded-lg bg-slate-800/40 border border-slate-700/50 text-silverText hover:text-accentCyan hover:border-accentCyan transition-all duration-300 group" title="Email">
+						<a href="mailto:javier.arevalo.11111@gmail.com" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentNature hover:border-accentNature transition-all duration-300 group">
 							<i class="fa-solid fa-envelope text-xl group-hover:scale-110 transition-transform"></i>
 						</a>
 					</div>
 				</div>
 				<div class="flex-shrink-0 relative group">
-					<div class="absolute -inset-1 rounded-full bg-gradient-to-r from-accentCyan to-accentBlue opacity-40 blur group-hover:opacity-70 transition duration-500"></div>
-					<div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-darkCard overflow-hidden border-2 border-slate-700/50 flex items-center justify-center">
-						<svg class="w-24 h-24 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-						</svg>
+					<div class="absolute -inset-1 rounded-full bg-gradient-to-tr from-accentNature to-accentTech opacity-30 blur group-hover:opacity-50 transition duration-500"></div>
+					<div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-white overflow-hidden border-4 border-white shadow-xl flex items-center justify-center">
+						<i class="fa-solid fa-code text-6xl text-gray-300"></i>
 					</div>
 				</div>
 			</section>
 
-			<hr class="border-slate-800/60">
+			<hr class="border-gray-200">
 
+				<!-- ABOUT SECTION -->
 				<section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-24">
 					<div class="md:col-span-2 space-y-4">
-						<h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-							<span class="text-accentCyan text-lg">&lt;/&gt;</span> About Me
+						<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
+							<i class="fa-solid fa-seedling text-accentNature"></i> About Me
 						</h2>
-						<p class="text-base text-silverText leading-relaxed shadow-sm">
+						<p class="text-base text-textMuted leading-relaxed">
 							Deeply passionate about technology, software development, and non-stop learning. I identify as a highly curious and analytical problem solver, with a proven ability to adapt fast and tackle complex engineering bottlenecks. I enjoy researching and building clean, highly performant systems architectures, working effectively both within collaborative team agile environments or pushing milestones autonomously. Beyond my engineering baseline, I actively maintain a disciplined life through sports and nature exploration, which fuel my drive to outperform expectations and bring premium execution to every project.
 						</p>
 					</div>
-					<div class="bg-slate-900/40 border border-slate-800/80 rounded-xl p-6 h-fit space-y-6">
+					<div class="bg-white shadow-md border border-gray-100 rounded-2xl p-6 h-fit space-y-6">
 						<div>
-							<h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400 mb-3">Languages Spoken</h3>
+							<h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400 mb-3">Languages Spoken</h3>
 							<div class="space-y-3">
 								<div class="flex justify-between items-center text-sm">
-									<span class="font-medium text-slate-200">English</span>
-									<span class="px-2 py-0.5 bg-accentCyan/10 border border-accentCyan/20 text-accentCyan text-xs rounded-md font-semibold">C1 Advanced</span>
+									<span class="font-medium text-textMain">English</span>
+									<span class="px-2 py-0.5 bg-green-50 border border-green-200 text-accentNature text-xs rounded-md font-semibold">C1 Advanced</span>
 								</div>
 								<div class="flex justify-between items-center text-sm">
-									<span class="font-medium text-slate-200">Spanish</span>
-									<span class="px-2 py-0.5 bg-slate-800 border border-slate-700 text-slate-400 text-xs rounded-md font-semibold">Native</span>
+									<span class="font-medium text-textMain">Spanish</span>
+									<span class="px-2 py-0.5 bg-gray-100 border border-gray-200 text-textMuted text-xs rounded-md font-semibold">Native</span>
 								</div>
 							</div>
 						</div>
-						<div class="pt-4 border-t border-slate-800">
-							<h3 class="text-sm font-semibold tracking-wider uppercase text-slate-400 mb-2">Core Motivation</h3>
-							<p class="text-xs text-silverText leading-relaxed">
+						<div class="pt-4 border-t border-gray-100">
+							<h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400 mb-2">Core Motivation</h3>
+							<p class="text-xs text-textMuted leading-relaxed">
 								Leveraging full-stack & DevOps competencies to construct highly resilient cyber-physical and cloud systems.
 							</p>
 						</div>
 					</div>
 				</section>
 
-				<hr class="border-slate-800/60">
+				<hr class="border-gray-200">
 
+					<!-- PROJECTS CAROUSEL SECTION -->
 					<section id="projects" class="space-y-8 scroll-mt-24">
-						<div>
-							<h2 class="text-2xl font-bold tracking-tight text-white">
-								Featured Systems & Devlogs
+						<div class="text-center sm:text-left">
+							<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center justify-center sm:justify-start gap-2">
+								<i class="fa-solid fa-laptop-code text-accentTech"></i> Featured Systems
 							</h2>
-							<p class="text-sm text-silverText mt-1">
-								Deep dive engineering showcases blending complex software implementation with detailed visual walk-throughs.
+							<p class="text-sm text-textMuted mt-2">
+								Swipe or click the dots to explore my deep dive engineering showcases.
 							</p>
 						</div>
 
-						<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+						<!-- Carousel Wrapper -->
+						<div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl">
 
-							<div class="bg-slate-900/50 border border-slate-800/80 hover:border-slate-700/80 rounded-xl overflow-hidden transition-all duration-300 flex flex-col group shadow-lg">
-								<div class="relative aspect-video w-full bg-slate-950">
-									<div class="absolute inset-0 flex items-center justify-center text-slate-700 group-hover:text-accentCyan transition-colors">
-										<i class="fa-brands fa-youtube text-5xl"></i>
-										<span class="absolute bottom-3 text-xs font-mono text-slate-500">[YouTube Devlog Container Embed]</span>
-									</div>
-								</div>
-								<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-									<div class="space-y-2">
-										<h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-accentCyan transition-colors">IoT Smart Standing Desk</h3>
-										<div class="flex flex-wrap gap-1.5">
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">C++</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">ESP32</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">IoT MQTT</span>
+							<!-- Carousel Track -->
+							<div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+
+								<!-- Slide 1 -->
+								<div class="w-full flex-shrink-0 px-2 sm:px-4">
+									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
+										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
+											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
 										</div>
-										<ul class="text-xs text-silverText space-y-1.5 pt-2 list-none">
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Problem:</strong> Stock manual interfaces offer no reactive automation or ergonomic feedback loops.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Solution:</strong> Built an embedded hardware controller intercepting signal lines via custom optocouplers.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Key Tech:</strong> Wrote firmware managing automated time-based height corrections and safety checks.
-												</span>
-											</li>
-										</ul>
-									</div>
-									<div class="grid grid-cols-2 gap-3 pt-2">
-										<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-github"></i> View Code
-										</a>
-										<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-red-950/30 border border-red-900/40 hover:bg-red-900/40 text-red-400 text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-youtube"></i> Watch Devlog
-										</a>
-									</div>
-								</div>
-							</div>
-
-							<div class="bg-slate-900/50 border border-slate-800/80 hover:border-slate-700/80 rounded-xl overflow-hidden transition-all duration-300 flex flex-col group shadow-lg">
-								<div class="relative aspect-video w-full bg-slate-950">
-									<div class="absolute inset-0 flex items-center justify-center text-slate-700 group-hover:text-accentCyan transition-colors">
-										<i class="fa-brands fa-youtube text-5xl"></i>
-										<span class="absolute bottom-3 text-xs font-mono text-slate-500">[YouTube Devlog Container Embed]</span>
-									</div>
-								</div>
-								<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-									<div class="space-y-2">
-										<h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-accentCyan transition-colors">Mount Stray: Procedural Roguelike</h3>
-										<div class="flex flex-wrap gap-1.5">
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">Java</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">Algorithms</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">ECS Architecture</span>
+										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
+											<div>
+												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">IoT Smart Standing Desk</h3>
+												<div class="flex flex-wrap gap-2 mt-3">
+													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">C++</span>
+													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">ESP32</span>
+													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">IoT MQTT</span>
+												</div>
+											</div>
+											<p class="text-sm text-textMuted">Built an embedded hardware controller intercepting signal lines via custom optocouplers to automate time-based height corrections.</p>
+											<div class="flex gap-3 pt-2">
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-github"></i> Code
+												</a>
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-youtube"></i> Watch
+												</a>
+											</div>
 										</div>
-										<ul class="text-xs text-silverText space-y-1.5 pt-2 list-none">
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Problem:</strong> Standard linear world progression reduces structural algorithmic scaling and reply loops.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Solution:</strong> Conceived a post-apocalyptic mountain climbing roguelike driven by programmatic map arrays.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Key Tech:</strong> Implemented noise sampling equations and pathfinders for node map networks.
-												</span>
-											</li>
-										</ul>
-									</div>
-									<div class="grid grid-cols-2 gap-3 pt-2">
-										<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-github"></i> View Code
-										</a>
-										<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-red-950/30 border border-red-900/40 hover:bg-red-900/40 text-red-400 text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-youtube"></i> Watch Devlog
-										</a>
 									</div>
 								</div>
-							</div>
 
-							<div class="bg-slate-900/50 border border-slate-800/80 hover:border-slate-700/80 rounded-xl overflow-hidden transition-all duration-300 flex flex-col group shadow-lg">
-								<div class="relative aspect-video w-full bg-slate-950">
-									<div class="absolute inset-0 flex items-center justify-center text-slate-700 group-hover:text-accentCyan transition-colors">
-										<i class="fa-brands fa-youtube text-5xl"></i>
-										<span class="absolute bottom-3 text-xs font-mono text-slate-500">[YouTube Devlog Container Embed]</span>
-									</div>
-								</div>
-								<div class="p-5 flex-1 flex flex-col justify-between space-y-4">
-									<div class="space-y-2">
-										<h3 class="text-lg font-semibold text-white tracking-tight group-hover:text-accentCyan transition-colors">AI Desktop Companion</h3>
-										<div class="flex flex-wrap gap-1.5">
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">Python</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">Edge AI</span>
-											<span class="px-2 py-0.5 bg-slate-800 text-slate-300 text-[11px] font-medium rounded-md">Raspberry Pi 5</span>
+								<!-- Slide 2 -->
+								<div class="w-full flex-shrink-0 px-2 sm:px-4">
+									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
+										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
+											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
 										</div>
-										<ul class="text-xs text-silverText space-y-1.5 pt-2 list-none">
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Problem:</strong> Cloud-reliant assistants generate heavy structural processing latencies and privacy concerns.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Solution:</strong> Deployed a local physical hardware companion executing low-footprint local LLMs natively.
-												</span>
-											</li>
-											<li class="flex items-start gap-2">
-												<span class="text-accentCyan mt-0.5">▪</span>
-												<span>
-													<strong>Key Tech:</strong> Structured speech pipes using optimized Whisper wrappers and integrated RAG pipelines.
-												</span>
-											</li>
-										</ul>
-									</div>
-									<div class="grid grid-cols-2 gap-3 pt-2">
-										<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-github"></i> View Code
-										</a>
-										<a href="https://youtube.com" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 px-3 py-2 bg-red-950/30 border border-red-900/40 hover:bg-red-900/40 text-red-400 text-xs font-medium rounded-lg transition-colors">
-											<i class="fa-brands fa-youtube"></i> Watch Devlog
-										</a>
+										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
+											<div>
+												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">Mount Stray: Procedural Roguelike</h3>
+												<div class="flex flex-wrap gap-2 mt-3">
+													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">Java</span>
+													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">Algorithms</span>
+													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">ECS</span>
+												</div>
+											</div>
+											<p class="text-sm text-textMuted">Conceived a post-apocalyptic mountain climbing roguelike implementing noise sampling equations and pathfinders for node map networks.</p>
+											<div class="flex gap-3 pt-2">
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-github"></i> Code
+												</a>
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-youtube"></i> Watch
+												</a>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
 
+								<!-- Slide 3 -->
+								<div class="w-full flex-shrink-0 px-2 sm:px-4">
+									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
+										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
+											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
+											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
+										</div>
+										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
+											<div>
+												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">AI Desktop Companion</h3>
+												<div class="flex flex-wrap gap-2 mt-3">
+													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">Python</span>
+													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">Edge AI</span>
+													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">Raspberry Pi</span>
+												</div>
+											</div>
+											<p class="text-sm text-textMuted">Deployed a physical hardware companion executing low-footprint local LLMs natively, structured with optimized Whisper wrappers.</p>
+											<div class="flex gap-3 pt-2">
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-github"></i> Code
+												</a>
+												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
+													<i class="fa-brands fa-youtube"></i> Watch
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+
+						<!-- Carousel Navigation Dots -->
+						<div class="flex justify-center items-center gap-2 pt-4" id="carousel-dots">
+							<button class="carousel-dot w-8 h-2.5 rounded-full bg-accentNature transition-all duration-300" aria-label="Go to slide 1"></button>
+							<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" aria-label="Go to slide 2"></button>
+							<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" aria-label="Go to slide 3"></button>
 						</div>
 					</section>
 
-					<hr class="border-slate-800/60">
+					<hr class="border-gray-200">
 
+						<!-- EXPERIENCE SECTION -->
 						<section id="experience" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-24">
 							<div class="space-y-3">
-								<h2 class="text-2xl font-bold tracking-tight text-white">Professional Experience</h2>
-								<p class="text-sm text-silverText">
+								<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
+									<i class="fa-solid fa-briefcase text-accentTech"></i> Experience
+								</h2>
+								<p class="text-sm text-textMuted">
 									Chronological outline of enterprise internships and industry engineering exposure.
 								</p>
 							</div>
-							<div class="md:col-span-2 relative border-l border-slate-800 pl-6 ml-2 space-y-10">
-
+							<div class="md:col-span-2 relative border-l-2 border-green-100 pl-6 ml-2 space-y-10">
 								<div class="relative group">
-									<div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-accentCyan group-hover:bg-accentCyan transition-colors duration-300 shadow-[0_0_8px_rgba(6,182,212,0.5)]"></div>
-									<div class="space-y-1">
-										<span class="text-xs font-mono font-semibold text-accentCyan">March 2026 - May 2026</span>
-										<h3 class="text-lg font-semibold text-white tracking-tight">Cloud Developer Intern</h3>
-										<p class="text-sm font-medium text-slate-400">Axazure S.L. | Madrid, Spain</p>
-										<p class="text-xs text-silverText leading-relaxed pt-1">
+									<div class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-accentNature group-hover:bg-accentNature transition-colors duration-300 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
+									<div class="space-y-1 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+										<span class="text-xs font-mono font-semibold text-accentNature">March 2026 - May 2026</span>
+										<h3 class="text-lg font-bold text-textMain tracking-tight">Cloud Developer Intern</h3>
+										<p class="text-sm font-medium text-accentTech">Axazure S.L. | Madrid, Spain</p>
+										<p class="text-sm text-textMuted leading-relaxed pt-2">
 											Collaborated in designing and provisioning reliable infrastructure operations, sharpening systems orchestration and modern cloud delivery metrics.
 										</p>
 									</div>
 								</div>
 
 								<div class="relative group">
-									<div class="absolute -left-[31px] top-1.5 w-4 h-4 rounded-full bg-darkBg border-2 border-slate-700 group-hover:border-accentCyan group-hover:bg-accentCyan transition-colors duration-300"></div>
-									<div class="space-y-1">
-										<span class="text-xs font-mono font-semibold text-slate-500">March 2025 - June 2025</span>
-										<h3 class="text-lg font-semibold text-white tracking-tight">Software Developer Intern</h3>
-										<p class="text-sm font-medium text-slate-400">Skiller Academy S.L. | Remote</p>
-										<p class="text-xs text-silverText leading-relaxed pt-1">
+									<div class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-gray-300 group-hover:border-accentTech transition-colors duration-300"></div>
+									<div class="space-y-1 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
+										<span class="text-xs font-mono font-semibold text-gray-500">March 2025 - June 2025</span>
+										<h3 class="text-lg font-bold text-textMain tracking-tight">Software Developer Intern</h3>
+										<p class="text-sm font-medium text-accentTech">Skiller Academy S.L. | Remote</p>
+										<p class="text-sm text-textMuted leading-relaxed pt-2">
 											Engineered logical codebase components, handling cross-functional requirements alongside modern agile delivery frameworks.
 										</p>
 									</div>
 								</div>
-
 							</div>
 						</section>
 
-						<hr class="border-slate-800/60">
+						<hr class="border-gray-200">
 
+							<!-- SKILLS & EDUCATION SECTION -->
 							<section id="skills" class="space-y-12 scroll-mt-24">
-
 								<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
 									<div class="space-y-2">
-										<h2 class="text-2xl font-bold tracking-tight text-white">Technical Skillset</h2>
-										<p class="text-sm text-silverText">
+										<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
+											<i class="fa-solid fa-layer-group text-accentNature"></i> Skillset
+										</h2>
+										<p class="text-sm text-textMuted">
 											Granular classification of programming environments, target frameworks, and runtime methodologies.
 										</p>
 									</div>
 
 									<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-										<div class="bg-slate-900/30 border border-slate-800/80 rounded-xl p-5 space-y-3">
-											<h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Languages</h3>
-											<div class="flex flex-wrap gap-1.5">
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Java (Dominant)</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Kotlin</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Swift</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">SQL</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-slate-400 text-xs rounded-md border border-slate-800">HTML/CSS/JS</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-slate-400 text-xs rounded-md border border-slate-800">Python</span>
+										<div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
+											<h3 class="text-sm font-bold text-textMain uppercase tracking-wider flex items-center gap-2">
+												<i class="fa-solid fa-code text-accentTech"></i> Languages
+											</h3>
+											<div class="flex flex-wrap gap-2">
+												<span class="px-3 py-1 bg-green-50 text-accentNature text-xs rounded-full font-medium">Java</span>
+												<span class="px-3 py-1 bg-blue-50 text-accentTech text-xs rounded-full font-medium">Kotlin</span>
+												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Swift</span>
+												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">SQL</span>
+												<span class="px-3 py-1 bg-gray-50 text-textMuted text-xs rounded-full font-medium border border-gray-200">HTML/CSS/JS</span>
+												<span class="px-3 py-1 bg-gray-50 text-textMuted text-xs rounded-full font-medium border border-gray-200">Python</span>
 											</div>
 										</div>
-										<div class="bg-slate-900/30 border border-slate-800/80 rounded-xl p-5 space-y-3">
-											<h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Frameworks & Tools</h3>
-											<div class="flex flex-wrap gap-1.5">
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Android SDK</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">iOS Development</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Git / GitHub</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">AWS Cloud</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Firebase</span>
-											</div>
-										</div>
-										<div class="bg-slate-900/30 border border-slate-800/80 rounded-xl p-5 space-y-3">
-											<h3 class="text-sm font-semibold text-slate-300 uppercase tracking-wider">Databases & Architecture</h3>
-											<div class="flex flex-wrap gap-1.5">
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">MySQL</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">MongoDB</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">UX/UI Design (Figma)</span>
-												<span class="px-2.5 py-1 bg-slate-800/60 text-white text-xs rounded-md border border-slate-700/50">Agile (Scrum)</span>
+										<div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
+											<h3 class="text-sm font-bold text-textMain uppercase tracking-wider flex items-center gap-2">
+												<i class="fa-solid fa-wrench text-accentTech"></i> Frameworks & Tools
+											</h3>
+											<div class="flex flex-wrap gap-2">
+												<span class="px-3 py-1 bg-green-50 text-accentNature text-xs rounded-full font-medium">Android SDK</span>
+												<span class="px-3 py-1 bg-blue-50 text-accentTech text-xs rounded-full font-medium">AWS Cloud</span>
+												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">iOS Dev</span>
+												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Git / GitHub</span>
+												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Firebase</span>
 											</div>
 										</div>
 									</div>
@@ -389,89 +352,87 @@
 
 								<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-6">
 									<div class="space-y-2">
-										<h2 class="text-2xl font-bold tracking-tight text-white">Academic Journey</h2>
-										<p class="text-sm text-silverText">
-											University foundation and technical multiplatform degrees.
-										</p>
+										<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
+											<i class="fa-solid fa-graduation-cap text-accentNature"></i> Education
+										</h2>
 									</div>
 									<div class="md:col-span-2 space-y-6">
-										<div class="relative bg-slate-900/20 border border-slate-800/60 rounded-xl p-6 hover:border-slate-700/40 transition-colors">
-											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-												<h3 class="text-lg font-bold text-white">BSc in Computer Science</h3>
-												<span class="text-xs font-mono text-accentCyan bg-accentCyan/10 border border-accentCyan/20 px-2 py-0.5 rounded-md w-fit font-semibold">Sept 2026 - Present</span>
+										<div class="bg-white border-l-4 border-accentNature shadow-sm rounded-r-xl p-6 hover:shadow-md transition-shadow">
+											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+												<h3 class="text-lg font-bold text-textMain">BSc in Computer Science</h3>
+												<span class="text-xs font-mono text-accentNature bg-green-50 border border-green-200 px-2 py-1 rounded-md w-fit font-semibold">Sept 2026 - Present</span>
 											</div>
-											<p class="text-sm font-medium text-slate-300">University of Southern Denmark (SDU)</p>
-											<p class="text-xs text-slate-500 mt-0.5">Vejle, Denmark</p>
+											<p class="text-sm font-medium text-accentTech">University of Southern Denmark (SDU)</p>
+											<p class="text-xs text-textMuted mt-1">Vejle, Denmark</p>
 										</div>
-										<div class="relative bg-slate-900/20 border border-slate-800/60 rounded-xl p-6 hover:border-slate-700/40 transition-colors">
-											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-2">
-												<h3 class="text-lg font-bold text-white">Higher National Diploma (HND) in Multiplatform Applications Development (DAM)</h3>
-												<span class="text-xs font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded-md w-fit">Sept 2023 - June 2025</span>
+										<div class="bg-white border-l-4 border-gray-300 shadow-sm rounded-r-xl p-6 hover:shadow-md transition-shadow">
+											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+												<h3 class="text-lg font-bold text-textMain">HND in Multiplatform App Development</h3>
+												<span class="text-xs font-mono text-gray-600 bg-gray-100 border border-gray-200 px-2 py-1 rounded-md w-fit font-semibold">Sept 2023 - June 2025</span>
 											</div>
-											<p class="text-sm font-medium text-slate-300">Universidad U-TAD</p>
-											<p class="text-xs text-slate-500 mt-0.5">Madrid, Spain</p>
-										</div>
-									</div>
-								</div>
-
-								<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-6">
-									<div class="space-y-1">
-										<h2 class="text-xl font-bold tracking-tight text-white">Certifications</h2>
-									</div>
-									<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-4">
-										<div class="p-4 bg-slate-900/40 border border-slate-800/60 rounded-xl text-center space-y-1">
-											<div class="text-accentCyan mb-1">
-												<i class="fa-solid fa-certificate"></i>
-											</div>
-											<h4 class="text-xs font-semibold text-slate-200">Programmatic Advertising Specialist</h4>
-											<p class="text-[11px] text-slate-500">Skiller Academy</p>
-										</div>
-										<div class="p-4 bg-slate-900/40 border border-slate-800/60 rounded-xl text-center space-y-1">
-											<div class="text-accentCyan mb-1">
-												<i class="fa-brands fa-python"></i>
-											</div>
-											<h4 class="text-xs font-semibold text-slate-200">Python Essentials 1</h4>
-											<p class="text-[11px] text-slate-500">Cisco Networking Academy</p>
-										</div>
-										<div class="p-4 bg-slate-900/40 border border-slate-800/60 rounded-xl text-center space-y-1">
-											<div class="text-accentCyan mb-1">
-												<i class="fa-solid fa-brain"></i>
-											</div>
-											<h4 class="text-xs font-semibold text-slate-200">Python for Data Science & AI</h4>
-											<p class="text-[11px] text-slate-500">IBM / Coursera</p>
+											<p class="text-sm font-medium text-accentTech">Universidad U-TAD</p>
+											<p class="text-xs text-textMuted mt-1">Madrid, Spain</p>
 										</div>
 									</div>
 								</div>
-
 							</section>
 
 						</main>
 
-		<footer class="border-t border-slate-900 mt-24 bg-slate-950/40">
-			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
-				<p>&copy; 2026 Javier Arévalo. Built for scalable performant execution.</p>
+		<footer class="border-t border-gray-200 mt-24 bg-white">
+			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-textMuted gap-4">
+				<p>&copy; 2026 Javier Arévalo. Connecting logic and nature.</p>
 				<div class="flex space-x-6">
-					<a href="https://github.com" aria-label="GitHub Profile" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">GitHub</a>
-					<a href="https://linkedin.com" aria-label="LinkedIn Profile" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">LinkedIn</a>
+					<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-accentNature transition-colors text-lg">
+						<i class="fa-brands fa-github"></i>
+					</a>
+					<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-accentTech transition-colors text-lg">
+						<i class="fa-brands fa-linkedin-in"></i>
+					</a>
 				</div>
 			</div>
 		</footer>
 
 		<script>
+			// --- Mobile Menu Logic ---
 			const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 			const mobileMenu = document.getElementById('mobile-menu');
 
-			// Toggle mobile dropdown menu visibility
 			mobileMenuBtn.addEventListener('click', () => {
 			mobileMenu.classList.toggle('hidden');
 			});
 
-			// Close mobile dropdown menu when clicking any nav anchor link
 			const mobileLinks = mobileMenu.querySelectorAll('a');
 			mobileLinks.forEach(link => {
 			link.addEventListener('click', () => {
 			mobileMenu.classList.add('hidden');
 			});
+			});
+
+			// --- Carousel Logic ---
+			const track = document.getElementById('carousel-track');
+			const dots = document.querySelectorAll('.carousel-dot');
+			let currentSlide = 0;
+
+			function updateCarousel(index) {
+			currentSlide = index;
+			// Move track
+			track.style.transform = `translateX(-${index * 100}%)`;
+
+			// Update dots styles
+			dots.forEach((dot, i) => {
+			if (i === index) {
+			dot.classList.remove('w-2.5', 'bg-gray-300', 'hover:bg-gray-400');
+			dot.classList.add('w-8', 'bg-accentNature');
+			} else {
+			dot.classList.add('w-2.5', 'bg-gray-300', 'hover:bg-gray-400');
+			dot.classList.remove('w-8', 'bg-accentNature');
+			}
+			});
+			}
+
+			dots.forEach((dot, index) => {
+			dot.addEventListener('click', () => updateCarousel(index));
 			});
 		</script>
 	</body>
