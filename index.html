@@ -1,392 +1,433 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 	<head>
 		<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-				<meta name="description" content="Portfolio of Javier Arévalo, Software Developer specialized in Cloud & DevOps.">
-					<title>Javier Arévalo | Software Developer | Nature & Tech</title>
+				<meta name="description" content="Portfolio profesional de Javier Arévalo, Desarrollador de Software especializado en Cloud & DevOps con enfoque sostenible.">
+					<title>Javier Arévalo | Software Developer | Cloud & DevOps</title>
 
 					<script src="https://cdn.tailwindcss.com"></script>
 
 					<link rel="preconnect" href="https://fonts.googleapis.com">
 						<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-							<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+							<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 								<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 									<script>
-										// Tailwind Custom Configuration for Nature + Tech Theme
 										tailwind.config = {
 										theme: {
 										extend: {
 										fontFamily: {
-										sans: ['Inter', 'sans-serif'],
+										sans: ['Plus Jakarta Sans', 'sans-serif'],
 										},
 										colors: {
-										natureBg: '#f4f7f6',      // Light earthy/minty background
-										natureCard: '#ffffff',    // Clean white for cards
-										accentNature: '#10b981',  // Emerald green (Nature)
-										accentTech: '#0ea5e9',    // Sky blue (Tech)
-										textMain: '#1f2937',      // Dark slate for readability
-										textMuted: '#6b7280'      // Gray for secondary text
+										brandBg: '#f8fafc',         // Fondo limpio, aireado y moderno
+										brandCard: '#ffffff',       // Blanco puro para destacar el contenido
+										natEmerald: '#059669',     // Verde esmeralda profundo (Naturaleza/Crecimiento)
+										natMint: '#e6f4ea',        // Menta suave para fondos de etiquetas
+										techBlue: '#0284c7',       // Azul cielo tecnológico (Cloud/DevOps)
+										techCyan: '#e0f2fe',       // Cyan suave para acentos tech
+										textDark: '#0f172a',       // Slate oscuro de alta legibilidad
+										textMuted: '#475569'       // Gris profesional para textos secundarios
 										}
 										}
 										}
 										}
 									</script>
 									<style>
-										/* Custom scrollbar matching the new nature/tech theme */
-										::-webkit-scrollbar {
-										width: 8px;
-										}
-										::-webkit-scrollbar-track {
-										background: #f4f7f6;
-										}
-										::-webkit-scrollbar-thumb {
-										background: #cbd5e1;
-										border-radius: 4px;
-										}
-										::-webkit-scrollbar-thumb:hover {
-										background: #10b981;
-										}
-										/* Gradient text utility */
+										::-webkit-scrollbar { width: 10px; }
+										::-webkit-scrollbar-track { background: #f1f5f9; }
+										::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
+										::-webkit-scrollbar-thumb:hover { background: #059669; }
+
 										.text-gradient {
-										background-clip: text;
+										background: linear-gradient(135deg, #059669 0%, #0284c7 100%);
 										-webkit-background-clip: text;
 										-webkit-text-fill-color: transparent;
 										}
 									</style>
 								</head>
-	<body class="bg-natureBg text-textMain font-sans antialiased selection:bg-accentNature selection:text-white">
+	<body class="bg-brandBg text-textDark font-sans antialiased selection:bg-natEmerald selection:text-white">
 
-		<header class="sticky top-0 z-50 backdrop-blur-md bg-natureBg/80 border-b border-gray-200 transition-all duration-300">
-			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-				<a href="#" class="text-xl font-bold tracking-tight text-textMain hover:text-accentNature transition-all duration-300">
-					JA<span class="text-accentNature">.</span>
+		<header class="sticky top-0 z-50 backdrop-blur-xl bg-brandBg/75 border-b border-slate-200/80 transition-all duration-300">
+			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+				<a href="#" class="text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform duration-300">
+					JA<span class="text-natEmerald">.</span>
 				</a>
-				<nav class="hidden md:flex space-x-8 text-sm font-medium">
-					<a href="#about" class="text-textMuted hover:text-accentNature transition-colors duration-200">About</a>
-					<a href="#projects" class="text-textMuted hover:text-accentNature transition-colors duration-200">Projects</a>
-					<a href="#experience" class="text-textMuted hover:text-accentNature transition-colors duration-200">Experience</a>
-					<a href="#skills" class="text-textMuted hover:text-accentNature transition-colors duration-200">Skills</a>
+				<nav class="hidden md:flex items-center space-x-10 text-sm font-semibold">
+					<a href="#about" class="text-textMuted hover:text-natEmerald transition-colors">Sobre mí</a>
+					<a href="#experience" class="text-textMuted hover:text-natEmerald transition-colors">Trayectoria</a>
+					<a href="#projects" class="text-textMuted hover:text-techBlue transition-colors">Proyectos Destacados</a>
+					<a href="#skills" class="text-textMuted hover:text-natEmerald transition-colors">Habilidades</a>
+					<a href="mailto:javier.arevalo.11111@gmail.com" class="px-5 py-2.5 bg-textDark hover:bg-natEmerald text-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5">
+						Contactar <i class="fa-solid fa-arrow-right ml-2 text-xs opacity-80"></i>
+					</a>
 				</nav>
-				<button id="mobile-menu-btn" aria-label="Toggle navigation menu" class="md:hidden text-textMuted hover:text-accentNature focus:outline-none">
-					<i class="fa-solid fa-bars text-xl"></i>
+				<button id="mobile-menu-btn" aria-label="Abrir menú" class="md:hidden text-textMuted hover:text-natEmerald p-2 rounded-lg bg-white shadow-sm border border-slate-200">
+					<i class="fa-solid fa-bars-staggered text-xl"></i>
 				</button>
 			</div>
-			<nav id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-200 px-4 pt-2 pb-4 space-y-3 shadow-lg">
-				<a href="#about" class="block text-textMuted hover:text-accentNature text-base">About</a>
-				<a href="#projects" class="block text-textMuted hover:text-accentNature text-base">Projects</a>
-				<a href="#experience" class="block text-textMuted hover:text-accentNature text-base">Experience</a>
-				<a href="#skills" class="block text-textMuted hover:text-accentNature text-base">Skills</a>
+			<nav id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0 animate-fadeIn">
+				<a href="#about" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Sobre mí</a>
+				<a href="#experience" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Trayectoria</a>
+				<a href="#projects" class="block font-medium text-textMuted hover:text-techBlue text-lg">Proyectos</a>
+				<a href="#skills" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Habilidades</a>
+				<a href="mailto:javier.arevalo.11111@gmail.com" class="block text-center py-3 bg-natEmerald text-white rounded-xl font-semibold">Escribir Email</a>
 			</nav>
 		</header>
 
-		<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-32">
+		<main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-36">
 
-			<!-- HERO SECTION -->
-			<section id="hero" class="min-h-[70vh] flex flex-col-reverse md:flex-row items-center justify-between gap-12 pt-4 md:pt-12">
-				<div class="flex-1 space-y-6 text-center md:text-left">
-					<div class="inline-flex items-center space-x-2 bg-white shadow-sm border border-green-100 rounded-full px-4 py-1.5 text-xs text-accentNature font-medium">
-						<i class="fa-solid fa-leaf"></i>
-						<span>Connecting Tech & Nature</span>
+			<section id="hero" class="min-h-[75vh] flex flex-col-reverse md:flex-row items-center justify-between gap-16 pt-4">
+				<div class="flex-1 space-y-8 text-center md:text-left">
+					<div class="inline-flex items-center space-x-2.5 bg-natMint border border-emerald-200/60 rounded-full px-4 py-2 text-xs text-natEmerald font-semibold tracking-wide uppercase">
+						<i class="fa-solid fa-seedling animate-bounce"></i>
+						<span>Ingeniería de Software Sostenible</span>
 					</div>
-					<h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-textMain">
-						Hi, I'm <span class="bg-gradient-to-r from-accentNature to-accentTech text-gradient">Javier Arévalo</span>
+					<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-textDark leading-[1.15]">
+						Hola, soy <span class="text-gradient">Javier Arévalo</span>
 					</h1>
-					<p class="text-xl sm:text-2xl font-medium text-textMuted">
-						Software Developer | Cloud & DevOps
+					<p class="text-xl sm:text-2xl font-medium text-textMuted max-w-2xl leading-relaxed">
+						Desarrollador de Software enfocado en arquitecturas robustas, automatización <span class="text-techBlue font-semibold">Cloud & DevOps</span> y la optimización de ecosistemas digitales.
 					</p>
-					<div class="flex items-center justify-center md:justify-start gap-4 pt-2">
-						<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentNature hover:border-accentNature transition-all duration-300 group">
-							<i class="fa-brands fa-github text-xl group-hover:scale-110 transition-transform"></i>
+					<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4">
+						<a href="mailto:javier.arevalo.11111@gmail.com" class="px-6 py-3.5 bg-natEmerald hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-1">
+							<i class="fa-solid fa-envelope mr-2"></i> javier.arevalo.11111@gmail.com
 						</a>
-						<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentTech hover:border-accentTech transition-all duration-300 group">
-							<i class="fa-brands fa-linkedin-in text-xl group-hover:scale-110 transition-transform"></i>
-						</a>
-						<a href="mailto:javier.arevalo.11111@gmail.com" class="w-11 h-11 flex items-center justify-center rounded-full bg-white shadow-sm border border-gray-200 text-textMuted hover:text-white hover:bg-accentNature hover:border-accentNature transition-all duration-300 group">
-							<i class="fa-solid fa-envelope text-xl group-hover:scale-110 transition-transform"></i>
-						</a>
+						<div class="flex gap-3">
+							<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-200/80 text-textMuted hover:text-white hover:bg-textDark hover:border-textDark transition-all duration-300 group">
+								<i class="fa-brands fa-github text-xl group-hover:scale-110 transition-transform"></i>
+							</a>
+							<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="w-12 h-12 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-200/80 text-textMuted hover:text-white hover:bg-techBlue hover:border-techBlue transition-all duration-300 group">
+								<i class="fa-brands fa-linkedin-in text-xl group-hover:scale-110 transition-transform"></i>
+							</a>
+						</div>
 					</div>
 				</div>
+
 				<div class="flex-shrink-0 relative group">
-					<div class="absolute -inset-1 rounded-full bg-gradient-to-tr from-accentNature to-accentTech opacity-30 blur group-hover:opacity-50 transition duration-500"></div>
-					<div class="relative w-48 h-48 sm:w-56 sm:h-56 rounded-full bg-white overflow-hidden border-4 border-white shadow-xl flex items-center justify-center">
-						<i class="fa-solid fa-code text-6xl text-gray-300"></i>
+					<div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500 to-sky-500 opacity-20 blur-xl group-hover:opacity-40 transition duration-700 animate-pulse"></div>
+					<div class="relative w-52 h-52 sm:w-64 sm:h-64 rounded-full bg-white overflow-hidden border-[6px] border-white shadow-2xl flex items-center justify-center group-hover:rotate-3 transition-transform duration-500">
+						<div class="absolute inset-0 bg-gradient-to-tr from-natMint to-techCyan opacity-40"></div>
+						<i class="fa-solid fa-cubes-stacked text-7xl text-slate-300 relative z-10 group-hover:text-natEmerald transition-colors duration-500"></i>
 					</div>
 				</div>
 			</section>
 
-			<hr class="border-gray-200">
+			<section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-28">
+				<div class="md:col-span-2 space-y-6">
+					<div class="flex items-center gap-3">
+						<div class="w-8 h-8 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm">
+							<i class="fa-solid fa-user"></i>
+						</div>
+						<h2 class="text-2xl font-bold tracking-tight text-textDark">Sobre mi enfoque profesional</h2>
+					</div>
+					<p class="text-base text-textMuted leading-relaxed">
+						Me apasiona profundamente la intersección entre la naturaleza (eficiencia, adaptación, ecosistemas equilibrados) y la tecnología (escalabilidad, abstracción, automatización). Como desarrollador enfocado en la resolución analítica de problemas, me especializo en construir arquitecturas limpias y de alto rendimiento. Disfruto investigando cuellos de botella en infraestructuras y cooperando en equipos bajo metodologías ágiles. Fuera del ecosistema de desarrollo, mantengo un estilo de vida disciplinado conectado a la montaña y el deporte, lo que potencia mi resiliencia frente a grandes retos técnicos.
+					</p>
+					<div class="grid grid-cols-2 gap-4 pt-4">
+						<div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+							<h4 class="text-sm font-bold text-textDark mb-1">Comunicación e Idiomas</h4>
+							<p class="text-xs text-textMuted">Inglés Avanzado C1 / Español Nativo. Listo para entornos internacionales.</p>
+						</div>
+						<div class="bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
+							<h4 class="text-sm font-bold text-textDark mb-1">Filosofía DevOps</h4>
+							<p class="text-xs text-textMuted">Automatización total, CI/CD eficiente y monitorización proactiva de recursos.</p>
+						</div>
+					</div>
+				</div>
 
-				<!-- ABOUT SECTION -->
-				<section id="about" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-24">
-					<div class="md:col-span-2 space-y-4">
-						<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
-							<i class="fa-solid fa-seedling text-accentNature"></i> About Me
-						</h2>
-						<p class="text-base text-textMuted leading-relaxed">
-							Deeply passionate about technology, software development, and non-stop learning. I identify as a highly curious and analytical problem solver, with a proven ability to adapt fast and tackle complex engineering bottlenecks. I enjoy researching and building clean, highly performant systems architectures, working effectively both within collaborative team agile environments or pushing milestones autonomously. Beyond my engineering baseline, I actively maintain a disciplined life through sports and nature exploration, which fuel my drive to outperform expectations and bring premium execution to every project.
+				<div class="bg-white shadow-md border border-slate-100 rounded-2xl p-6 h-fit space-y-6">
+					<h3 class="text-xs font-bold tracking-wider uppercase text-slate-400">Datos de interés para Reclutadores</h3>
+					<div class="space-y-4">
+						<div class="flex items-center justify-between text-sm border-b border-slate-50 pb-3">
+							<span class="text-textMuted font-medium">
+								<i class="fa-solid fa-location-dot mr-2 text-slate-400"></i> Ubicación
+							</span>
+							<span class="font-semibold text-textDark">Dinamarca / España</span>
+						</div>
+						<div class="flex items-center justify-between text-sm border-b border-slate-50 pb-3">
+							<span class="text-textMuted font-medium">
+								<i class="fa-solid fa-graduation-cap mr-2 text-slate-400"></i> Nivel de Estudios
+							</span>
+							<span class="font-semibold text-textDark">Grado Universitario (BSc)</span>
+						</div>
+						<div class="flex items-center justify-between text-sm">
+							<span class="text-textMuted font-medium">
+								<i class="fa-solid fa-circle-check mr-2 text-emerald-500"></i> Disponibilidad
+							</span>
+							<span class="px-2.5 py-0.5 bg-emerald-50 text-natEmerald text-xs rounded-md font-bold">Inmediata</span>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="experience" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-28">
+				<div class="space-y-3">
+					<div class="flex items-center gap-3">
+						<div class="w-8 h-8 rounded-lg bg-techCyan flex items-center justify-center text-techBlue text-sm">
+							<i class="fa-solid fa-briefcase"></i>
+						</div>
+						<h2 class="text-2xl font-bold tracking-tight text-textDark">Experiencia</h2>
+					</div>
+					<p class="text-sm text-textMuted">
+						Historial de prácticas en la industria aportando soluciones reales de desarrollo e infraestructura.
+					</p>
+				</div>
+				<div class="md:col-span-2 relative border-l-2 border-slate-200/80 pl-8 ml-2 space-y-10">
+					<div class="relative group">
+						<div class="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-white border-4 border-natEmerald group-hover:bg-natEmerald transition-all duration-300 shadow-md"></div>
+						<div class="space-y-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+							<span class="inline-block px-3 py-1 bg-natMint text-natEmerald text-xs font-bold rounded-md font-mono">Marzo 2026 - Mayo 2026</span>
+							<h3 class="text-lg font-bold text-textDark tracking-tight group-hover:text-natEmerald transition-colors">Cloud Developer Intern</h3>
+							<p class="text-sm font-semibold text-techBlue">Axazure S.L. | Madrid, España</p>
+							<p class="text-sm text-textMuted leading-relaxed pt-1">
+								Colaboración directa en el diseño y aprovisionamiento de infraestructura escalable en la nube, optimizando métricas de entrega continua y arquitecturas resilientes.
+							</p>
+						</div>
+					</div>
+					<div class="relative group">
+						<div class="absolute -left-[41px] top-1 w-6 h-6 rounded-full bg-white border-4 border-slate-200 group-hover:border-techBlue transition-all duration-300 shadow-md"></div>
+						<div class="space-y-2 bg-white p-6 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow">
+							<span class="inline-block px-3 py-1 bg-slate-100 text-textMuted text-xs font-bold rounded-md font-mono">Marzo 2025 - Junio 2025</span>
+							<h3 class="text-lg font-bold text-textDark tracking-tight group-hover:text-techBlue transition-colors">Software Developer Intern</h3>
+							<p class="text-sm font-semibold text-techBlue">Skiller Academy S.L. | Remoto</p>
+							<p class="text-sm text-textMuted leading-relaxed pt-1">
+								Desarrollo lógico de componentes modulares del lado del servidor y resolución de requerimientos cross-functional utilizando metodologías Scrum.
+							</p>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section id="projects" class="space-y-8 scroll-mt-28">
+				<div class="text-center sm:text-left flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+					<div>
+						<div class="flex items-center justify-center sm:justify-start gap-3">
+							<div class="w-8 h-8 rounded-lg bg-techCyan flex items-center justify-center text-techBlue text-sm">
+								<i class="fa-solid fa-code-branch"></i>
+							</div>
+							<h2 class="text-2xl font-bold tracking-tight text-textDark">Proyectos e Ingeniería</h2>
+						</div>
+						<p class="text-sm text-textMuted mt-2">
+							Despliegue interactivo de soluciones complejas con foco en IoT, algoritmos y automatización.
 						</p>
 					</div>
-					<div class="bg-white shadow-md border border-gray-100 rounded-2xl p-6 h-fit space-y-6">
-						<div>
-							<h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400 mb-3">Languages Spoken</h3>
-							<div class="space-y-3">
-								<div class="flex justify-between items-center text-sm">
-									<span class="font-medium text-textMain">English</span>
-									<span class="px-2 py-0.5 bg-green-50 border border-green-200 text-accentNature text-xs rounded-md font-semibold">C1 Advanced</span>
-								</div>
-								<div class="flex justify-between items-center text-sm">
-									<span class="font-medium text-textMain">Spanish</span>
-									<span class="px-2 py-0.5 bg-gray-100 border border-gray-200 text-textMuted text-xs rounded-md font-semibold">Native</span>
+				</div>
+
+				<div class="relative w-full max-w-4xl mx-auto group/carousel">
+
+					<button id="carousel-prev" aria-label="Anterior proyecto" class="absolute left-2 sm:-left-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-white/90 border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
+						<i class="fa-solid fa-chevron-left text-sm"></i>
+					</button>
+
+					<button id="carousel-next" aria-label="Siguiente proyecto" class="absolute right-2 sm:-right-6 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-xl bg-white/90 border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
+						<i class="fa-solid fa-chevron-right text-sm"></i>
+					</button>
+
+					<div class="overflow-hidden rounded-2xl border border-slate-100 shadow-xl bg-white">
+						<div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
+
+							<div class="w-full flex-shrink-0">
+								<div class="flex flex-col md:flex-row h-full">
+									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/video">
+										<div class="absolute inset-0 bg-gradient-to-br from-emerald-950/40 to-slate-900/80 z-0"></div>
+										<i class="fa-brands fa-youtube text-6xl text-red-500 relative z-10 group-hover/video:scale-110 transition-transform duration-300"></i>
+										<span class="text-xs font-mono text-slate-400 mt-4 relative z-10">[Demo de Hardware IoT]</span>
+									</div>
+									<div class="p-8 md:w-1/2 flex flex-col justify-center space-y-4">
+										<div class="space-y-1">
+											<span class="text-xs font-bold text-natEmerald uppercase tracking-wider">Cyber-Physical Systems</span>
+											<h3 class="text-xl font-bold text-textDark">IoT Smart Standing Desk</h3>
+										</div>
+										<p class="text-sm text-textMuted leading-relaxed">
+											Diseño y montaje de un controlador de hardware embebido interceptando líneas de señal mediante optoacopladores personalizados para automatizar correcciones de altura ergonómicas basadas en MQTT.
+										</p>
+										<div class="flex flex-wrap gap-2 pt-1">
+											<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">C++ / FreeRTOS</span>
+											<span class="px-2.5 py-1 bg-techCyan text-techBlue text-xs font-semibold rounded-md">ESP32</span>
+										</div>
+										<div class="flex gap-3 pt-3">
+											<a href="#" class="px-4 py-2 bg-textDark hover:bg-black text-white text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-brands fa-github mr-1.5"></i> Código
+											</a>
+											<a href="#" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-textDark text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-solid fa-play mr-1.5"></i> Ver Demo
+											</a>
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="pt-4 border-t border-gray-100">
-							<h3 class="text-sm font-semibold tracking-wider uppercase text-gray-400 mb-2">Core Motivation</h3>
-							<p class="text-xs text-textMuted leading-relaxed">
-								Leveraging full-stack & DevOps competencies to construct highly resilient cyber-physical and cloud systems.
-							</p>
+
+							<div class="w-full flex-shrink-0">
+								<div class="flex flex-col md:flex-row h-full">
+									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/video">
+										<div class="absolute inset-0 bg-gradient-to-br from-sky-950/40 to-slate-900/80 z-0"></div>
+										<i class="fa-brands fa-youtube text-6xl text-red-500 relative z-10 group-hover/video:scale-110 transition-transform duration-300"></i>
+										<span class="text-xs font-mono text-slate-400 mt-4 relative z-10">[Gameplay / Mecánicas]</span>
+									</div>
+									<div class="p-8 md:w-1/2 flex flex-col justify-center space-y-4">
+										<div class="space-y-1">
+											<span class="text-xs font-bold text-techBlue uppercase tracking-wider">Algoritmia y Lógica</span>
+											<h3 class="text-xl font-bold text-textDark">Mount Stray: Roguelike Procedural</h3>
+										</div>
+										<p class="text-sm text-textMuted leading-relaxed">
+											Videojuego táctico de escalada de montañas generado procedimentalmente. Implementación de muestreo de ruido coherente y algoritmos de búsqueda de caminos eficientes para redes de nodos dinámicas.
+										</p>
+										<div class="flex flex-wrap gap-2 pt-1">
+											<span class="px-2.5 py-1 bg-slate-100 text-textDark text-xs font-semibold rounded-md">Java</span>
+											<span class="px-2.5 py-1 bg-techCyan text-techBlue text-xs font-semibold rounded-md">Generación Procedural</span>
+										</div>
+										<div class="flex gap-3 pt-3">
+											<a href="#" class="px-4 py-2 bg-textDark hover:bg-black text-white text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-brands fa-github mr-1.5"></i> Código
+											</a>
+											<a href="#" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-textDark text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-solid fa-play mr-1.5"></i> Ver Demo
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="w-full flex-shrink-0">
+								<div class="flex flex-col md:flex-row h-full">
+									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/video">
+										<div class="absolute inset-0 bg-gradient-to-br from-slate-950/40 to-slate-900/80 z-0"></div>
+										<i class="fa-brands fa-youtube text-6xl text-red-500 relative z-10 group-hover/video:scale-110 transition-transform duration-300"></i>
+										<span class="text-xs font-mono text-slate-400 mt-4 relative z-10">[Demostración Local AI]</span>
+									</div>
+									<div class="p-8 md:w-1/2 flex flex-col justify-center space-y-4">
+										<div class="space-y-1">
+											<span class="text-xs font-bold text-natEmerald uppercase tracking-wider">Edge Computing & AI</span>
+											<h3 class="text-xl font-bold text-textDark">Acompañante de Escritorio Inteligente</h3>
+										</div>
+										<p class="text-sm text-textMuted leading-relaxed">
+											Despliegue físico de un compañero de hardware ejecutando LLMs locales optimizados y en miniatura de forma nativa en el dispositivo, estructurado con wrappers eficientes de procesamiento de voz a texto.
+										</p>
+										<div class="flex flex-wrap gap-2 pt-1">
+											<span class="px-2.5 py-1 bg-slate-100 text-textDark text-xs font-semibold rounded-md">Python</span>
+											<span class="px-2.5 py-1 bg-techCyan text-techBlue text-xs font-semibold rounded-md">Raspberry Pi / On-Edge AI</span>
+										</div>
+										<div class="flex gap-3 pt-3">
+											<a href="#" class="px-4 py-2 bg-textDark hover:bg-black text-white text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-brands fa-github mr-1.5"></i> Código
+											</a>
+											<a href="#" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-textDark text-xs font-semibold rounded-lg transition-colors">
+												<i class="fa-solid fa-play mr-1.5"></i> Ver Demo
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+
 						</div>
 					</div>
-				</section>
 
-				<hr class="border-gray-200">
+					<div class="flex justify-center items-center gap-2.5 pt-6" id="carousel-dots">
+						<button class="carousel-dot w-8 h-2.5 rounded-full bg-natEmerald transition-all duration-300" aria-label="Ir al proyecto 1"></button>
+						<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300" aria-label="Ir al proyecto 2"></button>
+						<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300" aria-label="Ir al proyecto 3"></button>
+					</div>
+				</div>
+			</section>
 
-					<!-- PROJECTS CAROUSEL SECTION -->
-					<section id="projects" class="space-y-8 scroll-mt-24">
-						<div class="text-center sm:text-left">
-							<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center justify-center sm:justify-start gap-2">
-								<i class="fa-solid fa-laptop-code text-accentTech"></i> Featured Systems
-							</h2>
-							<p class="text-sm text-textMuted mt-2">
-								Swipe or click the dots to explore my deep dive engineering showcases.
+			<section id="skills" class="space-y-16 scroll-mt-28">
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+					<div class="space-y-2">
+						<div class="flex items-center gap-3">
+							<div class="w-8 h-8 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm">
+								<i class="fa-solid fa-layer-group"></i>
+							</div>
+							<h2 class="text-2xl font-bold tracking-tight text-textDark">Stack Tecnológico</h2>
+						</div>
+						<p class="text-sm text-textMuted">
+							Estructurado según lenguajes nativos, entornos de infraestructura y herramientas DevOps.
+						</p>
+					</div>
+
+					<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+						<div class="bg-white shadow-sm border border-slate-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
+							<h3 class="text-xs font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
+								<i class="fa-solid fa-terminal text-natEmerald"></i> Lenguajes de Programación
+							</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Java</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Kotlin</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Python</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Swift</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">SQL</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">HTML / CSS / JavaScript</span>
+							</div>
+						</div>
+						<div class="bg-white shadow-sm border border-slate-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
+							<h3 class="text-xs font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
+								<i class="fa-solid fa-cloud text-techBlue"></i> Tecnologías & DevOps
+							</h3>
+							<div class="flex flex-wrap gap-2">
+								<span class="px-3 py-1 bg-techCyan text-techBlue text-xs rounded-lg font-semibold">AWS Cloud</span>
+								<span class="px-3 py-1 bg-natMint text-natEmerald text-xs rounded-lg font-semibold">Android SDK</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Git & GitHub</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">Firebase</span>
+								<span class="px-3 py-1 bg-slate-50 text-textDark text-xs rounded-lg font-medium border border-slate-100">iOS Development</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-8 border-t border-slate-100">
+					<div class="space-y-2">
+						<div class="flex items-center gap-3">
+							<div class="w-8 h-8 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm">
+								<i class="fa-solid fa-graduation-cap"></i>
+							</div>
+							<h2 class="text-2xl font-bold tracking-tight text-textDark">Formación y Certificaciones</h2>
+						</div>
+					</div>
+					<div class="md:col-span-2 space-y-6">
+						<div class="bg-white border-l-4 border-natEmerald shadow-sm rounded-xl p-6 hover:shadow-md transition-all">
+							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+								<h3 class="text-lg font-bold text-textDark">BSc in Computer Science (Grado Universitario)</h3>
+								<span class="text-xs font-semibold text-natEmerald bg-natMint px-2.5 py-1 rounded-md w-fit font-mono">Sept 2026 - Presente</span>
+							</div>
+							<p class="text-sm font-semibold text-techBlue">University of Southern Denmark (SDU)</p>
+							<p class="text-xs text-textMuted mt-1">
+								<i class="fa-solid fa-map-pin mr-1"></i> Vejle, Dinamarca
 							</p>
 						</div>
-
-						<!-- Carousel Wrapper -->
-						<div class="relative w-full max-w-4xl mx-auto overflow-hidden rounded-2xl">
-
-							<!-- Carousel Track -->
-							<div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
-
-								<!-- Slide 1 -->
-								<div class="w-full flex-shrink-0 px-2 sm:px-4">
-									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
-										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
-											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
-											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
-										</div>
-										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
-											<div>
-												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">IoT Smart Standing Desk</h3>
-												<div class="flex flex-wrap gap-2 mt-3">
-													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">C++</span>
-													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">ESP32</span>
-													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">IoT MQTT</span>
-												</div>
-											</div>
-											<p class="text-sm text-textMuted">Built an embedded hardware controller intercepting signal lines via custom optocouplers to automate time-based height corrections.</p>
-											<div class="flex gap-3 pt-2">
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-github"></i> Code
-												</a>
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-youtube"></i> Watch
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Slide 2 -->
-								<div class="w-full flex-shrink-0 px-2 sm:px-4">
-									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
-										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
-											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
-											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
-										</div>
-										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
-											<div>
-												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">Mount Stray: Procedural Roguelike</h3>
-												<div class="flex flex-wrap gap-2 mt-3">
-													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">Java</span>
-													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">Algorithms</span>
-													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">ECS</span>
-												</div>
-											</div>
-											<p class="text-sm text-textMuted">Conceived a post-apocalyptic mountain climbing roguelike implementing noise sampling equations and pathfinders for node map networks.</p>
-											<div class="flex gap-3 pt-2">
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-github"></i> Code
-												</a>
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-youtube"></i> Watch
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Slide 3 -->
-								<div class="w-full flex-shrink-0 px-2 sm:px-4">
-									<div class="bg-white border border-gray-100 rounded-2xl overflow-hidden flex flex-col md:flex-row group shadow-lg h-full">
-										<div class="relative w-full md:w-1/2 aspect-video bg-gray-900 flex items-center justify-center">
-											<i class="fa-brands fa-youtube text-5xl text-red-500 group-hover:scale-110 transition-transform"></i>
-											<span class="absolute bottom-3 text-xs font-mono text-gray-400">[Video Container]</span>
-										</div>
-										<div class="p-6 md:w-1/2 flex flex-col justify-center space-y-4">
-											<div>
-												<h3 class="text-xl font-bold text-textMain group-hover:text-accentNature transition-colors">AI Desktop Companion</h3>
-												<div class="flex flex-wrap gap-2 mt-3">
-													<span class="px-2.5 py-1 bg-green-50 text-accentNature text-[11px] font-semibold rounded-md">Python</span>
-													<span class="px-2.5 py-1 bg-blue-50 text-accentTech text-[11px] font-semibold rounded-md">Edge AI</span>
-													<span class="px-2.5 py-1 bg-gray-100 text-textMuted text-[11px] font-semibold rounded-md">Raspberry Pi</span>
-												</div>
-											</div>
-											<p class="text-sm text-textMuted">Deployed a physical hardware companion executing low-footprint local LLMs natively, structured with optimized Whisper wrappers.</p>
-											<div class="flex gap-3 pt-2">
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-textMain hover:bg-black text-white text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-github"></i> Code
-												</a>
-												<a href="#" class="flex items-center gap-2 px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 text-xs font-medium rounded-lg transition-colors">
-													<i class="fa-brands fa-youtube"></i> Watch
-												</a>
-											</div>
-										</div>
-									</div>
-								</div>
-
+						<div class="bg-white border-l-4 border-slate-300 shadow-sm rounded-xl p-6 hover:shadow-md transition-all">
+							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+								<h3 class="text-lg font-bold text-textDark">Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM)</h3>
+								<span class="text-xs font-semibold text-textMuted bg-slate-100 px-2.5 py-1 rounded-md w-fit font-mono">Sept 2023 - Junio 2025</span>
+							</div>
+							<p class="text-sm font-semibold text-techBlue">Universidad U-TAD</p>
+							<p class="text-xs text-textMuted mt-1">
+								<i class="fa-solid fa-map-pin mr-1"></i> Madrid, España
+							</p>
+						</div>
+						<div class="bg-white border border-slate-100 shadow-sm rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition-all">
+							<div class="w-12 h-12 rounded-xl bg-sky-50 flex items-center justify-center text-techBlue text-xl">
+								<i class="fa-solid fa-award"></i>
+							</div>
+							<div>
+								<h4 class="text-sm font-bold text-textDark">Python for Data Science & AI</h4>
+								<p class="text-xs text-textMuted">IBM / Coursera Credential</p>
 							</div>
 						</div>
+					</div>
+				</div>
+			</section>
 
-						<!-- Carousel Navigation Dots -->
-						<div class="flex justify-center items-center gap-2 pt-4" id="carousel-dots">
-							<button class="carousel-dot w-8 h-2.5 rounded-full bg-accentNature transition-all duration-300" aria-label="Go to slide 1"></button>
-							<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" aria-label="Go to slide 2"></button>
-							<button class="carousel-dot w-2.5 h-2.5 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" aria-label="Go to slide 3"></button>
-						</div>
-					</section>
+		</main>
 
-					<hr class="border-gray-200">
-
-						<!-- EXPERIENCE SECTION -->
-						<section id="experience" class="grid grid-cols-1 md:grid-cols-3 gap-12 scroll-mt-24">
-							<div class="space-y-3">
-								<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
-									<i class="fa-solid fa-briefcase text-accentTech"></i> Experience
-								</h2>
-								<p class="text-sm text-textMuted">
-									Chronological outline of enterprise internships and industry engineering exposure.
-								</p>
-							</div>
-							<div class="md:col-span-2 relative border-l-2 border-green-100 pl-6 ml-2 space-y-10">
-								<div class="relative group">
-									<div class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-accentNature group-hover:bg-accentNature transition-colors duration-300 shadow-[0_0_8px_rgba(16,185,129,0.4)]"></div>
-									<div class="space-y-1 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
-										<span class="text-xs font-mono font-semibold text-accentNature">March 2026 - May 2026</span>
-										<h3 class="text-lg font-bold text-textMain tracking-tight">Cloud Developer Intern</h3>
-										<p class="text-sm font-medium text-accentTech">Axazure S.L. | Madrid, Spain</p>
-										<p class="text-sm text-textMuted leading-relaxed pt-2">
-											Collaborated in designing and provisioning reliable infrastructure operations, sharpening systems orchestration and modern cloud delivery metrics.
-										</p>
-									</div>
-								</div>
-
-								<div class="relative group">
-									<div class="absolute -left-[33px] top-1.5 w-4 h-4 rounded-full bg-white border-4 border-gray-300 group-hover:border-accentTech transition-colors duration-300"></div>
-									<div class="space-y-1 bg-white p-5 rounded-xl shadow-sm border border-gray-100">
-										<span class="text-xs font-mono font-semibold text-gray-500">March 2025 - June 2025</span>
-										<h3 class="text-lg font-bold text-textMain tracking-tight">Software Developer Intern</h3>
-										<p class="text-sm font-medium text-accentTech">Skiller Academy S.L. | Remote</p>
-										<p class="text-sm text-textMuted leading-relaxed pt-2">
-											Engineered logical codebase components, handling cross-functional requirements alongside modern agile delivery frameworks.
-										</p>
-									</div>
-								</div>
-							</div>
-						</section>
-
-						<hr class="border-gray-200">
-
-							<!-- SKILLS & EDUCATION SECTION -->
-							<section id="skills" class="space-y-12 scroll-mt-24">
-								<div class="grid grid-cols-1 md:grid-cols-3 gap-12">
-									<div class="space-y-2">
-										<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
-											<i class="fa-solid fa-layer-group text-accentNature"></i> Skillset
-										</h2>
-										<p class="text-sm text-textMuted">
-											Granular classification of programming environments, target frameworks, and runtime methodologies.
-										</p>
-									</div>
-
-									<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-										<div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
-											<h3 class="text-sm font-bold text-textMain uppercase tracking-wider flex items-center gap-2">
-												<i class="fa-solid fa-code text-accentTech"></i> Languages
-											</h3>
-											<div class="flex flex-wrap gap-2">
-												<span class="px-3 py-1 bg-green-50 text-accentNature text-xs rounded-full font-medium">Java</span>
-												<span class="px-3 py-1 bg-blue-50 text-accentTech text-xs rounded-full font-medium">Kotlin</span>
-												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Swift</span>
-												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">SQL</span>
-												<span class="px-3 py-1 bg-gray-50 text-textMuted text-xs rounded-full font-medium border border-gray-200">HTML/CSS/JS</span>
-												<span class="px-3 py-1 bg-gray-50 text-textMuted text-xs rounded-full font-medium border border-gray-200">Python</span>
-											</div>
-										</div>
-										<div class="bg-white shadow-sm border border-gray-100 rounded-xl p-6 space-y-4 hover:shadow-md transition-shadow">
-											<h3 class="text-sm font-bold text-textMain uppercase tracking-wider flex items-center gap-2">
-												<i class="fa-solid fa-wrench text-accentTech"></i> Frameworks & Tools
-											</h3>
-											<div class="flex flex-wrap gap-2">
-												<span class="px-3 py-1 bg-green-50 text-accentNature text-xs rounded-full font-medium">Android SDK</span>
-												<span class="px-3 py-1 bg-blue-50 text-accentTech text-xs rounded-full font-medium">AWS Cloud</span>
-												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">iOS Dev</span>
-												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Git / GitHub</span>
-												<span class="px-3 py-1 bg-gray-100 text-textMain text-xs rounded-full font-medium">Firebase</span>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="grid grid-cols-1 md:grid-cols-3 gap-12 pt-6">
-									<div class="space-y-2">
-										<h2 class="text-2xl font-bold tracking-tight text-textMain flex items-center gap-2">
-											<i class="fa-solid fa-graduation-cap text-accentNature"></i> Education
-										</h2>
-									</div>
-									<div class="md:col-span-2 space-y-6">
-										<div class="bg-white border-l-4 border-accentNature shadow-sm rounded-r-xl p-6 hover:shadow-md transition-shadow">
-											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-												<h3 class="text-lg font-bold text-textMain">BSc in Computer Science</h3>
-												<span class="text-xs font-mono text-accentNature bg-green-50 border border-green-200 px-2 py-1 rounded-md w-fit font-semibold">Sept 2026 - Present</span>
-											</div>
-											<p class="text-sm font-medium text-accentTech">University of Southern Denmark (SDU)</p>
-											<p class="text-xs text-textMuted mt-1">Vejle, Denmark</p>
-										</div>
-										<div class="bg-white border-l-4 border-gray-300 shadow-sm rounded-r-xl p-6 hover:shadow-md transition-shadow">
-											<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-												<h3 class="text-lg font-bold text-textMain">HND in Multiplatform App Development</h3>
-												<span class="text-xs font-mono text-gray-600 bg-gray-100 border border-gray-200 px-2 py-1 rounded-md w-fit font-semibold">Sept 2023 - June 2025</span>
-											</div>
-											<p class="text-sm font-medium text-accentTech">Universidad U-TAD</p>
-											<p class="text-xs text-textMuted mt-1">Madrid, Spain</p>
-										</div>
-									</div>
-								</div>
-							</section>
-
-						</main>
-
-		<footer class="border-t border-gray-200 mt-24 bg-white">
-			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between text-xs text-textMuted gap-4">
-				<p>&copy; 2026 Javier Arévalo. Connecting logic and nature.</p>
-				<div class="flex space-x-6">
-					<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-accentNature transition-colors text-lg">
+		<footer class="border-t border-slate-200 mt-36 bg-white">
+			<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col sm:flex-row items-center justify-between text-xs text-textMuted gap-4">
+				<p>&copy; 2026 Javier Arévalo. Diseñado conectando lógica matemática y optimización orgánica.</p>
+				<div class="flex space-x-6 text-base">
+					<a href="https://github.com" target="_blank" rel="noopener noreferrer" class="hover:text-natEmerald transition-colors" aria-label="GitHub">
 						<i class="fa-brands fa-github"></i>
 					</a>
-					<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-accentTech transition-colors text-lg">
+					<a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-techBlue transition-colors" aria-label="LinkedIn">
 						<i class="fa-brands fa-linkedin-in"></i>
 					</a>
 				</div>
@@ -394,46 +435,82 @@
 		</footer>
 
 		<script>
-			// --- Mobile Menu Logic ---
+			// --- Lógica del Menú Móvil ---
 			const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 			const mobileMenu = document.getElementById('mobile-menu');
 
 			mobileMenuBtn.addEventListener('click', () => {
 			mobileMenu.classList.toggle('hidden');
 			});
-
-			const mobileLinks = mobileMenu.querySelectorAll('a');
-			mobileLinks.forEach(link => {
-			link.addEventListener('click', () => {
-			mobileMenu.classList.add('hidden');
-			});
+			document.querySelectorAll('#mobile-menu a').forEach(link => {
+			link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
 			});
 
-			// --- Carousel Logic ---
+			// --- Lógica Avanzada del Carrusel ---
 			const track = document.getElementById('carousel-track');
 			const dots = document.querySelectorAll('.carousel-dot');
+			const prevBtn = document.getElementById('carousel-prev');
+			const nextBtn = document.getElementById('carousel-next');
+
+			const totalSlides = dots.length;
 			let currentSlide = 0;
+			let autoplayTimer = null;
+			const autoplayInterval = 5000; // Tiempo de autoplay: 5 segundos
 
 			function updateCarousel(index) {
-			currentSlide = index;
-			// Move track
-			track.style.transform = `translateX(-${index * 100}%)`;
+			// Controlar desbordamientos circulares
+			if (index >= totalSlides) index = 0;
+			if (index < 0) index = totalSlides - 1;
+            
+            currentSlide = index;
+            track.style.transform = `translateX(-${currentSlide * 100}%)`;
+            
+            // Actualizar diseño dinámico de los puntos
+            dots.forEach((dot, i) => {
+                if (i === currentSlide) {
+                    dot.classList.remove('w-2.5', 'bg-slate-300', 'hover:bg-slate-400');
+                    dot.classList.add('w-8', 'bg-natEmerald');
+                } else {
+                    dot.classList.add('w-2.5', 'bg-slate-300', 'hover:bg-slate-400');
+                    dot.classList.remove('w-8', 'bg-natEmerald');
+                }
+            });
+        }
 
-			// Update dots styles
-			dots.forEach((dot, i) => {
-			if (i === index) {
-			dot.classList.remove('w-2.5', 'bg-gray-300', 'hover:bg-gray-400');
-			dot.classList.add('w-8', 'bg-accentNature');
-			} else {
-			dot.classList.add('w-2.5', 'bg-gray-300', 'hover:bg-gray-400');
-			dot.classList.remove('w-8', 'bg-accentNature');
-			}
-			});
-			}
+        // Funciones de salto
+        function nextSlide() { updateCarousel(currentSlide + 1); }
+        function prevSlide() { updateCarousel(currentSlide - 1); }
 
-			dots.forEach((dot, index) => {
-			dot.addEventListener('click', () => updateCarousel(index));
-			});
+        // Eventos para Flechas de Navegación
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoplay();
+        });
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoplay();
+        });
+
+        // Eventos para los Puntos Inferiores
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                updateCarousel(index);
+                resetAutoplay();
+            });
+        });
+
+        // Sistema Inteligente de Autoplay (Reproducción Automática)
+        function startAutoplay() {
+            autoplayTimer = setInterval(nextSlide, autoplayInterval);
+        }
+
+        function resetAutoplay() {
+            clearInterval(autoplayTimer);
+            startAutoplay(); // Reinicia el temporizador para evitar saltos bruscos tras un clic manual
+        }
+
+        // Inicializar el carrusel al cargar la página
+        startAutoplay();
 		</script>
 	</body>
 </html>
