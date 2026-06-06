@@ -6,8 +6,10 @@
     <meta name="description" content="Portfolio de Javier Arévalo, Desarrollador de Software especializado en Cloud & DevOps.">
     <title>Javier Arévalo | Software Developer | Cloud & DevOps</title>
 
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- Google Fonts & FontAwesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -55,11 +57,13 @@
 </head>
 <body class="bg-brandBg text-textDark font-sans antialiased selection:bg-natEmerald selection:text-white relative overflow-x-hidden">
 
+    <!-- FONDOS DECORATIVOS -->
     <div class="fixed inset-0 bg-grid-pattern opacity-30 z-[-2] pointer-events-none"></div>
     <div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-natEmerald/5 blur-[150px] pointer-events-none z-[-1]"></div>
     <div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-techBlue/5 blur-[150px] pointer-events-none z-[-1]"></div>
     <div class="fixed top-[30%] left-[60%] w-[30vw] h-[30vw] rounded-full bg-techCyan/10 blur-[120px] pointer-events-none z-[-1]"></div>
 
+    <!-- NAVBAR -->
     <header class="sticky top-0 z-50 backdrop-blur-xl bg-brandBg/80 border-b border-slate-200/80 transition-all duration-300">
         <div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between">
             <a href="#" class="text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform duration-300">
@@ -78,6 +82,7 @@
                 <i class="fa-solid fa-bars-staggered text-xl"></i>
             </button>
         </div>
+        <!-- Menú Móvil -->
         <nav id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0 animate-fadeIn">
             <a href="#about" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Sobre mí</a>
             <a href="#experience" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Trayectoria</a>
@@ -89,6 +94,7 @@
 
     <main class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-16 2xl:py-24 space-y-36 2xl:space-y-48">
 
+        <!-- HERO -->
         <section id="hero" class="min-h-[75vh] flex flex-col-reverse md:flex-row items-center justify-between gap-16 pt-4 2xl:pt-12">
             <div class="flex-1 space-y-8 2xl:space-y-10 text-center md:text-left">
                 <h1 class="text-4xl sm:text-5xl lg:text-7xl 2xl:text-8xl font-extrabold tracking-tight text-textDark leading-[1.15]">
@@ -112,6 +118,7 @@
                 </div>
             </div>
             
+            <!-- Avatar Gráfico -->
             <div class="flex-shrink-0 relative group">
                 <div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500 to-sky-500 opacity-20 blur-xl group-hover:opacity-40 transition duration-700 animate-pulse"></div>
                 <div class="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 2xl:w-[450px] 2xl:h-[450px] rounded-full bg-white/80 backdrop-blur-sm overflow-hidden border-[6px] border-white shadow-2xl flex items-center justify-center group-hover:rotate-3 transition-transform duration-500">
@@ -121,52 +128,28 @@
             </div>
         </section>
 
-        <section id="about" class="grid grid-cols-1 lg:grid-cols-3 gap-12 2xl:gap-16 scroll-mt-28">
-            <div class="lg:col-span-2 space-y-6 2xl:space-y-8">
-                <div class="flex items-center gap-3">
-                    <div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg"><i class="fa-solid fa-user"></i></div>
-                    <h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Un poco sobre mí</h2>
-                </div>
-                <p class="text-base 2xl:text-xl text-textMuted leading-relaxed 2xl:leading-loose">
-                    Siempre me ha gustado entender cómo funcionan las cosas por debajo. Ese interés me llevó al desarrollo de software y, más tarde, a la gestión de la infraestructura en la nube. Me desenvuelvo bien diseñando arquitecturas limpias, integrando servicios y automatizando tareas para que los sistemas sean escalables. Si hay un cuello de botella técnico, analizo el problema y aplico la solución más lógica.
-                    <br><br>
-                    Cuando apago las pantallas, mi vía de escape es el deporte y la montaña. Mantener ese equilibrio me ayuda a desconectar, mantener la disciplina y volver al código con la cabeza fría y la perspectiva clara.
-                </p>
-                <div class="grid grid-cols-2 gap-4 2xl:gap-8 pt-4">
-                    <div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
-                        <h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Idiomas</h4>
-                        <p class="text-xs 2xl:text-base text-textMuted">Inglés C1 Avanzado <br> Español Nativo</p>
-                    </div>
-                    <div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
-                        <h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Forma de trabajo</h4>
-                        <p class="text-xs 2xl:text-base text-textMuted">Acostumbrado a integrarme en equipos bajo metodologías ágiles (Scrum) o avanzar de forma autónoma.</p>
-                    </div>
-                </div>
+        <!-- SOBRE MÍ -->
+        <section id="about" class="max-w-4xl space-y-6 2xl:space-y-8 scroll-mt-28">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg"><i class="fa-solid fa-user"></i></div>
+                <h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Un poco sobre mí</h2>
             </div>
-            
-            <div class="bg-white/80 backdrop-blur-sm shadow-md border border-slate-100 rounded-2xl p-6 2xl:p-10 h-fit space-y-6 2xl:space-y-8">
-                <h3 class="text-xs 2xl:text-sm font-bold tracking-wider uppercase text-slate-400">Datos de Contacto</h3>
-                <div class="space-y-4 2xl:space-y-6">
-                    <div class="flex items-center justify-between text-sm 2xl:text-lg border-b border-slate-100 pb-3 2xl:pb-5">
-                        <span class="text-textMuted font-medium"><i class="fa-solid fa-location-dot mr-2 text-slate-400"></i> Ubicación</span>
-                        <span class="font-semibold text-textDark text-right">Torrelodones, Madrid</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm 2xl:text-lg border-b border-slate-100 pb-3 2xl:pb-5">
-                        <span class="text-textMuted font-medium"><i class="fa-solid fa-phone mr-2 text-slate-400"></i> Teléfono</span>
-                        <span class="font-semibold text-textDark">+34 684 349 498</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm 2xl:text-lg border-b border-slate-100 pb-3 2xl:pb-5">
-                        <span class="text-textMuted font-medium"><i class="fa-solid fa-envelope mr-2 text-slate-400"></i> Email</span>
-                        <span class="font-semibold text-textDark truncate ml-4">javier.arevalo...</span>
-                    </div>
-                    <div class="flex items-center justify-between text-sm 2xl:text-lg">
-                        <span class="text-textMuted font-medium"><i class="fa-solid fa-circle-check mr-2 text-emerald-500"></i> Disponibilidad</span>
-                        <span class="px-2.5 py-1 2xl:px-4 2xl:py-1.5 bg-emerald-50 text-natEmerald text-xs 2xl:text-sm rounded-md font-bold">Inmediata</span>
-                    </div>
+            <p class="text-base 2xl:text-xl text-textMuted leading-relaxed 2xl:leading-loose">
+                Siempre me ha gustado entender cómo funcionan las cosas por debajo. Ese interés me llevó al desarrollo de software y, más tarde, a la gestión de la infraestructura en la nube. Me desenvuelvo bien diseñando arquitecturas limpias, integrando servicios y automatizando tareas para que los sistemas sean escalables. Si hay un cuello de botella técnico, analizo el problema y aplico la solución más lógica.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 2xl:gap-8 pt-4">
+                <div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
+                    <h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Idiomas</h4>
+                    <p class="text-xs 2xl:text-base text-textMuted">Inglés C1 Avanzado <br> Español Nativo</p>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
+                    <h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Forma de trabajo</h4>
+                    <p class="text-xs 2xl:text-base text-textMuted">Acostumbrado a integrarme en equipos bajo metodologías ágiles (Scrum) o avanzar de forma autónoma.</p>
                 </div>
             </div>
         </section>
 
+        <!-- TRAYECTORIA -->
         <section id="experience" class="grid grid-cols-1 lg:grid-cols-3 gap-12 2xl:gap-16 scroll-mt-28">
             <div class="space-y-3 2xl:space-y-5">
                 <div class="flex items-center gap-3">
@@ -203,6 +186,7 @@
             </div>
         </section>
 
+        <!-- PROYECTOS (CARRUSEL) -->
         <section id="projects" class="space-y-8 2xl:space-y-12 scroll-mt-28">
             <div class="text-center sm:text-left">
                 <div class="flex items-center justify-center sm:justify-start gap-3">
@@ -214,6 +198,7 @@
                 </p>
             </div>
 
+            <!-- Carrusel -->
             <div class="relative w-full max-w-5xl 2xl:max-w-6xl mx-auto group/carousel">
                 <button id="carousel-prev" aria-label="Anterior" class="absolute left-2 sm:-left-6 2xl:-left-12 top-1/2 -translate-y-1/2 z-10 w-11 h-11 2xl:w-16 2xl:h-16 rounded-xl bg-white border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
                     <i class="fa-solid fa-chevron-left text-sm 2xl:text-xl"></i>
@@ -273,6 +258,7 @@
                     </div>
                 </div>
 
+                <!-- Puntos del carrusel -->
                 <div class="flex justify-center items-center gap-2.5 pt-6 2xl:pt-8" id="carousel-dots">
                     <button class="carousel-dot w-8 h-2.5 2xl:w-12 2xl:h-3 rounded-full bg-natEmerald transition-all duration-300"></button>
                     <button class="carousel-dot w-2.5 h-2.5 2xl:w-3 2xl:h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300"></button>
@@ -280,6 +266,7 @@
             </div>
         </section>
 
+        <!-- HABILIDADES & EDUCACIÓN -->
         <section id="skills" class="space-y-16 2xl:space-y-24 scroll-mt-28">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 2xl:gap-16">
                 <div class="space-y-2">
@@ -323,6 +310,7 @@
                 </div>
             </div>
 
+            <!-- EDUCACIÓN Y CERTIFICACIONES -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 2xl:gap-16 pt-8 border-t border-slate-200/60">
                 <div class="space-y-2">
                     <div class="flex items-center gap-3">
@@ -379,6 +367,7 @@
 
     </main>
 
+    <!-- FOOTER -->
     <footer class="border-t border-slate-200 mt-36 2xl:mt-48 bg-white/50 backdrop-blur-md relative z-10">
         <div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-10 2xl:py-16 flex flex-col sm:flex-row items-center justify-between text-xs 2xl:text-base text-textMuted gap-4">
             <p>&copy; 2026 Javier Arévalo. Desarrollador de Software.</p>
@@ -389,6 +378,7 @@
         </div>
     </footer>
 
+    <!-- LÓGICA DE JS -->
     <script>
         // 1. Menú Móvil
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
