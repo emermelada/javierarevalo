@@ -6,10 +6,7 @@
 		<meta name="description" content="Portfolio of Javier Arévalo, Software Developer specialized in Cloud & DevOps.">
 		<title>Javier Arévalo | Software Developer | Cloud & DevOps</title>
 
-		<!-- Tailwind CSS -->
 		<script src="https://cdn.tailwindcss.com"></script>
-
-		<!-- Google Fonts & FontAwesome -->
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,23 +33,29 @@
 		</script>
 
 		<style>
+			/* Custom scrollbar */
 			::-webkit-scrollbar { width: 10px; }
 			::-webkit-scrollbar-track { background: #f1f5f9; }
 			::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
 			::-webkit-scrollbar-thumb:hover { background: #059669; }
 
+			/* Text gradient utility */
 			.text-gradient {
 				background: linear-gradient(135deg, #047857 0%, #0369a1 100%);
 				-webkit-background-clip: text;
 				-webkit-text-fill-color: transparent;
+				background-clip: text;
+				/* FIX: Remove inherited text-shadow so it doesn't white out the transparent fill */
+				text-shadow: none !important; 
 			}
 
+			/* Background patterns */
 			.bg-grid-pattern {
 				background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
 				background-size: 32px 32px;
 			}
 
-			/* ── Cursor glow ── */
+			/* Mouse tracking cursor */
 			#cursor-glow {
 				position: fixed;
 				pointer-events: none;
@@ -67,7 +70,7 @@
 				top: -999px;
 			}
 
-			/* ── Scroll reveal ── */
+			/* Scroll animations */
 			[data-reveal] {
 				opacity: 0;
 				transform: translateY(36px);
@@ -78,7 +81,7 @@
 				transform: translateY(0);
 			}
 
-			/* ── Hero canvas ── */
+			/* Hero section canvas */
 			#hero-canvas {
 				position: absolute;
 				inset: 0;
@@ -88,9 +91,7 @@
 				z-index: 0;
 			}
 
-			/* Keep the hero heading/paragraph readable over the particle
-			   network: a soft halo matching the page background sits behind
-			   the glyphs so wandering nodes/labels never blend with the text. */
+			/* Halo effect to keep text readable over particles */
 			#hero h1,
 			#hero p {
 				position: relative;
@@ -101,7 +102,7 @@
 					0 0 36px #f8fafc;
 			}
 
-			/* Respect reduced-motion preferences */
+			/* A11y: respect reduced motion OS settings */
 			@media (prefers-reduced-motion: reduce) {
 				[data-reveal] { opacity: 1; transform: none; transition: none; }
 				#cursor-glow { display: none; }
@@ -111,21 +112,19 @@
 
 	<body class="bg-brandBg text-textDark font-sans antialiased selection:bg-natEmerald selection:text-white relative overflow-x-hidden">
 
-		<!-- Cursor glow -->
 		<div id="cursor-glow"></div>
 
-		<!-- FONDOS DECORATIVOS -->
 		<div class="fixed inset-0 bg-grid-pattern opacity-30 z-[-2] pointer-events-none"></div>
 		<div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-natEmerald/5 blur-[150px] pointer-events-none z-[-1]"></div>
 		<div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-techBlue/5 blur-[150px] pointer-events-none z-[-1]"></div>
 		<div class="fixed top-[30%] left-[60%] w-[30vw] h-[30vw] rounded-full bg-techCyan/10 blur-[120px] pointer-events-none z-[-1]"></div>
 
-		<!-- NAVBAR -->
 		<header class="sticky top-0 z-50 backdrop-blur-xl bg-brandBg/80 border-b border-slate-200/80 transition-all duration-300">
 			<div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between">
 				<a href="#" class="text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform duration-300">
 					JA<span class="text-natEmerald">.</span>
 				</a>
+				
 				<nav class="hidden lg:flex items-center space-x-10 text-sm font-semibold">
 					<a href="#about" class="text-textMuted hover:text-natEmerald transition-colors">About me</a>
 					<a href="#experience" class="text-textMuted hover:text-natEmerald transition-colors">Experience</a>
@@ -137,11 +136,12 @@
 						<i class="fa-solid fa-arrow-right ml-2 text-xs opacity-80 transition-none"></i>
 					</a>
 				</nav>
+
 				<button id="mobile-menu-btn" aria-label="Open menu" class="lg:hidden text-textMuted hover:text-natEmerald p-2 rounded-lg bg-white shadow-sm border border-slate-200">
 					<i class="fa-solid fa-bars-staggered text-xl"></i>
 				</button>
 			</div>
-			<!-- Menú Móvil -->
+
 			<nav id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0">
 				<a href="#about" class="block font-medium text-textMuted hover:text-natEmerald text-lg">About me</a>
 				<a href="#experience" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Experience</a>
@@ -156,12 +156,7 @@
 
 		<main class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-16 2xl:py-24 space-y-36 2xl:space-y-48">
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- HERO                                                    -->
-			<!-- ═══════════════════════════════════════════════════════ -->
 			<section id="hero" class="relative min-h-[75vh] flex flex-col-reverse lg:flex-row items-center justify-between gap-16 pt-4 2xl:pt-12">
-
-				<!-- Particle network canvas -->
 				<canvas id="hero-canvas"></canvas>
 
 				<div class="flex-1 space-y-8 2xl:space-y-10 text-center md:text-left relative z-10">
@@ -171,6 +166,7 @@
 					<p class="text-xl sm:text-2xl 2xl:text-3xl font-medium text-textMuted max-w-3xl 2xl:max-w-4xl leading-relaxed">
 						Software Developer focused on <span class="text-techBlue font-semibold">Cloud & DevOps</span>. I work with Microsoft Azure, infrastructure automation, and system integration in real environments.
 					</p>
+					
 					<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4 2xl:pt-8">
 						<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn px-6 py-3.5 2xl:px-8 2xl:py-5 2xl:text-lg bg-natEmerald hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-1 min-w-[300px] text-center">
 							<i class="fa-solid fa-envelope mr-2 transition-none"></i>
@@ -187,7 +183,6 @@
 					</div>
 				</div>
 
-				<!-- Avatar Gráfico -->
 				<div class="flex-shrink-0 relative group z-10">
 					<div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500 to-sky-500 opacity-20 blur-xl group-hover:opacity-40 transition duration-700 animate-pulse"></div>
 					<div class="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 2xl:w-[450px] 2xl:h-[450px] rounded-full bg-white/80 backdrop-blur-sm overflow-hidden border-[6px] border-white shadow-2xl flex items-center justify-center group-hover:rotate-3 transition-transform duration-500">
@@ -196,9 +191,6 @@
 				</div>
 			</section>
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- ABOUT ME                                               -->
-			<!-- ═══════════════════════════════════════════════════════ -->
 			<section id="about" class="space-y-8 2xl:space-y-10 scroll-mt-28" data-reveal>
 				<div class="flex items-center gap-3">
 					<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
@@ -214,21 +206,15 @@
 				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 2xl:gap-8">
 					<div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
 						<h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Languages</h4>
-						<p class="text-xs 2xl:text-base text-textMuted">
-							English C1 Advanced<br>Native Spanish</p>
+						<p class="text-xs 2xl:text-base text-textMuted">English C1 Advanced<br>Native Spanish</p>
 					</div>
 					<div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
 						<h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Location and availability</h4>
-						<p class="text-xs 2xl:text-base text-textMuted">
-							Madrid (Spain) until August 2026.<br>
-							Vejle, Denmark starting in September.<br>Available for remote work.</p>
+						<p class="text-xs 2xl:text-base text-textMuted">Madrid (Spain) until August 2026.<br>Vejle, Denmark starting in September.<br>Available for remote work.</p>
 					</div>
 				</div>
 			</section>
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- EXPERIENCE                                             -->
-			<!-- ═══════════════════════════════════════════════════════ -->
 			<section id="experience" class="space-y-10 2xl:space-y-14 scroll-mt-28" data-reveal>
 				<div class="space-y-2 2xl:space-y-3">
 					<div class="flex items-center gap-3">
@@ -240,10 +226,7 @@
 					<p class="text-sm 2xl:text-lg text-textMuted">Industry experience developing software and managing cloud environments.</p>
 				</div>
 
-				<!-- Timeline -->
 				<div class="relative border-l-2 border-slate-200/80 pl-8 2xl:pl-12 ml-2 space-y-10 2xl:space-y-14">
-
-					<!-- Axazure -->
 					<div class="relative group">
 						<div class="absolute -left-[41px] 2xl:-left-[57px] top-1 w-6 h-6 2xl:w-8 2xl:h-8 rounded-full bg-white border-4 border-natEmerald group-hover:bg-natEmerald transition-all duration-300 shadow-md"></div>
 						<div class="space-y-2 2xl:space-y-4 bg-white/80 backdrop-blur-sm p-6 2xl:p-10 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all">
@@ -263,7 +246,6 @@
 						</div>
 					</div>
 
-					<!-- Skiller Academy -->
 					<div class="relative group">
 						<div class="absolute -left-[41px] 2xl:-left-[57px] top-1 w-6 h-6 2xl:w-8 2xl:h-8 rounded-full bg-white border-4 border-slate-200 group-hover:border-techBlue transition-all duration-300 shadow-md"></div>
 						<div class="space-y-2 2xl:space-y-4 bg-white/80 backdrop-blur-sm p-6 2xl:p-10 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all">
@@ -281,13 +263,9 @@
 							</div>
 						</div>
 					</div>
-
 				</div>
 			</section>
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- PROJECTS (CAROUSEL)                                    -->
-			<!-- ═══════════════════════════════════════════════════════ -->
 			<section id="projects" class="space-y-8 2xl:space-y-12 scroll-mt-28" data-reveal>
 				<div class="space-y-2">
 					<div class="flex items-center gap-3">
@@ -299,7 +277,6 @@
 					<p class="text-sm 2xl:text-lg text-textMuted">My most notable technical developments and implementations.</p>
 				</div>
 
-				<!-- Carrusel -->
 				<div class="relative w-full max-w-5xl 2xl:max-w-6xl mx-auto group/carousel">
 					<button id="carousel-prev" aria-label="Previous" class="absolute left-2 sm:-left-6 2xl:-left-12 top-1/2 -translate-y-1/2 z-10 w-11 h-11 2xl:w-16 2xl:h-16 rounded-xl bg-white border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
 						<i class="fa-solid fa-chevron-left text-sm 2xl:text-xl"></i>
@@ -311,7 +288,6 @@
 					<div class="overflow-hidden rounded-2xl border border-slate-100 shadow-xl bg-white/90 backdrop-blur-md">
 						<div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
 
-							<!-- Slide 1: IoT Standing Desk -->
 							<div class="w-full flex-shrink-0">
 								<div class="flex flex-col md:flex-row h-full">
 									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/icon">
@@ -338,7 +314,6 @@
 								</div>
 							</div>
 
-							<!-- Slide 2: Mount Stray -->
 							<div class="w-full flex-shrink-0">
 								<div class="flex flex-col md:flex-row h-full">
 									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/icon">
@@ -368,11 +343,6 @@
 						</div>
 					</div>
 
-					<!-- Puntos del carrusel: one button per slide above. The first is the
-					     "active" state (wide, emerald) and the rest start in the "inactive"
-					     state (small, slate). If you add a 3rd/4th slide to #carousel-track,
-					     add one more button here with the same inactive classes — the script
-					     reads dots.length automatically, no JS changes needed. -->
 					<div class="flex justify-center items-center gap-3 pt-6 2xl:pt-8" id="carousel-dots">
 						<button aria-label="Slide 1" class="carousel-dot w-8 h-2.5 2xl:w-12 2xl:h-3 rounded-full bg-natEmerald transition-all duration-300"></button>
 						<button aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 2xl:w-3 2xl:h-3 rounded-full bg-slate-400 border border-slate-300 hover:bg-slate-500 transition-all duration-300"></button>
@@ -380,19 +350,6 @@
 				</div>
 			</section>
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- AI-ASSISTED DEPLOYMENTS                                 -->
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!--
-				HOW TO ADD A NEW CARD:
-				1. Copy everything between "START CARD TEMPLATE" and "END CARD TEMPLATE" below.
-				2. Paste it as a new <div> right before the "START CARD TEMPLATE" comment
-				   (i.e. as another child inside the grid div with id="ai-builds-grid").
-				3. Replace the placeholder text: category label, title, description,
-				   tags, and the href on the "Visit live site" link.
-				4. Pick any Font Awesome icon for the badge (swap fa-robot for
-				   fa-camera, fa-store, fa-utensils, etc. depending on the project).
-			-->
 			<section id="ai-builds" class="space-y-8 2xl:space-y-12 scroll-mt-28" data-reveal>
 				<div class="space-y-2">
 					<div class="flex items-center gap-3">
@@ -407,8 +364,6 @@
 				</div>
 
 				<div id="ai-builds-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 2xl:gap-10">
-
-					<!-- CARD: José Rodríguez — Steadicam Operator CV -->
 					<div class="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 2xl:p-8 flex flex-col gap-4 2xl:gap-6">
 						<div class="flex items-start justify-between gap-4">
 							<div class="space-y-1">
@@ -432,41 +387,11 @@
 							Visit live site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
 						</a>
 					</div>
-					<!-- /CARD -->
-
-					<!-- START CARD TEMPLATE (copy from here down to END CARD TEMPLATE)
-					<div class="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 2xl:p-8 flex flex-col gap-4 2xl:gap-6">
-						<div class="flex items-start justify-between gap-4">
-							<div class="space-y-1">
-								<span class="text-xs 2xl:text-sm font-bold text-natEmerald uppercase tracking-wider">Category Label Here</span>
-								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark leading-snug">Project / Client Title</h3>
-							</div>
-							<div class="w-10 h-10 2xl:w-14 2xl:h-14 flex-shrink-0 rounded-xl bg-natMint flex items-center justify-center text-natEmerald text-lg 2xl:text-2xl">
-								<i class="fa-solid fa-robot"></i>
-							</div>
-						</div>
-						<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed flex-grow">
-							Short description of the project and your role as project lead / QA / deployment engineer.
-						</p>
-						<div class="flex flex-wrap gap-2">
-							<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">AI-Assisted</span>
-							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">GitHub Pages</span>
-						</div>
-						<a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm 2xl:text-lg font-semibold text-techBlue hover:text-natEmerald transition-colors">
-							Visit live site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-						</a>
-					</div>
-					END CARD TEMPLATE -->
-
 				</div>
 			</section>
 
-			<!-- ═══════════════════════════════════════════════════════ -->
-			<!-- SKILLS                                                 -->
-			<!-- ═══════════════════════════════════════════════════════ -->
 			<section id="skills" class="space-y-16 2xl:space-y-24 scroll-mt-28" data-reveal>
-
-				<!-- Stack Tecnológico -->
+				
 				<div class="space-y-8 2xl:space-y-10">
 					<div class="flex items-center gap-3">
 						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
@@ -476,7 +401,6 @@
 					</div>
 
 					<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 2xl:gap-10">
-
 						<div class="bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 rounded-xl p-6 2xl:p-10 space-y-4 2xl:space-y-6 hover:shadow-lg transition-shadow">
 							<h3 class="text-xs 2xl:text-sm font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
 								<i class="fa-solid fa-terminal text-natEmerald"></i> Languages
@@ -519,11 +443,9 @@
 								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Dynamics 365</span>
 							</div>
 						</div>
-
 					</div>
 				</div>
 
-				<!-- EDUCATION -->
 				<div class="space-y-8 2xl:space-y-10 pt-8 border-t border-slate-200/60">
 					<div class="flex items-center gap-3">
 						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
@@ -552,7 +474,6 @@
 							<p class="text-sm 2xl:text-lg font-semibold text-techBlue">U-TAD · Madrid</p>
 						</div>
 
-						<!-- Certifications -->
 						<h3 class="text-sm 2xl:text-lg font-bold text-slate-400 uppercase tracking-wider pt-4">Certifications</h3>
 						<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
 							<div class="bg-white border border-slate-100 shadow-sm rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition-all">
@@ -585,12 +506,9 @@
 						</div>
 					</div>
 				</div>
-
 			</section>
-
 		</main>
 
-		<!-- FOOTER -->
 		<footer class="border-t border-slate-200 mt-36 2xl:mt-48 bg-white/50 backdrop-blur-md relative z-10">
 			<div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-10 2xl:py-16 flex flex-col sm:flex-row items-center justify-between text-xs 2xl:text-base text-textMuted gap-4">
 				<p>&copy; 2026 Javier Arévalo. Software Developer.</p>
@@ -605,11 +523,8 @@
 			</div>
 		</footer>
 
-		<!-- ═══════════════════════════════════════════════════════ -->
-		<!-- JS                                                      -->
-		<!-- ═══════════════════════════════════════════════════════ -->
 		<script>
-		// ── 1. Mobile Menu ────────────────────────────────────────
+		// Mobile Menu toggle
 		const mobileMenuBtn = document.getElementById('mobile-menu-btn');
 		const mobileMenu    = document.getElementById('mobile-menu');
 		mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
@@ -617,35 +532,40 @@
 			link.addEventListener('click', () => mobileMenu.classList.add('hidden'))
 		);
 
-		// ── 2. Email copy + open ──────────────────────────────────
+		// Email button clipboard & mailto routing
 		document.querySelectorAll('.email-btn').forEach(btn => {
 			btn.addEventListener('click', (e) => {
 				e.preventDefault();
-				const textSpan   = btn.querySelector('span');
+				const textSpan = btn.querySelector('span');
 				const originalText = textSpan.innerText;
-				const email      = 'javier.arevalo.11111@gmail.com';
+				const email = 'javier.arevalo.11111@gmail.com';
+				
 				navigator.clipboard.writeText(email).then(() => {
 					textSpan.innerText = 'Copied!';
 					setTimeout(() => { textSpan.innerText = originalText; }, 2500);
 					window.location.href = `mailto:${email}`;
-				}).catch(() => { window.location.href = `mailto:${email}`; });
+				}).catch(() => { 
+					window.location.href = `mailto:${email}`; 
+				});
 			});
 		});
 
-		// ── 3. Carousel ───────────────────────────────────────────
-		const track      = document.getElementById('carousel-track');
-		const dots       = document.querySelectorAll('.carousel-dot');
-		const prevBtn    = document.getElementById('carousel-prev');
-		const nextBtn    = document.getElementById('carousel-next');
+		// Projects Carousel implementation
+		const track = document.getElementById('carousel-track');
+		const dots = document.querySelectorAll('.carousel-dot');
+		const prevBtn = document.getElementById('carousel-prev');
+		const nextBtn = document.getElementById('carousel-next');
 		const totalSlides = dots.length;
-		let currentSlide  = 0;
+		let currentSlide = 0;
 		let autoplayTimer = null;
 
 		function updateCarousel(index) {
 			if (index >= totalSlides) index = 0;
 			if (index < 0) index = totalSlides - 1;
 			currentSlide = index;
+			
 			track.style.transform = `translateX(-${currentSlide * 100}%)`;
+			
 			dots.forEach((dot, i) => {
 				if (i === currentSlide) {
 					dot.classList.remove('w-2.5','2xl:w-3','bg-slate-400','border','border-slate-300','hover:bg-slate-500');
@@ -656,23 +576,30 @@
 				}
 			});
 		}
+
 		function nextSlide() { updateCarousel(currentSlide + 1); }
 		function prevSlide() { updateCarousel(currentSlide - 1); }
+		
 		nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
 		prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
-		dots.forEach((dot, i) => dot.addEventListener('click', () => { updateCarousel(i); resetAutoplay(); }));
+		
+		dots.forEach((dot, i) => dot.addEventListener('click', () => { 
+			updateCarousel(i); 
+			resetAutoplay(); 
+		}));
+
 		function startAutoplay() { autoplayTimer = setInterval(nextSlide, 5000); }
 		function resetAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
 		startAutoplay();
 
-		// ── 4. Cursor glow ────────────────────────────────────────
+		// Custom cursor glow effect
 		const glow = document.getElementById('cursor-glow');
 		document.addEventListener('mousemove', (e) => {
 			glow.style.left = e.clientX + 'px';
-			glow.style.top  = e.clientY + 'px';
+			glow.style.top = e.clientY + 'px';
 		});
 
-		// ── 5. Scroll reveal ──────────────────────────────────────
+		// Intersection Observer for scroll reveal animations
 		const revealObserver = new IntersectionObserver((entries) => {
 			entries.forEach(entry => {
 				if (entry.isIntersecting) {
@@ -681,72 +608,71 @@
 				}
 			});
 		}, { threshold: 0.08 });
+		
 		document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
 
-		// ── 6. Hero particle network ──────────────────────────────
+		// Hero Canvas - Interactive particle network
 		(function () {
-			const canvas  = document.getElementById('hero-canvas');
-			const ctx     = canvas.getContext('2d');
+			const canvas = document.getElementById('hero-canvas');
+			const ctx = canvas.getContext('2d');
 			const section = canvas.parentElement;
 
-			// Tech labels themed around Javier's real stack
 			const LABELS = [
 				'Azure','Dynamics 365','Java','Kotlin','Python',
 				'C#','C++','Android','Swift','MongoDB',
 				'MySQL','Firebase','Git','REST API','Figma','MQTT'
 			];
 
-			// Colour palette matching the portfolio
 			const PALETTE = [
-				{ node: '#059669', line: '5,150,105'  },  // natEmerald
-				{ node: '#0284c7', line: '2,132,199'  },  // techBlue
-				{ node: '#94a3b8', line: '148,163,184'},   // slate-400
+				{ node: '#059669', line: '5,150,105'  }, 
+				{ node: '#0284c7', line: '2,132,199'  }, 
+				{ node: '#94a3b8', line: '148,163,184'},  
 			];
 
 			let W, H;
 			const MOUSE = { x: -9999, y: -9999 };
 			const NODE_COUNT = 16;
-			const MAX_DIST   = 210;
+			const MAX_DIST = 210;
 			const MOUSE_RADIUS = 160;
 
 			class Node {
 				constructor(isMobile) {
 					const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-					this.color     = c.node;
+					this.color = c.node;
 					this.lineColor = c.line;
-					this.label     = LABELS[Math.floor(Math.random() * LABELS.length)];
-					this.size      = (Math.random() * 2.5 + 2.5) * (isMobile ? 0.8 : 1);
+					this.label = LABELS[Math.floor(Math.random() * LABELS.length)];
+					this.size = (Math.random() * 2.5 + 2.5) * (isMobile ? 0.8 : 1);
 					this.labelAlpha = isMobile ? 0.22 : 0.55;
-					this.phase     = Math.random() * Math.PI * 2;
-					this.speed     = Math.random() * 0.3 + 0.1;
+					this.phase = Math.random() * Math.PI * 2;
+					this.speed = Math.random() * 0.3 + 0.1;
 					this.place();
 				}
 				place() {
-					this.x  = Math.random() * W;
-					this.y  = Math.random() * H;
+					this.x = Math.random() * W;
+					this.y = Math.random() * H;
 					this.vx = (Math.random() - 0.5) * this.speed;
 					this.vy = (Math.random() - 0.5) * this.speed;
 				}
 				update() {
-					// Soft mouse attraction
-					const dx   = MOUSE.x - this.x;
-					const dy   = MOUSE.y - this.y;
+					const dx = MOUSE.x - this.x;
+					const dy = MOUSE.y - this.y;
 					const dist = Math.hypot(dx, dy);
+					
 					if (dist < MOUSE_RADIUS && dist > 0) {
 						const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.025;
 						this.vx += dx / dist * force;
 						this.vy += dy / dist * force;
 					}
-					// Speed limit & damping
+					
 					const spd = Math.hypot(this.vx, this.vy);
 					if (spd > 1.2) { this.vx *= 1.2 / spd; this.vy *= 1.2 / spd; }
+					
 					this.vx *= 0.995;
 					this.vy *= 0.995;
 
 					this.x += this.vx;
 					this.y += this.vy;
 
-					// Wrap edges
 					if (this.x < -40) this.x = W + 40;
 					if (this.x > W + 40) this.x = -40;
 					if (this.y < -40) this.y = H + 40;
@@ -756,7 +682,7 @@
 				}
 				draw() {
 					const pulse = 1 + Math.sin(this.phase) * 0.25;
-					const r     = this.size * pulse;
+					const r = this.size * pulse;
 
 					// Outer aura
 					ctx.beginPath();
@@ -770,10 +696,10 @@
 					ctx.fillStyle = this.color;
 					ctx.fill();
 
-					// Label — fades to match aura opacity
+					// Label rendering
 					ctx.font = '600 10px Plus Jakarta Sans, sans-serif';
 					ctx.globalAlpha = this.labelAlpha;
-					ctx.fillStyle   = this.color;
+					ctx.fillStyle = this.color;
 					ctx.fillText(this.label, this.x + r + 6, this.y + 4);
 					ctx.globalAlpha = 1;
 				}
@@ -783,22 +709,17 @@
 
 			function resize() {
 				const rect = section.getBoundingClientRect();
-				const dpr  = window.devicePixelRatio || 1;
+				const dpr = window.devicePixelRatio || 1;
 
 				W = rect.width;
 				H = rect.height;
 
-				// Render at native pixel density so dots/lines/text stay crisp
-				// on high-DPI mobile screens instead of looking blurry.
-				canvas.width  = Math.round(W * dpr);
+				canvas.width = Math.round(W * dpr);
 				canvas.height = Math.round(H * dpr);
-				canvas.style.width  = W + 'px';
+				canvas.style.width = W + 'px';
 				canvas.style.height = H + 'px';
 				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-				// Fewer, fainter nodes while the hero is in its stacked layout
-				// (below the lg breakpoint) so labels don't clutter or clash
-				// with the heading text on phones and tablets.
 				const isMobile = W < 1024;
 				nodes = Array.from({ length: isMobile ? 9 : NODE_COUNT }, () => new Node(isMobile));
 			}
@@ -811,7 +732,7 @@
 						if (d > MAX_DIST) continue;
 
 						const alpha = ((1 - d / MAX_DIST) * 0.28).toFixed(3);
-						const grad  = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
+						const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
 						grad.addColorStop(0, `rgba(${a.lineColor},${alpha})`);
 						grad.addColorStop(1, `rgba(${b.lineColor},${alpha})`);
 
@@ -819,29 +740,26 @@
 						ctx.moveTo(a.x, a.y);
 						ctx.lineTo(b.x, b.y);
 						ctx.strokeStyle = grad;
-						ctx.lineWidth   = 1;
+						ctx.lineWidth = 1;
 						ctx.stroke();
 					}
 				}
 			}
 
-			let animId;
 			function animate() {
 				ctx.clearRect(0, 0, W, H);
 				drawEdges();
 				nodes.forEach(n => { n.update(); n.draw(); });
-				animId = requestAnimationFrame(animate);
+				requestAnimationFrame(animate);
 			}
 
-			// Mouse tracking relative to the section
 			section.addEventListener('mousemove', (e) => {
-				const rect  = section.getBoundingClientRect();
+				const rect = section.getBoundingClientRect();
 				MOUSE.x = e.clientX - rect.left;
 				MOUSE.y = e.clientY - rect.top;
 			});
 			section.addEventListener('mouseleave', () => { MOUSE.x = -9999; MOUSE.y = -9999; });
 
-			// Resize observer keeps canvas in sync with hero height changes
 			new ResizeObserver(resize).observe(section);
 			resize();
 			animate();
