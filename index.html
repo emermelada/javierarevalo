@@ -42,8 +42,10 @@
 			::-webkit-scrollbar-thumb:hover { background: #059669; }
 
 			.text-gradient {
-				background: linear-gradient(135deg, #059669 0%, #0284c7 100%);
+				background: linear-gradient(135deg, #047857 0%, #0369a1 100%);
+				background-clip: text;
 				-webkit-background-clip: text;
+				color: transparent;
 				-webkit-text-fill-color: transparent;
 			}
 
@@ -88,6 +90,19 @@
 				z-index: 0;
 			}
 
+			/* Keep the hero heading/paragraph readable over the particle
+			   network: a soft halo matching the page background sits behind
+			   the glyphs so wandering nodes/labels never blend with the text. */
+			#hero h1,
+			#hero p {
+				position: relative;
+				z-index: 10;
+				text-shadow:
+					0 0 14px #f8fafc,
+					0 0 26px #f8fafc,
+					0 0 36px #f8fafc;
+			}
+
 			/* Respect reduced-motion preferences */
 			@media (prefers-reduced-motion: reduce) {
 				[data-reveal] { opacity: 1; transform: none; transition: none; }
@@ -113,25 +128,27 @@
 				<a href="#" class="text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform duration-300">
 					JA<span class="text-natEmerald">.</span>
 				</a>
-				<nav class="hidden md:flex items-center space-x-10 text-sm font-semibold">
+				<nav class="hidden lg:flex items-center space-x-10 text-sm font-semibold">
 					<a href="#about" class="text-textMuted hover:text-natEmerald transition-colors">About me</a>
 					<a href="#experience" class="text-textMuted hover:text-natEmerald transition-colors">Experience</a>
 					<a href="#projects" class="text-textMuted hover:text-techBlue transition-colors">Projects</a>
+					<a href="#ai-builds" class="text-textMuted hover:text-natEmerald transition-colors">AI Builds</a>
 					<a href="#skills" class="text-textMuted hover:text-natEmerald transition-colors">Skills</a>
 					<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn px-5 py-2.5 bg-textDark hover:bg-natEmerald text-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 whitespace-nowrap min-w-[130px] text-center">
 						<span>Contact</span>
 						<i class="fa-solid fa-arrow-right ml-2 text-xs opacity-80 transition-none"></i>
 					</a>
 				</nav>
-				<button id="mobile-menu-btn" aria-label="Open menu" class="md:hidden text-textMuted hover:text-natEmerald p-2 rounded-lg bg-white shadow-sm border border-slate-200">
+				<button id="mobile-menu-btn" aria-label="Open menu" class="lg:hidden text-textMuted hover:text-natEmerald p-2 rounded-lg bg-white shadow-sm border border-slate-200">
 					<i class="fa-solid fa-bars-staggered text-xl"></i>
 				</button>
 			</div>
 			<!-- Menú Móvil -->
-			<nav id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0">
+			<nav id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0">
 				<a href="#about" class="block font-medium text-textMuted hover:text-natEmerald text-lg">About me</a>
 				<a href="#experience" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Experience</a>
 				<a href="#projects" class="block font-medium text-textMuted hover:text-techBlue text-lg">Projects</a>
+				<a href="#ai-builds" class="block font-medium text-textMuted hover:text-natEmerald text-lg">AI Builds</a>
 				<a href="#skills" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Skills</a>
 				<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn block text-center py-3 bg-natEmerald text-white rounded-xl font-semibold">
 					<span>Write Email</span>
@@ -144,7 +161,7 @@
 			<!-- ═══════════════════════════════════════════════════════ -->
 			<!-- HERO                                                    -->
 			<!-- ═══════════════════════════════════════════════════════ -->
-			<section id="hero" class="relative min-h-[75vh] flex flex-col-reverse md:flex-row items-center justify-between gap-16 pt-4 2xl:pt-12">
+			<section id="hero" class="relative min-h-[75vh] flex flex-col-reverse lg:flex-row items-center justify-between gap-16 pt-4 2xl:pt-12">
 
 				<!-- Particle network canvas -->
 				<canvas id="hero-canvas"></canvas>
@@ -353,11 +370,96 @@
 						</div>
 					</div>
 
-					<!-- Puntos del carrusel -->
-					<div class="flex justify-center items-center gap-2.5 pt-6 2xl:pt-8" id="carousel-dots">
-						<button class="carousel-dot w-8 h-2.5 2xl:w-12 2xl:h-3 rounded-full bg-natEmerald transition-all duration-300"></button>
-						<button class="carousel-dot w-2.5 h-2.5 2xl:w-3 2xl:h-3 rounded-full bg-slate-300 hover:bg-slate-400 transition-all duration-300"></button>
+					<!-- Puntos del carrusel: one button per slide above. The first is the
+					     "active" state (wide, emerald) and the rest start in the "inactive"
+					     state (small, slate). If you add a 3rd/4th slide to #carousel-track,
+					     add one more button here with the same inactive classes — the script
+					     reads dots.length automatically, no JS changes needed. -->
+					<div class="flex justify-center items-center gap-3 pt-6 2xl:pt-8" id="carousel-dots">
+						<button aria-label="Slide 1" class="carousel-dot w-8 h-2.5 2xl:w-12 2xl:h-3 rounded-full bg-natEmerald transition-all duration-300"></button>
+						<button aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 2xl:w-3 2xl:h-3 rounded-full bg-slate-400 border border-slate-300 hover:bg-slate-500 transition-all duration-300"></button>
 					</div>
+				</div>
+			</section>
+
+			<!-- ═══════════════════════════════════════════════════════ -->
+			<!-- AI-ASSISTED DEPLOYMENTS                                 -->
+			<!-- ═══════════════════════════════════════════════════════ -->
+			<!--
+				HOW TO ADD A NEW CARD:
+				1. Copy everything between "START CARD TEMPLATE" and "END CARD TEMPLATE" below.
+				2. Paste it as a new <div> right before the "START CARD TEMPLATE" comment
+				   (i.e. as another child inside the grid div with id="ai-builds-grid").
+				3. Replace the placeholder text: category label, title, description,
+				   tags, and the href on the "Visit live site" link.
+				4. Pick any Font Awesome icon for the badge (swap fa-robot for
+				   fa-camera, fa-store, fa-utensils, etc. depending on the project).
+			-->
+			<section id="ai-builds" class="space-y-8 2xl:space-y-12 scroll-mt-28" data-reveal>
+				<div class="space-y-2">
+					<div class="flex items-center gap-3">
+						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
+							<i class="fa-solid fa-robot"></i>
+						</div>
+						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">AI-Assisted Deployments</h2>
+					</div>
+					<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed max-w-4xl">
+						Beyond my own code, I use LLMs as a productivity multiplier to design, build, and ship complete websites for friends and small clients in under 48 hours. My role on these projects is <strong class="font-semibold text-textDark">project lead and QA</strong>: defining the brief and content, prompting and iterating with the model, reviewing the generated code for bugs and accessibility, structuring the repository, and deploying it via GitHub Pages.
+					</p>
+				</div>
+
+				<div id="ai-builds-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 2xl:gap-10">
+
+					<!-- CARD: José Rodríguez — Steadicam Operator CV -->
+					<div class="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 2xl:p-8 flex flex-col gap-4 2xl:gap-6">
+						<div class="flex items-start justify-between gap-4">
+							<div class="space-y-1">
+								<span class="text-xs 2xl:text-sm font-bold text-natEmerald uppercase tracking-wider">Client Portfolio · CV Site</span>
+								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark leading-snug">José Rodríguez — Steadicam Operator & Filmmaker</h3>
+							</div>
+							<div class="w-10 h-10 2xl:w-14 2xl:h-14 flex-shrink-0 rounded-xl bg-natMint flex items-center justify-center text-natEmerald text-lg 2xl:text-2xl">
+								<i class="fa-solid fa-camera-retro"></i>
+							</div>
+						</div>
+						<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed flex-grow">
+							Single-page CV and portfolio site for a Steadicam operator and filmmaker. I gathered the content and structure, prompted the model to generate the layout and styling, then reviewed and fixed the output, organized the project for GitHub Pages, and deployed it.
+						</p>
+						<div class="flex flex-wrap gap-2">
+							<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">AI-Assisted</span>
+							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">GitHub Pages</span>
+							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">Prompt Engineering</span>
+							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">QA & Deployment</span>
+						</div>
+						<a href="https://joserdez.github.io/CV/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm 2xl:text-lg font-semibold text-techBlue hover:text-natEmerald transition-colors">
+							Visit live site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+						</a>
+					</div>
+					<!-- /CARD -->
+
+					<!-- START CARD TEMPLATE (copy from here down to END CARD TEMPLATE)
+					<div class="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 2xl:p-8 flex flex-col gap-4 2xl:gap-6">
+						<div class="flex items-start justify-between gap-4">
+							<div class="space-y-1">
+								<span class="text-xs 2xl:text-sm font-bold text-natEmerald uppercase tracking-wider">Category Label Here</span>
+								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark leading-snug">Project / Client Title</h3>
+							</div>
+							<div class="w-10 h-10 2xl:w-14 2xl:h-14 flex-shrink-0 rounded-xl bg-natMint flex items-center justify-center text-natEmerald text-lg 2xl:text-2xl">
+								<i class="fa-solid fa-robot"></i>
+							</div>
+						</div>
+						<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed flex-grow">
+							Short description of the project and your role as project lead / QA / deployment engineer.
+						</p>
+						<div class="flex flex-wrap gap-2">
+							<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">AI-Assisted</span>
+							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">GitHub Pages</span>
+						</div>
+						<a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm 2xl:text-lg font-semibold text-techBlue hover:text-natEmerald transition-colors">
+							Visit live site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+						</a>
+					</div>
+					END CARD TEMPLATE -->
+
 				</div>
 			</section>
 
@@ -548,10 +650,10 @@
 			track.style.transform = `translateX(-${currentSlide * 100}%)`;
 			dots.forEach((dot, i) => {
 				if (i === currentSlide) {
-					dot.classList.remove('w-2.5','h-2.5','2xl:w-3','bg-slate-300');
+					dot.classList.remove('w-2.5','2xl:w-3','bg-slate-400','border','border-slate-300','hover:bg-slate-500');
 					dot.classList.add('w-8','2xl:w-12','bg-natEmerald');
 				} else {
-					dot.classList.add('w-2.5','h-2.5','2xl:w-3','bg-slate-300');
+					dot.classList.add('w-2.5','2xl:w-3','bg-slate-400','border','border-slate-300','hover:bg-slate-500');
 					dot.classList.remove('w-8','2xl:w-12','bg-natEmerald');
 				}
 			});
@@ -610,12 +712,13 @@
 			const MOUSE_RADIUS = 160;
 
 			class Node {
-				constructor() {
+				constructor(isMobile) {
 					const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
 					this.color     = c.node;
 					this.lineColor = c.line;
 					this.label     = LABELS[Math.floor(Math.random() * LABELS.length)];
-					this.size      = Math.random() * 2.5 + 2.5;
+					this.size      = (Math.random() * 2.5 + 2.5) * (isMobile ? 0.8 : 1);
+					this.labelAlpha = isMobile ? 0.22 : 0.55;
 					this.phase     = Math.random() * Math.PI * 2;
 					this.speed     = Math.random() * 0.3 + 0.1;
 					this.place();
@@ -671,7 +774,7 @@
 
 					// Label — fades to match aura opacity
 					ctx.font = '600 10px Plus Jakarta Sans, sans-serif';
-					ctx.globalAlpha = 0.55;
+					ctx.globalAlpha = this.labelAlpha;
 					ctx.fillStyle   = this.color;
 					ctx.fillText(this.label, this.x + r + 6, this.y + 4);
 					ctx.globalAlpha = 1;
@@ -682,9 +785,24 @@
 
 			function resize() {
 				const rect = section.getBoundingClientRect();
-				W = canvas.width  = rect.width;
-				H = canvas.height = rect.height;
-				nodes = Array.from({ length: NODE_COUNT }, () => new Node());
+				const dpr  = window.devicePixelRatio || 1;
+
+				W = rect.width;
+				H = rect.height;
+
+				// Render at native pixel density so dots/lines/text stay crisp
+				// on high-DPI mobile screens instead of looking blurry.
+				canvas.width  = Math.round(W * dpr);
+				canvas.height = Math.round(H * dpr);
+				canvas.style.width  = W + 'px';
+				canvas.style.height = H + 'px';
+				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+				// Fewer, fainter nodes while the hero is in its stacked layout
+				// (below the lg breakpoint) so labels don't clutter or clash
+				// with the heading text on phones and tablets.
+				const isMobile = W < 1024;
+				nodes = Array.from({ length: isMobile ? 9 : NODE_COUNT }, () => new Node(isMobile));
 			}
 
 			function drawEdges() {
