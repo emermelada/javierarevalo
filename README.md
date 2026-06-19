@@ -2,7 +2,7 @@
 
 Personal portfolio website showcasing my professional background, projects, and skills as a Software Developer with a focus on Cloud & DevOps. 
 
-You can view the live site here: (https://emermelada.github.io/javierarevalo)
+You can view the live site here: (https://cv.javierarevalo.dev/)
 
 ## Overview
 This is a single-page static application designed to be fast, responsive, and easy to navigate. It details my trajectory from Android development (Kotlin) to Cloud infrastructure (Microsoft Azure, Dynamics 365, Serverless) and embedded hardware (IoT / C++). 
