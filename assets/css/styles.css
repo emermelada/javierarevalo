@@ -1025,9 +1025,21 @@
 			grid-template-columns: 1fr;
 			align-items: start;
 		}
+		/* On mobile the tall framed portrait reads awkwardly. Switch it to a
+		 * centred circular avatar and drop the figure caption (which looks odd
+		 * under a round image). */
 		.hero__figure {
 			order: -1;
-			width: 9rem;
+			width: 11rem;
+			margin-inline: auto;
+		}
+		.hero__figure img {
+			aspect-ratio: 1;
+			border-radius: 50%;
+			object-position: center;
+		}
+		.hero__figcaption {
+			display: none;
 		}
 		.facts {
 			grid-template-columns: repeat(2, 1fr);
