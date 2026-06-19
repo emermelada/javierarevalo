@@ -110,11 +110,27 @@ Duplicate an existing `<article class="entry">` inside `#projects`, bump the
 The hero facts strip (Based in / Languages / Focus / Status) is plain markup in
 the `<dl class="facts">` block near the top of `index.html`.
 
+### Edit skills
+
+The Skills section (`#skills`) is a list of category groups (`.skillset`): each
+has a display-font heading with an accent icon (`.skillset__icon`) and a list of
+tools as tags. Add or remove `<li class="tag">…</li>` items, or duplicate a
+whole `.skillset` to add a category. Use `tag--key` to highlight a headline
+skill.
+
 ### Theme
 
 Colour, type scale and spacing are all CSS custom properties in the `tokens`
 `@layer` at the top of `assets/css/styles.css`. Change a value there and it
 propagates across the whole page.
+
+### After editing CSS or JS — bump the cache-buster
+
+The stylesheet and script are linked with a version query
+(`styles.css?v=N`, `main.js?v=N`) in the `<head>` of `index.html`. Browsers and
+the GitHub Pages CDN cache these files aggressively, so **increment `N` whenever
+you change `styles.css` or `main.js`** to make returning visitors (especially on
+mobile) fetch the new version instead of a stale copy.
 
 ## Running locally
 
