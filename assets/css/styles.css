@@ -42,9 +42,10 @@
 		--line: #e2e1d8; /* hairline rules                                    */
 		--line-2: #cdccc2; /* stronger rules                                   */
 
-		--accent: #1f5bb0; /* ETH blue                                         */
+		--accent: #1f5bb0; /* ETH blue — the default; overridden per section   */
 		--accent-deep: #17467f;
 		--accent-soft: rgba(31, 91, 176, 0.08);
+		--band: #f6f7f9; /* soft neutral for alternating section bands        */
 
 		/* --- Typography ----------------------------------------------------- *
 		 * Space Grotesk : display headings (geometric, authoritative)
@@ -284,7 +285,9 @@
 		gap: 0.5rem;
 		font-family: var(--font-mono);
 		font-size: 0.78rem;
-		color: var(--accent);
+		/* deep variant keeps the small number AA-legible in the lighter
+		 * per-section hues (green/amber); the tick below stays bright. */
+		color: var(--accent-deep);
 		margin-bottom: 0.85rem;
 	}
 	.block__num::before {
@@ -345,7 +348,7 @@
 		align-items: center;
 		gap: 0.4rem;
 		font-weight: 500;
-		color: var(--accent);
+		color: var(--accent-deep); /* AA-legible across all section hues       */
 		border-bottom: 1px solid transparent;
 		transition: border-color var(--dur) var(--ease);
 	}
@@ -1184,6 +1187,11 @@
 			border-top: 1px solid #999;
 			break-inside: avoid;
 		}
+		/* Drop the coloured bands so print stays clean and ink-saving. */
+		.block--band {
+			background: #fff;
+			box-shadow: none;
+		}
 		.entries--cards {
 			display: block;
 		}
@@ -1196,5 +1204,36 @@
 		a {
 			color: #000;
 		}
+	}
+}
+
+/* =============================================================================
+   PER-SECTION THEMING
+   Two devices give the page rhythm without disturbing the layout:
+
+   • Accent classes recolour a whole section by overriding the three accent
+     custom properties. Every component inside already reads `var(--accent)` /
+     `--accent-deep` / `--accent-soft` (numbers, icon tiles, key tags, links,
+     card-hover border…), so each section recolours "for free". Placed in the
+     components layer so they win over the :root defaults (tokens layer) for the
+     section's subtree, while the page chrome outside the sections keeps the
+     root value (and is synced separately by the scroll-spy in main.js).
+
+   • `.block--band` paints a full-bleed neutral band behind alternating sections
+     using the box-shadow-spread + clip-path trick — full viewport width with no
+     `100vw` scrollbar overflow and no z-index juggling.
+============================================================================= */
+@layer components {
+	.accent-blue   { --accent: #1f5bb0; --accent-deep: #17467f; --accent-soft: rgba(31, 91, 176, 0.10); }
+	.accent-teal   { --accent: #117c83; --accent-deep: #0b5d61; --accent-soft: rgba(17, 124, 131, 0.12); }
+	.accent-indigo { --accent: #4f46c9; --accent-deep: #372f9c; --accent-soft: rgba(79, 70, 201, 0.10); }
+	.accent-violet { --accent: #8a4ec2; --accent-deep: #653a93; --accent-soft: rgba(138, 78, 194, 0.11); }
+	.accent-green  { --accent: #2f8f5b; --accent-deep: #1f6b41; --accent-soft: rgba(47, 143, 91, 0.13); }
+	.accent-amber  { --accent: #b9741a; --accent-deep: #8a560f; --accent-soft: rgba(185, 116, 26, 0.13); }
+
+	.block--band {
+		background-color: var(--band);
+		box-shadow: 0 0 0 100vmax var(--band);
+		clip-path: inset(0 -100vmax);
 	}
 }

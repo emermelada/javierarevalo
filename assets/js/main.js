@@ -156,6 +156,16 @@ function initScrollSpy() {
 				if (!entry.isIntersecting) return;
 				links.forEach((l) => l.classList.remove("is-active"));
 				linkFor.get(entry.target)?.classList.add("is-active");
+
+				// Sync the page chrome (reading-progress bar, active nav marker)
+				// to the section in view. Those elements live outside the
+				// sections and read the root `--accent`; each section advertises
+				// its hue via `data-accent`. The sections themselves keep their
+				// own accent because their class scope is closer than :root.
+				const accent = entry.target.dataset.accent;
+				if (accent) {
+					document.documentElement.style.setProperty("--accent", accent);
+				}
 			});
 		},
 		{ rootMargin: "-45% 0px -50% 0px", threshold: 0 }
