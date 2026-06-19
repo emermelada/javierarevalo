@@ -277,20 +277,29 @@
 		align-self: start;
 		height: fit-content;
 	}
+	/* Number reads as an accent "eyebrow" (— 01) above a real display title. */
 	.block__num {
-		display: block;
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
 		font-family: var(--font-mono);
-		font-size: 0.8rem;
+		font-size: 0.78rem;
 		color: var(--accent);
-		margin-bottom: 0.6rem;
+		margin-bottom: 0.85rem;
+	}
+	.block__num::before {
+		content: "";
+		width: 1.6rem;
+		height: 2px;
+		background: var(--accent);
 	}
 	.block__label {
-		font-family: var(--font-mono);
-		font-size: var(--fs-label);
-		font-weight: 500;
-		letter-spacing: 0.18em;
-		text-transform: uppercase;
-		color: var(--muted);
+		font-family: var(--font-display);
+		font-size: clamp(1.4rem, 1.1rem + 1.1vw, 1.95rem);
+		font-weight: 600;
+		line-height: 1.05;
+		letter-spacing: -0.02em;
+		color: var(--ink);
 	}
 	.block__body {
 		min-width: 0; /* lets long content shrink instead of overflowing      */
@@ -786,31 +795,46 @@
 	}
 
 	/* ---------------------------------------------------------------------- *
-	 * SKILLS MATRIX — a clean definition table, not pill soup.                */
-	.matrix {
+	 * SKILLS — category groups. Each category gets a prominent display-font   *
+	 * heading with an accent icon tile, so the groupings (Languages, Cloud…)  *
+	 * read clearly at a glance, with their tools listed beneath. Cells form a *
+	 * hairline grid (1px gap over the container background) like the certs.   */
+	.skills {
 		display: grid;
-		gap: 0;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+		overflow: hidden;
 	}
-	.matrix__row {
-		display: grid;
-		grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
-		gap: clamp(1rem, 3vw, 2rem);
-		padding-block: 1.1rem;
-		align-items: start;
+	.skillset {
+		display: flex;
+		flex-direction: column;
+		gap: 1.1rem;
+		padding: 1.5rem;
+		background: var(--surface);
 	}
-	.matrix__row + .matrix__row {
-		border-top: 1px solid var(--line);
-	}
-	.matrix__row:first-child {
-		padding-top: 0;
-	}
-	.matrix__key {
-		font-family: var(--font-mono);
-		font-size: var(--fs-label);
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
+	.skillset__name {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		font-family: var(--font-display);
+		font-size: 1.1rem;
+		font-weight: 600;
+		letter-spacing: -0.01em;
 		color: var(--ink);
-		padding-top: 0.3rem;
+	}
+	.skillset__name i {
+		display: grid;
+		place-items: center;
+		flex-shrink: 0;
+		width: 2rem;
+		height: 2rem;
+		font-size: 0.85rem;
+		color: var(--accent);
+		background: var(--accent-soft);
+		border-radius: var(--radius);
 	}
 
 	/* ---------------------------------------------------------------------- *
@@ -855,6 +879,17 @@
 
 	/* Hairlines drawn by a 1px grid gap showing the container's background
 	 * through it — robust no matter how many columns wrap. */
+	/* Small mono sub-heading used inside a section body (e.g. "Certifications"),
+	 * distinct from the large display section titles in the rail. */
+	.subhead {
+		font-family: var(--font-mono);
+		font-size: var(--fs-label);
+		font-weight: 500;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+
 	.certs {
 		display: grid;
 		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
@@ -1004,19 +1039,14 @@
 		.nav-toggle {
 			display: block;
 		}
-		/* Stack the editorial grid; the rail becomes a heading row. */
+		/* Stack the editorial grid; the rail's eyebrow + title sit above the
+		 * body in their natural vertical order. */
 		.block {
 			grid-template-columns: 1fr;
-			gap: 1.25rem;
+			gap: 1.1rem;
 		}
 		.block__rail {
 			position: static;
-			display: flex;
-			align-items: baseline;
-			gap: 0.75rem;
-		}
-		.block__num {
-			margin-bottom: 0;
 		}
 	}
 
@@ -1055,10 +1085,6 @@
 		.edu__item {
 			grid-template-columns: 1fr;
 			gap: 0.75rem;
-		}
-		.matrix__row {
-			grid-template-columns: 1fr;
-			gap: 0.6rem;
 		}
 		.colophon__inner {
 			grid-template-columns: 1fr;
