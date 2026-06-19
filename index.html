@@ -57,8 +57,10 @@
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 		/>
 
-		<link rel="stylesheet" href="assets/css/styles.css" />
-		<script src="assets/js/main.js" defer></script>
+		<!-- ?v= is a cache-buster: bump it whenever the CSS/JS changes so phones
+		     and the GitHub Pages CDN fetch the new file instead of a stale copy. -->
+		<link rel="stylesheet" href="assets/css/styles.css?v=3" />
+		<script src="assets/js/main.js?v=3" defer></script>
 	</head>
 
 	<body>
@@ -408,9 +410,9 @@
 					<h2 class="block__label" id="skills-title">Skills</h2>
 				</div>
 				<div class="block__body">
-					<div class="matrix">
-						<div class="matrix__row">
-							<span class="matrix__key">Languages</span>
+					<div class="skills">
+						<div class="skillset">
+							<h3 class="skillset__name"><i class="fa-solid fa-code" aria-hidden="true"></i> Languages</h3>
 							<ul class="tags">
 								<li class="tag">Java</li>
 								<li class="tag">Kotlin</li>
@@ -422,8 +424,8 @@
 								<li class="tag">JavaScript</li>
 							</ul>
 						</div>
-						<div class="matrix__row">
-							<span class="matrix__key">Cloud &amp; DevOps</span>
+						<div class="skillset">
+							<h3 class="skillset__name"><i class="fa-solid fa-cloud" aria-hidden="true"></i> Cloud &amp; DevOps</h3>
 							<ul class="tags">
 								<li class="tag tag--key">Microsoft Azure</li>
 								<li class="tag tag--key">Azure Functions</li>
@@ -434,23 +436,23 @@
 								<li class="tag">REST APIs</li>
 							</ul>
 						</div>
-						<div class="matrix__row">
-							<span class="matrix__key">Mobile</span>
+						<div class="skillset">
+							<h3 class="skillset__name"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> Mobile</h3>
 							<ul class="tags">
 								<li class="tag">Android SDK</li>
 								<li class="tag">iOS / Swift</li>
 							</ul>
 						</div>
-						<div class="matrix__row">
-							<span class="matrix__key">Data</span>
+						<div class="skillset">
+							<h3 class="skillset__name"><i class="fa-solid fa-database" aria-hidden="true"></i> Data</h3>
 							<ul class="tags">
 								<li class="tag">MySQL</li>
 								<li class="tag">MongoDB</li>
 								<li class="tag">Dynamics 365 / Dataverse</li>
 							</ul>
 						</div>
-						<div class="matrix__row">
-							<span class="matrix__key">Design</span>
+						<div class="skillset">
+							<h3 class="skillset__name"><i class="fa-solid fa-pen-nib" aria-hidden="true"></i> Design</h3>
 							<ul class="tags">
 								<li class="tag">Figma</li>
 							</ul>
@@ -487,7 +489,7 @@
 						</div>
 					</div>
 
-					<p class="block__label" style="margin-bottom: 1rem">Certifications</p>
+					<p class="subhead" style="margin-bottom: 1rem">Certifications</p>
 					<div class="certs">
 						<div class="cert">
 							<p class="cert__name">Programmatic Advertising</p>
