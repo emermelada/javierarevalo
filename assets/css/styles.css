@@ -507,10 +507,13 @@
 
 	/* ---------------------------------------------------------------------- *
 	 * PROSE — the About body                                                  */
+	/* Body prose (About, AI-assisted intro). Kept close to the base reading size
+	 * so it sits in proportion with the rest of the page rather than dominating
+	 * it; the generous line-height carries the "lead paragraph" feel instead. */
 	.prose {
 		max-width: var(--prose);
-		font-size: var(--fs-lead);
-		line-height: 1.55;
+		font-size: 1.1rem;
+		line-height: 1.7;
 		color: var(--ink-2);
 	}
 	.prose p + p {
@@ -829,17 +832,20 @@
 		letter-spacing: -0.01em;
 		color: var(--ink);
 	}
-	.skillset__name i {
+	/* Icon tile. The Font Awesome <i> is wrapped in this span and centred here
+	 * rather than by styling the <i> directly. Font Awesome's stylesheet is
+	 * loaded outside any @layer, so its `display: inline-block` on the <i> beats
+	 * any `display` we set from inside an @layer (unlayered styles win over
+	 * layered ones, regardless of specificity) — which left the glyph pinned to
+	 * the tile's top-left corner. Centring on a plain wrapper span avoids the
+	 * conflict entirely (the same pattern the certification icons use). */
+	.skillset__icon {
 		flex-shrink: 0;
 		width: 1.85rem;
 		height: 1.85rem;
-		/* inline-flex + line-height:1 reliably centres the Font Awesome glyph
-		 * both axes inside the tile (grid place-items can leave it top-left
-		 * depending on the icon font's line metrics). */
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		line-height: 1;
 		font-size: 0.8rem;
 		color: var(--accent);
 		background: var(--accent-soft);
