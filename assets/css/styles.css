@@ -801,40 +801,49 @@
 	 * hairline grid (1px gap over the container background) like the certs.   */
 	.skills {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
-		gap: 1px;
-		background: var(--line);
-		border: 1px solid var(--line);
-		border-radius: var(--radius-card);
-		overflow: hidden;
 	}
+	/* Each category is a full-width editorial row: a big display-font name with
+	 * an accent icon on the left, its tools on the right, divided by a hairline.
+	 * No boxes — it stays consistent with the rest of the typographic layout
+	 * while making the groupings unmistakably prominent. */
 	.skillset {
-		display: flex;
-		flex-direction: column;
-		gap: 1.1rem;
-		padding: 1.5rem;
-		background: var(--surface);
+		display: grid;
+		grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+		gap: clamp(1rem, 3vw, 2.5rem);
+		padding-block: 1.6rem;
+		align-items: start;
+	}
+	.skillset:first-child {
+		padding-top: 0;
+	}
+	.skillset + .skillset {
+		border-top: 1px solid var(--line);
 	}
 	.skillset__name {
 		display: flex;
 		align-items: center;
-		gap: 0.65rem;
+		gap: 0.6rem;
 		font-family: var(--font-display);
-		font-size: 1.1rem;
+		font-size: clamp(1.1rem, 1rem + 0.55vw, 1.4rem);
 		font-weight: 600;
 		letter-spacing: -0.01em;
 		color: var(--ink);
 	}
 	.skillset__name i {
+		flex-shrink: 0;
+		width: 1.85rem;
+		height: 1.85rem;
 		display: grid;
 		place-items: center;
-		flex-shrink: 0;
-		width: 2rem;
-		height: 2rem;
-		font-size: 0.85rem;
+		font-size: 0.8rem;
 		color: var(--accent);
 		background: var(--accent-soft);
 		border-radius: var(--radius);
+	}
+	/* Slightly larger, more comfortable chips in the skills list. */
+	.skillset .tag {
+		font-size: 0.78rem;
+		padding: 0.35rem 0.75rem;
 	}
 
 	/* ---------------------------------------------------------------------- *
@@ -1056,15 +1065,20 @@
 			align-items: start;
 		}
 		/* On mobile the tall framed portrait reads awkwardly. Switch it to a
-		 * centred circular avatar and drop the figure caption (which looks odd
-		 * under a round image). */
+		 * centred circular avatar. We force a real square box (equal width and
+		 * height on the figure, image filling it) so it's a true circle — not
+		 * relying on aspect-ratio, which the <img>'s width/height attributes can
+		 * otherwise win out over and leave an oval. The caption is dropped
+		 * (it looks odd under a round image). */
 		.hero__figure {
 			order: -1;
-			width: 11rem;
+			width: 12rem;
+			height: 12rem;
 			margin-inline: auto;
 		}
 		.hero__figure img {
-			aspect-ratio: 1;
+			width: 100%;
+			height: 100%;
 			border-radius: 50%;
 			object-position: center;
 		}
@@ -1082,7 +1096,8 @@
 			border-top: 1px solid var(--line);
 		}
 		.entry,
-		.edu__item {
+		.edu__item,
+		.skillset {
 			grid-template-columns: 1fr;
 			gap: 0.75rem;
 		}
