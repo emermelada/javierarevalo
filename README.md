@@ -8,16 +8,28 @@ Personal portfolio / CV for **Javier Arévalo**, a Software Developer focused on
 ## Design
 
 A deliberately restrained **Swiss / International Typographic Style** CV:
-grid-driven, typographic, near-monochrome on warm paper with a single accent
-(ETH blue). The personality comes from typography, hierarchy and structure
-rather than decoration. Each section is numbered like a technical dossier and
-built on a two-column editorial grid — a sticky label/number rail beside the
-content body. Experience reads as a clean list; the showcases (Selected work,
-AI-assisted) read as cards.
+grid-driven, typographic, on warm paper. The personality comes from typography,
+hierarchy and structure rather than decoration. Each section is numbered like a
+technical dossier and built on a two-column editorial grid — a sticky
+label/number rail beside the content body.
 
-Interactions are minimal and professional: a reading-progress bar, scroll-spy
-navigation, subtle on-scroll reveals, a mobile menu, a clipboard-aware contact
-link, and lazy-loaded project videos. No decorative background animation.
+Visual rhythm comes from two restrained devices:
+
+- **Per-section accent colour** — each section carries its own hue (Profile
+  blue · Experience teal · Selected work indigo · AI violet · Skills green ·
+  Education amber), used only in small details (numbers, icon tiles, key tags,
+  links) so the page stays serious.
+- **Alternating background bands** — every other section sits on a soft,
+  full-bleed neutral band, giving the page cadence as you scroll.
+
+Layout per section: Experience reads as a clean list; AI-assisted as a card;
+**Selected work as full-width, stacked horizontal cards** (media panel beside
+the text).
+
+Interactions are minimal and professional: a reading-progress bar and scroll-spy
+navigation that both adopt the colour of the section in view, subtle on-scroll
+reveals, a mobile menu, a clipboard-aware contact link, and lazy-loaded project
+videos. No decorative background animation.
 
 ## Tech stack
 
@@ -57,8 +69,9 @@ Designed mobile-first-friendly and verified from small phones to ultrawide:
   viewport via `clamp()`, so there are very few hard breakpoints to maintain.
 - **Breakpoints** — `60rem` (collapse nav to a menu, stack the editorial grid),
   `48rem` (stack the hero, entries and tables), `30rem` (single-column facts).
-- **Showcase grid** — cards use `auto-fit`, so they reflow from 1 → 2 → 3
-  columns as the screen widens and as more projects are added.
+- **Showcases** — Selected work cards stack as full-width horizontal rows
+  (media beside text) that collapse to media-on-top on small screens; the
+  AI-assisted card uses an `auto-fit` grid that reflows as more are added.
 - **Touch** — ≥44px tap targets; no hover-only functionality.
 - **Print** — a dedicated `@media print` stylesheet produces a clean, ink-saving
   CV when the page is printed or saved as PDF.
@@ -102,8 +115,17 @@ otherwise (a "facade" loading pattern, via the privacy-friendly `nocookie` host)
 ### Add a new project
 
 Duplicate an existing `<article class="entry">` inside `#projects`, bump the
-`entry__index` number, and edit the title, summary, bullet points and tags. The
-`auto-fit` grid lays the new card out automatically.
+`entry__index` number, and edit the title, summary, bullet points and tags. It
+stacks automatically as the next full-width horizontal row.
+
+### Change a section's colour or band
+
+Each section element in `index.html` carries an accent class and a
+`data-accent` (the deep variant used to tint the progress bar / nav marker while
+that section is in view) — e.g. `class="block accent-teal" data-accent="#0b5d61"`.
+Swap the `accent-*` class (and matching `data-accent`) to recolour a section; the
+six palettes live at the bottom of `assets/css/styles.css`. Add or remove the
+`block--band` class to toggle a section's background band.
 
 ### Edit the facts / status
 
