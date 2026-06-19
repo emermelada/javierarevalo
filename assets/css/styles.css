@@ -801,6 +801,42 @@
 	}
 
 	/* ---------------------------------------------------------------------- *
+	 * ROW VARIANT — used alongside .entries--cards (e.g. Selected work). The  *
+	 * cards stack one per row (full width) and each lays out horizontally:    *
+	 * the media as a panel on the left, the meta + content on the right. This *
+	 * keeps the card styling from .entries--cards and only re-flows it.       */
+	.entries--rows {
+		grid-template-columns: 1fr; /* one card per row, stacked              */
+	}
+	.entries--rows .entry {
+		display: grid;
+		grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+		grid-template-rows: auto 1fr;
+		column-gap: clamp(1.25rem, 3vw, 2.25rem);
+	}
+	/* Media becomes a full-height panel in the left column instead of a top
+	 * "lid" — so its bleeding negative margins, fixed ratio and bottom border
+	 * are reset here. */
+	.entries--rows .entry__media {
+		grid-column: 1;
+		grid-row: 1 / -1;
+		margin: 0;
+		aspect-ratio: auto;
+		height: 100%;
+		min-height: 12rem;
+		border: none;
+		border-radius: var(--radius);
+	}
+	.entries--rows .entry__meta {
+		grid-column: 2;
+		grid-row: 1;
+	}
+	.entries--rows .entry__content {
+		grid-column: 2;
+		grid-row: 2;
+	}
+
+	/* ---------------------------------------------------------------------- *
 	 * SKILLS — category groups. Each category gets a prominent display-font   *
 	 * heading with an accent icon tile, so the groupings (Languages, Cloud…)  *
 	 * read clearly at a glance, with their tools listed beneath. Cells form a *
@@ -1115,6 +1151,24 @@
 		.skillset {
 			grid-template-columns: 1fr;
 			gap: 0.75rem;
+		}
+		/* Row-variant cards collapse back to media-on-top, content-below. The
+		 * children's explicit grid placement is reset so the single column
+		 * stacks them in source order. */
+		.entries--rows .entry {
+			grid-template-columns: 1fr;
+		}
+		.entries--rows .entry__media,
+		.entries--rows .entry__meta,
+		.entries--rows .entry__content {
+			grid-column: 1;
+			grid-row: auto;
+		}
+		.entries--rows .entry__media {
+			height: auto;
+			min-height: 0;
+			aspect-ratio: 16 / 9;
+			margin-bottom: 1.1rem;
 		}
 		.colophon__inner {
 			grid-template-columns: 1fr;
