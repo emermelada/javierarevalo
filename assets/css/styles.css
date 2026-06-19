@@ -1,0 +1,1135 @@
+/* =============================================================================
+   Javier Arévalo — Portfolio
+   styles.css
+
+   Design language: Swiss / International Typographic Style.
+   A rigorous, grid-driven, typographic CV. Near-monochrome on warm paper with a
+   single disciplined accent (ETH blue, a quiet nod to the goal). The personality
+   comes from typography, structure and restraint — not decoration. Every section
+   is numbered like a technical dossier and built on a two-column editorial grid:
+   a sticky label/number rail on the left, content on the right.
+
+   Architecture:
+   We lean on the cascade deliberately via @layer so specificity stays flat and
+   predictable, and on custom properties so the whole system retunes from one
+   place. Order of layers = order of precedence (later wins).
+
+     tokens     -> design primitives (color, type, space)
+     base       -> resets and element defaults
+     layout     -> page scaffolding, header, the editorial grid
+     components -> reusable pieces (buttons, tags, work entries, tables…)
+     utilities  -> small single-purpose helpers (override everything)
+
+   Author: Javier Arévalo
+============================================================================= */
+
+@layer tokens, base, layout, components, utilities;
+
+/* =============================================================================
+   TOKENS
+============================================================================= */
+@layer tokens {
+	:root {
+		/* --- Colour: warm paper + ink, one accent -------------------------- *
+		 * Warm off-white page with white-ish cards lifted by a soft shadow;    *
+		 * the accent is ETH blue, used for structure and emphasis.             */
+		--paper: #f3f2ec; /* warm off-white page                              */
+		--surface: #fbfaf6; /* cards, a shade brighter than paper             */
+		--ink: #15171b; /* near-black, primary text & headings               */
+		--ink-2: #3c4047; /* strong secondary text                            */
+		--muted: #71757c; /* captions, supporting copy                        */
+		--faint: #a4a8ad; /* the faintest labels                              */
+		--line: #e2e1d8; /* hairline rules                                    */
+		--line-2: #cdccc2; /* stronger rules                                   */
+
+		--accent: #1f5bb0; /* ETH blue                                         */
+		--accent-deep: #17467f;
+		--accent-soft: rgba(31, 91, 176, 0.08);
+
+		/* --- Typography ----------------------------------------------------- *
+		 * Space Grotesk : display headings (geometric, authoritative)
+		 * Inter         : body & UI (neutral, highly legible)
+		 * JetBrains Mono : labels, numbers, metadata (technical register)     */
+		--font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+		--font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+		--font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+
+		/* Fluid type scale — clamp(min, vw-preferred, max). */
+		--fs-display: clamp(2.75rem, 1.4rem + 6vw, 6.5rem);
+		--fs-h2: clamp(1.6rem, 1.2rem + 1.6vw, 2.4rem);
+		--fs-h3: clamp(1.15rem, 1rem + 0.6vw, 1.45rem);
+		--fs-lead: clamp(1.15rem, 1.05rem + 0.6vw, 1.5rem);
+		--fs-body: 1.0625rem; /* 17px — comfortable reading size              */
+		--fs-sm: 0.875rem;
+		--fs-label: 0.72rem; /* tracked mono labels                          */
+
+		/* --- Space & shape -------------------------------------------------- */
+		--gutter: clamp(1.25rem, 4vw, 4rem);
+		--measure: 78rem; /* outer content max-width                          */
+		--prose: 62ch; /* readable paragraph width                          */
+		--radius: 4px; /* deliberately minimal — Swiss work is rarely round  */
+		--radius-card: 10px; /* showcase cards get a softer corner            */
+
+		/* Soft, blue-tinted card shadows — restrained so the page stays
+		 * editorial rather than "floaty". */
+		--shadow-card: 0 1px 2px rgba(20, 32, 56, 0.05),
+			0 18px 32px -22px rgba(31, 91, 176, 0.28);
+		--shadow-card-hover: 0 2px 6px rgba(20, 32, 56, 0.07),
+			0 28px 46px -22px rgba(31, 91, 176, 0.4);
+
+		--ease: cubic-bezier(0.22, 1, 0.36, 1);
+		--dur: 0.35s;
+	}
+}
+
+/* =============================================================================
+   BASE
+============================================================================= */
+@layer base {
+	*,
+	*::before,
+	*::after {
+		box-sizing: border-box;
+		margin: 0;
+	}
+
+	html {
+		scroll-behavior: smooth;
+		scroll-padding-top: 6rem; /* anchors clear the sticky header          */
+		-webkit-text-size-adjust: 100%; /* stop iOS bumping font size on rotate */
+		-webkit-tap-highlight-color: transparent; /* no grey flash on tap      */
+	}
+
+	body {
+		min-height: 100vh;
+		font-family: var(--font-body);
+		font-size: var(--fs-body);
+		line-height: 1.6;
+		color: var(--ink-2);
+		background: var(--paper);
+		text-rendering: optimizeLegibility;
+		-webkit-font-smoothing: antialiased;
+		font-feature-settings: "cv05" 1, "ss01" 1; /* nicer Inter letterforms */
+		overflow-x: hidden;
+		/* Break long unbreakable tokens (e.g. the email address) instead of
+		 * letting them force horizontal scroll on narrow screens. */
+		overflow-wrap: break-word;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4 {
+		font-family: var(--font-display);
+		font-weight: 600;
+		line-height: 1.08;
+		color: var(--ink);
+		letter-spacing: -0.02em;
+	}
+
+	a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	button {
+		font: inherit;
+		color: inherit;
+		cursor: pointer;
+		background: none;
+		border: none;
+	}
+
+	img {
+		display: block;
+		max-width: 100%;
+	}
+
+	strong {
+		font-weight: 600;
+		color: var(--ink);
+	}
+
+	::selection {
+		background: var(--ink);
+		color: var(--paper);
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 3px;
+	}
+
+	/* Discreet, monochrome scrollbar to match the restraint of the page. */
+	::-webkit-scrollbar {
+		width: 12px;
+	}
+	::-webkit-scrollbar-track {
+		background: var(--paper);
+	}
+	::-webkit-scrollbar-thumb {
+		background: var(--line-2);
+		border: 3px solid var(--paper);
+		border-radius: 0;
+	}
+	::-webkit-scrollbar-thumb:hover {
+		background: var(--muted);
+	}
+}
+
+/* =============================================================================
+   LAYOUT
+============================================================================= */
+@layer layout {
+	/* Reading-progress bar pinned to the very top of the viewport; its width is
+	 * driven by main.js as the page scrolls. A small, professional signal of
+	 * how far through the document the reader is. */
+	.progress {
+		position: fixed;
+		inset: 0 auto auto 0;
+		height: 2px;
+		width: 0;
+		background: var(--accent);
+		z-index: 200;
+	}
+
+	.shell {
+		max-width: var(--measure);
+		margin-inline: auto;
+		padding-inline: var(--gutter);
+	}
+
+	/* --- Header ---------------------------------------------------------- */
+	.masthead {
+		position: sticky;
+		top: 0;
+		z-index: 100;
+		background: color-mix(in srgb, var(--paper) 88%, transparent);
+		backdrop-filter: blur(10px);
+		border-bottom: 1px solid var(--line);
+	}
+	.masthead__inner {
+		max-width: var(--measure);
+		margin-inline: auto;
+		padding-inline: var(--gutter);
+		height: 4.5rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1.5rem;
+	}
+	.wordmark {
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		font-weight: 700;
+		letter-spacing: -0.01em;
+		color: var(--ink);
+		white-space: nowrap; /* keep the name on one line in the header        */
+	}
+	.wordmark span {
+		color: var(--accent);
+	}
+
+	.nav {
+		display: flex;
+		align-items: center;
+		gap: clamp(1rem, 2.4vw, 2.25rem);
+	}
+	.nav__link {
+		position: relative;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--muted);
+		transition: color var(--dur) var(--ease);
+	}
+	.nav__link:hover {
+		color: var(--ink);
+	}
+	/* Active section (set by scroll-spy): inked, with a small marker. */
+	.nav__link.is-active {
+		color: var(--ink);
+	}
+	.nav__link.is-active::before {
+		content: "";
+		position: absolute;
+		left: -0.7rem;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 4px;
+		height: 4px;
+		background: var(--accent);
+	}
+
+	/* --- The editorial grid ---------------------------------------------- *
+	 * Each numbered section is a two-column grid: a label/number rail (which
+	 * sticks while you read the section) and the content body.              */
+	.block {
+		display: grid;
+		grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+		gap: clamp(1.5rem, 5vw, 5rem);
+		padding-block: clamp(3.5rem, 7vw, 6rem);
+		border-top: 1px solid var(--line);
+		scroll-margin-top: 5.5rem;
+	}
+	.block__rail {
+		position: sticky;
+		top: 6rem;
+		align-self: start;
+		height: fit-content;
+	}
+	.block__num {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		color: var(--accent);
+		margin-bottom: 0.6rem;
+	}
+	.block__label {
+		font-family: var(--font-mono);
+		font-size: var(--fs-label);
+		font-weight: 500;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--muted);
+	}
+	.block__body {
+		min-width: 0; /* lets long content shrink instead of overflowing      */
+	}
+}
+
+/* =============================================================================
+   COMPONENTS
+============================================================================= */
+@layer components {
+	/* --- Buttons & links -------------------------------------------------- */
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55rem;
+		padding: 0.7rem 1.25rem;
+		font-size: var(--fs-sm);
+		font-weight: 500;
+		border-radius: var(--radius);
+		border: 1px solid var(--ink);
+		transition: background-color var(--dur) var(--ease),
+			color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+	}
+	.btn--solid {
+		background: var(--ink);
+		color: var(--paper);
+	}
+	.btn--solid:hover {
+		background: var(--accent);
+		border-color: var(--accent);
+	}
+	.btn--ghost {
+		border-color: var(--line-2);
+		color: var(--ink);
+	}
+	.btn--ghost:hover {
+		border-color: var(--ink);
+	}
+
+	/* Inline "arrow" link used for external destinations. */
+	.link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-weight: 500;
+		color: var(--accent);
+		border-bottom: 1px solid transparent;
+		transition: border-color var(--dur) var(--ease);
+	}
+	.link:hover {
+		border-color: var(--accent);
+	}
+	.link i {
+		font-size: 0.8em;
+		transition: transform var(--dur) var(--ease);
+	}
+	.link:hover i {
+		transform: translate(2px, -2px);
+	}
+
+	/* --- Tag list — monospace, hairline-boxed --------------------------- */
+	.tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.4rem;
+		list-style: none;
+		padding: 0;
+	}
+	.tag {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--ink-2);
+		padding: 0.25rem 0.6rem;
+		border: 1px solid var(--line-2);
+		border-radius: var(--radius);
+		background: var(--surface);
+		white-space: nowrap;
+	}
+	.tag--key {
+		color: var(--accent-deep);
+		border-color: color-mix(in srgb, var(--accent) 45%, var(--line-2));
+		background: var(--accent-soft);
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * HERO / MASTHEAD                                                         */
+	.hero {
+		padding-block: clamp(3rem, 8vw, 6.5rem) clamp(2rem, 5vw, 3.5rem);
+	}
+	.hero__grid {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		align-items: end;
+		gap: clamp(2rem, 5vw, 4.5rem);
+	}
+	.hero__kicker {
+		font-family: var(--font-mono);
+		font-size: var(--fs-label);
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		color: var(--accent);
+		margin-bottom: 1.5rem;
+	}
+	.hero h1 {
+		font-size: var(--fs-display);
+		font-weight: 700;
+		letter-spacing: -0.035em;
+		margin-bottom: 1.5rem;
+	}
+	.hero__lead {
+		font-size: var(--fs-lead);
+		color: var(--ink-2);
+		max-width: 34ch;
+		line-height: 1.4;
+		margin-bottom: 2rem;
+	}
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	/* Icon-only buttons for social links. */
+	.iconbtn {
+		display: inline-grid;
+		place-items: center;
+		width: 2.75rem; /* ≥44px — comfortable touch target                   */
+		height: 2.75rem;
+		border: 1px solid var(--line-2);
+		border-radius: var(--radius);
+		color: var(--ink);
+		font-size: 1rem;
+		transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+	}
+	.iconbtn:hover {
+		border-color: var(--ink);
+		color: var(--accent);
+	}
+
+	/* Portrait: a plainly framed image with a mono caption beneath — presented
+	 * like a documented figure rather than a decorated avatar. */
+	.hero__figure {
+		margin: 0;
+		width: clamp(11rem, 18vw, 15rem);
+	}
+	.hero__figure img {
+		width: 100%;
+		aspect-ratio: 4 / 5;
+		object-fit: cover;
+		object-position: top;
+		border: 1px solid var(--line-2);
+		border-radius: var(--radius);
+		box-shadow: var(--shadow-card);
+	}
+	.hero__figcaption {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		margin-top: 0.6rem;
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		color: var(--faint);
+	}
+
+	/* Facts strip beneath the hero — four mono key/value cells split by rules.
+	 * Carries real signal (location, focus, status) and gives the top of the
+	 * page structured weight. */
+	.facts {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		margin-top: clamp(2.5rem, 5vw, 4rem);
+		border-block: 1px solid var(--line);
+	}
+	.fact {
+		padding: 1.1rem 1.25rem 1.1rem 0;
+	}
+	.fact + .fact {
+		padding-left: 1.25rem;
+		border-left: 1px solid var(--line);
+	}
+	.fact__k {
+		display: block;
+		font-family: var(--font-mono);
+		font-size: 0.66rem;
+		letter-spacing: 0.16em;
+		text-transform: uppercase;
+		color: var(--faint);
+		margin-bottom: 0.45rem;
+	}
+	.fact__v {
+		font-size: var(--fs-sm);
+		color: var(--ink);
+		line-height: 1.45;
+	}
+	/* "Available" indicator dot. */
+	.dot {
+		display: inline-block;
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background: #2c9d63;
+		margin-right: 0.4rem;
+		vertical-align: middle;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * PROSE — the About body                                                  */
+	.prose {
+		max-width: var(--prose);
+		font-size: var(--fs-lead);
+		line-height: 1.55;
+		color: var(--ink-2);
+	}
+	.prose p + p {
+		margin-top: 1.1rem;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * ENTRY — shared record layout for Experience & Projects.                 *
+	 * A meta column (dates / index / category) beside a content column, with  *
+	 * hairline separators between records.                                    */
+	.entries {
+		display: grid;
+	}
+	.entry {
+		display: grid;
+		grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+		gap: clamp(1rem, 3vw, 2.5rem);
+		padding-block: 2rem;
+	}
+	.entry:first-child {
+		padding-top: 0;
+	}
+	.entry + .entry {
+		border-top: 1px solid var(--line);
+	}
+	.entry__meta {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--muted);
+		line-height: 1.5;
+	}
+	.entry__index {
+		display: block;
+		font-size: 1.6rem;
+		color: var(--line-2);
+		margin-bottom: 0.4rem;
+	}
+	.entry__period {
+		color: var(--ink-2);
+	}
+	.entry__where {
+		display: block;
+		margin-top: 0.25rem;
+		color: var(--faint);
+	}
+	.entry__head {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.5rem 0.9rem;
+		margin-bottom: 0.5rem;
+	}
+	.entry__title {
+		font-size: var(--fs-h3);
+		font-weight: 600;
+	}
+	.entry__org {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--accent-deep);
+	}
+	.entry__kicker {
+		font-family: var(--font-mono);
+		font-size: var(--fs-label);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--faint);
+		margin-bottom: 0.5rem;
+	}
+	.entry__summary {
+		color: var(--ink-2);
+		margin-bottom: 1rem;
+		max-width: var(--prose);
+	}
+	/* Achievement bullets with a tidy en-dash marker. */
+	.entry__points {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.1rem;
+		display: grid;
+		gap: 0.5rem;
+		max-width: var(--prose);
+	}
+	.entry__points li {
+		position: relative;
+		padding-left: 1.4rem;
+		font-size: var(--fs-sm);
+		color: var(--ink-2);
+		line-height: 1.55;
+	}
+	.entry__points li::before {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0.62em;
+		width: 0.7rem;
+		height: 1px;
+		background: var(--accent);
+	}
+	.entry__foot {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem 1.25rem;
+	}
+	/* Small status note (e.g. "Demo in preparation"). */
+	.note {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--muted);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * CARD VARIANT — showcase records (Selected work, AI-assisted) become a   *
+	 * responsive grid of self-contained cards instead of a vertical list.     *
+	 * `auto-fit` means the grid scales gracefully as more items are added:    *
+	 * cards sit side by side and wrap to new rows, and a section always fills *
+	 * its row width rather than leaving gaps. Cards lift off the warm page on  *
+	 * a soft shadow — the same card feel as the previous carousel, integrated *
+	 * into this type system.                                                  */
+	.entries--cards {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+		gap: clamp(1.25rem, 2.5vw, 1.75rem);
+	}
+	/* Each card stacks vertically (header → content → footer) since it's now
+	 * a narrow column rather than a full-width row. This overrides the base
+	 * .entry meta|content grid and its list separators. */
+	.entries--cards .entry {
+		display: flex;
+		flex-direction: column;
+		padding: clamp(1.5rem, 3vw, 2.25rem);
+		background: var(--surface);
+		border: 1px solid var(--line);
+		border-radius: var(--radius-card);
+		box-shadow: var(--shadow-card);
+		transition: transform var(--dur) var(--ease),
+			box-shadow var(--dur) var(--ease), border-color var(--dur) var(--ease);
+	}
+	.entries--cards .entry:first-child {
+		padding-top: clamp(1.5rem, 3vw, 2.25rem);
+	}
+	.entries--cards .entry + .entry {
+		border-top: 1px solid var(--line); /* keep the full card border        */
+	}
+	.entries--cards .entry:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--shadow-card-hover);
+		border-color: color-mix(in srgb, var(--accent) 35%, var(--line));
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * CARD MEDIA — a 16:9 slot at the top of a card for a project video.      *
+	 * Two states, both populated/managed by initVideos() in main.js:          *
+	 *   [data-youtube]  → YouTube thumbnail + play button (facade); clicking   *
+	 *                     swaps in the inline player.                          *
+	 *   [data-soon]     → a styled "demo coming soon" placeholder.             *
+	 * Sits flush to the top of the card via negative margins, so it reads as   *
+	 * the card's "lid" above the padded body.                                  */
+	.entries--cards .entry__media {
+		position: relative;
+		aspect-ratio: 16 / 9;
+		/* Pull out to the card edges (cancel the card's padding on 3 sides). */
+		margin: clamp(-2.25rem, -3vw, -1.5rem) clamp(-2.25rem, -3vw, -1.5rem) 1.4rem;
+		border-bottom: 1px solid var(--line);
+		border-top-left-radius: var(--radius-card);
+		border-top-right-radius: var(--radius-card);
+		overflow: hidden;
+		background: var(--paper);
+	}
+
+	/* The thumbnail image injected by JS. */
+	.entry__media img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform var(--dur) var(--ease);
+	}
+	.entries--cards .entry:hover .entry__media img {
+		transform: scale(1.03);
+	}
+
+	/* Play control overlaid on the thumbnail. */
+	.entry__play {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		background: rgba(10, 14, 22, 0.18);
+		transition: background-color var(--dur) var(--ease);
+	}
+	.entry__play:hover {
+		background: rgba(10, 14, 22, 0.32);
+	}
+	.entry__play::after {
+		content: "\f04b"; /* Font Awesome "play" glyph */
+		font-family: "Font Awesome 6 Free";
+		font-weight: 900;
+		font-size: 1rem;
+		color: var(--accent);
+		display: grid;
+		place-items: center;
+		width: 3.25rem;
+		height: 3.25rem;
+		padding-left: 0.2rem; /* optically centre the triangle */
+		background: rgba(255, 255, 255, 0.95);
+		border-radius: 50%;
+		box-shadow: var(--shadow-card);
+		transition: transform var(--dur) var(--ease);
+	}
+	.entry__play:hover::after {
+		transform: scale(1.08);
+	}
+
+	/* The injected inline player fills the slot once play is pressed. */
+	.entry__media iframe {
+		width: 100%;
+		height: 100%;
+		border: 0;
+		display: block;
+	}
+
+	/* "Coming soon" placeholder state. */
+	.entry__media[data-soon] {
+		display: grid;
+		place-items: center;
+		gap: 0.5rem;
+		background: var(--surface);
+		color: var(--muted);
+		font-family: var(--font-mono);
+		font-size: 0.74rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		/* faint diagonal hatch so the empty state still has texture */
+		background-image: repeating-linear-gradient(
+			135deg,
+			transparent 0 11px,
+			rgba(31, 91, 176, 0.04) 11px 12px
+		);
+	}
+	.entry__media[data-soon] i {
+		font-size: 1.4rem;
+		color: var(--faint);
+	}
+
+	/* Card header: index + category on one line, divided from the body. */
+	.entries--cards .entry__meta {
+		display: flex;
+		align-items: baseline;
+		gap: 0.6rem;
+		margin-bottom: 1.1rem;
+		padding-bottom: 0.9rem;
+		border-bottom: 1px solid var(--line);
+		font-size: 0.72rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--faint);
+		line-height: 1.3;
+	}
+	.entries--cards .entry__index {
+		display: inline;
+		margin: 0;
+		font-size: 1.05rem;
+		line-height: 1;
+		letter-spacing: 0;
+		color: var(--accent);
+	}
+
+	/* Content fills the card; the footer is pinned to the bottom so cards of
+	 * different heights still line their tags/links up along a baseline. */
+	.entries--cards .entry__content {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+	}
+	.entries--cards .entry__foot {
+		margin-top: auto;
+		padding-top: 0.25rem;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * SKILLS MATRIX — a clean definition table, not pill soup.                */
+	.matrix {
+		display: grid;
+		gap: 0;
+	}
+	.matrix__row {
+		display: grid;
+		grid-template-columns: minmax(0, 10rem) minmax(0, 1fr);
+		gap: clamp(1rem, 3vw, 2rem);
+		padding-block: 1.1rem;
+		align-items: start;
+	}
+	.matrix__row + .matrix__row {
+		border-top: 1px solid var(--line);
+	}
+	.matrix__row:first-child {
+		padding-top: 0;
+	}
+	.matrix__key {
+		font-family: var(--font-mono);
+		font-size: var(--fs-label);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--ink);
+		padding-top: 0.3rem;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * EDUCATION + CERTIFICATIONS                                              */
+	.edu {
+		display: grid;
+		gap: 0;
+		margin-bottom: 2.5rem;
+	}
+	.edu__item {
+		display: grid;
+		grid-template-columns: minmax(0, 9rem) minmax(0, 1fr);
+		gap: clamp(1rem, 3vw, 2.5rem);
+		padding-block: 1.5rem;
+	}
+	.edu__item:first-child {
+		padding-top: 0;
+	}
+	.edu__item + .edu__item {
+		border-top: 1px solid var(--line);
+	}
+	.edu__when {
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--muted);
+	}
+	.edu__degree {
+		font-size: var(--fs-h3);
+		font-weight: 600;
+		margin-bottom: 0.25rem;
+	}
+	.edu__org {
+		font-family: var(--font-mono);
+		font-size: 0.85rem;
+		color: var(--accent-deep);
+	}
+	.edu__loc {
+		font-size: var(--fs-sm);
+		color: var(--muted);
+		margin-top: 0.3rem;
+	}
+
+	/* Hairlines drawn by a 1px grid gap showing the container's background
+	 * through it — robust no matter how many columns wrap. */
+	.certs {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+		gap: 1px;
+		background: var(--line);
+		border: 1px solid var(--line);
+	}
+	.cert {
+		padding: 1.1rem 1.25rem;
+		background: var(--surface);
+	}
+	.cert__name {
+		font-size: var(--fs-sm);
+		font-weight: 600;
+		color: var(--ink);
+		line-height: 1.35;
+	}
+	.cert__by {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--muted);
+		margin-top: 0.3rem;
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * FOOTER + COLOPHON                                                       */
+	.colophon {
+		border-top: 1px solid var(--line-2);
+		margin-top: 2rem;
+	}
+	.colophon__inner {
+		max-width: var(--measure);
+		margin-inline: auto;
+		padding: clamp(2.5rem, 5vw, 4rem) var(--gutter);
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) auto;
+		gap: 2rem;
+		align-items: end;
+	}
+	.colophon__cta {
+		font-family: var(--font-display);
+		font-size: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+		font-weight: 600;
+		letter-spacing: -0.02em;
+		color: var(--ink);
+	}
+	.colophon__cta a {
+		border-bottom: 2px solid var(--accent);
+	}
+	.colophon__meta {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		color: var(--muted);
+		text-align: right;
+		line-height: 1.7;
+	}
+	.colophon__socials {
+		display: flex;
+		gap: 1.25rem;
+		justify-content: flex-end;
+		margin-bottom: 0.75rem;
+		font-size: 1.1rem;
+	}
+	.colophon__socials a {
+		color: var(--ink);
+		transition: color var(--dur) var(--ease);
+	}
+	.colophon__socials a:hover {
+		color: var(--accent);
+	}
+
+	/* ---------------------------------------------------------------------- *
+	 * MOBILE NAV                                                              */
+	.nav-toggle {
+		display: none;
+		font-family: var(--font-mono);
+		font-size: 0.78rem;
+		color: var(--ink);
+		padding: 0.4rem 0.2rem;
+	}
+	.mobile-nav {
+		display: none;
+		flex-direction: column;
+		padding: 0.5rem var(--gutter) 1.25rem;
+		border-bottom: 1px solid var(--line);
+		background: var(--paper);
+	}
+	.mobile-nav[data-open] {
+		display: flex;
+	}
+	.mobile-nav a {
+		font-family: var(--font-mono);
+		font-size: 0.9rem;
+		color: var(--ink-2);
+		padding: 0.7rem 0;
+		border-top: 1px solid var(--line);
+	}
+}
+
+/* =============================================================================
+   UTILITIES — small helpers, responsive collapses, accessibility (win last)
+============================================================================= */
+@layer utilities {
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.skip-link {
+		position: absolute;
+		left: 1rem;
+		top: -4rem;
+		z-index: 300;
+		background: var(--ink);
+		color: var(--paper);
+		padding: 0.6rem 1rem;
+		font-size: var(--fs-sm);
+		transition: top var(--dur) var(--ease);
+	}
+	.skip-link:focus {
+		top: 1rem;
+	}
+
+	/* Scroll-reveal: content starts slightly lowered & dimmed, main.js reveals. */
+	[data-reveal] {
+		opacity: 0;
+		transform: translateY(18px);
+		transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+	}
+	[data-reveal].is-revealed {
+		opacity: 1;
+		transform: none;
+	}
+
+	/* --- Tablet / phone --------------------------------------------------- */
+	@media (max-width: 60rem) {
+		.nav {
+			display: none;
+		}
+		.nav-toggle {
+			display: block;
+		}
+		/* Stack the editorial grid; the rail becomes a heading row. */
+		.block {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+		.block__rail {
+			position: static;
+			display: flex;
+			align-items: baseline;
+			gap: 0.75rem;
+		}
+		.block__num {
+			margin-bottom: 0;
+		}
+	}
+
+	@media (max-width: 48rem) {
+		.hero__grid {
+			grid-template-columns: 1fr;
+			align-items: start;
+		}
+		.hero__figure {
+			order: -1;
+			width: 9rem;
+		}
+		.facts {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.fact:nth-child(3) {
+			border-left: none;
+			padding-left: 0;
+		}
+		.fact:nth-child(n + 3) {
+			border-top: 1px solid var(--line);
+		}
+		.entry,
+		.edu__item {
+			grid-template-columns: 1fr;
+			gap: 0.75rem;
+		}
+		.matrix__row {
+			grid-template-columns: 1fr;
+			gap: 0.6rem;
+		}
+		.colophon__inner {
+			grid-template-columns: 1fr;
+			align-items: start;
+		}
+		.colophon__meta,
+		.colophon__socials {
+			text-align: left;
+			justify-content: flex-start;
+		}
+	}
+
+	/* --- Small phones ----------------------------------------------------- *
+	 * Below ~30rem the two-up facts grid gets cramped; drop it to a single
+	 * column and reset the cell dividers to horizontal rules.               */
+	@media (max-width: 30rem) {
+		.facts {
+			grid-template-columns: 1fr;
+		}
+		.fact + .fact {
+			padding-left: 0;
+			border-left: none;
+			border-top: 1px solid var(--line);
+		}
+	}
+
+	/* --- Reduced motion --------------------------------------------------- */
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			animation-duration: 0.001ms !important;
+			transition-duration: 0.001ms !important;
+			scroll-behavior: auto !important;
+		}
+		[data-reveal] {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	/* --- Print ------------------------------------------------------------ *
+	 * A clean, ink-saving CV when the page is printed or saved as PDF — which
+	 * an applicant is likely to do. Chrome/UI affordances and on-screen-only
+	 * elements are dropped; the editorial grid collapses to a single readable
+	 * column and cards lose their shadows.                                   */
+	@media print {
+		.masthead,
+		.progress,
+		.nav-toggle,
+		.mobile-nav,
+		.scroll-cue,
+		.hero__actions,
+		.entry__media {
+			display: none !important;
+		}
+		body {
+			background: #fff;
+			color: #000;
+			font-size: 11pt;
+		}
+		.shell {
+			max-width: none;
+		}
+		.block,
+		.hero__grid {
+			grid-template-columns: 1fr;
+		}
+		.block {
+			border-top: 1px solid #999;
+			break-inside: avoid;
+		}
+		.entries--cards {
+			display: block;
+		}
+		.entries--cards .entry {
+			box-shadow: none;
+			border: 1px solid #ccc;
+			margin-bottom: 0.6rem;
+			break-inside: avoid;
+		}
+		a {
+			color: #000;
+		}
+	}
+}
