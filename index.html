@@ -1,771 +1,538 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<!--
+	Javier Arévalo — Portfolio
+	==========================
+	A single static page, no build step, deployed on GitHub Pages.
+
+	Design language: Swiss / International Typographic Style — a rigorous,
+	grid-driven, typographic CV. Restraint over decoration; structure and
+	content carry the page. Sections are numbered like a technical dossier and
+	laid out on a two-column editorial grid (label/number rail + content body).
+
+	File map:
+	  index.html            ← structure & content (this file)
+	  assets/css/styles.css ← the system (token-driven, @layer-organised)
+	  assets/js/main.js     ← behaviour (progress, nav, reveal, scroll-spy, copy)
+-->
+<html lang="en">
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Portfolio of Javier Arévalo, Software Developer specialized in Cloud & DevOps.">
-		<title>Javier Arévalo | Software Developer | Cloud & DevOps</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-		<script src="https://cdn.tailwindcss.com"></script>
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-		<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+		<title>Javier Arévalo — Software Developer · Cloud &amp; DevOps</title>
+		<meta
+			name="description"
+			content="Javier Arévalo — Software Developer focused on Cloud & DevOps. Microsoft Azure, infrastructure automation and system integration in production environments."
+		/>
+		<meta name="author" content="Javier Arévalo" />
+		<meta name="theme-color" content="#f3f2ec" />
 
-		<script>
-			tailwind.config = {
-				theme: {
-					extend: {
-						fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
-						colors: {
-							brandBg: '#f8fafc',
-							brandCard: '#ffffff',
-							natEmerald: '#059669',
-							natMint: '#e6f4ea',
-							techBlue: '#0284c7',
-							techCyan: '#e0f2fe',
-							textDark: '#0f172a',
-							textMuted: '#475569'
-						}
-					}
-				}
-			}
-		</script>
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Javier Arévalo — Software Developer" />
+		<meta
+			property="og:description"
+			content="Cloud & DevOps developer. Microsoft Azure, automation, embedded systems."
+		/>
+		<meta property="og:url" content="https://cv.javierarevalo.dev/" />
+		<link rel="canonical" href="https://cv.javierarevalo.dev/" />
 
-		<style>
-			/* Custom scrollbar */
-			::-webkit-scrollbar { width: 10px; }
-			::-webkit-scrollbar-track { background: #f1f5f9; }
-			::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 5px; }
-			::-webkit-scrollbar-thumb:hover { background: #059669; }
+		<!-- Favicon: a minimal monogram tile, inlined to avoid an extra request. -->
+		<link
+			rel="icon"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2315171b'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='700' fill='%23f3f2ec' text-anchor='middle'%3EJA%3C/text%3E%3Crect x='22' y='18' width='3' height='3' fill='%231f5bb0'/%3E%3C/svg%3E"
+		/>
 
-			/* Text gradient utility */
-			.text-gradient {
-				background: linear-gradient(135deg, #047857 0%, #0369a1 100%);
-				-webkit-background-clip: text;
-				-webkit-text-fill-color: transparent;
-				background-clip: text;
-				/* FIX: Remove inherited text-shadow so it doesn't white out the transparent fill */
-				text-shadow: none !important; 
-			}
+		<!-- Fonts: Space Grotesk (display), Inter (body), JetBrains Mono (labels). -->
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@500;600;700&display=swap"
+			rel="stylesheet"
+		/>
 
-			/* Background patterns */
-			.bg-grid-pattern {
-				background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
-				background-size: 32px 32px;
-			}
+		<!-- Icons -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		/>
 
-			/* Mouse tracking cursor */
-			#cursor-glow {
-				position: fixed;
-				pointer-events: none;
-				z-index: 9998;
-				width: 500px;
-				height: 500px;
-				border-radius: 50%;
-				background: radial-gradient(circle, rgba(5,150,105,0.07) 0%, transparent 65%);
-				transform: translate(-50%, -50%);
-				transition: left 0.08s linear, top 0.08s linear;
-				left: -999px;
-				top: -999px;
-			}
-
-			/* Scroll animations */
-			[data-reveal] {
-				opacity: 0;
-				transform: translateY(36px);
-				transition: opacity 0.75s cubic-bezier(0.22,1,0.36,1), transform 0.75s cubic-bezier(0.22,1,0.36,1);
-			}
-			[data-reveal].revealed {
-				opacity: 1;
-				transform: translateY(0);
-			}
-
-			/* Hero section canvas */
-			#hero-canvas {
-				position: absolute;
-				inset: 0;
-				width: 100%;
-				height: 100%;
-				pointer-events: none;
-				z-index: 0;
-			}
-
-			/* Halo effect to keep text readable over particles */
-			#hero h1,
-			#hero p {
-				position: relative;
-				z-index: 10;
-				text-shadow:
-					0 0 14px #f8fafc,
-					0 0 26px #f8fafc,
-					0 0 36px #f8fafc;
-			}
-
-			/* A11y: respect reduced motion OS settings */
-			@media (prefers-reduced-motion: reduce) {
-				[data-reveal] { opacity: 1; transform: none; transition: none; }
-				#cursor-glow { display: none; }
-			}
-		</style>
+		<link rel="stylesheet" href="assets/css/styles.css" />
+		<script src="assets/js/main.js" defer></script>
 	</head>
 
-	<body class="bg-brandBg text-textDark font-sans antialiased selection:bg-natEmerald selection:text-white relative overflow-x-hidden">
+	<body>
+		<a class="skip-link" href="#about">Skip to content</a>
 
-		<div id="cursor-glow"></div>
+		<!-- Reading-progress bar (width driven by main.js). -->
+		<div class="progress" data-progress aria-hidden="true"></div>
 
-		<div class="fixed inset-0 bg-grid-pattern opacity-30 z-[-2] pointer-events-none"></div>
-		<div class="fixed top-[-10%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-natEmerald/5 blur-[150px] pointer-events-none z-[-1]"></div>
-		<div class="fixed bottom-[-10%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-techBlue/5 blur-[150px] pointer-events-none z-[-1]"></div>
-		<div class="fixed top-[30%] left-[60%] w-[30vw] h-[30vw] rounded-full bg-techCyan/10 blur-[120px] pointer-events-none z-[-1]"></div>
-
-		<header class="sticky top-0 z-50 backdrop-blur-xl bg-brandBg/80 border-b border-slate-200/80 transition-all duration-300">
-			<div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 h-20 flex items-center justify-between">
-				<a href="#" class="text-2xl font-extrabold tracking-tight hover:scale-105 transition-transform duration-300">
-					JA<span class="text-natEmerald">.</span>
+		<!-- ===================================================================
+		     MASTHEAD
+		==================================================================== -->
+		<header class="masthead">
+			<div class="masthead__inner">
+				<a href="#top" class="wordmark" aria-label="Javier Arévalo — top">
+					Javier Arévalo<span>.</span>
 				</a>
-				
-				<nav class="hidden lg:flex items-center space-x-10 text-sm font-semibold">
-					<a href="#about" class="text-textMuted hover:text-natEmerald transition-colors">About me</a>
-					<a href="#experience" class="text-textMuted hover:text-natEmerald transition-colors">Experience</a>
-					<a href="#projects" class="text-textMuted hover:text-techBlue transition-colors">Projects</a>
-					<a href="#ai-builds" class="text-textMuted hover:text-natEmerald transition-colors">AI Builds</a>
-					<a href="#skills" class="text-textMuted hover:text-natEmerald transition-colors">Skills</a>
-					<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn px-5 py-2.5 bg-textDark hover:bg-natEmerald text-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 whitespace-nowrap min-w-[130px] text-center">
-						<span>Contact</span>
-						<i class="fa-solid fa-arrow-right ml-2 text-xs opacity-80 transition-none"></i>
-					</a>
+
+				<nav class="nav" aria-label="Primary">
+					<a class="nav__link" href="#about">Profile</a>
+					<a class="nav__link" href="#experience">Experience</a>
+					<a class="nav__link" href="#projects">Work</a>
+					<a class="nav__link" href="#builds">AI</a>
+					<a class="nav__link" href="#skills">Skills</a>
+					<a class="nav__link" href="#education">Education</a>
 				</nav>
 
-				<button id="mobile-menu-btn" aria-label="Open menu" class="lg:hidden text-textMuted hover:text-natEmerald p-2 rounded-lg bg-white shadow-sm border border-slate-200">
-					<i class="fa-solid fa-bars-staggered text-xl"></i>
+				<button
+					class="nav-toggle"
+					data-nav-toggle
+					aria-label="Toggle navigation"
+					aria-expanded="false"
+					aria-controls="mobile-nav"
+				>
+					Menu
 				</button>
 			</div>
 
-			<nav id="mobile-menu" class="hidden lg:hidden bg-white border-b border-slate-200 px-6 py-6 space-y-4 shadow-xl absolute w-full left-0">
-				<a href="#about" class="block font-medium text-textMuted hover:text-natEmerald text-lg">About me</a>
-				<a href="#experience" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Experience</a>
-				<a href="#projects" class="block font-medium text-textMuted hover:text-techBlue text-lg">Projects</a>
-				<a href="#ai-builds" class="block font-medium text-textMuted hover:text-natEmerald text-lg">AI Builds</a>
-				<a href="#skills" class="block font-medium text-textMuted hover:text-natEmerald text-lg">Skills</a>
-				<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn block text-center py-3 bg-natEmerald text-white rounded-xl font-semibold">
-					<span>Write Email</span>
-				</a>
+			<nav id="mobile-nav" class="mobile-nav" data-mobile-nav aria-label="Mobile">
+				<a href="#about">01 — Profile</a>
+				<a href="#experience">02 — Experience</a>
+				<a href="#projects">03 — Selected work</a>
+				<a href="#builds">04 — AI-assisted</a>
+				<a href="#skills">05 — Skills</a>
+				<a href="#education">06 — Education</a>
 			</nav>
 		</header>
 
-		<main class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-16 2xl:py-24 space-y-36 2xl:space-y-48">
-
-			<section id="hero" class="relative min-h-[75vh] flex flex-col-reverse lg:flex-row items-center justify-between gap-16 pt-4 2xl:pt-12">
-				<canvas id="hero-canvas"></canvas>
-
-				<div class="flex-1 space-y-8 2xl:space-y-10 text-center md:text-left relative z-10">
-					<h1 class="text-4xl sm:text-5xl lg:text-7xl 2xl:text-8xl font-extrabold tracking-tight text-textDark leading-[1.15]">
-						Hi, I'm <br class="hidden lg:block"/> <span class="text-gradient">Javier Arévalo</span>
-					</h1>
-					<p class="text-xl sm:text-2xl 2xl:text-3xl font-medium text-textMuted max-w-3xl 2xl:max-w-4xl leading-relaxed">
-						Software Developer focused on <span class="text-techBlue font-semibold">Cloud & DevOps</span>. I work with Microsoft Azure, infrastructure automation, and system integration in real environments.
-					</p>
-					
-					<div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-4 2xl:pt-8">
-						<a href="mailto:javier.arevalo.11111@gmail.com" class="email-btn px-6 py-3.5 2xl:px-8 2xl:py-5 2xl:text-lg bg-natEmerald hover:bg-emerald-700 text-white font-semibold rounded-xl shadow-lg shadow-emerald-600/20 hover:shadow-xl hover:shadow-emerald-600/30 transition-all duration-300 transform hover:-translate-y-1 min-w-[300px] text-center">
-							<i class="fa-solid fa-envelope mr-2 transition-none"></i>
-							<span>Contact by Email</span>
-						</a>
-						<div class="flex gap-3">
-							<a href="https://github.com/emermelada" target="_blank" rel="noopener noreferrer" class="w-12 h-12 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-200/80 text-textMuted hover:text-white hover:bg-textDark hover:border-textDark transition-all duration-300 group">
-								<i class="fa-brands fa-github text-xl 2xl:text-2xl group-hover:scale-110 transition-transform"></i>
-							</a>
-							<a href="https://www.linkedin.com/in/javier-arevalo-hernandez" target="_blank" rel="noopener noreferrer" class="w-12 h-12 2xl:w-16 2xl:h-16 flex items-center justify-center rounded-xl bg-white shadow-sm border border-slate-200/80 text-textMuted hover:text-white hover:bg-techBlue hover:border-techBlue transition-all duration-300 group">
-								<i class="fa-brands fa-linkedin-in text-xl 2xl:text-2xl group-hover:scale-110 transition-transform"></i>
-							</a>
-						</div>
-					</div>
-				</div>
-
-				<div class="flex-shrink-0 relative group z-10">
-					<div class="absolute -inset-4 rounded-full bg-gradient-to-tr from-emerald-500 to-sky-500 opacity-20 blur-xl group-hover:opacity-40 transition duration-700 animate-pulse"></div>
-					<div class="relative w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 2xl:w-[450px] 2xl:h-[450px] rounded-full bg-white/80 backdrop-blur-sm overflow-hidden border-[6px] border-white shadow-2xl flex items-center justify-center group-hover:rotate-3 transition-transform duration-500">
-						<img src="picture.jpeg" alt="Javier Arévalo" class="w-full h-full object-cover object-top">
-					</div>
-				</div>
-			</section>
-
-			<section id="about" class="space-y-8 2xl:space-y-10 scroll-mt-28" data-reveal>
-				<div class="flex items-center gap-3">
-					<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
-						<i class="fa-solid fa-user"></i>
-					</div>
-					<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">A little about me</h2>
-				</div>
-
-				<p class="text-base 2xl:text-xl text-textMuted leading-relaxed 2xl:leading-loose max-w-4xl">
-					I started out wanting to understand how things work on the inside. That interest led me to software development and, later on, to cloud infrastructure. I have deployed serverless functions in Azure, automated integrations with Dynamics 365, and built native Android applications with Kotlin in real enterprise environments. In September I will begin my BSc in Computer Science at the University of Southern Denmark, where I want to dive deeper into distributed systems and cloud architectures at scale.
-				</p>
-
-				<div class="grid grid-cols-1 sm:grid-cols-2 gap-4 2xl:gap-8">
-					<div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
-						<h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Languages</h4>
-						<p class="text-xs 2xl:text-base text-textMuted">English C1 Advanced<br>Native Spanish</p>
-					</div>
-					<div class="bg-white/80 backdrop-blur-sm p-5 2xl:p-8 rounded-xl border border-slate-100 shadow-sm">
-						<h4 class="text-sm 2xl:text-lg font-bold text-textDark mb-1 2xl:mb-3">Location and availability</h4>
-						<p class="text-xs 2xl:text-base text-textMuted">Madrid (Spain) until August 2026.<br>Vejle, Denmark starting in September.<br>Available for remote work.</p>
-					</div>
-				</div>
-			</section>
-
-			<section id="experience" class="space-y-10 2xl:space-y-14 scroll-mt-28" data-reveal>
-				<div class="space-y-2 2xl:space-y-3">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-techCyan flex items-center justify-center text-techBlue text-sm 2xl:text-lg">
-							<i class="fa-solid fa-briefcase"></i>
-						</div>
-						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Experience</h2>
-					</div>
-					<p class="text-sm 2xl:text-lg text-textMuted">Industry experience developing software and managing cloud environments.</p>
-				</div>
-
-				<div class="relative border-l-2 border-slate-200/80 pl-8 2xl:pl-12 ml-2 space-y-10 2xl:space-y-14">
-					<div class="relative group">
-						<div class="absolute -left-[41px] 2xl:-left-[57px] top-1 w-6 h-6 2xl:w-8 2xl:h-8 rounded-full bg-white border-4 border-natEmerald group-hover:bg-natEmerald transition-all duration-300 shadow-md"></div>
-						<div class="space-y-2 2xl:space-y-4 bg-white/80 backdrop-blur-sm p-6 2xl:p-10 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all">
-							<span class="inline-block px-3 py-1 2xl:px-4 2xl:py-2 bg-natMint text-natEmerald text-xs 2xl:text-sm font-bold rounded-md font-mono">March 2026 – May 2026</span>
-							<h3 class="text-lg 2xl:text-2xl font-bold text-textDark tracking-tight group-hover:text-natEmerald transition-colors">Internship – Cloud Developer</h3>
-							<p class="text-sm 2xl:text-lg font-semibold text-techBlue">Axazure S.L. · Madrid</p>
-							<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed pt-1">
-								Developed serverless functions in <strong class="font-semibold text-textDark">Azure Functions</strong> with time triggers to automate record generation in <strong class="font-semibold text-textDark">Dynamics 365 (Dataverse)</strong>. Implemented secretless authentication using <strong class="font-semibold text-textDark">Managed Identity</strong> and configured telemetry with Application Insights.
-							</p>
-							<div class="flex flex-wrap gap-2 pt-2">
-								<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">Azure Functions</span>
-								<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">Managed Identity</span>
-								<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">Dynamics 365</span>
-								<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">Application Insights</span>
-								<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">C#</span>
-							</div>
-						</div>
-					</div>
-
-					<div class="relative group">
-						<div class="absolute -left-[41px] 2xl:-left-[57px] top-1 w-6 h-6 2xl:w-8 2xl:h-8 rounded-full bg-white border-4 border-slate-200 group-hover:border-techBlue transition-all duration-300 shadow-md"></div>
-						<div class="space-y-2 2xl:space-y-4 bg-white/80 backdrop-blur-sm p-6 2xl:p-10 rounded-2xl shadow-sm border border-slate-100 hover:shadow-lg transition-all">
-							<span class="inline-block px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-100 text-textMuted text-xs 2xl:text-sm font-bold rounded-md font-mono">March 2025 – June 2025</span>
-							<h3 class="text-lg 2xl:text-2xl font-bold text-textDark tracking-tight group-hover:text-techBlue transition-colors">Internship – Software Developer</h3>
-							<p class="text-sm 2xl:text-lg font-semibold text-techBlue">Skiller Academy S.L.</p>
-							<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed pt-1">
-								Native development for <strong class="font-semibold text-textDark">Android with Kotlin</strong>, implementing new features and integrating external services. Participated in the full cycle: analysis, implementation, and testing, working on real production code.
-							</p>
-							<div class="flex flex-wrap gap-2 pt-2">
-								<span class="px-2.5 py-1 bg-techCyan text-techBlue text-xs font-semibold rounded-md">Kotlin</span>
-								<span class="px-2.5 py-1 bg-techCyan text-techBlue text-xs font-semibold rounded-md">Android SDK</span>
-								<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">REST APIs</span>
-								<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">Git</span>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section id="projects" class="space-y-8 2xl:space-y-12 scroll-mt-28" data-reveal>
-				<div class="space-y-2">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-techCyan flex items-center justify-center text-techBlue text-sm 2xl:text-lg">
-							<i class="fa-solid fa-code-branch"></i>
-						</div>
-						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Projects & Engineering</h2>
-					</div>
-					<p class="text-sm 2xl:text-lg text-textMuted">My most notable technical developments and implementations.</p>
-				</div>
-
-				<div class="relative w-full max-w-5xl 2xl:max-w-6xl mx-auto group/carousel">
-					<button id="carousel-prev" aria-label="Previous" class="absolute left-2 sm:-left-6 2xl:-left-12 top-1/2 -translate-y-1/2 z-10 w-11 h-11 2xl:w-16 2xl:h-16 rounded-xl bg-white border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
-						<i class="fa-solid fa-chevron-left text-sm 2xl:text-xl"></i>
-					</button>
-					<button id="carousel-next" aria-label="Next" class="absolute right-2 sm:-right-6 2xl:-right-12 top-1/2 -translate-y-1/2 z-10 w-11 h-11 2xl:w-16 2xl:h-16 rounded-xl bg-white border border-slate-200 text-textDark shadow-md hover:bg-natEmerald hover:text-white hover:border-natEmerald transition-all duration-300 opacity-0 group-hover/carousel:opacity-100 flex items-center justify-center">
-						<i class="fa-solid fa-chevron-right text-sm 2xl:text-xl"></i>
-					</button>
-
-					<div class="overflow-hidden rounded-2xl border border-slate-100 shadow-xl bg-white/90 backdrop-blur-md">
-						<div id="carousel-track" class="flex transition-transform duration-500 ease-in-out">
-
-							<div class="w-full flex-shrink-0">
-								<div class="flex flex-col md:flex-row h-full">
-									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/icon">
-										<div class="absolute inset-0 bg-gradient-to-br from-emerald-950/40 to-slate-900/80 z-0"></div>
-										<i class="fa-solid fa-microchip text-6xl 2xl:text-8xl text-emerald-400 relative z-10 group-hover/icon:scale-110 transition-transform duration-300"></i>
-										<span class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/70 text-xs font-medium">
-											<i class="fa-brands fa-youtube text-red-400 text-sm"></i> Video coming soon
-										</span>
-									</div>
-									<div class="p-8 2xl:p-12 md:w-1/2 flex flex-col justify-center space-y-4 2xl:space-y-6">
-										<div class="space-y-1">
-											<span class="text-xs 2xl:text-sm font-bold text-natEmerald uppercase tracking-wider">Hardware · Embedded Systems</span>
-											<h3 class="text-xl 2xl:text-3xl font-bold text-textDark">Autonomous Smart Standing Desk</h3>
-										</div>
-										<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed">
-											Autonomous cyber-physical system based on an ESP32 microcontroller that intercepts physical control lines via optocouplers to automate ergonomic postural corrections. Features non-blocking timed sequence logic implementing a physical Pomodoro technique, and integrates a predictive optical safety layer for collision avoidance using Time-of-Flight (ToF) laser sensors.
-										</p>
-										<div class="flex flex-wrap gap-2 pt-1">
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-natMint text-natEmerald text-xs 2xl:text-sm font-semibold rounded-md">C++</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-techCyan text-techBlue text-xs 2xl:text-sm font-semibold rounded-md">ESP32</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-slate-100 text-textMuted text-xs 2xl:text-sm font-semibold rounded-md">FSM &amp; ISR</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-slate-100 text-textMuted text-xs 2xl:text-sm font-semibold rounded-md">PC817 Optocouplers</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-slate-100 text-textMuted text-xs 2xl:text-sm font-semibold rounded-md">VL53L0X ToF</span>
-										</div>
-									</div>
-								</div>
-							</div>
-
-							<div class="w-full flex-shrink-0">
-								<div class="flex flex-col md:flex-row h-full">
-									<div class="w-full md:w-1/2 aspect-video md:aspect-auto bg-slate-900 flex flex-col items-center justify-center p-6 text-center relative group/icon">
-										<div class="absolute inset-0 bg-gradient-to-br from-sky-950/40 to-slate-900/80 z-0"></div>
-										<i class="fa-solid fa-gamepad text-6xl 2xl:text-8xl text-sky-400 relative z-10 group-hover/icon:scale-110 transition-transform duration-300"></i>
-										<span class="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-1.5 px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white/70 text-xs font-medium">
-											<i class="fa-brands fa-youtube text-red-400 text-sm"></i> Video coming soon
-										</span>
-									</div>
-									<div class="p-8 2xl:p-12 md:w-1/2 flex flex-col justify-center space-y-4 2xl:space-y-6">
-										<div class="space-y-1">
-											<span class="text-xs 2xl:text-sm font-bold text-techBlue uppercase tracking-wider">Video Game · Algorithms</span>
-											<h3 class="text-xl 2xl:text-3xl font-bold text-textDark">Mount Stray: Procedural Roguelike</h3>
-										</div>
-										<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed">
-											Roguelike video game with procedural level generation. The system design stands out for the implementation of graph search algorithms and Perlin noise sampling for the dynamic creation of node networks.
-										</p>
-										<div class="flex flex-wrap gap-2 pt-1">
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-slate-100 text-textDark text-xs 2xl:text-sm font-semibold rounded-md">Java</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-techCyan text-techBlue text-xs 2xl:text-sm font-semibold rounded-md">Graphs & BFS/DFS</span>
-											<span class="px-2.5 py-1 2xl:px-3 2xl:py-1.5 bg-slate-100 text-textMuted text-xs 2xl:text-sm font-semibold rounded-md">Perlin Noise</span>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-					<div class="flex justify-center items-center gap-3 pt-6 2xl:pt-8" id="carousel-dots">
-						<button aria-label="Slide 1" class="carousel-dot w-8 h-2.5 2xl:w-12 2xl:h-3 rounded-full bg-natEmerald transition-all duration-300"></button>
-						<button aria-label="Slide 2" class="carousel-dot w-2.5 h-2.5 2xl:w-3 2xl:h-3 rounded-full bg-slate-400 border border-slate-300 hover:bg-slate-500 transition-all duration-300"></button>
-					</div>
-				</div>
-			</section>
-
-			<section id="ai-builds" class="space-y-8 2xl:space-y-12 scroll-mt-28" data-reveal>
-				<div class="space-y-2">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
-							<i class="fa-solid fa-robot"></i>
-						</div>
-						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">AI-Assisted Deployments</h2>
-					</div>
-					<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed max-w-4xl">
-						Beyond my own code, I use LLMs as a productivity multiplier to design, build, and ship complete websites for friends and small clients in under 48 hours. My role on these projects is <strong class="font-semibold text-textDark">project lead and QA</strong>: defining the brief and content, prompting and iterating with the model, reviewing the generated code for bugs and accessibility, structuring the repository, and deploying it via GitHub Pages.
-					</p>
-				</div>
-
-				<div id="ai-builds-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 2xl:gap-10">
-					<div class="bg-white/80 backdrop-blur-sm border border-slate-100 rounded-2xl shadow-sm hover:shadow-lg transition-all p-6 2xl:p-8 flex flex-col gap-4 2xl:gap-6">
-						<div class="flex items-start justify-between gap-4">
-							<div class="space-y-1">
-								<span class="text-xs 2xl:text-sm font-bold text-natEmerald uppercase tracking-wider">Client Portfolio · CV Site</span>
-								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark leading-snug">José Rodríguez — Steadicam Operator & Filmmaker</h3>
-							</div>
-							<div class="w-10 h-10 2xl:w-14 2xl:h-14 flex-shrink-0 rounded-xl bg-natMint flex items-center justify-center text-natEmerald text-lg 2xl:text-2xl">
-								<i class="fa-solid fa-camera-retro"></i>
-							</div>
-						</div>
-						<p class="text-sm 2xl:text-lg text-textMuted leading-relaxed flex-grow">
-							Single-page portfolio developed for a professional filmmaker. Architected the content structure and utilized an AI-assisted workflow for rapid UI prototyping. Audited and refactored the generated code for production compliance, managed the deployment pipeline via GitHub Pages, and configured custom domain routing and SSL/TLS infrastructure through Cloudflare.
+		<main id="top" class="shell">
+			<!-- ===============================================================
+			     HERO
+			================================================================ -->
+			<section class="hero" aria-labelledby="name">
+				<div class="hero__grid">
+					<div class="hero__intro">
+						<p class="hero__kicker">Software Developer — Cloud &amp; DevOps</p>
+						<h1 id="name">Javier Arévalo</h1>
+						<p class="hero__lead">
+							I build and automate cloud infrastructure — Microsoft Azure,
+							system integration and serverless backends in real production
+							environments.
 						</p>
-						<div class="flex flex-wrap gap-2">
-							<span class="px-2.5 py-1 bg-natMint text-natEmerald text-xs font-semibold rounded-md">AI-Assisted</span>
-							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">GitHub Pages</span>
-							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">Prompt Engineering</span>
-							<span class="px-2.5 py-1 bg-slate-100 text-textMuted text-xs font-semibold rounded-md">QA & Deployment</span>
+						<div class="hero__actions">
+							<a class="btn btn--solid" href="mailto:javier.arevalo.11111@gmail.com" data-copy-email>
+								<i class="fa-solid fa-envelope" aria-hidden="true"></i>
+								<span data-label>Get in touch</span>
+							</a>
+							<a class="iconbtn" href="https://github.com/emermelada" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+								<i class="fa-brands fa-github" aria-hidden="true"></i>
+							</a>
+							<a class="iconbtn" href="https://www.linkedin.com/in/javier-arevalo-hernandez" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+								<i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+							</a>
 						</div>
-						<a href="https://joserodriguez.mov/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-sm 2xl:text-lg font-semibold text-techBlue hover:text-natEmerald transition-colors">
-							Visit live site <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-						</a>
+					</div>
+
+					<figure class="hero__figure">
+						<img src="picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
+						<figcaption class="hero__figcaption">
+							<span>Javier Arévalo</span>
+							<span>Madrid · 2026</span>
+						</figcaption>
+					</figure>
+				</div>
+
+				<!-- Structured facts strip. -->
+				<dl class="facts">
+					<div class="fact">
+						<dt class="fact__k">Based in</dt>
+						<dd class="fact__v">Madrid, Spain<br />Vejle, Denmark — Sep 2026</dd>
+					</div>
+					<div class="fact">
+						<dt class="fact__k">Languages</dt>
+						<dd class="fact__v">English — C1<br />Spanish — Native</dd>
+					</div>
+					<div class="fact">
+						<dt class="fact__k">Focus</dt>
+						<dd class="fact__v">Cloud · DevOps<br />Distributed systems</dd>
+					</div>
+					<div class="fact">
+						<dt class="fact__k">Status</dt>
+						<dd class="fact__v"><span class="dot" aria-hidden="true"></span>Available<br />Open to remote</dd>
+					</div>
+				</dl>
+			</section>
+
+			<!-- ===============================================================
+			     01 — PROFILE
+			================================================================ -->
+			<section id="about" class="block" data-reveal aria-labelledby="about-title">
+				<div class="block__rail">
+					<span class="block__num">01</span>
+					<h2 class="block__label" id="about-title">Profile</h2>
+				</div>
+				<div class="block__body">
+					<div class="prose">
+						<p>
+							I started out wanting to understand how things work on the
+							inside — that curiosity took me from software development into
+							cloud infrastructure. I've shipped serverless functions on
+							Microsoft Azure, automated integrations with Dynamics 365, and
+							built native Android applications in real enterprise environments.
+						</p>
+						<p>
+							In September 2026 I begin my BSc in Computer Science at the
+							University of Southern Denmark, where I intend to go deeper into
+							distributed systems and cloud architecture at scale. I care about
+							systems that are observable, secure by default, and built to run
+							unattended.
+						</p>
 					</div>
 				</div>
 			</section>
 
-			<section id="skills" class="space-y-16 2xl:space-y-24 scroll-mt-28" data-reveal>
-				
-				<div class="space-y-8 2xl:space-y-10">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
-							<i class="fa-solid fa-layer-group"></i>
-						</div>
-						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Tech Stack</h2>
+			<!-- ===============================================================
+			     02 — EXPERIENCE
+			================================================================ -->
+			<section id="experience" class="block" data-reveal aria-labelledby="exp-title">
+				<div class="block__rail">
+					<span class="block__num">02</span>
+					<h2 class="block__label" id="exp-title">Experience</h2>
+				</div>
+				<div class="block__body">
+					<div class="entries">
+						<article class="entry">
+							<div class="entry__meta">
+								<span class="entry__period">Mar – May 2026</span>
+								<span class="entry__where">Madrid, ES</span>
+							</div>
+							<div class="entry__content">
+								<div class="entry__head">
+									<h3 class="entry__title">Cloud Developer — Internship</h3>
+									<span class="entry__org">Axazure S.L.</span>
+								</div>
+								<p class="entry__summary">
+									Built event-driven automation across the Microsoft cloud,
+									with a focus on running workloads securely and without manual
+									intervention.
+								</p>
+								<ul class="entry__points">
+									<li>Developed time-triggered <strong>Azure Functions</strong> to automate record generation in <strong>Dynamics 365 (Dataverse)</strong>.</li>
+									<li>Implemented secretless authentication with <strong>Managed Identity</strong>, removing stored credentials from the pipeline.</li>
+									<li>Instrumented services with <strong>Application Insights</strong> for telemetry and observability.</li>
+								</ul>
+								<ul class="tags">
+									<li class="tag tag--key">C#</li>
+									<li class="tag tag--key">Azure Functions</li>
+									<li class="tag tag--key">Managed Identity</li>
+									<li class="tag">Dynamics 365</li>
+									<li class="tag">Application Insights</li>
+								</ul>
+							</div>
+						</article>
+
+						<article class="entry">
+							<div class="entry__meta">
+								<span class="entry__period">Mar – Jun 2025</span>
+								<span class="entry__where">Madrid, ES</span>
+							</div>
+							<div class="entry__content">
+								<div class="entry__head">
+									<h3 class="entry__title">Software Developer — Internship</h3>
+									<span class="entry__org">Skiller Academy S.L.</span>
+								</div>
+								<p class="entry__summary">
+									Native Android development on a production codebase, across
+									the full delivery cycle.
+								</p>
+								<ul class="entry__points">
+									<li>Implemented new features in <strong>Kotlin</strong> and integrated external services over REST.</li>
+									<li>Took part in analysis, implementation and testing on real, shipped code.</li>
+								</ul>
+								<ul class="tags">
+									<li class="tag tag--key">Kotlin</li>
+									<li class="tag">Android SDK</li>
+									<li class="tag">REST APIs</li>
+									<li class="tag">Git</li>
+								</ul>
+							</div>
+						</article>
 					</div>
+				</div>
+			</section>
 
-					<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 2xl:gap-10">
-						<div class="bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 rounded-xl p-6 2xl:p-10 space-y-4 2xl:space-y-6 hover:shadow-lg transition-shadow">
-							<h3 class="text-xs 2xl:text-sm font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
-								<i class="fa-solid fa-terminal text-natEmerald"></i> Languages
-							</h3>
-							<div class="flex flex-wrap gap-2 2xl:gap-3">
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Java</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Kotlin</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Swift</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">C# / C++</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">SQL</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">HTML / CSS / JS</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Python</span>
+			<!-- ===============================================================
+			     03 — SELECTED WORK
+			================================================================ -->
+			<section id="projects" class="block" data-reveal aria-labelledby="proj-title">
+				<div class="block__rail">
+					<span class="block__num">03</span>
+					<h2 class="block__label" id="proj-title">Selected work</h2>
+				</div>
+				<div class="block__body">
+					<div class="entries entries--cards">
+						<article class="entry">
+							<!-- Video slot. To add the demo later: replace `data-soon`
+							     with `data-youtube="VIDEO_ID" data-title="…"`. -->
+							<div class="entry__media" data-soon>
+								<i class="fa-solid fa-film" aria-hidden="true"></i>
+								Demo coming soon
 							</div>
+							<div class="entry__meta">
+								<span class="entry__index">01</span>
+								<span>Hardware · Embedded</span>
+							</div>
+							<div class="entry__content">
+								<p class="entry__kicker">Cyber-physical system</p>
+								<div class="entry__head">
+									<h3 class="entry__title">Autonomous Smart Standing Desk</h3>
+								</div>
+								<p class="entry__summary">
+									An ESP32-based controller that turns an ordinary electric
+									desk into an autonomous, safety-aware ergonomic device.
+								</p>
+								<ul class="entry__points">
+									<li>Intercepts the desk's physical control lines through <strong>optocouplers</strong> to drive height changes in software.</li>
+									<li>Non-blocking <strong>finite-state machine</strong> runs a timed "physical Pomodoro", prompting posture changes on schedule.</li>
+									<li>Predictive optical safety layer uses <strong>Time-of-Flight</strong> sensors for collision avoidance before movement.</li>
+								</ul>
+								<div class="entry__foot">
+									<ul class="tags">
+										<li class="tag tag--key">C++</li>
+										<li class="tag tag--key">ESP32</li>
+										<li class="tag">FSM &amp; ISR</li>
+										<li class="tag">PC817 Optocouplers</li>
+										<li class="tag">VL53L0X ToF</li>
+									</ul>
+								</div>
+							</div>
+						</article>
+
+						<article class="entry">
+							<!-- Video slot. To add the demo later: replace `data-soon`
+							     with `data-youtube="VIDEO_ID" data-title="…"`. -->
+							<div class="entry__media" data-soon>
+								<i class="fa-solid fa-film" aria-hidden="true"></i>
+								Demo coming soon
+							</div>
+							<div class="entry__meta">
+								<span class="entry__index">02</span>
+								<span>Game · Algorithms</span>
+							</div>
+							<div class="entry__content">
+								<p class="entry__kicker">Procedural generation</p>
+								<div class="entry__head">
+									<h3 class="entry__title">Mount Stray — Roguelike</h3>
+								</div>
+								<p class="entry__summary">
+									A roguelike whose maps are generated fresh every run from a
+									small set of algorithmic primitives.
+								</p>
+								<ul class="entry__points">
+									<li>Builds dynamic <strong>node networks</strong> per run for level topology.</li>
+									<li>Uses <strong>graph-search</strong> (BFS/DFS) for connectivity and traversal guarantees.</li>
+									<li>Samples <strong>Perlin noise</strong> for organic, non-repeating layout variation.</li>
+								</ul>
+								<div class="entry__foot">
+									<ul class="tags">
+										<li class="tag tag--key">Java</li>
+										<li class="tag">Graphs · BFS/DFS</li>
+										<li class="tag">Perlin Noise</li>
+									</ul>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- ===============================================================
+			     04 — AI-ASSISTED
+			================================================================ -->
+			<section id="builds" class="block" data-reveal aria-labelledby="builds-title">
+				<div class="block__rail">
+					<span class="block__num">04</span>
+					<h2 class="block__label" id="builds-title">AI-assisted</h2>
+				</div>
+				<div class="block__body">
+					<p class="prose" style="margin-bottom: 2rem">
+						I use large language models as a delivery multiplier — shipping
+						complete sites for small clients in under 48 hours. My role is
+						<strong>project lead and QA</strong>: defining the brief, directing
+						and iterating with the model, then auditing the generated code for
+						bugs, accessibility and structure before deployment.
+					</p>
+					<div class="entries entries--cards">
+						<article class="entry">
+							<div class="entry__meta">
+								<span>Client · CV site</span>
+							</div>
+							<div class="entry__content">
+								<p class="entry__kicker">Project lead &amp; QA</p>
+								<div class="entry__head">
+									<h3 class="entry__title">José Rodríguez — Steadicam Operator &amp; Filmmaker</h3>
+								</div>
+								<p class="entry__summary">
+									A single-page portfolio for a professional filmmaker,
+									delivered end to end.
+								</p>
+								<ul class="entry__points">
+									<li>Architected the content structure and ran an AI-assisted UI prototyping workflow.</li>
+									<li>Audited and refactored the generated code to a production standard.</li>
+									<li>Managed GitHub Pages deployment and configured custom-domain routing with SSL/TLS via <strong>Cloudflare</strong>.</li>
+								</ul>
+								<div class="entry__foot">
+									<ul class="tags">
+										<li class="tag">GitHub Pages</li>
+										<li class="tag">Cloudflare</li>
+										<li class="tag">Prompt Engineering</li>
+										<li class="tag">QA</li>
+									</ul>
+									<a class="link" href="https://joserodriguez.mov/" target="_blank" rel="noopener noreferrer">
+										joserodriguez.mov <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+									</a>
+								</div>
+							</div>
+						</article>
+					</div>
+				</div>
+			</section>
+
+			<!-- ===============================================================
+			     05 — SKILLS
+			================================================================ -->
+			<section id="skills" class="block" data-reveal aria-labelledby="skills-title">
+				<div class="block__rail">
+					<span class="block__num">05</span>
+					<h2 class="block__label" id="skills-title">Skills</h2>
+				</div>
+				<div class="block__body">
+					<div class="matrix">
+						<div class="matrix__row">
+							<span class="matrix__key">Languages</span>
+							<ul class="tags">
+								<li class="tag">Java</li>
+								<li class="tag">Kotlin</li>
+								<li class="tag">C#</li>
+								<li class="tag">C++</li>
+								<li class="tag">Swift</li>
+								<li class="tag">Python</li>
+								<li class="tag">SQL</li>
+								<li class="tag">JavaScript</li>
+							</ul>
 						</div>
-
-						<div class="bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 rounded-xl p-6 2xl:p-10 space-y-4 2xl:space-y-6 hover:shadow-lg transition-shadow">
-							<h3 class="text-xs 2xl:text-sm font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
-								<i class="fa-solid fa-cloud text-techBlue"></i> Cloud & DevOps
-							</h3>
-							<div class="flex flex-wrap gap-2 2xl:gap-3">
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-natMint text-natEmerald text-xs 2xl:text-sm rounded-lg font-semibold">Microsoft Azure</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-natMint text-natEmerald text-xs 2xl:text-sm rounded-lg font-semibold">Azure Functions</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-natMint text-natEmerald text-xs 2xl:text-sm rounded-lg font-semibold">Managed Identity</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Firebase</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Git / GitHub</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">REST APIs</span>
-							</div>
+						<div class="matrix__row">
+							<span class="matrix__key">Cloud &amp; DevOps</span>
+							<ul class="tags">
+								<li class="tag tag--key">Microsoft Azure</li>
+								<li class="tag tag--key">Azure Functions</li>
+								<li class="tag tag--key">Managed Identity</li>
+								<li class="tag">Application Insights</li>
+								<li class="tag">Firebase</li>
+								<li class="tag">Git / GitHub</li>
+								<li class="tag">REST APIs</li>
+							</ul>
 						</div>
-
-						<div class="bg-white/80 backdrop-blur-sm shadow-sm border border-slate-100 rounded-xl p-6 2xl:p-10 space-y-4 2xl:space-y-6 hover:shadow-lg transition-shadow">
-							<h3 class="text-xs 2xl:text-sm font-bold text-textDark uppercase tracking-wider flex items-center gap-2">
-								<i class="fa-solid fa-mobile-screen text-purple-600"></i> Mobile & Others
-							</h3>
-							<div class="flex flex-wrap gap-2 2xl:gap-3">
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-techCyan text-techBlue text-xs 2xl:text-sm rounded-lg font-semibold">Android SDK</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-techCyan text-techBlue text-xs 2xl:text-sm rounded-lg font-semibold">iOS / Swift</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">MySQL</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">MongoDB</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Figma</span>
-								<span class="px-3 py-1 2xl:px-4 2xl:py-2 bg-slate-50 text-textDark text-xs 2xl:text-sm rounded-lg font-medium border border-slate-100">Dynamics 365</span>
-							</div>
+						<div class="matrix__row">
+							<span class="matrix__key">Mobile</span>
+							<ul class="tags">
+								<li class="tag">Android SDK</li>
+								<li class="tag">iOS / Swift</li>
+							</ul>
+						</div>
+						<div class="matrix__row">
+							<span class="matrix__key">Data</span>
+							<ul class="tags">
+								<li class="tag">MySQL</li>
+								<li class="tag">MongoDB</li>
+								<li class="tag">Dynamics 365 / Dataverse</li>
+							</ul>
+						</div>
+						<div class="matrix__row">
+							<span class="matrix__key">Design</span>
+							<ul class="tags">
+								<li class="tag">Figma</li>
+							</ul>
 						</div>
 					</div>
 				</div>
+			</section>
 
-				<div class="space-y-8 2xl:space-y-10 pt-8 border-t border-slate-200/60">
-					<div class="flex items-center gap-3">
-						<div class="w-8 h-8 2xl:w-10 2xl:h-10 rounded-lg bg-natMint flex items-center justify-center text-natEmerald text-sm 2xl:text-lg">
-							<i class="fa-solid fa-graduation-cap"></i>
+			<!-- ===============================================================
+			     06 — EDUCATION
+			================================================================ -->
+			<section id="education" class="block" data-reveal aria-labelledby="edu-title">
+				<div class="block__rail">
+					<span class="block__num">06</span>
+					<h2 class="block__label" id="edu-title">Education</h2>
+				</div>
+				<div class="block__body">
+					<div class="edu">
+						<div class="edu__item">
+							<span class="edu__when">Sep 2026 —</span>
+							<div>
+								<h3 class="edu__degree">BSc in Computer Science</h3>
+								<span class="edu__org">University of Southern Denmark (SDU)</span>
+								<p class="edu__loc">Vejle, Denmark</p>
+							</div>
 						</div>
-						<h2 class="text-2xl 2xl:text-3xl font-bold tracking-tight text-textDark">Education</h2>
+						<div class="edu__item">
+							<span class="edu__when">2023 – 2025</span>
+							<div>
+								<h3 class="edu__degree">Higher Degree — Multi-platform Application Development</h3>
+								<span class="edu__org">U-TAD</span>
+								<p class="edu__loc">Madrid, Spain</p>
+							</div>
+						</div>
 					</div>
 
-					<div class="space-y-6 2xl:space-y-8">
-						<div class="bg-white/90 backdrop-blur-sm border-l-4 border-natEmerald shadow-sm rounded-xl p-6 2xl:p-8 hover:shadow-lg transition-all">
-							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark">BSc in Computer Science</h3>
-								<span class="text-xs 2xl:text-sm font-semibold text-natEmerald bg-natMint px-2.5 py-1 rounded-md w-fit font-mono">Sept 2026 – Present</span>
-							</div>
-							<p class="text-sm 2xl:text-lg font-semibold text-techBlue">University of Southern Denmark (SDU)</p>
-							<p class="text-xs 2xl:text-sm text-textMuted mt-1">
-								<i class="fa-solid fa-map-pin mr-1"></i> Vejle, Denmark
-							</p>
+					<p class="block__label" style="margin-bottom: 1rem">Certifications</p>
+					<div class="certs">
+						<div class="cert">
+							<p class="cert__name">Programmatic Advertising</p>
+							<p class="cert__by">Skiller Academy</p>
 						</div>
-
-						<div class="bg-white/90 backdrop-blur-sm border-l-4 border-slate-300 shadow-sm rounded-xl p-6 2xl:p-8 hover:shadow-lg transition-all">
-							<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-								<h3 class="text-lg 2xl:text-2xl font-bold text-textDark">Higher Degree in Multi-platform Application Development</h3>
-								<span class="text-xs 2xl:text-sm font-semibold text-textMuted bg-slate-100 px-2.5 py-1 rounded-md w-fit font-mono">Sept 2023 – June 2025</span>
-							</div>
-							<p class="text-sm 2xl:text-lg font-semibold text-techBlue">U-TAD · Madrid</p>
+						<div class="cert">
+							<p class="cert__name">Python Essentials 1</p>
+							<p class="cert__by">Cisco Networking Academy</p>
 						</div>
-
-						<h3 class="text-sm 2xl:text-lg font-bold text-slate-400 uppercase tracking-wider pt-4">Certifications</h3>
-						<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-							<div class="bg-white border border-slate-100 shadow-sm rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition-all">
-								<div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-techBlue text-lg">
-									<i class="fa-solid fa-chart-line"></i>
-								</div>
-								<div>
-									<h4 class="text-sm font-bold text-textDark leading-tight">Programmatic Advertising</h4>
-									<p class="text-xs text-textMuted mt-0.5">Skiller Academy</p>
-								</div>
-							</div>
-							<div class="bg-white border border-slate-100 shadow-sm rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition-all">
-								<div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-techBlue text-lg">
-									<i class="fa-brands fa-python"></i>
-								</div>
-								<div>
-									<h4 class="text-sm font-bold text-textDark leading-tight">Python Essentials 1</h4>
-									<p class="text-xs text-textMuted mt-0.5">Cisco Networking Academy</p>
-								</div>
-							</div>
-							<div class="bg-white border border-slate-100 shadow-sm rounded-xl p-4 flex items-center gap-4 hover:shadow-md transition-all">
-								<div class="w-10 h-10 rounded-xl bg-sky-50 flex items-center justify-center text-techBlue text-lg">
-									<i class="fa-solid fa-award"></i>
-								</div>
-								<div>
-									<h4 class="text-sm font-bold text-textDark leading-tight">Python for Data Science and AI</h4>
-									<p class="text-xs text-textMuted mt-0.5">IBM / Coursera</p>
-								</div>
-							</div>
+						<div class="cert">
+							<p class="cert__name">Python for Data Science &amp; AI</p>
+							<p class="cert__by">IBM / Coursera</p>
 						</div>
 					</div>
 				</div>
 			</section>
 		</main>
 
-		<footer class="border-t border-slate-200 mt-36 2xl:mt-48 bg-white/50 backdrop-blur-md relative z-10">
-			<div class="max-w-7xl 2xl:max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-12 py-10 2xl:py-16 flex flex-col sm:flex-row items-center justify-between text-xs 2xl:text-base text-textMuted gap-4">
-				<p>&copy; 2026 Javier Arévalo. Software Developer.</p>
-				<div class="flex space-x-6 text-base 2xl:text-xl">
-					<a href="https://github.com/emermelada" target="_blank" rel="noopener noreferrer" class="hover:text-natEmerald transition-colors">
-						<i class="fa-brands fa-github"></i>
+		<!-- ===================================================================
+		     COLOPHON / FOOTER
+		==================================================================== -->
+		<footer class="colophon">
+			<div class="colophon__inner">
+				<p class="colophon__cta">
+					Let's talk —
+					<a href="mailto:javier.arevalo.11111@gmail.com" data-copy-email>
+						<span data-label>javier.arevalo.11111@gmail.com</span>
 					</a>
-					<a href="https://www.linkedin.com/in/javier-arevalo-hernandez" target="_blank" rel="noopener noreferrer" class="hover:text-techBlue transition-colors">
-						<i class="fa-brands fa-linkedin-in"></i>
-					</a>
+				</p>
+				<div>
+					<div class="colophon__socials">
+						<a href="https://github.com/emermelada" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+							<i class="fa-brands fa-github" aria-hidden="true"></i>
+						</a>
+						<a href="https://www.linkedin.com/in/javier-arevalo-hernandez" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+							<i class="fa-brands fa-linkedin-in" aria-hidden="true"></i>
+						</a>
+					</div>
+					<p class="colophon__meta">
+						© 2026 Javier Arévalo<br />
+						Madrid · Set in Space Grotesk &amp; Inter<br />
+						Built with HTML, CSS &amp; vanilla JS
+					</p>
 				</div>
 			</div>
 		</footer>
-
-		<script>
-		// Mobile Menu toggle
-		const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-		const mobileMenu    = document.getElementById('mobile-menu');
-		mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-		document.querySelectorAll('#mobile-menu a').forEach(link =>
-			link.addEventListener('click', () => mobileMenu.classList.add('hidden'))
-		);
-
-		// Email button clipboard & mailto routing
-		document.querySelectorAll('.email-btn').forEach(btn => {
-			btn.addEventListener('click', (e) => {
-				e.preventDefault();
-				const textSpan = btn.querySelector('span');
-				const originalText = textSpan.innerText;
-				const email = 'javier.arevalo.11111@gmail.com';
-				
-				navigator.clipboard.writeText(email).then(() => {
-					textSpan.innerText = 'Copied!';
-					setTimeout(() => { textSpan.innerText = originalText; }, 2500);
-					window.location.href = `mailto:${email}`;
-				}).catch(() => { 
-					window.location.href = `mailto:${email}`; 
-				});
-			});
-		});
-
-		// Projects Carousel implementation
-		const track = document.getElementById('carousel-track');
-		const dots = document.querySelectorAll('.carousel-dot');
-		const prevBtn = document.getElementById('carousel-prev');
-		const nextBtn = document.getElementById('carousel-next');
-		const totalSlides = dots.length;
-		let currentSlide = 0;
-		let autoplayTimer = null;
-
-		function updateCarousel(index) {
-			if (index >= totalSlides) index = 0;
-			if (index < 0) index = totalSlides - 1;
-			currentSlide = index;
-			
-			track.style.transform = `translateX(-${currentSlide * 100}%)`;
-			
-			dots.forEach((dot, i) => {
-				if (i === currentSlide) {
-					dot.classList.remove('w-2.5','2xl:w-3','bg-slate-400','border','border-slate-300','hover:bg-slate-500');
-					dot.classList.add('w-8','2xl:w-12','bg-natEmerald');
-				} else {
-					dot.classList.add('w-2.5','2xl:w-3','bg-slate-400','border','border-slate-300','hover:bg-slate-500');
-					dot.classList.remove('w-8','2xl:w-12','bg-natEmerald');
-				}
-			});
-		}
-
-		function nextSlide() { updateCarousel(currentSlide + 1); }
-		function prevSlide() { updateCarousel(currentSlide - 1); }
-		
-		nextBtn.addEventListener('click', () => { nextSlide(); resetAutoplay(); });
-		prevBtn.addEventListener('click', () => { prevSlide(); resetAutoplay(); });
-		
-		dots.forEach((dot, i) => dot.addEventListener('click', () => { 
-			updateCarousel(i); 
-			resetAutoplay(); 
-		}));
-
-		function startAutoplay() { autoplayTimer = setInterval(nextSlide, 5000); }
-		function resetAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
-		startAutoplay();
-
-		// Custom cursor glow effect
-		const glow = document.getElementById('cursor-glow');
-		document.addEventListener('mousemove', (e) => {
-			glow.style.left = e.clientX + 'px';
-			glow.style.top = e.clientY + 'px';
-		});
-
-		// Intersection Observer for scroll reveal animations
-		const revealObserver = new IntersectionObserver((entries) => {
-			entries.forEach(entry => {
-				if (entry.isIntersecting) {
-					entry.target.classList.add('revealed');
-					revealObserver.unobserve(entry.target);
-				}
-			});
-		}, { threshold: 0.08 });
-		
-		document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
-
-		// Hero Canvas - Interactive particle network
-		(function () {
-			const canvas = document.getElementById('hero-canvas');
-			const ctx = canvas.getContext('2d');
-			const section = canvas.parentElement;
-
-			const LABELS = [
-				'Azure','Dynamics 365','Java','Kotlin','Python',
-				'C#','C++','Android','Swift','MongoDB',
-				'MySQL','Firebase','Git','REST API','Figma','MQTT'
-			];
-
-			const PALETTE = [
-				{ node: '#059669', line: '5,150,105'  }, 
-				{ node: '#0284c7', line: '2,132,199'  }, 
-				{ node: '#94a3b8', line: '148,163,184'},  
-			];
-
-			let W, H;
-			const MOUSE = { x: -9999, y: -9999 };
-			const NODE_COUNT = 16;
-			const MAX_DIST = 210;
-			const MOUSE_RADIUS = 160;
-
-			class Node {
-				constructor(isMobile) {
-					const c = PALETTE[Math.floor(Math.random() * PALETTE.length)];
-					this.color = c.node;
-					this.lineColor = c.line;
-					this.label = LABELS[Math.floor(Math.random() * LABELS.length)];
-					this.size = (Math.random() * 2.5 + 2.5) * (isMobile ? 0.8 : 1);
-					this.labelAlpha = isMobile ? 0.22 : 0.55;
-					this.phase = Math.random() * Math.PI * 2;
-					this.speed = Math.random() * 0.3 + 0.1;
-					this.place();
-				}
-				place() {
-					this.x = Math.random() * W;
-					this.y = Math.random() * H;
-					this.vx = (Math.random() - 0.5) * this.speed;
-					this.vy = (Math.random() - 0.5) * this.speed;
-				}
-				update() {
-					const dx = MOUSE.x - this.x;
-					const dy = MOUSE.y - this.y;
-					const dist = Math.hypot(dx, dy);
-					
-					if (dist < MOUSE_RADIUS && dist > 0) {
-						const force = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.025;
-						this.vx += dx / dist * force;
-						this.vy += dy / dist * force;
-					}
-					
-					const spd = Math.hypot(this.vx, this.vy);
-					if (spd > 1.2) { this.vx *= 1.2 / spd; this.vy *= 1.2 / spd; }
-					
-					this.vx *= 0.995;
-					this.vy *= 0.995;
-
-					this.x += this.vx;
-					this.y += this.vy;
-
-					if (this.x < -40) this.x = W + 40;
-					if (this.x > W + 40) this.x = -40;
-					if (this.y < -40) this.y = H + 40;
-					if (this.y > H + 40) this.y = -40;
-
-					this.phase += 0.018;
-				}
-				draw() {
-					const pulse = 1 + Math.sin(this.phase) * 0.25;
-					const r = this.size * pulse;
-
-					// Outer aura
-					ctx.beginPath();
-					ctx.arc(this.x, this.y, r * 3.5, 0, Math.PI * 2);
-					ctx.fillStyle = this.color + '18';
-					ctx.fill();
-
-					// Core dot
-					ctx.beginPath();
-					ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
-					ctx.fillStyle = this.color;
-					ctx.fill();
-
-					// Label rendering
-					ctx.font = '600 10px Plus Jakarta Sans, sans-serif';
-					ctx.globalAlpha = this.labelAlpha;
-					ctx.fillStyle = this.color;
-					ctx.fillText(this.label, this.x + r + 6, this.y + 4);
-					ctx.globalAlpha = 1;
-				}
-			}
-
-			let nodes = [];
-
-			function resize() {
-				const rect = section.getBoundingClientRect();
-				const dpr = window.devicePixelRatio || 1;
-
-				W = rect.width;
-				H = rect.height;
-
-				canvas.width = Math.round(W * dpr);
-				canvas.height = Math.round(H * dpr);
-				canvas.style.width = W + 'px';
-				canvas.style.height = H + 'px';
-				ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-				const isMobile = W < 1024;
-				nodes = Array.from({ length: isMobile ? 9 : NODE_COUNT }, () => new Node(isMobile));
-			}
-
-			function drawEdges() {
-				for (let i = 0; i < nodes.length; i++) {
-					for (let j = i + 1; j < nodes.length; j++) {
-						const a = nodes[i], b = nodes[j];
-						const d = Math.hypot(a.x - b.x, a.y - b.y);
-						if (d > MAX_DIST) continue;
-
-						const alpha = ((1 - d / MAX_DIST) * 0.28).toFixed(3);
-						const grad = ctx.createLinearGradient(a.x, a.y, b.x, b.y);
-						grad.addColorStop(0, `rgba(${a.lineColor},${alpha})`);
-						grad.addColorStop(1, `rgba(${b.lineColor},${alpha})`);
-
-						ctx.beginPath();
-						ctx.moveTo(a.x, a.y);
-						ctx.lineTo(b.x, b.y);
-						ctx.strokeStyle = grad;
-						ctx.lineWidth = 1;
-						ctx.stroke();
-					}
-				}
-			}
-
-			function animate() {
-				ctx.clearRect(0, 0, W, H);
-				drawEdges();
-				nodes.forEach(n => { n.update(); n.draw(); });
-				requestAnimationFrame(animate);
-			}
-
-			section.addEventListener('mousemove', (e) => {
-				const rect = section.getBoundingClientRect();
-				MOUSE.x = e.clientX - rect.left;
-				MOUSE.y = e.clientY - rect.top;
-			});
-			section.addEventListener('mouseleave', () => { MOUSE.x = -9999; MOUSE.y = -9999; });
-
-			new ResizeObserver(resize).observe(section);
-			resize();
-			animate();
-		})();
-		</script>
 	</body>
 </html>
