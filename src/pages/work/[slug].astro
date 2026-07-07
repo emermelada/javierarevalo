@@ -1,10 +1,20 @@
 ---
+/**
+ * Case-study template — one static page per entry in the `work`
+ * collection (/work/<slug>/).
+ *
+ * Layout: back link → title/tagline → fact columns (role/year/stack)
+ * → media slot → markdown body → optional external link → prev/next nav.
+ */
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Cover from '../../components/Cover.astro';
 
 export async function getStaticPaths() {
 	const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+	// prev/next wrap around so every case links onward; with exactly two
+	// entries they collapse to the same target and the nav renders a
+	// single "Next case" link instead of a duplicated pair.
 	return work.map((entry, i) => ({
 		params: { slug: entry.id },
 		props: {

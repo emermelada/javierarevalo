@@ -1,9 +1,13 @@
+# Builds the Astro site and publishes dist/ to GitHub Pages on every push
+# to main. Requires the repository's Pages source to be set to
+# "GitHub Actions" (Settings → Pages). The custom domain is preserved by
+# public/CNAME, which Astro copies into the build output.
 name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
-  workflow_dispatch:
+  workflow_dispatch: # allow manual re-deploys from the Actions tab
 
 permissions:
   contents: read

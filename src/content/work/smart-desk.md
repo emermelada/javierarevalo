@@ -6,7 +6,8 @@ role: Personal project — hardware & firmware
 stack: [C++, ESP32, FSM & ISR, PC817 Optocouplers, VL53L0X ToF]
 summary: A cyber-physical system that intercepts a desk's control lines to drive posture changes in software — with a predictive optical safety layer.
 order: 1
-# Cuando el vídeo esté en YouTube, descomenta y pon el ID (lo que va tras watch?v=):
+# To embed the project video once it's on YouTube, uncomment and set the
+# video ID (the part after watch?v= in the URL):
 # youtube: VIDEO_ID
 ---
 

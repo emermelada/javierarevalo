@@ -1,8 +1,21 @@
 ---
+/**
+ * Base layout — the single page shell shared by every route.
+ *
+ * Owns the document head (SEO/OG metadata, fonts, favicon), the sticky
+ * site header, the contact footer, and the only client-side JavaScript
+ * on the site (copy-email + scroll reveal, at the bottom of this file).
+ *
+ * Pages provide their content through the default <slot/> and pass
+ * `title`/`description` for the head. The canonical URL is derived from
+ * `site` in astro.config.mjs, so it stays correct in every environment.
+ */
 import '../styles/global.css';
 
 interface Props {
+	/** Document title, shown in the tab and in social previews. */
 	title: string;
+	/** Meta description; also reused as the OG description. */
 	description: string;
 }
 
@@ -86,6 +99,10 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		</footer>
 
 		<script>
+			// All client-side behaviour lives here, as progressive enhancement:
+			// the site is fully usable with JavaScript disabled (the copy button
+			// degrades to mailto:, and content is simply visible without reveals).
+
 			// Copy-to-clipboard contact button.
 			for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy-email]')) {
 				const label = btn.querySelector('[data-copy-label]');

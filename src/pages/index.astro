@@ -1,4 +1,17 @@
 ---
+/**
+ * Home page — the whole CV in one scroll.
+ *
+ * Everything except the project case studies is authored directly in
+ * this file (hero, about, experience, skills, education, certifications);
+ * there is deliberately no CMS or data file for content that changes a
+ * few times a year. Work cards are generated from the `work` content
+ * collection, ordered by their `order` frontmatter, so adding a markdown
+ * file under src/content/work/ is enough to get a new card + case page.
+ *
+ * The contact section lives in the Base layout (it doubles as the footer
+ * on every page).
+ */
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
