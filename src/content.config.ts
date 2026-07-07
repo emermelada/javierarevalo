@@ -14,6 +14,8 @@ const work = defineCollection({
 		/** Optional external link shown on the case page (repo, live site…). */
 		linkLabel: z.string().optional(),
 		linkUrl: z.string().optional(),
+		/** YouTube video ID — when set, the case media slot embeds the video. */
+		youtube: z.string().optional(),
 	}),
 });
 
