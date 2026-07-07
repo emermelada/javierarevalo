@@ -124,11 +124,22 @@
 		padding-block: calc(var(--space-section) / 2);
 	}
 
-	/* Section heading: rule + big title */
+	/* Section heading: mono number + rule + big title */
 	.section__head {
+		display: grid;
+		grid-template-columns: auto 1fr;
+		align-items: baseline;
+		gap: 1rem;
 		border-top: 2px solid var(--ink);
 		padding-top: 1rem;
 		margin-bottom: var(--space-block);
+	}
+
+	.section__index {
+		font-family: var(--font-mono);
+		font-size: var(--text-label);
+		letter-spacing: 0.15em;
+		color: var(--accent);
 	}
 
 	.section__title {
