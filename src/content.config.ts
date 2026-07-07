@@ -1,3 +1,12 @@
+/**
+ * Content collections.
+ *
+ * `work` holds one markdown file per project case study
+ * (src/content/work/*.md). The frontmatter below feeds the home-page
+ * card and the case header; the markdown body is the case narrative
+ * (Problem → Solution → Result). The file name becomes the URL slug:
+ * `smart-desk.md` → /work/smart-desk/.
+ */
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 

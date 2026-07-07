@@ -3,6 +3,18 @@
    ------------------------------------------------------------
    Warm paper ground, huge display typography, asymmetric grid,
    one electric accent. Everything tunes from :root.
+
+   Cascade is controlled with @layer (later layers win):
+     tokens     — every design decision as a custom property
+     base       — element defaults (typography, links, focus)
+     layout     — page scaffolding (.wrap, .section, headings)
+     components — one block per UI piece, in page order
+     utilities  — reveal animation, responsive collapses, print
+
+   House rules:
+   - Change a token before adding an override; the whole visual
+     system (colour, fluid type scale, rhythm) derives from :root.
+   - Anything animated must stay behind prefers-reduced-motion.
    ============================================================ */
 
 @layer tokens, base, layout, components, utilities;
