@@ -1,0 +1,252 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Cover from '../components/Cover.astro';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base
+	title="Javier Arévalo — Software Developer · Cloud & DevOps"
+	description="Javier Arévalo — Software Developer focused on Cloud & DevOps. Microsoft Azure, infrastructure automation and system integration in production environments."
+>
+	<!-- ================= HERO ================= -->
+	<section class="hero wrap">
+		<p class="hero__kicker">Software Developer — Cloud &amp; DevOps</p>
+		<h1 class="hero__name">
+			<span class="line">Javier</span>
+			<span class="line">Arévalo<span class="accent-dot">.</span></span>
+		</h1>
+
+		<div class="hero__grid">
+			<p class="hero__pitch">
+				I build and automate <strong>cloud infrastructure</strong> — Microsoft Azure,
+				system integration and automation in real production environments.
+			</p>
+			<figure class="hero__portrait">
+				<img src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
+			</figure>
+		</div>
+
+		<dl class="facts">
+			<div>
+				<dt>Based in</dt>
+				<dd>Madrid, Spain</dd>
+			</div>
+			<div>
+				<dt>Languages</dt>
+				<dd>English C1 · Spanish native</dd>
+			</div>
+			<div>
+				<dt>Focus</dt>
+				<dd>Cloud · DevOps · Distributed systems</dd>
+			</div>
+			<div>
+				<dt>Status</dt>
+				<dd><span class="status-dot">●</span> Open to opportunities</dd>
+			</div>
+		</dl>
+	</section>
+
+	<!-- ================= ABOUT ================= -->
+	<section class="section wrap" id="about" data-reveal>
+		<div class="section__head">
+			<span class="section__index">01 / Profile</span>
+			<h2 class="section__title">About</h2>
+		</div>
+		<div class="about">
+			<p class="about__lede">
+				Software developer focused on cloud infrastructure. I work with Microsoft
+				Azure and Dynamics 365, automating workloads so systems run without manual
+				intervention — and I treat AI as a delivery multiplier, directing it with a
+				project-lead mindset rather than typing everything myself.
+			</p>
+			<p class="about__aside">
+				Currently deepening distributed systems: from Sep 2026 I'll be studying a
+				BSc in Software Engineering at the University of Southern Denmark (SDU),
+				Vejle.
+			</p>
+		</div>
+	</section>
+
+	<!-- ================= WORK ================= -->
+	<section class="section wrap" id="work" data-reveal>
+		<div class="section__head">
+			<span class="section__index">02 / Selected work</span>
+			<h2 class="section__title">Work</h2>
+		</div>
+
+		<div class="work-list">
+			{
+				work.map((project, i) => (
+					<a class="work-card" href={`/work/${project.id}/`} data-reveal>
+						<div class="work-card__media">
+							<Cover slug={project.id} />
+						</div>
+						<div class="work-card__body">
+							<span class="work-card__index">{String(i + 1).padStart(2, '0')} — {project.data.year}</span>
+							<h3 class="work-card__title">{project.data.title}</h3>
+							<p class="work-card__summary">{project.data.summary}</p>
+							<ul class="tags">
+								{project.data.stack.map((tech) => (
+									<li class="tag">{tech}</li>
+								))}
+							</ul>
+							<span class="work-card__cta">Read the case →</span>
+						</div>
+					</a>
+				))
+			}
+		</div>
+	</section>
+
+	<!-- ================= EXPERIENCE ================= -->
+	<section class="section wrap" id="experience" data-reveal>
+		<div class="section__head">
+			<span class="section__index">03 / Where I've worked</span>
+			<h2 class="section__title">Experience</h2>
+		</div>
+
+		<div class="entries">
+			<article class="entry">
+				<p class="entry__when">Mar — May 2026</p>
+				<div>
+					<h3 class="entry__role">Cloud Developer — Internship</h3>
+					<p class="entry__org">Axazure S.L. · Madrid</p>
+					<ul class="entry__points">
+						<li>
+							Automated Azure workloads so recurring operations run without manual
+							intervention.
+						</li>
+						<li>
+							Developed integrations for Dynamics 365 and Customer Insights in a
+							consultancy delivering to production clients.
+						</li>
+					</ul>
+					<ul class="tags">
+						<li class="tag tag--key">Microsoft Azure</li>
+						<li class="tag">Dynamics 365</li>
+						<li class="tag">Customer Insights</li>
+						<li class="tag">Automation</li>
+					</ul>
+				</div>
+			</article>
+
+			<article class="entry">
+				<p class="entry__when">Mar — Jun 2025</p>
+				<div>
+					<h3 class="entry__role">Software Developer — Internship</h3>
+					<p class="entry__org">Skiller Academy S.L. · Madrid</p>
+					<ul class="entry__points">
+						<li>Native Android development: implemented app features in Kotlin.</li>
+						<li>Worked with SDK integrations and delivery on a small product team.</li>
+					</ul>
+					<ul class="tags">
+						<li class="tag tag--key">Kotlin</li>
+						<li class="tag">Android SDK</li>
+					</ul>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<!-- ================= SKILLS ================= -->
+	<section class="section wrap" id="skills" data-reveal>
+		<div class="section__head">
+			<span class="section__index">04 / Toolbox</span>
+			<h2 class="section__title">Skills</h2>
+		</div>
+
+		<div class="skills">
+			<div class="skillset">
+				<h3>Cloud &amp; DevOps</h3>
+				<ul class="tags">
+					<li class="tag tag--key">Microsoft Azure</li>
+					<li class="tag">Dynamics 365</li>
+					<li class="tag">Customer Insights</li>
+					<li class="tag">GitHub Actions</li>
+					<li class="tag">Cloudflare</li>
+				</ul>
+			</div>
+			<div class="skillset">
+				<h3>Languages</h3>
+				<ul class="tags">
+					<li class="tag tag--key">Java</li>
+					<li class="tag">Kotlin</li>
+					<li class="tag">C++</li>
+					<li class="tag">Python</li>
+					<li class="tag">Swift</li>
+					<li class="tag">SQL / MySQL</li>
+				</ul>
+			</div>
+			<div class="skillset">
+				<h3>Mobile</h3>
+				<ul class="tags">
+					<li class="tag">Android SDK</li>
+					<li class="tag">iOS · Swift</li>
+				</ul>
+			</div>
+			<div class="skillset">
+				<h3>Embedded &amp; systems</h3>
+				<ul class="tags">
+					<li class="tag">ESP32</li>
+					<li class="tag">FSM / ISR design</li>
+					<li class="tag">Sensor integration</li>
+				</ul>
+			</div>
+			<div class="skillset">
+				<h3>AI-assisted delivery</h3>
+				<ul class="tags">
+					<li class="tag tag--key">Prompt engineering</li>
+					<li class="tag">Code auditing / QA</li>
+					<li class="tag">Rapid prototyping</li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<!-- ================= EDUCATION & CERTIFICATIONS ================= -->
+	<section class="section wrap" id="education" data-reveal>
+		<div class="section__head">
+			<span class="section__index">05 / Background</span>
+			<h2 class="section__title">Education</h2>
+		</div>
+
+		<div class="entries">
+			<article class="entry">
+				<p class="entry__when">2026 —</p>
+				<div>
+					<h3 class="entry__role">BSc in Software Engineering</h3>
+					<p class="entry__org">University of Southern Denmark (SDU) · Vejle</p>
+				</div>
+			</article>
+			<article class="entry">
+				<p class="entry__when">2023 — 2025</p>
+				<div>
+					<h3 class="entry__role">Higher Degree — Multi-platform Application Development</h3>
+					<p class="entry__org">Madrid</p>
+				</div>
+			</article>
+		</div>
+
+		<div class="section__head" style="margin-top: var(--space-block);">
+			<span class="section__index">05.1 / Certifications</span>
+			<h2 class="section__title" style="font-size: var(--text-h3);">Certifications</h2>
+		</div>
+
+		<div class="certs">
+			<div class="cert cert--badge">
+				<span class="cert__name">Azure Fundamentals (AZ-900)</span>
+				<span class="cert__issuer">Microsoft · 2026</span>
+			</div>
+			<div class="cert">
+				<span class="cert__name">Python Essentials 1</span>
+				<span class="cert__issuer">Cisco</span>
+			</div>
+			<div class="cert">
+				<span class="cert__name">Python for Data Science &amp; AI</span>
+				<span class="cert__issuer">IBM · Coursera</span>
+			</div>
+		</div>
+	</section>
+</Base>

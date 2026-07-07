@@ -1,0 +1,81 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Cover from '../../components/Cover.astro';
+
+export async function getStaticPaths() {
+	const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+	return work.map((entry, i) => ({
+		params: { slug: entry.id },
+		props: {
+			entry,
+			prev: work[i - 1] ?? work[work.length - 1],
+			next: work[i + 1] ?? work[0],
+		},
+	}));
+}
+
+const { entry, prev, next } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<Base title={`${entry.data.title} — Javier Arévalo`} description={entry.data.summary}>
+	<article class="wrap">
+		<header class="case-header">
+			<a class="case-header__back" href="/#work">← All work</a>
+			<h1 class="case-header__title">{entry.data.title}</h1>
+			<p class="case-header__tagline">{entry.data.tagline}</p>
+
+			<dl class="case-facts">
+				<div>
+					<dt>Role</dt>
+					<dd>{entry.data.role}</dd>
+				</div>
+				<div>
+					<dt>Year</dt>
+					<dd>{entry.data.year}</dd>
+				</div>
+				<div>
+					<dt>Stack</dt>
+					<dd>{entry.data.stack.join(' · ')}</dd>
+				</div>
+			</dl>
+		</header>
+
+		<!--
+			Media slot.
+			Today: the editorial SVG cover. To swap in an interactive 3D model
+			(e.g. the desk as a .glb), replace <Cover/> with Google's
+			<model-viewer> web component — no build change needed:
+
+			  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+			  <model-viewer src="/models/desk.glb" alt="3D model of the smart desk"
+			      camera-controls auto-rotate loading="lazy"
+			      style="width:100%; height:32rem;"></model-viewer>
+
+			Drop the .glb in public/models/. Gate auto-rotate behind
+			prefers-reduced-motion if it's added globally.
+		-->
+		<div class="case-media">
+			<Cover slug={entry.id} />
+		</div>
+
+		<div class="case-body">
+			<Content />
+			{
+				entry.data.linkUrl && (
+					<p>
+						<a class="btn btn--accent" href={entry.data.linkUrl} rel="noopener">
+							{entry.data.linkLabel ?? 'Visit'} <span class="arrow">→</span>
+						</a>
+					</p>
+				)
+			}
+		</div>
+
+		<nav class="case-nav" aria-label="More work">
+			<a href={`/work/${prev.id}/`}>← {prev.data.title}</a>
+			<a href={`/work/${next.id}/`}>{next.data.title} →</a>
+		</nav>
+	</article>
+</Base>
