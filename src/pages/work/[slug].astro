@@ -44,20 +44,35 @@ const { Content } = await render(entry);
 
 		<!--
 			Media slot.
-			Today: the editorial SVG cover. To swap in an interactive 3D model
-			(e.g. the desk as a .glb), replace <Cover/> with Google's
-			<model-viewer> web component — no build change needed:
+			- With `youtube: <video id>` in the entry's frontmatter, it embeds the
+			  video (privacy-friendly nocookie host, lazy-loaded).
+			- Otherwise it shows the editorial SVG cover.
+			- For an interactive 3D model (e.g. the desk as a .glb), swap in
+			  Google's <model-viewer> web component — no build change needed:
 
 			  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 			  <model-viewer src="/models/desk.glb" alt="3D model of the smart desk"
 			      camera-controls auto-rotate loading="lazy"
 			      style="width:100%; height:32rem;"></model-viewer>
 
-			Drop the .glb in public/models/. Gate auto-rotate behind
-			prefers-reduced-motion if it's added globally.
+			  Drop the .glb in public/models/. Gate auto-rotate behind
+			  prefers-reduced-motion if it's added globally.
 		-->
 		<div class="case-media">
-			<Cover slug={entry.id} />
+			{
+				entry.data.youtube ? (
+					<iframe
+						class="case-media__video"
+						src={`https://www.youtube-nocookie.com/embed/${entry.data.youtube}`}
+						title={`${entry.data.title} — video`}
+						loading="lazy"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowfullscreen
+					/>
+				) : (
+					<Cover slug={entry.id} />
+				)
+			}
 		</div>
 
 		<div class="case-body">
@@ -74,8 +89,16 @@ const { Content } = await render(entry);
 		</div>
 
 		<nav class="case-nav" aria-label="More work">
-			<a href={`/work/${prev.id}/`}>← {prev.data.title}</a>
-			<a href={`/work/${next.id}/`}>{next.data.title} →</a>
+			{
+				prev.id === next.id ? (
+					<a href={`/work/${next.id}/`}>Next case: {next.data.title} →</a>
+				) : (
+					<>
+						<a href={`/work/${prev.id}/`}>← {prev.data.title}</a>
+						<a href={`/work/${next.id}/`}>{next.data.title} →</a>
+					</>
+				)
+			}
 		</nav>
 	</article>
 </Base>

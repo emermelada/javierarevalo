@@ -61,11 +61,12 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 				intervention — and I treat AI as a delivery multiplier, directing it with a
 				project-lead mindset rather than typing everything myself.
 			</p>
-			<p class="about__aside">
-				Currently deepening distributed systems: from Sep 2026 I'll be studying a
-				BSc in Software Engineering at the University of Southern Denmark (SDU),
-				Vejle.
-			</p>
+			<aside class="next-card">
+				<span class="next-card__label">Next stop</span>
+				<h3 class="next-card__title">BSc Software Engineering</h3>
+				<span class="next-card__org">University of Southern Denmark · Vejle</span>
+				<span class="next-card__when">Sep 2026 →</span>
+			</aside>
 		</div>
 	</section>
 
@@ -157,49 +158,44 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 			<h2 class="section__title">Skills</h2>
 		</div>
 
-		<div class="skills">
-			<div class="skillset">
-				<h3>Cloud &amp; DevOps</h3>
-				<ul class="tags">
-					<li class="tag tag--key">Microsoft Azure</li>
-					<li class="tag">Dynamics 365</li>
-					<li class="tag">Customer Insights</li>
-					<li class="tag">GitHub Actions</li>
-					<li class="tag">Cloudflare</li>
+		<div class="skill-rows">
+			<div class="skill-row">
+				<span class="skill-row__label">Cloud &amp; DevOps</span>
+				<ul class="skill-row__items">
+					<li class="key">Microsoft Azure</li>
+					<li>Dynamics 365</li>
+					<li>Customer Insights</li>
+					<li>GitHub Actions</li>
+					<li>Cloudflare</li>
 				</ul>
 			</div>
-			<div class="skillset">
-				<h3>Languages</h3>
-				<ul class="tags">
-					<li class="tag tag--key">Java</li>
-					<li class="tag">Kotlin</li>
-					<li class="tag">C++</li>
-					<li class="tag">Python</li>
-					<li class="tag">Swift</li>
-					<li class="tag">SQL / MySQL</li>
+			<div class="skill-row">
+				<span class="skill-row__label">Languages</span>
+				<ul class="skill-row__items">
+					<li class="key">Java</li>
+					<li>Kotlin</li>
+					<li>C++</li>
+					<li>Python</li>
+					<li>Swift</li>
+					<li>SQL / MySQL</li>
 				</ul>
 			</div>
-			<div class="skillset">
-				<h3>Mobile</h3>
-				<ul class="tags">
-					<li class="tag">Android SDK</li>
-					<li class="tag">iOS · Swift</li>
+			<div class="skill-row">
+				<span class="skill-row__label">Mobile &amp; Embedded</span>
+				<ul class="skill-row__items">
+					<li>Android SDK</li>
+					<li>iOS · Swift</li>
+					<li class="key">ESP32</li>
+					<li>FSM / ISR design</li>
+					<li>Sensor integration</li>
 				</ul>
 			</div>
-			<div class="skillset">
-				<h3>Embedded &amp; systems</h3>
-				<ul class="tags">
-					<li class="tag">ESP32</li>
-					<li class="tag">FSM / ISR design</li>
-					<li class="tag">Sensor integration</li>
-				</ul>
-			</div>
-			<div class="skillset">
-				<h3>AI-assisted delivery</h3>
-				<ul class="tags">
-					<li class="tag tag--key">Prompt engineering</li>
-					<li class="tag">Code auditing / QA</li>
-					<li class="tag">Rapid prototyping</li>
+			<div class="skill-row">
+				<span class="skill-row__label">AI-assisted delivery</span>
+				<ul class="skill-row__items">
+					<li class="key">Prompt engineering</li>
+					<li>Code auditing / QA</li>
+					<li>Rapid prototyping</li>
 				</ul>
 			</div>
 		</div>
