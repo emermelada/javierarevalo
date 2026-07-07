@@ -315,32 +315,54 @@
 		object-fit: cover;
 	}
 
-	.facts {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem 2.5rem;
+	/* Editorial fact columns: legible uppercase label over a bold value,
+	   thin dividers between columns. Shared by the hero and case pages. */
+	.facts,
+	.case-facts {
+		display: grid;
+		gap: 1.25rem 1.5rem;
 		margin: var(--space-block) 0 0;
-		padding-top: 1rem;
+		padding-top: 1.5rem;
 		border-top: 1px solid var(--hairline);
-		font-family: var(--font-mono);
-		font-size: var(--text-small);
 	}
 
-	.facts div {
-		display: flex;
-		gap: 0.6rem;
+	.facts {
+		grid-template-columns: repeat(4, 1fr);
 	}
 
-	.facts dt {
+	.case-facts {
+		grid-template-columns: repeat(3, 1fr);
+		margin: 0 0 var(--space-block);
+	}
+
+	.facts div,
+	.case-facts div {
+		display: grid;
+		gap: 0.35rem;
+		align-content: start;
+		padding-left: 1.25rem;
+		border-left: 1px solid var(--hairline);
+	}
+
+	.facts div:first-child,
+	.case-facts div:first-child {
+		padding-left: 0;
+		border-left: 0;
+	}
+
+	.facts dt,
+	.case-facts dt {
+		font-size: 0.8rem;
+		font-weight: 600;
+		letter-spacing: 0.09em;
+		text-transform: uppercase;
 		color: var(--muted);
 	}
 
-	.facts dt::after {
-		content: ' /';
-	}
-
-	.facts dd {
+	.facts dd,
+	.case-facts dd {
 		margin: 0;
+		font-weight: 600;
 	}
 
 	.facts .status-dot {
@@ -495,49 +517,23 @@
 		color: var(--accent);
 	}
 
-	/* ---------- Skills: full-width editorial rows ---------- */
-	.skill-row {
+	/* ---------- Skills: sober CV-style columns ---------- */
+	.skill-cols {
 		display: grid;
-		grid-template-columns: 12rem 1fr;
-		gap: 1rem 1.5rem;
-		align-items: baseline;
-		padding-block: 1.6rem;
-		border-top: 1px solid var(--hairline);
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--space-block) clamp(2.5rem, 5vw, 5rem);
 	}
 
-	.skill-row:last-child {
-		border-bottom: 1px solid var(--hairline);
+	.skill-group h3 {
+		font-size: 1.05rem;
+		letter-spacing: 0.04em;
+		margin-bottom: 0.75rem;
 	}
 
-	.skill-row__label {
-		font-family: var(--font-mono);
-		font-size: var(--text-label);
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--muted);
-	}
-
-	.skill-row__items {
-		display: inline;
-		font-weight: 600;
-		font-size: clamp(1.15rem, 1rem + 1vw, 1.6rem);
-		line-height: 1.6;
-	}
-
-	.skill-row__items li {
-		display: inline;
-		white-space: nowrap;
-	}
-
-	.skill-row__items li:not(:last-child)::after {
-		content: ' · ';
-		color: var(--muted);
-		font-weight: 400;
-		white-space: normal;
-	}
-
-	.skill-row__items .key {
-		color: var(--accent);
+	.skill-group p {
+		margin: 0;
+		max-width: none;
+		line-height: 1.7;
 	}
 
 	/* ---------- Certifications ---------- */
@@ -717,33 +713,6 @@
 		margin-bottom: 1.5rem;
 	}
 
-	.case-facts {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem 2.5rem;
-		margin: 0 0 var(--space-block);
-		padding-top: 1rem;
-		border-top: 1px solid var(--hairline);
-		font-family: var(--font-mono);
-		font-size: var(--text-small);
-	}
-
-	.case-facts div {
-		display: flex;
-		gap: 0.6rem;
-	}
-
-	.case-facts dt {
-		color: var(--muted);
-	}
-
-	.case-facts dt::after {
-		content: ' /';
-	}
-
-	.case-facts dd {
-		margin: 0;
-	}
 
 	.case-media {
 		border: 2px solid var(--ink);
@@ -868,13 +837,32 @@
 			gap: 0.5rem;
 		}
 
-		.skill-row {
+		.skill-cols {
 			grid-template-columns: 1fr;
-			gap: 0.5rem;
+			gap: 1.75rem;
 		}
 
 		.next-card {
 			justify-self: start;
+		}
+
+		/* Facts fold to 2×2; case facts stack. Dividers follow the new rows. */
+		.facts {
+			grid-template-columns: repeat(2, 1fr);
+		}
+
+		.facts div:nth-child(odd) {
+			padding-left: 0;
+			border-left: 0;
+		}
+
+		.case-facts {
+			grid-template-columns: 1fr;
+		}
+
+		.case-facts div {
+			padding-left: 0;
+			border-left: 0;
 		}
 	}
 
