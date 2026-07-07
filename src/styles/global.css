@@ -580,6 +580,25 @@
 		color: var(--accent);
 	}
 
+	/* A cert rendered as a link (verifiable credential) */
+	a.cert {
+		text-decoration: none;
+		transition: box-shadow 0.2s ease, translate 0.2s ease;
+	}
+
+	a.cert:hover {
+		color: inherit;
+		box-shadow: 6px 6px 0 var(--accent);
+		translate: -2px -2px;
+	}
+
+	.cert__verify {
+		margin-top: 0.4rem;
+		font-size: var(--text-small);
+		font-weight: 600;
+		color: var(--accent);
+	}
+
 	/* ---------- About ---------- */
 	.about {
 		display: grid;
