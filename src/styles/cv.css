@@ -248,6 +248,15 @@ a {
 	line-height: 1.4;
 }
 
+/* Live URL for a project. Printed in full so it is readable on paper, and
+   still a real hyperlink in the PDF. */
+.cv-project__link {
+	font-family: var(--font-mono);
+	font-size: 8.2pt;
+	color: var(--accent);
+	margin-top: 1.2mm;
+}
+
 .cv-stack {
 	font-family: var(--font-mono);
 	font-size: 7.8pt;
