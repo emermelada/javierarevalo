@@ -92,6 +92,11 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 										<span class="cv-entry__when">{project.data.year}</span>
 									</div>
 									<p class="cv-project__line">{project.data.tagline}</p>
+									{project.data.linkUrl && (
+										<p class="cv-project__link">
+											<a href={project.data.linkUrl}>{project.data.linkLabel ?? project.data.linkUrl} →</a>
+										</p>
+									)}
 									<p class="cv-stack">{project.data.stack.join(' · ')}</p>
 								</article>
 							))
