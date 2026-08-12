@@ -2,12 +2,11 @@
 /**
  * Home page — the whole CV in one scroll.
  *
- * Everything except the project case studies is authored directly in
- * this file (hero, about, experience, skills, education, certifications);
- * there is deliberately no CMS or data file for content that changes a
- * few times a year. Work cards are generated from the `work` content
- * collection, ordered by their `order` frontmatter, so adding a markdown
- * file under src/content/work/ is enough to get a new card + case page.
+ * Content comes from two places and only two: `src/data/cv.ts` (profile,
+ * experience, skills, education, certifications — shared with the printable
+ * /cv/ page) and the `work` content collection (one markdown file per case
+ * study, ordered by its `order` frontmatter). Adding a file under
+ * src/content/work/ is enough to get a new card + case page.
  *
  * The contact section lives in the Base layout (it doubles as the footer
  * on every page).
@@ -15,13 +14,15 @@
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Cover from '../components/Cover.astro';
+import { about, certs, education, experience, facts, nextStop, pitch, skills } from '../data/cv';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const [lead, ...rest] = pitch;
 ---
 
 <Base
 	title="Javier Arévalo — Software Developer · Cloud & DevOps"
-	description="Javier Arévalo — Software Developer focused on Cloud & DevOps. Microsoft Azure, infrastructure automation and system integration in production environments."
+	description="Javier Arévalo — developer based in Madrid. C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads. Kotlin and Android before that."
 >
 	<!-- ================= HERO ================= -->
 	<section class="hero wrap">
@@ -32,32 +33,21 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		</h1>
 
 		<div class="hero__grid">
-			<p class="hero__pitch">
-				I build and automate <strong>cloud infrastructure</strong> — Microsoft Azure,
-				system integration and automation in real production environments.
-			</p>
+			<p class="hero__pitch"><strong>{lead}</strong> {rest.join(' ')}</p>
 			<figure class="hero__portrait">
 				<img src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
 			</figure>
 		</div>
 
 		<dl class="facts">
-			<div>
-				<dt>Based in</dt>
-				<dd>Madrid, Spain</dd>
-			</div>
-			<div>
-				<dt>Languages</dt>
-				<dd>English C1 · Spanish native</dd>
-			</div>
-			<div>
-				<dt>Focus</dt>
-				<dd>Cloud · DevOps · Distributed systems</dd>
-			</div>
-			<div>
-				<dt>Status</dt>
-				<dd><span class="status-dot">●</span> Open to opportunities</dd>
-			</div>
+			{
+				facts.map((fact) => (
+					<div>
+						<dt>{fact.label}</dt>
+						<dd>{fact.dot && <span class="status-dot">● </span>}{fact.value}</dd>
+					</div>
+				))
+			}
 		</dl>
 	</section>
 
@@ -68,17 +58,12 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 			<h2 class="section__title">About</h2>
 		</div>
 		<div class="about">
-			<p class="about__lede">
-				Software developer focused on cloud infrastructure. I work with Microsoft
-				Azure and Dynamics 365, automating workloads so systems run without manual
-				intervention — and I treat AI as a delivery multiplier, directing it with a
-				project-lead mindset rather than typing everything myself.
-			</p>
+			<p class="about__lede">{about}</p>
 			<aside class="next-card">
-				<span class="next-card__label">Next stop</span>
-				<h3 class="next-card__title">BSc Computer Science</h3>
-				<span class="next-card__org">University of Southern Denmark · Vejle</span>
-				<span class="next-card__when">Sep 2026 →</span>
+				<span class="next-card__label">{nextStop.label}</span>
+				<h3 class="next-card__title">{nextStop.title}</h3>
+				<span class="next-card__org">{nextStop.org}</span>
+				<span class="next-card__when">{nextStop.when}</span>
 			</aside>
 		</div>
 	</section>
@@ -122,45 +107,25 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		</div>
 
 		<div class="entries">
-			<article class="entry">
-				<p class="entry__when">Mar — May 2026</p>
-				<div>
-					<h3 class="entry__role">Cloud Developer — Internship</h3>
-					<p class="entry__org">Axazure S.L. · Madrid</p>
-					<ul class="entry__points">
-						<li>
-							Automated Azure workloads so recurring operations run without manual
-							intervention.
-						</li>
-						<li>
-							Developed integrations for Dynamics 365 and Customer Insights in a
-							consultancy delivering to production clients.
-						</li>
-					</ul>
-					<ul class="tags">
-						<li class="tag tag--key">Microsoft Azure</li>
-						<li class="tag">Dynamics 365</li>
-						<li class="tag">Customer Insights</li>
-						<li class="tag">Automation</li>
-					</ul>
-				</div>
-			</article>
-
-			<article class="entry">
-				<p class="entry__when">Mar — Jun 2025</p>
-				<div>
-					<h3 class="entry__role">Software Developer — Internship</h3>
-					<p class="entry__org">Skiller Academy S.L. · Madrid</p>
-					<ul class="entry__points">
-						<li>Native Android development: implemented app features in Kotlin.</li>
-						<li>Worked with SDK integrations and delivery on a small product team.</li>
-					</ul>
-					<ul class="tags">
-						<li class="tag tag--key">Kotlin</li>
-						<li class="tag">Android SDK</li>
-					</ul>
-				</div>
-			</article>
+			{
+				experience.map((job) => (
+					<article class="entry">
+						<p class="entry__when">{job.when}</p>
+						<div>
+							<h3 class="entry__role">{job.role}</h3>
+							<p class="entry__org">{job.org}</p>
+							<ul class="entry__points">
+								{job.points?.map((point) => <li>{point}</li>)}
+							</ul>
+							<ul class="tags">
+								{job.tags?.map((tag) => (
+									<li class={tag.key ? 'tag tag--key' : 'tag'}>{tag.label}</li>
+								))}
+							</ul>
+						</div>
+					</article>
+				))
+			}
 		</div>
 	</section>
 
@@ -172,22 +137,14 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		</div>
 
 		<div class="skill-cols">
-			<div class="skill-group">
-				<h3>Cloud &amp; DevOps</h3>
-				<p>Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare</p>
-			</div>
-			<div class="skill-group">
-				<h3>Languages</h3>
-				<p>Java, Kotlin, C++, Python, Swift, SQL / MySQL</p>
-			</div>
-			<div class="skill-group">
-				<h3>Mobile &amp; Embedded</h3>
-				<p>Android SDK, iOS / Swift, ESP32, FSM / ISR design, sensor integration</p>
-			</div>
-			<div class="skill-group">
-				<h3>AI-assisted delivery</h3>
-				<p>Prompt engineering, code auditing / QA, rapid prototyping</p>
-			</div>
+			{
+				skills.map((group) => (
+					<div class="skill-group">
+						<h3>{group.title}</h3>
+						<p>{group.items}</p>
+					</div>
+				))
+			}
 		</div>
 	</section>
 
@@ -199,20 +156,17 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		</div>
 
 		<div class="entries">
-			<article class="entry">
-				<p class="entry__when">2026 —</p>
-				<div>
-					<h3 class="entry__role">BSc in Computer Science</h3>
-					<p class="entry__org">University of Southern Denmark (SDU) · Vejle</p>
-				</div>
-			</article>
-			<article class="entry">
-				<p class="entry__when">2023 — 2025</p>
-				<div>
-					<h3 class="entry__role">Higher Degree — Multi-platform Application Development</h3>
-					<p class="entry__org">Madrid</p>
-				</div>
-			</article>
+			{
+				education.map((step) => (
+					<article class="entry">
+						<p class="entry__when">{step.when}</p>
+						<div>
+							<h3 class="entry__role">{step.role}</h3>
+							<p class="entry__org">{step.org}</p>
+						</div>
+					</article>
+				))
+			}
 		</div>
 
 		<div class="section__head" style="margin-top: var(--space-block);">
@@ -221,23 +175,22 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		</div>
 
 		<div class="certs">
-			<a
-				class="cert cert--badge"
-				href="https://learn.microsoft.com/api/credentials/share/es-es/JavierArvaloHernndez-6412/EE44B11A8EEC4AF4?sharingId=2CD221F199B6E73C"
-				rel="noopener"
-			>
-				<span class="cert__name">Azure Fundamentals (AZ-900)</span>
-				<span class="cert__issuer">Microsoft · 2026</span>
-				<span class="cert__verify">Verify credential →</span>
-			</a>
-			<div class="cert">
-				<span class="cert__name">Python Essentials 1</span>
-				<span class="cert__issuer">Cisco</span>
-			</div>
-			<div class="cert">
-				<span class="cert__name">Python for Data Science &amp; AI</span>
-				<span class="cert__issuer">IBM · Coursera</span>
-			</div>
+			{
+				certs.map((cert) =>
+					cert.url ? (
+						<a class="cert cert--badge" href={cert.url} rel="noopener">
+							<span class="cert__name">{cert.name}</span>
+							<span class="cert__issuer">{cert.issuer}</span>
+							<span class="cert__verify">Verify credential →</span>
+						</a>
+					) : (
+						<div class="cert">
+							<span class="cert__name">{cert.name}</span>
+							<span class="cert__issuer">{cert.issuer}</span>
+						</div>
+					)
+				)
+			}
 		</div>
 	</section>
 </Base>

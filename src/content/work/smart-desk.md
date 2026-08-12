@@ -1,10 +1,10 @@
 ---
 title: Autonomous Smart Standing Desk
-tagline: An ESP32 controller that turns an ordinary electric desk into an autonomous, safety-aware ergonomic device.
+tagline: An ESP32 controller that makes an ordinary electric desk change height on its own, and stop if something is in the way.
 year: '2025'
 role: Personal project — hardware & firmware
 stack: [C++, ESP32, FSM & ISR, PC817 Optocouplers, VL53L0X ToF]
-summary: A cyber-physical system that intercepts a desk's control lines to drive posture changes in software — with a predictive optical safety layer.
+summary: An ESP32 wired between the desk's keypad and its motor controller, so height changes happen on a schedule instead of when I remember to press a button.
 order: 1
 # To embed the project video once it's on YouTube, uncomment and set the
 # video ID (the part after watch?v= in the URL):
