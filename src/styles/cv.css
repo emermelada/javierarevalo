@@ -1,0 +1,359 @@
+/* ============================================================
+   Printable CV — used only by src/pages/cv.astro.
+   ------------------------------------------------------------
+   Print-first: every size is in mm/pt so the A4 sheet is the
+   unit of design, and the browser view is just that same sheet
+   shown on the paper ground. Same vocabulary as the site
+   (Archivo Black, hairlines, one cobalt accent) at CV scale.
+
+   Hard constraint: the whole thing fits on ONE A4 page. If you
+   add content and it spills, shrink --cv-body/--cv-gap before
+   reaching for per-block overrides, then regenerate the PDF
+   (scripts/make-pdf.sh) and confirm with `pdfinfo`.
+   ============================================================ */
+
+:root {
+	--paper: #f4f1ea;
+	--ink: #141414;
+	--muted: #5f5b53;
+	--accent: #2b3ff2;
+	--hairline: rgba(20, 20, 20, 0.22);
+
+	--font-display: 'Archivo Black', 'Archivo', sans-serif;
+	--font-body: 'Archivo', system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+	/* The two dials to turn when the sheet is one line too long. */
+	--cv-body: 10.4pt;
+	--cv-gap: 6mm;
+}
+
+@page {
+	size: A4;
+	margin: 11mm 12mm;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-body);
+	font-size: var(--cv-body);
+	line-height: 1.42;
+	-webkit-font-smoothing: antialiased;
+	/* Keep the cobalt rules and labels when printing to PDF. */
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact;
+}
+
+h1,
+h2,
+h3 {
+	margin: 0;
+	font-weight: 400;
+}
+
+p {
+	margin: 0;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+/* ---------- The sheet ---------- */
+.sheet {
+	width: 210mm;
+	min-height: 297mm;
+	padding: 11mm 12mm;
+	margin: 10mm auto;
+	background: #fff;
+	box-shadow: 0 2mm 8mm rgba(20, 20, 20, 0.18);
+}
+
+/* ---------- Header: photo · identity · contact ---------- */
+.cv-head {
+	display: grid;
+	grid-template-columns: auto 1fr auto;
+	gap: 6mm;
+	align-items: start;
+	border-bottom: 0.7mm solid var(--ink);
+	padding-bottom: 4mm;
+}
+
+/* Height is set explicitly: the <img height> attribute is a presentational
+   hint that would otherwise stretch the portrait to 99mm on print. */
+.cv-photo {
+	width: 29mm;
+	height: 36mm;
+	object-fit: cover;
+	object-position: center 22%;
+	display: block;
+	border: 0.3mm solid var(--ink);
+}
+
+.cv-name {
+	font-family: var(--font-display);
+	font-size: 23pt;
+	line-height: 0.95;
+	letter-spacing: -0.02em;
+	text-transform: uppercase;
+}
+
+.cv-name .dot {
+	color: var(--accent);
+}
+
+.cv-role {
+	font-family: var(--font-mono);
+	font-size: 8.2pt;
+	letter-spacing: 0.09em;
+	text-transform: uppercase;
+	color: var(--muted);
+	margin-top: 1.6mm;
+}
+
+.cv-summary {
+	margin-top: 2.6mm;
+	max-width: 92mm;
+	line-height: 1.45;
+}
+
+.cv-contact {
+	font-family: var(--font-mono);
+	font-size: 8pt;
+	line-height: 1.5;
+	text-align: right;
+	color: var(--muted);
+	display: grid;
+	gap: 0.6mm;
+	justify-items: end;
+}
+
+.cv-contact li:first-child {
+	color: var(--ink);
+	font-weight: 500;
+}
+
+.cv-contact a:hover {
+	color: var(--accent);
+}
+
+/* ---------- Two-column body ---------- */
+.cv-body {
+	display: grid;
+	grid-template-columns: 1fr 57mm;
+	gap: 8mm;
+	padding-top: var(--cv-gap);
+}
+
+.cv-section {
+	margin-bottom: var(--cv-gap);
+	break-inside: avoid;
+}
+
+.cv-section:last-child {
+	margin-bottom: 0;
+}
+
+.cv-section__title {
+	font-family: var(--font-display);
+	font-size: 9.5pt;
+	text-transform: uppercase;
+	letter-spacing: 0.13em;
+	border-top: 0.5mm solid var(--ink);
+	padding-top: 1.4mm;
+	margin-bottom: 2.6mm;
+}
+
+/* ---------- Entries (experience, projects, education) ---------- */
+.cv-entry {
+	margin-bottom: 3.6mm;
+	break-inside: avoid;
+}
+
+.cv-entry:last-child {
+	margin-bottom: 0;
+}
+
+.cv-entry__head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 4mm;
+}
+
+.cv-entry__role {
+	font-family: var(--font-body);
+	font-weight: 700;
+	font-size: 10.5pt;
+	line-height: 1.25;
+}
+
+.cv-entry__when {
+	font-family: var(--font-mono);
+	font-size: 8pt;
+	color: var(--muted);
+	white-space: nowrap;
+}
+
+.cv-entry__org {
+	font-family: var(--font-mono);
+	font-size: 8.2pt;
+	color: var(--accent);
+	margin: 0.8mm 0 1.6mm;
+}
+
+/* Education blocks stack the date under the org instead of beside the role. */
+.cv-entry--tight {
+	margin-bottom: 3mm;
+}
+
+.cv-entry--tight .cv-entry__role {
+	font-size: 9pt;
+}
+
+.cv-entry--tight .cv-entry__org {
+	margin-bottom: 0.6mm;
+}
+
+.cv-points li {
+	position: relative;
+	padding-left: 4.4mm;
+	margin-bottom: 1.2mm;
+	line-height: 1.4;
+}
+
+.cv-points li::before {
+	content: '—';
+	position: absolute;
+	left: 0;
+	color: var(--accent);
+}
+
+.cv-project__line {
+	line-height: 1.4;
+}
+
+.cv-stack {
+	font-family: var(--font-mono);
+	font-size: 7.8pt;
+	color: var(--muted);
+	margin-top: 1.4mm;
+	line-height: 1.45;
+}
+
+/* ---------- Sidebar blocks ---------- */
+.cv-skill {
+	margin-bottom: 2.6mm;
+}
+
+.cv-skill:last-child {
+	margin-bottom: 0;
+}
+
+.cv-skill__title {
+	font-family: var(--font-mono);
+	font-size: 8pt;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	margin-bottom: 0.5mm;
+}
+
+.cv-skill p {
+	font-size: 8.8pt;
+	line-height: 1.4;
+	color: var(--muted);
+}
+
+.cv-langs li {
+	display: flex;
+	justify-content: space-between;
+	gap: 3mm;
+	font-size: 9pt;
+	padding-block: 0.7mm;
+	border-bottom: 0.2mm solid var(--hairline);
+}
+
+.cv-langs li:last-child {
+	border-bottom: 0;
+}
+
+.cv-langs__level {
+	font-family: var(--font-mono);
+	font-size: 8pt;
+	color: var(--muted);
+}
+
+/* ---------- Screen-only chrome ---------- */
+.cv-back {
+	position: fixed;
+	top: 4mm;
+	left: 4mm;
+	font-family: var(--font-mono);
+	font-size: 8pt;
+	color: var(--muted);
+	background: var(--paper);
+	padding: 1.5mm 2.5mm;
+	border: 0.3mm solid var(--hairline);
+}
+
+.cv-back:hover {
+	color: var(--accent);
+}
+
+/* Narrow screens: let the sheet be a normal responsive page. */
+@media screen and (max-width: 220mm) {
+	.sheet {
+		width: 100%;
+		min-height: 0;
+		margin: 0;
+		padding: 6mm;
+	}
+
+	.cv-head {
+		grid-template-columns: auto 1fr;
+	}
+
+	.cv-contact {
+		grid-column: 1 / -1;
+		text-align: left;
+		justify-items: start;
+	}
+
+	.cv-body {
+		grid-template-columns: 1fr;
+		gap: 0;
+	}
+}
+
+@media print {
+	body {
+		background: #fff;
+	}
+
+	.sheet {
+		width: auto;
+		min-height: 0;
+		margin: 0;
+		padding: 0;
+		box-shadow: none;
+	}
+
+	.cv-back {
+		display: none;
+	}
+}

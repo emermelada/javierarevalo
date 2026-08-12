@@ -918,13 +918,28 @@
 	}
 
 	/* Print: clean ink-saving CV */
+	/* Printing the site is a fallback, not the CV: the real one-page CV is the
+	   /cv/ route (src/pages/cv.astro), which is what public/cv.pdf is made
+	   from. This block only makes an accidental Ctrl+P come out readable. */
 	@media print {
+		@page {
+			size: A4;
+			margin: 14mm;
+		}
+
 		.site-header,
 		.contact__actions,
 		.work-card__cta,
 		.case-header__back,
 		.case-nav {
 			display: none !important;
+		}
+
+		.entry,
+		.work-card,
+		.cert,
+		.section__head {
+			break-inside: avoid;
 		}
 
 		body {

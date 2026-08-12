@@ -1,0 +1,159 @@
+---
+/**
+ * /cv/ — the printable CV, and the source of public/cv.pdf.
+ *
+ * Deliberately does NOT use Base.astro: no sticky header, no contact footer,
+ * no scroll-reveal JavaScript. It is one A4 sheet, laid out for paper, that
+ * happens to be readable in a browser too. Everything it shows comes from
+ * src/data/cv.ts and the `work` collection, so it can never drift from the
+ * home page.
+ *
+ * Regenerate the PDF after editing: bash scripts/make-pdf.sh
+ * The layout is tuned to fit on ONE page — check that before committing.
+ */
+import { getCollection } from 'astro:content';
+import '../styles/cv.css';
+import { about, certs, education, experience, profile, skills, spokenLanguages } from '../data/cv';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Javier Arévalo — CV</title>
+		<meta name="description" content="Printable CV for Javier Arévalo, software developer based in Madrid." />
+		<!-- The PDF is the shareable artifact; this page is just its source. -->
+		<meta name="robots" content="noindex" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+
+	<body>
+		<!-- Screen-only escape hatch; hidden in print. -->
+		<a class="cv-back" href="/">← javierarevalo</a>
+
+		<article class="sheet">
+			<header class="cv-head">
+				<img class="cv-photo" src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
+
+				<div class="cv-id">
+					<h1 class="cv-name">Javier Arévalo<span class="dot">.</span></h1>
+					<p class="cv-role">{profile.role}</p>
+					<p class="cv-summary">{about}</p>
+				</div>
+
+				<ul class="cv-contact">
+					<li>{profile.location}</li>
+					<li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
+					<li><a href={profile.linkedin}>{profile.linkedinLabel}</a></li>
+					<li><a href={profile.github}>{profile.githubLabel}</a></li>
+					<li><a href={profile.site}>{profile.siteLabel}</a></li>
+				</ul>
+			</header>
+
+			<div class="cv-body">
+				<main class="cv-main">
+					<section class="cv-section">
+						<h2 class="cv-section__title">Experience</h2>
+						{
+							experience.map((job) => (
+								<article class="cv-entry">
+									<div class="cv-entry__head">
+										<h3 class="cv-entry__role">{job.role}</h3>
+										<span class="cv-entry__when">{job.when}</span>
+									</div>
+									<p class="cv-entry__org">{job.org}</p>
+									<ul class="cv-points">
+										{job.points?.map((point) => <li>{point}</li>)}
+									</ul>
+									{job.tags && (
+										<p class="cv-stack">{job.tags.map((tag) => tag.label).join(' · ')}</p>
+									)}
+								</article>
+							))
+						}
+					</section>
+
+					<section class="cv-section">
+						<h2 class="cv-section__title">Projects</h2>
+						{
+							work.map((project) => (
+								<article class="cv-entry">
+									<div class="cv-entry__head">
+										<h3 class="cv-entry__role">{project.data.title}</h3>
+										<span class="cv-entry__when">{project.data.year}</span>
+									</div>
+									<p class="cv-project__line">{project.data.tagline}</p>
+									<p class="cv-stack">{project.data.stack.join(' · ')}</p>
+								</article>
+							))
+						}
+					</section>
+				</main>
+
+				<aside class="cv-side">
+					<section class="cv-section">
+						<h2 class="cv-section__title">Education</h2>
+						{
+							education.map((step) => (
+								<article class="cv-entry cv-entry--tight">
+									<h3 class="cv-entry__role">{step.role}</h3>
+									<p class="cv-entry__org">{step.org}</p>
+									<span class="cv-entry__when">{step.when}</span>
+								</article>
+							))
+						}
+					</section>
+
+					<section class="cv-section">
+						<h2 class="cv-section__title">Skills</h2>
+						{
+							skills.map((group) => (
+								<div class="cv-skill">
+									<h3 class="cv-skill__title">{group.title}</h3>
+									<p>{group.items}</p>
+								</div>
+							))
+						}
+					</section>
+
+					<section class="cv-section">
+						<h2 class="cv-section__title">Certifications</h2>
+						{
+							certs.map((cert) => (
+								<div class="cv-skill">
+									<h3 class="cv-skill__title">
+										{cert.url ? <a href={cert.url}>{cert.name}</a> : cert.name}
+									</h3>
+									<p>{cert.issuer}</p>
+								</div>
+							))
+						}
+					</section>
+
+					<section class="cv-section">
+						<h2 class="cv-section__title">Languages</h2>
+						<ul class="cv-langs">
+							{
+								spokenLanguages.map((lang) => (
+									<li>
+										<span>{lang.name}</span>
+										<span class="cv-langs__level">{lang.level}</span>
+									</li>
+								))
+							}
+						</ul>
+					</section>
+				</aside>
+			</div>
+		</article>
+	</body>
+</html>
