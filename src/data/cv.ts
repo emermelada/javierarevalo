@@ -62,7 +62,8 @@ export const about =
 	'Academy. Day to day that means C# against Dynamics 365, automating Azure ' +
 	'workloads, and Kotlin on Android. I use AI tools to move faster and review ' +
 	'everything they produce before it ships. I move to Denmark in September 2026 ' +
-	'for a Computer Science degree, and I am open to work until then.';
+	'for a Computer Science degree, and I am open to work alongside my studies, ' +
+	'either part-time or as an intern.';
 
 export interface Fact {
 	label: string;

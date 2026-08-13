@@ -19,7 +19,7 @@ URL="http://localhost:${PORT}/cv/"
 OUT="public/cv.pdf"
 
 BROWSER=""
-for candidate in chromium chromium-browser google-chrome google-chrome-stable brave microsoft-edge microsoft-edge-stable; do
+for candidate in chromium chromium-browser google-chrome google-chrome-stable chrome brave microsoft-edge microsoft-edge-stable msedge; do
 	if command -v "$candidate" >/dev/null 2>&1; then
 		BROWSER="$candidate"
 		break
@@ -47,13 +47,23 @@ done
 
 echo "→ Printing ${URL} with ${BROWSER}"
 PROFILE="$(mktemp -d)"
+# A Windows browser launched from Git Bash needs native paths for its file args.
+if command -v cygpath >/dev/null 2>&1; then
+	mkdir -p "$(dirname "$OUT")"
+	OUT_ARG="$(cygpath -w "$(cd "$(dirname "$OUT")" && pwd)/$(basename "$OUT")")"
+	PROFILE_ARG="$(cygpath -w "$PROFILE")"
+else
+	OUT_ARG="$OUT"
+	PROFILE_ARG="$PROFILE"
+fi
+
 "$BROWSER" \
 	--headless=new \
 	--disable-gpu \
-	--user-data-dir="$PROFILE" \
+	--user-data-dir="$PROFILE_ARG" \
 	--no-pdf-header-footer \
 	--virtual-time-budget=5000 \
-	--print-to-pdf="$OUT" \
+	--print-to-pdf="$OUT_ARG" \
 	"$URL"
 rm -rf "$PROFILE"
 
