@@ -13,11 +13,29 @@
  */
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import Cover from '../components/Cover.astro';
 import { about, certs, education, experience, facts, nextStop, pitch, skills } from '../data/cv';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const [lead, ...rest] = pitch;
+
+/**
+ * Index numbering. A normal entry takes the next whole number; an entry
+ * flagged `sub: true` hangs off the one above it as `NN.1`, which is how the
+ * desk and FocusReef read as one system without either being demoted — same
+ * row, same columns, same type size, adjacent numbers.
+ */
+let major = 0;
+let minor = 0;
+const numbered = work.map((project) => {
+	if (project.data.sub) {
+		minor += 1;
+	} else {
+		major += 1;
+		minor = 0;
+	}
+	const pad = String(major).padStart(2, '0');
+	return { project, number: project.data.sub ? `${pad}.${minor}` : pad };
+});
 ---
 
 <Base
@@ -75,28 +93,52 @@ const [lead, ...rest] = pitch;
 			<h2 class="section__title">Work</h2>
 		</div>
 
-		<div class="work-list">
+		<ol class="work-index">
 			{
-				work.map((project, i) => (
-					<a class="work-card" href={`/work/${project.id}/`} data-reveal>
-						<div class="work-card__media">
-							<Cover slug={project.id} />
-						</div>
-						<div class="work-card__body">
-							<span class="work-card__index">{String(i + 1).padStart(2, '0')} — {project.data.year}</span>
-							<h3 class="work-card__title">{project.data.title}</h3>
-							<p class="work-card__summary">{project.data.summary}</p>
+				numbered.map(({ project, number }) => (
+					<li class={project.data.sub ? 'work-row work-row--sub' : 'work-row'} data-reveal>
+						<p class="work-row__num" aria-hidden="true">{number}</p>
+
+						<div class="work-row__main">
+							<h3 class="work-row__title">
+								<a href={`/work/${project.id}/`}>{project.data.title}</a>
+							</h3>
+							<p class="work-row__tagline">{project.data.tagline}</p>
+							{project.data.related && (
+								<p class="work-row__relation">
+									{project.data.related.prefix}{' '}
+									<a href={`/work/${project.data.related.slug}/`}>{project.data.related.name}</a>
+								</p>
+							)}
 							<ul class="tags">
 								{project.data.stack.map((tech) => (
 									<li class="tag">{tech}</li>
 								))}
 							</ul>
-							<span class="work-card__cta">Read the case →</span>
 						</div>
-					</a>
+
+						<div class="work-row__meta">
+							<p class="work-row__year">{project.data.year}</p>
+							<p class={`status status--${project.data.status}`}>
+								<span class="status__dot" aria-hidden="true">●</span>
+								{project.data.status === 'shipped' ? 'Shipped' : 'In progress'}
+							</p>
+							{project.data.statusNote && <p class="work-row__note">{project.data.statusNote}</p>}
+							<ul class="work-row__links">
+								{project.data.links.map((link) => (
+									<li>
+										<a href={link.url} rel="noopener">{link.label} <span aria-hidden="true">↗</span></a>
+									</li>
+								))}
+								<li>
+									<a href={`/work/${project.id}/`}>Read the case <span aria-hidden="true">→</span></a>
+								</li>
+							</ul>
+						</div>
+					</li>
 				))
 			}
-		</div>
+		</ol>
 	</section>
 
 	<!-- ================= EXPERIENCE ================= -->

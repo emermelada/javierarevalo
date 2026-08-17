@@ -49,6 +49,16 @@ const { Content } = await render(entry);
 					<dt>Stack</dt>
 					<dd>{entry.data.stack.join(' · ')}</dd>
 				</div>
+				<div>
+					<dt>Status</dt>
+					<dd>
+						<span class={`status status--${entry.data.status}`}>
+							<span class="status__dot" aria-hidden="true">●</span>
+							{entry.data.status === 'shipped' ? 'Shipped' : 'In progress'}
+						</span>
+						{entry.data.statusNote && <span class="case-facts__note">{entry.data.statusNote}</span>}
+					</dd>
+				</div>
 			</dl>
 		</header>
 
@@ -88,11 +98,13 @@ const { Content } = await render(entry);
 		<div class="case-body">
 			<Content />
 			{
-				entry.data.linkUrl && (
-					<p>
-						<a class="btn btn--accent" href={entry.data.linkUrl} rel="noopener">
-							{entry.data.linkLabel ?? 'Visit'} <span class="arrow">→</span>
-						</a>
+				entry.data.links.length > 0 && (
+					<p class="case-links">
+						{entry.data.links.map((link) => (
+							<a class="btn btn--accent" href={link.url} rel="noopener">
+								{link.label} <span class="arrow">→</span>
+							</a>
+						))}
 					</p>
 				)
 			}

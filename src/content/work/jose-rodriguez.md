@@ -5,9 +5,12 @@ year: '2026'
 role: Client work — build, review & deployment
 stack: [AI-assisted build, GitHub Pages, Cloudflare, Code review]
 summary: I wrote the brief, generated the UI with an AI assistant, reviewed and fixed the code myself, and handled the domain and deployment.
-order: 3
-linkLabel: joserodriguez.mov
-linkUrl: https://joserodriguez.mov
+order: 4
+status: shipped
+statusNote: Live since 2026
+links:
+  - label: joserodriguez.mov
+    url: https://joserodriguez.mov
 ---
 
 ## Problem
