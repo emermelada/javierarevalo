@@ -357,7 +357,8 @@
 	}
 
 	.facts div:first-child,
-	.case-facts div:first-child {
+	.case-facts div:first-child,
+	.case-facts div:nth-child(3n + 1) {
 		padding-left: 0;
 		border-left: 0;
 	}
@@ -381,76 +382,169 @@
 		color: var(--accent);
 	}
 
-	/* ---------- Work cards ---------- */
-	.work-list {
+	/* ---------- Work index ---------- */
+	/*
+	 * Projects are a numbered editorial index, not cards: same hairline rhythm
+	 * as .entry in Experience/Education, so the page has one list system
+	 * instead of two. Status is a column, not a badge.
+	 */
+	.work-index {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.work-row {
 		display: grid;
-		gap: var(--space-block);
+		grid-template-columns: 6rem minmax(0, 1fr) 15rem;
+		gap: clamp(1rem, 3vw, 2.5rem);
+		padding-block: clamp(1.75rem, 4vw, 2.75rem);
+		border-top: 1px solid var(--hairline);
 	}
 
-	.work-card {
-		display: grid;
-		grid-template-columns: 1.1fr 1fr;
-		gap: clamp(1.5rem, 4vw, 3rem);
-		align-items: center;
-		text-decoration: none;
-		border: 2px solid var(--ink);
-		background: var(--paper);
-		transition: box-shadow 0.2s ease, translate 0.2s ease;
+	.work-row:last-child {
+		border-bottom: 1px solid var(--hairline);
 	}
 
-	.work-card:hover {
-		color: inherit;
-		box-shadow: 8px 8px 0 var(--accent);
-		translate: -2px -2px;
+	/* Sub-entry: tied to the row above by a dashed rule and an accent bar on
+	   the number. Type size is deliberately unchanged — adjacency, not rank. */
+	.work-row--sub {
+		border-top-style: dashed;
 	}
 
-	.work-card:nth-child(even) .work-card__media {
-		order: 2;
+	.work-row--sub .work-row__num {
+		padding-inline-start: 1.25rem;
+		border-inline-start: 2px solid var(--accent);
 	}
 
-	.work-card__media {
-		align-self: stretch;
-		background: var(--paper-deep);
-		border-inline-end: 2px solid var(--ink);
-		min-height: 14rem;
-	}
-
-	.work-card:nth-child(even) .work-card__media {
-		border-inline-end: 0;
-		border-inline-start: 2px solid var(--ink);
-	}
-
-	.work-card__media svg {
-		width: 100%;
-		height: 100%;
-		display: block;
-	}
-
-	.work-card__body {
-		padding: clamp(1.25rem, 3vw, 2.25rem);
-	}
-
-	.work-card__index {
-		font-family: var(--font-mono);
-		font-size: var(--text-label);
-		color: var(--accent);
-		letter-spacing: 0.15em;
-	}
-
-	.work-card__title {
+	.work-row__num {
+		font-family: var(--font-display);
 		font-size: var(--text-h3);
-		margin-block: 0.5rem 0.75rem;
+		line-height: 1;
+		color: var(--accent);
+		margin: 0;
 	}
 
-	.work-card__summary {
+	.work-row__title {
+		font-size: var(--text-h3);
+		margin: 0 0 0.5rem;
+	}
+
+	.work-row__title a {
+		color: inherit;
+		text-decoration: none;
+		background-image: linear-gradient(var(--accent), var(--accent));
+		background-size: 0% 2px;
+		background-position: 0 100%;
+		background-repeat: no-repeat;
+		transition: background-size 0.2s ease;
+	}
+
+	.work-row__title a:hover,
+	.work-row__title a:focus-visible {
+		color: var(--accent);
+		background-size: 100% 2px;
+	}
+
+	.work-row__tagline {
 		color: var(--muted);
-		margin-bottom: 1rem;
+		margin: 0 0 0.75rem;
+		max-width: 46ch;
 	}
 
-	.work-card__cta {
+	.work-row__relation {
 		font-family: var(--font-mono);
 		font-size: var(--text-small);
+		color: var(--muted);
+		margin: 0 0 0.75rem;
+	}
+
+	.work-row__meta {
+		font-family: var(--font-mono);
+		font-size: var(--text-small);
+	}
+
+	.work-row__year {
+		color: var(--muted);
+		margin: 0 0 0.35rem;
+	}
+
+	.work-row__note {
+		color: var(--muted);
+		font-size: var(--text-label);
+		line-height: 1.5;
+		margin: 0.35rem 0 0;
+		max-width: 28ch;
+	}
+
+	.work-row__links {
+		list-style: none;
+		margin: 0.9rem 0 0;
+		padding: 0;
+		display: grid;
+		gap: 0.3rem;
+		justify-items: start;
+	}
+
+	/* ---------- Status ---------- */
+	/*
+	 * Never colour alone: the word carries the meaning, the dot and the hue
+	 * only reinforce it, so it survives greyscale and colour blindness.
+	 */
+	.status {
+		display: inline-flex;
+		align-items: baseline;
+		gap: 0.4rem;
+		font-family: var(--font-mono);
+		font-size: var(--text-label);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		margin: 0;
+	}
+
+	.status--shipped {
+		color: var(--ink);
+	}
+
+	.status--in-progress {
 		color: var(--accent);
+	}
+
+	.status__dot {
+		font-size: 0.7em;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.status--in-progress .status__dot {
+			animation: status-pulse 2.4s ease-in-out infinite;
+		}
+	}
+
+	@keyframes status-pulse {
+		0%,
+		100% {
+			opacity: 1;
+		}
+		50% {
+			opacity: 0.35;
+		}
+	}
+
+
+	/* Case page: several destinations (two repos, a live site) sit as a
+	   wrapping row of buttons rather than a single call to action. */
+	.case-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+
+	.case-facts__note {
+		display: block;
+		color: var(--muted);
+		font-size: var(--text-label);
+		line-height: 1.5;
+		margin-top: 0.35rem;
 	}
 
 	/* ---------- Tags ---------- */
@@ -467,6 +561,7 @@
 		border: 1px solid var(--hairline);
 		padding: 0.2rem 0.6rem;
 		white-space: nowrap;
+		font-variant-ligatures: none;
 	}
 
 	.tag--key {
@@ -851,16 +946,25 @@
 			justify-self: start;
 		}
 
-		.work-card {
+		/* Index rows: number sits inline above the title, meta drops below
+		   the body instead of holding a third column. */
+		.work-row {
 			grid-template-columns: 1fr;
+			gap: 0.75rem;
 		}
 
-		.work-card__media,
-		.work-card:nth-child(even) .work-card__media {
-			order: 0;
-			border-inline: 0;
-			border-bottom: 2px solid var(--ink);
-			min-height: 11rem;
+		.work-row--sub {
+			padding-inline-start: 1rem;
+			border-inline-start: 2px solid var(--accent);
+		}
+
+		.work-row--sub .work-row__num {
+			padding-inline-start: 0;
+			border-inline-start: 0;
+		}
+
+		.work-row__note {
+			max-width: none;
 		}
 
 		.entry {
@@ -929,14 +1033,14 @@
 
 		.site-header,
 		.contact__actions,
-		.work-card__cta,
+		.work-row__links,
 		.case-header__back,
 		.case-nav {
 			display: none !important;
 		}
 
 		.entry,
-		.work-card,
+		.work-row,
 		.cert,
 		.section__head {
 			break-inside: avoid;
