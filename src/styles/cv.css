@@ -25,7 +25,7 @@
 
 	/* The two dials to turn when the sheet is one line too long. */
 	--cv-body: 10.4pt;
-	--cv-gap: 6mm;
+	--cv-gap: 4.6mm;
 }
 
 @page {
@@ -254,7 +254,36 @@ a {
 	font-family: var(--font-mono);
 	font-size: 8.2pt;
 	color: var(--accent);
+	margin-top: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 3mm;
+	white-space: nowrap;
+}
+
+/*
+ * Stack and links share one line — the CV is a single page, and the
+ * projects section is where the lines run out first.
+ */
+.cv-project__foot {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 0 4mm;
 	margin-top: 1.2mm;
+}
+
+.cv-project__foot .cv-stack {
+	margin-top: 0;
+}
+
+/*
+ * Only unfinished projects carry a flag: "shipped" on a CV is noise,
+ * "in progress" is the thing a reader would otherwise assume wrongly.
+ */
+.cv-project__flag {
+	color: var(--accent);
 }
 
 .cv-stack {

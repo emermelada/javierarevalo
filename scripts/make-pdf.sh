@@ -26,6 +26,19 @@ for candidate in chromium chromium-browser google-chrome google-chrome-stable ch
 	fi
 done
 
+# Windows installs Chrome/Edge outside PATH, so probe the standard locations too.
+if [ -z "$BROWSER" ]; then
+	PF="${PROGRAMFILES:-/c/Program Files}"
+	PFX86="${PROGRAMFILES_X86:-/c/Program Files (x86)}"
+	LAD="${LOCALAPPDATA:-$HOME/AppData/Local}"
+	for candidate in "$PF/Google/Chrome/Application/chrome.exe" "$LAD/Google/Chrome/Application/chrome.exe" "$PFX86/Google/Chrome/Application/chrome.exe" "$PFX86/Microsoft/Edge/Application/msedge.exe" "$PF/Microsoft/Edge/Application/msedge.exe"; do
+		if [ -x "$candidate" ]; then
+			BROWSER="$candidate"
+			break
+		fi
+	done
+fi
+
 if [ -z "$BROWSER" ]; then
 	echo "No Chromium-family browser found (tried chromium, google-chrome, brave, msedge)." >&2
 	exit 1
@@ -35,7 +48,7 @@ echo "→ Building site"
 npm run build
 
 echo "→ Serving dist/ on port ${PORT}"
-npm run preview -- --port "$PORT" >/tmp/cv-preview.log 2>&1 &
+npm run preview -- --port "$PORT" >"${TMPDIR:-/tmp}/cv-preview.log" 2>&1 &
 PREVIEW_PID=$!
 trap 'kill "$PREVIEW_PID" 2>/dev/null || true' EXIT
 
