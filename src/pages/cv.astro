@@ -89,15 +89,24 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 								<article class="cv-entry">
 									<div class="cv-entry__head">
 										<h3 class="cv-entry__role">{project.data.title}</h3>
-										<span class="cv-entry__when">{project.data.year}</span>
+										<span class="cv-entry__when">
+											{project.data.year}
+											{project.data.status === 'in-progress' && (
+												<span class="cv-project__flag"> · In progress</span>
+											)}
+										</span>
 									</div>
 									<p class="cv-project__line">{project.data.tagline}</p>
-									{project.data.linkUrl && (
-										<p class="cv-project__link">
-											<a href={project.data.linkUrl}>{project.data.linkLabel ?? project.data.linkUrl} →</a>
-										</p>
-									)}
-									<p class="cv-stack">{project.data.stack.join(' · ')}</p>
+									<div class="cv-project__foot">
+										<p class="cv-stack">{project.data.stack.join(' · ')}</p>
+										{project.data.links.length > 0 && (
+											<p class="cv-project__link">
+												{project.data.links.map((link) => (
+													<a href={link.url}>{link.label} →</a>
+												))}
+											</p>
+										)}
+									</div>
 								</article>
 							))
 						}
