@@ -846,10 +846,35 @@
 		margin-bottom: var(--space-block);
 	}
 
-	.case-media svg {
+	/*
+	 * Screenshot gallery. --shots is set inline from the number of images,
+	 * so one wide capture fills the column and three phone captures sit
+	 * side by side without a separate class per case.
+	 */
+	.case-gallery {
+		display: grid;
+		grid-template-columns: repeat(var(--shots, 1), 1fr);
+		gap: 1.5rem;
+		margin-bottom: var(--space-block);
+	}
+
+	.case-shot {
+		margin: 0;
+	}
+
+	.case-shot img {
 		width: 100%;
 		height: auto;
 		display: block;
+		border: 2px solid var(--ink);
+		background: var(--paper-deep);
+	}
+
+	.case-shot figcaption {
+		margin-top: 0.6rem;
+		font-family: var(--font-mono);
+		font-size: var(--text-label);
+		color: var(--muted);
 	}
 
 	.case-media__video {
@@ -998,6 +1023,10 @@
 		.case-facts div {
 			padding-left: 0;
 			border-left: 0;
+		}
+
+		.case-gallery {
+			grid-template-columns: 1fr;
 		}
 	}
 

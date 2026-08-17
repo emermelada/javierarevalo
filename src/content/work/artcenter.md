@@ -13,6 +13,22 @@ links:
     url: https://github.com/emermelada/ArtCenter
   - label: REST API
     url: https://github.com/emermelada/artcenter_api
+gallery:
+  - src: /work/artcenter-feed.jpg
+    alt: The ArtCenter feed on a phone — a two-column grid of user artwork, each card labelled with its technique.
+    caption: Feed — paginated grid, each post tagged by technique
+    width: 560
+    height: 1141
+  - src: /work/artcenter-post-detail.jpg
+    alt: An ArtCenter post detail screen showing a charcoal portrait, its publication date, likes, save and comment controls.
+    caption: Post detail — likes, saves and comments
+    width: 560
+    height: 1141
+  - src: /work/artcenter-admin-categories.jpg
+    alt: The ArtCenter administration screen listing the categories Pintura, Escultura, Dibujo and Grabado, each with an edit control.
+    caption: Administration — categories and subcategories, admin role only
+    width: 560
+    height: 1141
 ---
 
 ## Problem
