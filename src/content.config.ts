@@ -48,6 +48,24 @@ const work = defineCollection({
 		sub: z.boolean().default(false),
 		/** YouTube video ID — when set, the case media slot embeds the video. */
 		youtube: z.string().optional(),
+		/**
+		 * Real screenshots of the thing, served from public/work/. The media
+		 * slot renders these; a project with nothing shot yet leaves the list
+		 * empty and gets no media block at all, rather than a stand-in.
+		 * Intrinsic width/height are required so the page doesn't jump while
+		 * the images load.
+		 */
+		gallery: z
+			.array(
+				z.object({
+					src: z.string(),
+					alt: z.string(),
+					caption: z.string().optional(),
+					width: z.number(),
+					height: z.number(),
+				}),
+			)
+			.default([]),
 	}),
 });
 

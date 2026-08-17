@@ -8,7 +8,6 @@
  */
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
-import Cover from '../../components/Cover.astro';
 
 export async function getStaticPaths() {
 	const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
@@ -63,24 +62,14 @@ const { Content } = await render(entry);
 		</header>
 
 		<!--
-			Media slot.
-			- With `youtube: <video id>` in the entry's frontmatter, it embeds the
-			  video (privacy-friendly nocookie host, lazy-loaded).
-			- Otherwise it shows the editorial SVG cover.
-			- For an interactive 3D model (e.g. the desk as a .glb), swap in
-			  Google's <model-viewer> web component — no build change needed:
-
-			  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
-			  <model-viewer src="/models/desk.glb" alt="3D model of the smart desk"
-			      camera-controls auto-rotate loading="lazy"
-			      style="width:100%; height:32rem;"></model-viewer>
-
-			  Drop the .glb in public/models/. Gate auto-rotate behind
-			  prefers-reduced-motion if it's added globally.
+			Media slot. Precedence: embedded video, then real screenshots, then
+			nothing. A project with no photograph yet renders no media block at
+			all — better an honest gap than a drawing standing in for hardware
+			that isn't built.
 		-->
-		<div class="case-media">
-			{
-				entry.data.youtube ? (
+		{
+			entry.data.youtube ? (
+				<div class="case-media">
 					<iframe
 						class="case-media__video"
 						src={`https://www.youtube-nocookie.com/embed/${entry.data.youtube}`}
@@ -89,11 +78,25 @@ const { Content } = await render(entry);
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen
 					/>
-				) : (
-					<Cover slug={entry.id} />
-				)
-			}
-		</div>
+				</div>
+			) : entry.data.gallery.length > 0 ? (
+				<div class="case-gallery" style={`--shots:${entry.data.gallery.length}`}>
+					{entry.data.gallery.map((shot) => (
+						<figure class="case-shot">
+							<img
+								src={shot.src}
+								alt={shot.alt}
+								width={shot.width}
+								height={shot.height}
+								loading="lazy"
+								decoding="async"
+							/>
+							{shot.caption && <figcaption>{shot.caption}</figcaption>}
+						</figure>
+					))}
+				</div>
+			) : null
+		}
 
 		<div class="case-body">
 			<Content />
