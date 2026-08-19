@@ -1,6 +1,6 @@
 ---
 /**
- * /cv/ — the printable CV, and the source of public/cv.pdf.
+ * /cv/ is the printable CV, and the source of public/cv.pdf.
  *
  * Deliberately does NOT use Base.astro: no sticky header, no contact footer,
  * no scroll-reveal JavaScript. It is one A4 sheet, laid out for paper, that
@@ -9,7 +9,7 @@
  * home page.
  *
  * Regenerate the PDF after editing: bash scripts/make-pdf.sh
- * The layout is tuned to fit on ONE page — check that before committing.
+ * The layout is tuned to fit on ONE page. Check that before committing.
  */
 import { getCollection } from 'astro:content';
 import '../styles/cv.css';
@@ -23,7 +23,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Javier Arévalo — CV</title>
+		<title>Javier Arévalo · CV</title>
 		<meta name="description" content="Printable CV for Javier Arévalo, software developer based in Madrid." />
 		<!-- The PDF is the shareable artifact; this page is just its source. -->
 		<meta name="robots" content="noindex" />

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Regenerate public/cv.pdf from the /cv/ route.
 #
-# The PDF is a build artifact of src/pages/cv.astro + src/styles/cv.css — never
+# The PDF is a build artifact of src/pages/cv.astro + src/styles/cv.css. Never
 # edit it by hand, and re-run this after any change to src/data/cv.ts.
 #
 #   bash scripts/make-pdf.sh

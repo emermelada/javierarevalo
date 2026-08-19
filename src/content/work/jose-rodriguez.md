@@ -1,8 +1,8 @@
 ---
-title: José Rodríguez — Filmmaker Portfolio
+title: José Rodríguez · Filmmaker Portfolio
 tagline: A single-page portfolio for a professional Steadicam operator, built and deployed in under 48 hours.
 year: '2026'
-role: Client work — build, review & deployment
+role: Client work · build, review & deployment
 stack: [AI-assisted build, GitHub Pages, Cloudflare, Code review]
 summary: I wrote the brief, generated the UI with an AI assistant, reviewed and fixed the code myself, and handled the domain and deployment.
 order: 4
@@ -14,21 +14,20 @@ links:
 gallery:
   - src: /work/jose-rodriguez-video.jpg
     alt: The video section of joserodriguez.mov, showing a grid of stills from the short film Amapolas over a dark background.
-    caption: Video section — stills grid, dark theme, the reel doing the talking
+    caption: The video section, a grid of stills from the short film Amapolas
     width: 1600
     height: 798
 ---
 
 ## Problem
 
-A working Steadicam operator needed a professional web presence — fast, on a
-small budget, and good enough to send to producers. Traditional agency
-timelines and pricing didn't fit; neither did a template that looked like a
-template.
+A working Steadicam operator needed a professional web presence quickly, on a
+small budget, and good enough to send to producers. Agency timelines and
+pricing didn't fit, and an off-the-shelf template would have looked like one.
 
 ## Solution
 
-I used a language model to write most of the UI, and kept the parts that decide
+I used a language model to write most of the UI and kept the parts that decide
 whether the result is any good:
 
 - Defined the content structure and the brief, then iterated on the UI with the

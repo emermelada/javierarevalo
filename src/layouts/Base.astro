@@ -1,6 +1,6 @@
 ---
 /**
- * Base layout — the single page shell shared by every route.
+ * Base layout: the single page shell shared by every route.
  *
  * Owns the document head (SEO/OG metadata, fonts, favicon), the sticky
  * site header, the contact footer, and the only client-side JavaScript
@@ -119,8 +119,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 				});
 			}
 
-			// Scroll reveal — skipped entirely under prefers-reduced-motion
-			// (CSS also gates the initial hidden state, so nothing flashes).
+			// Scroll reveal. Skipped entirely under prefers-reduced-motion;
+			// the CSS gates the initial hidden state too, so nothing flashes.
 			if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
 				const io = new IntersectionObserver(
 					(entries) => {
