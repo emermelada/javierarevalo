@@ -24,8 +24,8 @@
 	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
 	/* The two dials to turn when the sheet is one line too long. */
-	--cv-body: 10.4pt;
-	--cv-gap: 4.6mm;
+	--cv-body: 10pt;
+	--cv-gap: 3.6mm;
 }
 
 @page {
@@ -153,10 +153,13 @@ a {
 }
 
 /* ---------- Two-column body ---------- */
+/* The sidebar is the column that runs out of room first: its groups are short
+   labels over wrapping lists, so a couple of millimetres of width buy back a
+   whole line each. Widen it before shrinking --cv-body. */
 .cv-body {
 	display: grid;
-	grid-template-columns: 1fr 57mm;
-	gap: 8mm;
+	grid-template-columns: 1fr 59mm;
+	gap: 7mm;
 	padding-top: var(--cv-gap);
 }
 
