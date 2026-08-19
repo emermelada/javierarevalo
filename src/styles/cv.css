@@ -25,7 +25,7 @@
 
 	/* The two dials to turn when the sheet is one line too long. */
 	--cv-body: 10pt;
-	--cv-gap: 3.6mm;
+	--cv-gap: 3.2mm;
 }
 
 @page {
@@ -320,17 +320,24 @@ a {
 	color: var(--muted);
 }
 
-.cv-langs li {
+/* Two languages do not deserve four rows on a sheet this tight, so they run as
+   one line separated by the same middot the stack lines use. */
+.cv-langs {
 	display: flex;
-	justify-content: space-between;
-	gap: 3mm;
-	font-size: 9pt;
-	padding-block: 0.7mm;
-	border-bottom: 0.2mm solid var(--hairline);
+	flex-wrap: wrap;
+	align-items: baseline;
 }
 
-.cv-langs li:last-child {
-	border-bottom: 0;
+.cv-langs li {
+	display: flex;
+	gap: 1.4mm;
+	font-size: 9pt;
+}
+
+.cv-langs li + li::before {
+	content: '·';
+	color: var(--hairline);
+	margin-right: 1.4mm;
 }
 
 .cv-langs__level {

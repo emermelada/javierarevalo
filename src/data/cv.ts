@@ -63,7 +63,8 @@ export const about =
 	'Azure workloads, and Kotlin on Android. In September 2026 I move to Denmark ' +
 	'for a Computer Science degree, and I am looking for work alongside my studies, ' +
 	'part-time or as an intern. What I want next is cloud and platform work rather ' +
-	'than app development. Linux is where most of my own time outside work goes.';
+	'than app development. Linux is my daily driver and where most of my own time ' +
+	'outside work goes.';
 
 export interface Fact {
 	label: string;
@@ -137,12 +138,12 @@ export const skills = [
 		title: 'Cloud & Microsoft',
 		items: 'Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare',
 	},
-	{ title: 'Languages', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C# / .NET' },
+	{ title: 'Programming', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C# / .NET' },
 	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32, FSM / ISR design, sensors' },
 	{ title: 'AI-assisted delivery', items: 'Prompt engineering, review of generated code, prototyping' },
-	/* Interest, not experience: kept as its own group so it never reads as a
-	   professional skill claim. */
-	{ title: 'Learning on my own', items: 'Linux, the command line' },
+	/* Personal, not professional: its own group so it never reads as a claim of
+	   work experience with Linux. */
+	{ title: 'Linux', items: 'CachyOS daily; Debian, Mint, Arch, Raspberry Pi OS' },
 ];
 
 /** Spoken languages. Only the PDF has a dedicated block for them. */
