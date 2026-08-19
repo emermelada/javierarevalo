@@ -1,0 +1,133 @@
+---
+/**
+ * /og-card/ is the source of public/og.jpg, the link preview image used by
+ * LinkedIn, Slack, WhatsApp and anything else that reads Open Graph tags.
+ *
+ * It is a page rather than a hand-drawn image for the same reason the CV is:
+ * it reads profile data from src/data/cv.ts, so the preview card cannot end
+ * up advertising a role the site no longer claims. Capture it with:
+ *
+ *   bash scripts/make-og.sh
+ *
+ * The body is exactly 1200x630, the size every social platform crops to.
+ * Nothing here is responsive on purpose, and the route is noindex because it
+ * exists only to be screenshotted.
+ */
+import { profile } from '../data/cv';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Link preview card</title>
+		<meta name="robots" content="noindex" />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			/* Same tokens as global.css. Duplicated deliberately: this page is
+			   captured on its own and must not depend on the site's cascade. */
+			:root {
+				--paper: #f4f1ea;
+				--ink: #141414;
+				--accent: #2b3ff2;
+				--muted: #6b6660;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				width: 1200px;
+				height: 630px;
+				background: var(--paper);
+				color: var(--ink);
+				font-family: 'Archivo', system-ui, sans-serif;
+				display: grid;
+				grid-template-columns: 1fr auto;
+				align-items: center;
+				gap: 72px;
+				padding: 72px 80px;
+				/* The hairline frame the site uses around its own blocks. */
+				border: 10px solid var(--ink);
+			}
+
+			.kicker {
+				font-family: 'JetBrains Mono', ui-monospace, monospace;
+				font-size: 22px;
+				font-weight: 500;
+				letter-spacing: 0.14em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 28px;
+			}
+
+			.name {
+				font-family: 'Archivo Black', sans-serif;
+				font-size: 104px;
+				line-height: 0.92;
+				letter-spacing: -0.02em;
+			}
+
+			.name .dot {
+				color: var(--accent);
+			}
+
+			/* Hairline rule, the site's standard separator. */
+			.rule {
+				height: 2px;
+				background: var(--ink);
+				margin: 32px 0 24px;
+			}
+
+			.line {
+				font-size: 25px;
+				line-height: 1.45;
+				color: var(--muted);
+				max-width: 34ch;
+			}
+
+			.url {
+				font-family: 'JetBrains Mono', ui-monospace, monospace;
+				font-size: 21px;
+				font-weight: 500;
+				margin-top: 28px;
+			}
+
+			/* Portrait treatment copied from the home page: ink border with an
+			   offset cobalt shadow, no blur, no rounding. */
+			.portrait {
+				width: 300px;
+				height: 375px;
+				object-fit: cover;
+				border: 3px solid var(--ink);
+				box-shadow: 16px 16px 0 var(--accent);
+				display: block;
+				/* The offset shadow is drawn outside the box and would other-
+				   wise be clipped by the frame, so it gets its own room. */
+				margin-right: 24px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div>
+			<p class="kicker">{profile.role}</p>
+			<h1 class="name">Javier<br />Arévalo<span class="dot">.</span></h1>
+			<div class="rule"></div>
+			<p class="line">Kotlin and Java on Android, C# and Azure in the cloud. Based in {profile.location}.</p>
+			<p class="url">{profile.siteLabel}</p>
+		</div>
+
+		<img class="portrait" src="/picture.jpeg" alt="" />
+	</body>
+</html>
