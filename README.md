@@ -1,7 +1,7 @@
 # Portfolio and CV, Javier Arévalo
 
-Personal portfolio and CV for **Javier Arévalo**, a software developer focused
-on **Cloud & DevOps**. Live at
+Personal portfolio and CV for **Javier Arévalo**, a software developer heading
+into **cloud and platform work**. Live at
 **[cv.javierarevalo.dev](https://cv.javierarevalo.dev/)**.
 
 The repository holds three things that stay in sync: the site, the printable
