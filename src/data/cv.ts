@@ -58,13 +58,12 @@ export const pitch = [
 
 /** About paragraph (home) and profile summary (PDF). */
 export const about =
-	'Two internships so far: cloud consultancy at Axazure and mobile development ' +
-	'at Skiller Academy. Day to day that meant C# against Dynamics 365, automating ' +
-	'Azure workloads, and Kotlin on Android. In September 2026 I move to Denmark ' +
-	'for a Computer Science degree, and I am looking for work alongside my studies, ' +
-	'part-time or as an intern. What I want next is cloud and platform work rather ' +
-	'than app development. Linux is my daily driver and where most of my own time ' +
-	'outside work goes.';
+	'I have done two internships: Android development in Kotlin at Skiller Academy, ' +
+	'then cloud consultancy at Axazure, writing C# for Dynamics 365 and automating ' +
+	'Azure workloads. The second one is the one that stuck. I would rather work on ' +
+	'what a product runs on than on the product itself, which is also how Linux ' +
+	'ended up as my daily driver. In September 2026 I move to Denmark for a Computer ' +
+	'Science degree, and I am looking for work alongside it, part-time or as an intern.';
 
 export interface Fact {
 	label: string;
