@@ -26,7 +26,7 @@ const work = defineCollection({
 		 * something the page is hiding.
 		 */
 		status: z.enum(['shipped', 'in-progress']),
-		/** Short qualifier shown next to the status — what is or isn't done. */
+		/** Short qualifier shown next to the status, saying what is or isn't done. */
 		statusNote: z.string().optional(),
 		/**
 		 * External destinations (repo, live site, backend…). A list, because
@@ -42,11 +42,11 @@ const work = defineCollection({
 			.optional(),
 		/**
 		 * Renders as a sub-numbered row (02.1 under 02) instead of its own
-		 * number. Same type size and same columns — the numbering shows
-		 * adjacency, not subordination.
+		 * number. Type size and columns stay identical, so the numbering
+		 * reads as adjacency rather than subordination.
 		 */
 		sub: z.boolean().default(false),
-		/** YouTube video ID — when set, the case media slot embeds the video. */
+		/** YouTube video ID. When set, the case media slot embeds the video. */
 		youtube: z.string().optional(),
 		/**
 		 * Real screenshots of the thing, served from public/work/. The media

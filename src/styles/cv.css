@@ -1,5 +1,5 @@
 /* ============================================================
-   Printable CV — used only by src/pages/cv.astro.
+   Printable CV, used only by src/pages/cv.astro.
    ------------------------------------------------------------
    Print-first: every size is in mm/pt so the A4 sheet is the
    unit of design, and the browser view is just that same sheet
@@ -262,7 +262,7 @@ a {
 }
 
 /*
- * Stack and links share one line — the CV is a single page, and the
+ * Stack and links share one line, because the CV is a single page and the
  * projects section is where the lines run out first.
  */
 .cv-project__foot {

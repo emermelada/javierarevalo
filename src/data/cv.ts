@@ -1,5 +1,5 @@
 /**
- * CV content — the single source of truth for everything that is *not* a
+ * CV content: the single source of truth for everything that is *not* a
  * project case study (those live in src/content/work/*.md).
  *
  * Two pages read from here: the home page (src/pages/index.astro) and the
@@ -34,7 +34,7 @@ export interface Cert {
 
 export const profile = {
 	name: 'Javier Arévalo',
-	role: 'Software Developer — Cloud & DevOps',
+	role: 'Software Developer · Cloud & DevOps',
 	location: 'Madrid, Spain',
 	email: 'javier.arevalo.11111@gmail.com',
 	linkedin: 'https://www.linkedin.com/in/javier-arevalo-hernandez',
@@ -51,19 +51,19 @@ export const profile = {
  */
 export const pitch = [
 	'Developer based in Madrid.',
-	'C# and Azure at Axazure — Dynamics 365 plugins, APIs and automated workloads.',
+	'C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads.',
 	'Kotlin and Android before that.',
 	'Starting a Computer Science degree at SDU in September 2026.',
 ];
 
 /** About paragraph (home) and profile summary (PDF). */
 export const about =
-	'Two internships so far: cloud consultancy at Axazure and mobile at Skiller ' +
-	'Academy. Day to day that means C# against Dynamics 365, automating Azure ' +
-	'workloads, and Kotlin on Android. I use AI tools to move faster and review ' +
-	'everything they produce before it ships. I move to Denmark in September 2026 ' +
-	'for a Computer Science degree, and I am open to work alongside my studies, ' +
-	'either part-time or as an intern.';
+	'Two internships so far: cloud consultancy at Axazure and mobile development ' +
+	'at Skiller Academy. Day to day that meant C# against Dynamics 365, automating ' +
+	'Azure workloads, and Kotlin on Android. I use AI tools to work faster, and I ' +
+	'read everything they produce before it goes anywhere. In September 2026 I move ' +
+	'to Denmark for a Computer Science degree, and I am looking for work alongside ' +
+	'my studies, part-time or as an intern.';
 
 export interface Fact {
 	label: string;
@@ -81,13 +81,13 @@ export const facts: Fact[] = [
 
 export const experience: Entry[] = [
 	{
-		when: 'Mar — May 2026',
-		role: 'Cloud Developer — Internship',
+		when: 'Mar–May 2026',
+		role: 'Cloud Developer, Internship',
 		org: 'Axazure S.L. · Madrid',
 		points: [
 			'Wrote plugins and APIs in C# for Dynamics 365, deployed to client environments.',
-			'Automated recurring Azure workloads so they run without anyone pressing a button.',
-			'Built Customer Insights integrations inside a Microsoft consultancy delivering to live clients.',
+			'Automated recurring Azure workloads that until then were run by hand.',
+			'Built Customer Insights integrations for live client projects.',
 		],
 		tags: [
 			{ label: 'C#', key: true },
@@ -98,8 +98,8 @@ export const experience: Entry[] = [
 		],
 	},
 	{
-		when: 'Mar — Jun 2025',
-		role: 'Software Developer — Internship',
+		when: 'Mar–Jun 2025',
+		role: 'Software Developer, Internship',
 		org: 'Skiller Academy S.L. · Madrid',
 		points: [
 			'Built features for a native Android app in Kotlin.',
@@ -111,13 +111,13 @@ export const experience: Entry[] = [
 
 export const education: Entry[] = [
 	{
-		when: '2026 —',
+		when: 'From Sep 2026',
 		role: 'BSc in Computer Science',
 		org: 'University of Southern Denmark (SDU) · Vejle',
 	},
 	{
-		when: '2023 — 2025',
-		role: 'Higher Degree — Multi-platform Application Development',
+		when: '2023–2025',
+		role: 'Higher Degree in Multi-platform Application Development',
 		org: 'U-tad · Madrid',
 	},
 ];
@@ -137,12 +137,12 @@ export const skills = [
 		title: 'Cloud & Microsoft',
 		items: 'Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare',
 	},
-	{ title: 'Languages', items: 'C# / .NET, Kotlin, Java, C++, Python, Swift, SQL / MySQL' },
+	{ title: 'Languages', items: 'C# / .NET, Kotlin, Java, Python, Swift, SQL / MySQL' },
 	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32, FSM / ISR design, sensors' },
 	{ title: 'AI-assisted delivery', items: 'Prompt engineering, review of generated code, prototyping' },
 ];
 
-/** Spoken languages — only the PDF has a dedicated block for them. */
+/** Spoken languages. Only the PDF has a dedicated block for them. */
 export const spokenLanguages = [
 	{ name: 'Spanish', level: 'Native' },
 	{ name: 'English', level: 'C1' },

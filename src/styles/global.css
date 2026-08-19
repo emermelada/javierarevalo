@@ -1,15 +1,15 @@
 /* ============================================================
-   Javier Arévalo — Editorial Bold design system
+   Javier Arévalo, Editorial Bold design system
    ------------------------------------------------------------
    Warm paper ground, huge display typography, asymmetric grid,
    one electric accent. Everything tunes from :root.
 
    Cascade is controlled with @layer (later layers win):
-     tokens     — every design decision as a custom property
-     base       — element defaults (typography, links, focus)
-     layout     — page scaffolding (.wrap, .section, headings)
-     components — one block per UI piece, in page order
-     utilities  — reveal animation, responsive collapses, print
+     tokens     : every design decision as a custom property
+     base       : element defaults (typography, links, focus)
+     layout     : page scaffolding (.wrap, .section, headings)
+     components : one block per UI piece, in page order
+     utilities  : reveal animation, responsive collapses, print
 
    House rules:
    - Change a token before adding an override; the whole visual
@@ -21,7 +21,7 @@
 
 @layer tokens {
 	:root {
-		/* Colour — swap --accent to #ff4d00 for the orange variant. */
+		/* Colour. Swap --accent to #ff4d00 for the orange variant. */
 		--paper: #f4f1ea;
 		--paper-deep: #ebe7dc;
 		--ink: #141414;
@@ -156,6 +156,20 @@
 
 	.section__title {
 		font-size: var(--text-h2);
+	}
+
+	/*
+	   Subsection variant (Certifications under Education). It keeps the
+	   number/rule/title anatomy of a section head but sits one step down
+	   the type scale, so it groups with the section above instead of
+	   competing with it.
+	*/
+	.section__head--sub {
+		margin-top: var(--space-block);
+	}
+
+	.section__title--sub {
+		font-size: var(--text-h3);
 	}
 
 	.skip-link {
@@ -407,7 +421,8 @@
 	}
 
 	/* Sub-entry: tied to the row above by a dashed rule and an accent bar on
-	   the number. Type size is deliberately unchanged — adjacency, not rank. */
+	   the number. Type size is deliberately unchanged, so the pairing reads
+	   as adjacency rather than rank. */
 	.work-row--sub {
 		border-top-style: dashed;
 	}
@@ -709,7 +724,7 @@
 		line-height: 1.45;
 	}
 
-	/* "Next stop" card — same ink border + offset cobalt shadow as the portrait */
+	/* "Next stop" card: same ink border and offset cobalt shadow as the portrait */
 	.next-card {
 		border: 2px solid var(--ink);
 		box-shadow: 8px 8px 0 var(--accent);
@@ -940,7 +955,7 @@
 }
 
 @layer utilities {
-	/* Scroll reveal — JS adds [data-reveal] targets; motion only when allowed. */
+	/* Scroll reveal. JS adds [data-reveal] targets; motion only when allowed. */
 	@media (prefers-reduced-motion: no-preference) {
 		[data-reveal] {
 			opacity: 0;

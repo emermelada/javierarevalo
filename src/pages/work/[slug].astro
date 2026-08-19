@@ -1,6 +1,6 @@
 ---
 /**
- * Case-study template — one static page per entry in the `work`
+ * Case-study template: one static page per entry in the `work`
  * collection (/work/<slug>/).
  *
  * Layout: back link → title/tagline → fact columns (role/year/stack)
@@ -28,7 +28,7 @@ const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
 ---
 
-<Base title={`${entry.data.title} — Javier Arévalo`} description={entry.data.summary}>
+<Base title={`${entry.data.title} · Javier Arévalo`} description={entry.data.summary}>
 	<article class="wrap">
 		<header class="case-header">
 			<a class="case-header__back" href="/#work">← All work</a>
@@ -64,8 +64,8 @@ const { Content } = await render(entry);
 		<!--
 			Media slot. Precedence: embedded video, then real screenshots, then
 			nothing. A project with no photograph yet renders no media block at
-			all — better an honest gap than a drawing standing in for hardware
-			that isn't built.
+			all, since an empty space is more honest than a drawing standing in
+			for hardware that isn't built.
 		-->
 		{
 			entry.data.youtube ? (
@@ -73,7 +73,7 @@ const { Content } = await render(entry);
 					<iframe
 						class="case-media__video"
 						src={`https://www.youtube-nocookie.com/embed/${entry.data.youtube}`}
-						title={`${entry.data.title} — video`}
+						title={`${entry.data.title} video`}
 						loading="lazy"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 						allowfullscreen

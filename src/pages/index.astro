@@ -1,9 +1,9 @@
 ---
 /**
- * Home page — the whole CV in one scroll.
+ * Home page: the whole CV in one scroll.
  *
  * Content comes from two places and only two: `src/data/cv.ts` (profile,
- * experience, skills, education, certifications — shared with the printable
+ * experience, skills, education and certifications, shared with the printable
  * /cv/ page) and the `work` content collection (one markdown file per case
  * study, ordered by its `order` frontmatter). Adding a file under
  * src/content/work/ is enough to get a new card + case page.
@@ -21,7 +21,7 @@ const [lead, ...rest] = pitch;
 /**
  * Index numbering. A normal entry takes the next whole number; an entry
  * flagged `sub: true` hangs off the one above it as `NN.1`, which is how the
- * desk and FocusReef read as one system without either being demoted — same
+ * desk and FocusReef read as one system without either being demoted: same
  * row, same columns, same type size, adjacent numbers.
  */
 let major = 0;
@@ -39,12 +39,12 @@ const numbered = work.map((project) => {
 ---
 
 <Base
-	title="Javier Arévalo — Software Developer · Cloud & DevOps"
-	description="Javier Arévalo — developer based in Madrid. C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads. Kotlin and Android before that."
+	title="Javier Arévalo · Software Developer, Cloud & DevOps"
+	description="Javier Arévalo, developer based in Madrid. C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads. Kotlin and Android before that."
 >
 	<!-- ================= HERO ================= -->
 	<section class="hero wrap">
-		<p class="hero__kicker">Software Developer — Cloud &amp; DevOps</p>
+		<p class="hero__kicker">Software Developer · Cloud &amp; DevOps</p>
 		<h1 class="hero__name">
 			<span class="line">Javier</span>
 			<span class="line">Arévalo<span class="accent-dot">.</span></span>
@@ -211,9 +211,9 @@ const numbered = work.map((project) => {
 			}
 		</div>
 
-		<div class="section__head" style="margin-top: var(--space-block);">
+		<div class="section__head section__head--sub">
 			<span class="section__index">05.1</span>
-			<h2 class="section__title" style="font-size: var(--text-h3);">Certifications</h2>
+			<h2 class="section__title section__title--sub">Certifications</h2>
 		</div>
 
 		<div class="certs">
