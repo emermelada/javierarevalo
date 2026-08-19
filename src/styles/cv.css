@@ -388,6 +388,17 @@ a {
 	}
 }
 
+/* Phones around 320px: the photo plus the display name no longer fit on one
+   line and the header pushes past the viewport. Screen only, so the printed
+   sheet keeps its 23pt name. */
+@media screen and (max-width: 92mm) {
+	.cv-name {
+		/* Tracks the viewport rather than stepping down once, so the header still
+		   fits on a folded phone at 280px. */
+		font-size: clamp(15pt, 5.8vw, 19pt);
+	}
+}
+
 @media print {
 	body {
 		background: #fff;
