@@ -74,7 +74,7 @@ export interface Fact {
 export const facts: Fact[] = [
 	{ label: 'Based in', value: 'Madrid, Spain' },
 	{ label: 'Languages', value: 'English C1 · Spanish native' },
-	{ label: 'Focus', value: 'Azure · .NET · Automation' },
+	{ label: 'Focus', value: 'Azure · Java · Automation' },
 	{ label: 'Status', value: 'Open to opportunities', dot: true },
 ];
 
