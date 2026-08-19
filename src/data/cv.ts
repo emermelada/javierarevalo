@@ -34,7 +34,7 @@ export interface Cert {
 
 export const profile = {
 	name: 'Javier Arévalo',
-	role: 'Software Developer · Cloud & DevOps',
+	role: 'Software Developer · Heading into Cloud',
 	location: 'Madrid, Spain',
 	email: 'javier.arevalo.11111@gmail.com',
 	linkedin: 'https://www.linkedin.com/in/javier-arevalo-hernandez',
@@ -62,7 +62,8 @@ export const about =
 	'at Skiller Academy. Day to day that meant C# against Dynamics 365, automating ' +
 	'Azure workloads, and Kotlin on Android. In September 2026 I move to Denmark ' +
 	'for a Computer Science degree, and I am looking for work alongside my studies, ' +
-	'part-time or as an intern.';
+	'part-time or as an intern. What I want next is cloud and platform work rather ' +
+	'than app development.';
 
 export interface Fact {
 	label: string;
@@ -136,7 +137,7 @@ export const skills = [
 		title: 'Cloud & Microsoft',
 		items: 'Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare',
 	},
-	{ title: 'Languages', items: 'C# / .NET, Kotlin, Java, Python, Swift, SQL / MySQL' },
+	{ title: 'Languages', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C# / .NET' },
 	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32, FSM / ISR design, sensors' },
 	{ title: 'AI-assisted delivery', items: 'Prompt engineering, review of generated code, prototyping' },
 ];

@@ -13,7 +13,17 @@
  */
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { about, certs, education, experience, facts, nextStop, pitch, skills } from '../data/cv';
+import {
+	about,
+	certs,
+	education,
+	experience,
+	facts,
+	nextStop,
+	pitch,
+	profile,
+	skills,
+} from '../data/cv';
 
 const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
 const [lead, ...rest] = pitch;
@@ -39,12 +49,12 @@ const numbered = work.map((project) => {
 ---
 
 <Base
-	title="Javier Arévalo · Software Developer, Cloud & DevOps"
+	title={`Javier Arévalo, ${profile.role}`}
 	description="Javier Arévalo, developer based in Madrid. C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads. Kotlin and Android before that."
 >
 	<!-- ================= HERO ================= -->
 	<section class="hero wrap">
-		<p class="hero__kicker">Software Developer · Cloud &amp; DevOps</p>
+		<p class="hero__kicker">{profile.role}</p>
 		<h1 class="hero__name">
 			<span class="line">Javier</span>
 			<span class="line">Arévalo<span class="accent-dot">.</span></span>
