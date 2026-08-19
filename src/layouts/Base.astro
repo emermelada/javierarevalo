@@ -21,6 +21,13 @@ interface Props {
 
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+/**
+ * Link preview image. Absolute by requirement: LinkedIn, Slack and X all
+ * reject a relative og:image. Generated from /og-card/ by scripts/make-og.sh,
+ * and shared by every page, since the card is about the person rather than
+ * the route.
+ */
+const ogImage = new URL('/og.jpg', Astro.site);
 ---
 
 <!doctype html>
@@ -38,6 +45,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
+		<meta property="og:site_name" content="Javier Arévalo" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta
+			property="og:image:alt"
+			content="Javier Arévalo, software developer, with the address cv.javierarevalo.dev"
+		/>
+		<!-- Twitter/X needs its own card type to render the image large. -->
+		<meta name="twitter:card" content="summary_large_image" />
 		<link rel="canonical" href={canonical} />
 
 		<!-- Favicon: monogram tile, inlined to avoid a request. -->

@@ -41,6 +41,9 @@ builds and publishes to GitHub Pages (Pages source = GitHub Actions).
 - `src/pages/cv.astro` + `src/styles/cv.css`: the printable one-page A4 CV.
   Standalone document (no `Base.astro`, no JS), print-first units, `noindex`.
   This is what `public/cv.pdf` is generated from.
+- `src/pages/og-card.astro` + `scripts/make-og.sh`: the 1200x630 Open Graph
+  card and the script that captures it to `public/og.jpg`. Reads `profile`
+  from `src/data/cv.ts`; re-run the script after changing the role.
 - `src/pages/work/[slug].astro`: case-study template. Its media slot renders,
   in order of precedence, an embedded YouTube video (`youtube` in frontmatter),
   the real screenshots listed under `gallery`, or nothing at all. A project

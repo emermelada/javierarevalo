@@ -40,7 +40,9 @@ project has one, otherwise real screenshots, otherwise no media at all.
 ```
 .
 ├── astro.config.mjs              # site origin (canonical URLs) + trailingSlash
-├── scripts/make-pdf.sh           # prints /cv/ to public/cv.pdf with headless Chrome
+├── scripts/
+│   ├── make-pdf.sh               # prints /cv/ to public/cv.pdf with headless Chrome
+│   └── make-og.sh                # captures /og-card/ to public/og.jpg (link preview)
 ├── src/
 │   ├── data/cv.ts                # CV content: profile, experience, skills, education
 │   ├── content.config.ts         # schema of the `work` collection
@@ -52,8 +54,9 @@ project has one, otherwise real screenshots, otherwise no media at all.
 │   └── pages/
 │       ├── index.astro           # home
 │       ├── cv.astro              # printable one-page CV (no layout, no JS, noindex)
+│       ├── og-card.astro         # 1200x630 link preview card (source of og.jpg)
 │       └── work/[slug].astro     # case-study template
-├── public/                       # CNAME, picture.jpeg, cv.pdf, work/*.jpg
+├── public/                       # CNAME, picture.jpeg, cv.pdf, og.jpg, work/*.jpg
 └── .github/workflows/deploy.yml
 ```
 
@@ -123,6 +126,21 @@ pdfinfo public/cv.pdf   # expect: 1 page, 595 x 842 pts
 
 If it spills onto a second page, the two dials for that are documented at the
 top of `src/styles/cv.css`.
+
+## The link preview
+
+`public/og.jpg` is what LinkedIn, Slack and WhatsApp show when the site is
+shared. Like the PDF, it is generated rather than drawn:
+
+```bash
+bash scripts/make-og.sh
+```
+
+The card lives at `src/pages/og-card.astro` and reads `profile` from
+`src/data/cv.ts`, so it cannot advertise a role the site no longer claims.
+Re-run the script after changing the role or the portrait, and remember that
+platforms cache previews aggressively: an already-published post keeps the old
+image, and LinkedIn only refetches through its Post Inspector.
 
 ## Contact
 
