@@ -60,10 +60,9 @@ export const pitch = [
 export const about =
 	'Two internships so far: cloud consultancy at Axazure and mobile development ' +
 	'at Skiller Academy. Day to day that meant C# against Dynamics 365, automating ' +
-	'Azure workloads, and Kotlin on Android. I use AI tools to work faster, and I ' +
-	'read everything they produce before it goes anywhere. In September 2026 I move ' +
-	'to Denmark for a Computer Science degree, and I am looking for work alongside ' +
-	'my studies, part-time or as an intern.';
+	'Azure workloads, and Kotlin on Android. In September 2026 I move to Denmark ' +
+	'for a Computer Science degree, and I am looking for work alongside my studies, ' +
+	'part-time or as an intern.';
 
 export interface Fact {
 	label: string;
