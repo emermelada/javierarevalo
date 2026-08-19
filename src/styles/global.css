@@ -330,6 +330,9 @@
 
 	.hero__portrait {
 		justify-self: end;
+		/* <figure> carries a UA margin of 1em 40px. Left in place it survives the
+		   width calculation below and pushes the portrait off a 320px screen. */
+		margin: 0;
 		width: min(100%, 18rem);
 		border: 2px solid var(--ink);
 		box-shadow: 10px 10px 0 var(--accent);
@@ -955,15 +958,16 @@
 }
 
 @layer utilities {
-	/* Scroll reveal. JS adds [data-reveal] targets; motion only when allowed. */
+	/* Scroll reveal. The .js-reveal class is set by the head script, so with no
+	   JavaScript these rules never apply and the content is simply visible. */
 	@media (prefers-reduced-motion: no-preference) {
-		[data-reveal] {
+		.js-reveal [data-reveal] {
 			opacity: 0;
 			translate: 0 18px;
 			transition: opacity 0.5s ease, translate 0.5s ease;
 		}
 
-		[data-reveal].is-visible {
+		.js-reveal [data-reveal].is-visible {
 			opacity: 1;
 			translate: 0 0;
 		}
@@ -976,6 +980,30 @@
 	}
 
 	/* Responsive collapses */
+	/* Touch targets. Text links here sit at 18 to 25px tall, under the 24px
+	   minimum of WCAG 2.5.8 and well under what a thumb wants. Vertical padding
+	   on an inline element grows the tappable box without moving the line, so
+	   the layout is untouched and only coarse pointers pay for it. */
+	@media (pointer: coarse) {
+		.site-nav a,
+		.brand,
+		.work-row__title a,
+		.work-row__links a,
+		.work-row__relation a,
+		.case-links a,
+		.case-header__back,
+		.contact__meta a,
+		.contact__links a {
+			padding-block: 0.5rem;
+		}
+
+		/* These sit in a stacked list only 0.3rem apart, so the padded targets
+		   would overlap and steal each other's taps. */
+		.work-row__links {
+			gap: 1.1rem;
+		}
+	}
+
 	@media (max-width: 48rem) {
 		.hero__grid,
 		.about {

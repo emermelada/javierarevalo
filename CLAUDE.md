@@ -56,7 +56,14 @@ builds and publishes to GitHub Pages (Pages source = GitHub Actions).
   check it). No decorative cursors, tilts or typing effects; that was the
   previous design and it was deliberately discarded.
 - **Accessibility is part of "done"**: semantic landmarks, skip link, visible
-  focus, `aria` labels on icon-only controls, alt text.
+  focus, `aria` labels on icon-only controls, alt text. Touch targets get
+  vertical padding under `@media (pointer: coarse)` so they clear the 24px of
+  WCAG 2.5.8; padding on an inline link grows the hit area without moving the
+  layout, but check it does not overlap its neighbours.
+- **Nothing is hidden by CSS alone.** The reveal animation's hidden state is
+  scoped to `.js-reveal`, a class the head script sets before first paint. If
+  the script never runs the page shows its content instead of a blank sheet,
+  which is the whole point of calling this progressive enhancement.
 - **The PDF is a build artifact.** `public/cv.pdf` comes from the `/cv/` route
   via `bash scripts/make-pdf.sh` (headless Chromium). Never hand-edit it, and
   re-run the script after touching `src/data/cv.ts` or `cv.css`. It must stay

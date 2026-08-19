@@ -41,6 +41,20 @@ const ogImage = new URL('/og.jpg', Astro.site);
 		<meta name="author" content="Javier Arévalo" />
 		<meta name="theme-color" content="#f4f1ea" />
 
+		<script is:inline>
+			// The reveal animation hides its targets until they scroll into view.
+			// That hidden state is claimed here rather than in the stylesheet, and
+			// before first paint so nothing flashes: if this script never runs, or
+			// the browser has no IntersectionObserver, the page keeps its content
+			// visible instead of staying blank.
+			if (
+				'IntersectionObserver' in window &&
+				!matchMedia('(prefers-reduced-motion: reduce)').matches
+			) {
+				document.documentElement.classList.add('js-reveal');
+			}
+		</script>
+
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
@@ -136,9 +150,9 @@ const ogImage = new URL('/og.jpg', Astro.site);
 				});
 			}
 
-			// Scroll reveal. Skipped entirely under prefers-reduced-motion;
-			// the CSS gates the initial hidden state too, so nothing flashes.
-			if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+			// Scroll reveal. Runs only if the head script claimed the hidden state,
+			// which already checked for reduced motion and IntersectionObserver.
+			if (document.documentElement.classList.contains('js-reveal')) {
 				const io = new IntersectionObserver(
 					(entries) => {
 						for (const e of entries) {
