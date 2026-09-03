@@ -24,7 +24,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Javier Arévalo · CV</title>
-		<meta name="description" content="Printable CV for Javier Arévalo, software developer based in Madrid." />
+		<meta name="description" content="Printable CV for Javier Arévalo, software developer based in Vejle, Denmark." />
 		<!-- The PDF is the shareable artifact; this page is just its source. -->
 		<meta name="robots" content="noindex" />
 
@@ -52,6 +52,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 
 				<ul class="cv-contact">
 					<li>{profile.location}</li>
+					<li><a href={`tel:${profile.phoneHref}`}>{profile.phone}</a></li>
 					<li><a href={`mailto:${profile.email}`}>{profile.email}</a></li>
 					<li><a href={profile.linkedin}>{profile.linkedinLabel}</a></li>
 					<li><a href={profile.github}>{profile.githubLabel}</a></li>
