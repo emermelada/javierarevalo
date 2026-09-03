@@ -35,8 +35,11 @@ export interface Cert {
 export const profile = {
 	name: 'Javier Arévalo',
 	role: 'Software Developer · Heading into Cloud',
-	location: 'Madrid, Spain',
+	location: 'Vejle, Denmark',
 	email: 'javier.arevalo.11111@gmail.com',
+	/** Danish number. `phoneHref` is the tel: form, without spaces. */
+	phone: '+45 50 30 44 79',
+	phoneHref: '+4550304479',
 	linkedin: 'https://www.linkedin.com/in/javier-arevalo-hernandez',
 	linkedinLabel: 'in/javier-arevalo-hernandez',
 	github: 'https://github.com/emermelada',
@@ -50,10 +53,10 @@ export const profile = {
  * accent colour on the home page, so keep it short and self-contained.
  */
 export const pitch = [
-	'Developer based in Madrid.',
+	'Developer based in Vejle, Denmark.',
 	'C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads.',
 	'Kotlin and Android before that.',
-	'Starting a Computer Science degree at SDU in September 2026.',
+	'Now reading Computer Science at SDU, and working alongside it.',
 ];
 
 /** About paragraph (home) and profile summary (PDF). */
@@ -62,8 +65,9 @@ export const about =
 	'then cloud consultancy at Axazure, writing C# for Dynamics 365 and automating ' +
 	'Azure workloads. The second one is the one that stuck. I would rather work on ' +
 	'what a product runs on than on the product itself, which is also how Linux ' +
-	'ended up as my daily driver. In September 2026 I move to Denmark for a Computer ' +
-	'Science degree, and I am looking for work alongside it, part-time or as an intern.';
+	'ended up as my daily driver. In September 2026 I moved to Denmark, where I am ' +
+	'now reading Computer Science at SDU, and I am looking for work alongside the ' +
+	'degree, part-time or as an intern.';
 
 export interface Fact {
 	label: string;
@@ -73,10 +77,10 @@ export interface Fact {
 }
 
 export const facts: Fact[] = [
-	{ label: 'Based in', value: 'Madrid, Spain' },
+	{ label: 'Based in', value: 'Vejle, Denmark' },
 	{ label: 'Languages', value: 'English C1 · Spanish native' },
 	{ label: 'Focus', value: 'Azure · Java · Automation' },
-	{ label: 'Status', value: 'Open to opportunities', dot: true },
+	{ label: 'Status', value: 'Open to student jobs and internships', dot: true },
 ];
 
 export const experience: Entry[] = [
@@ -111,7 +115,7 @@ export const experience: Entry[] = [
 
 export const education: Entry[] = [
 	{
-		when: 'From Sep 2026',
+		when: 'Since Sep 2026',
 		role: 'BSc in Computer Science',
 		org: 'University of Southern Denmark (SDU) · Vejle',
 	},
@@ -151,10 +155,10 @@ export const spokenLanguages = [
 	{ name: 'English', level: 'C1' },
 ];
 
-/** The one line under the "Next stop" card on the home page. */
+/** The one line under the highlight card on the home page. */
 export const nextStop = {
-	label: 'Next stop',
+	label: 'Right now',
 	title: 'BSc Computer Science',
 	org: 'University of Southern Denmark · Vejle',
-	when: 'Sep 2026 →',
+	when: 'Since Sep 2026',
 };
