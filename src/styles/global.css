@@ -221,6 +221,9 @@
 		position: sticky;
 		top: 0;
 		z-index: 50;
+		/* Solid first: Safari before 16.2 drops color-mix and would leave the
+		   sticky bar transparent over the text. */
+		background: var(--page);
 		background: color-mix(in srgb, var(--page) 92%, transparent);
 		backdrop-filter: blur(8px);
 		border-bottom: 1px solid var(--line);
