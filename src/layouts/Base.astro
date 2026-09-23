@@ -4,7 +4,7 @@
  *
  * Owns the document head (SEO/OG metadata, fonts, favicon), the sticky
  * site header, the contact footer, and the only client-side JavaScript
- * on the site (copy-email + scroll reveal, at the bottom of this file).
+ * on the site (copy-email, at the bottom of this file).
  *
  * Pages provide their content through the default <slot/> and pass
  * `title`/`description` for the head. The canonical URL is derived from
@@ -39,21 +39,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<meta name="author" content="Javier Arévalo" />
-		<meta name="theme-color" content="#f4f1ea" />
-
-		<script is:inline>
-			// The reveal animation hides its targets until they scroll into view.
-			// That hidden state is claimed here rather than in the stylesheet, and
-			// before first paint so nothing flashes: if this script never runs, or
-			// the browser has no IntersectionObserver, the page keeps its content
-			// visible instead of staying blank.
-			if (
-				'IntersectionObserver' in window &&
-				!matchMedia('(prefers-reduced-motion: reduce)').matches
-			) {
-				document.documentElement.classList.add('js-reveal');
-			}
-		</script>
+		<meta name="theme-color" content="#ffffff" />
 
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title} />
@@ -74,14 +60,14 @@ const ogImage = new URL('/og.jpg', Astro.site);
 		<!-- Favicon: monogram tile, inlined to avoid a request. -->
 		<link
 			rel="icon"
-			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f4f1ea'/%3E%3Ctext x='15' y='23' font-family='Arial,sans-serif' font-size='17' font-weight='900' fill='%23141414' text-anchor='middle'%3EJA%3C/text%3E%3Crect x='25' y='19' width='4' height='4' fill='%232b3ff2'/%3E%3C/svg%3E"
+			href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%231d5b99' rx='6'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='%23ffffff' text-anchor='middle'%3EJA%3C/text%3E%3C/svg%3E"
 		/>
 
-		<!-- Fonts: Archivo Black (display), Archivo (body), JetBrains Mono (labels). -->
+		<!-- Fonts: IBM Plex Sans (structure, data), Source Serif 4 (reading). -->
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
@@ -91,12 +77,12 @@ const ogImage = new URL('/og.jpg', Astro.site);
 
 		<header class="site-header">
 			<div class="wrap site-header__inner">
-				<a class="brand" href="/">Javier<span class="brand__dot">.</span>Arévalo</a>
+				<a class="brand" href="/">Javier Arévalo</a>
 				<nav class="site-nav" aria-label="Main">
-					<a href="/#work">Work</a>
+					<a href="/#work">Projects</a>
 					<a class="nav-link--sm-hide" href="/#experience">Experience</a>
 					<a href="/#contact">Contact</a>
-					<a class="btn" href="/cv.pdf" download>CV ↓</a>
+					<a class="btn" href="/cv.pdf" download>CV (PDF)</a>
 				</nav>
 			</div>
 		</header>
@@ -107,18 +93,20 @@ const ogImage = new URL('/og.jpg', Astro.site);
 
 		<footer class="contact" id="contact">
 			<div class="wrap">
-				<h2 class="contact__title">
-					Let's<br />talk<span class="accent-dot">.</span>
-				</h2>
+				<h2 class="contact__title">Get in touch</h2>
+				<p class="contact__text">
+					Open to student jobs and internships alongside my degree. Email is the fastest way
+					to reach me.
+				</p>
 
 				<div class="contact__actions">
 					<button class="btn btn--accent" type="button" data-copy-email="javier.arevalo.11111@gmail.com">
 						<span data-copy-label>Copy email</span>
 					</button>
-					<a class="btn" href="mailto:javier.arevalo.11111@gmail.com">Write me <span class="arrow">→</span></a>
-					<a class="btn" href="tel:+4550304479">+45 50 30 44 79 <span class="arrow">→</span></a>
-					<a class="btn" href="https://www.linkedin.com/in/javier-arevalo-hernandez" rel="noopener">LinkedIn <span class="arrow">→</span></a>
-					<a class="btn" href="https://github.com/emermelada" rel="noopener">GitHub <span class="arrow">→</span></a>
+					<a class="btn" href="mailto:javier.arevalo.11111@gmail.com">Write me</a>
+					<a class="btn" href="tel:+4550304479">+45 50 30 44 79</a>
+					<a class="btn" href="https://www.linkedin.com/in/javier-arevalo-hernandez" rel="noopener">LinkedIn</a>
+					<a class="btn" href="https://github.com/emermelada" rel="noopener">GitHub</a>
 					<a class="btn" href="/cv.pdf" download>Download CV (PDF)</a>
 				</div>
 
@@ -133,7 +121,7 @@ const ogImage = new URL('/og.jpg', Astro.site);
 		<script>
 			// All client-side behaviour lives here, as progressive enhancement:
 			// the site is fully usable with JavaScript disabled (the copy button
-			// degrades to mailto:, and content is simply visible without reveals).
+			// degrades to mailto:).
 
 			// Copy-to-clipboard contact button.
 			for (const btn of document.querySelectorAll<HTMLButtonElement>('[data-copy-email]')) {
@@ -151,22 +139,6 @@ const ogImage = new URL('/og.jpg', Astro.site);
 				});
 			}
 
-			// Scroll reveal. Runs only if the head script claimed the hidden state,
-			// which already checked for reduced motion and IntersectionObserver.
-			if (document.documentElement.classList.contains('js-reveal')) {
-				const io = new IntersectionObserver(
-					(entries) => {
-						for (const e of entries) {
-							if (e.isIntersecting) {
-								e.target.classList.add('is-visible');
-								io.unobserve(e.target);
-							}
-						}
-					},
-					{ threshold: 0.12 }
-				);
-				for (const el of document.querySelectorAll('[data-reveal]')) io.observe(el);
-			}
 		</script>
 	</body>
 </html>

@@ -46,6 +46,11 @@ const work = defineCollection({
 		 * reads as adjacency rather than subordination.
 		 */
 		sub: z.boolean().default(false),
+		/**
+		 * Listed on the one-page PDF CV. The site shows every project; the
+		 * sheet only has room for the strongest few.
+		 */
+		cv: z.boolean().default(true),
 		/** YouTube video ID. When set, the case media slot embeds the video. */
 		youtube: z.string().optional(),
 		/**

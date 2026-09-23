@@ -3,160 +3,173 @@
  * Home page: the whole CV in one scroll.
  *
  * Content comes from two places and only two: `src/data/cv.ts` (profile,
- * experience, skills, education and certifications, shared with the printable
- * /cv/ page) and the `work` content collection (one markdown file per case
- * study, ordered by its `order` frontmatter). Adding a file under
- * src/content/work/ is enough to get a new card + case page.
+ * award, experience, skills, education and certifications, shared with the
+ * printable /cv/ page) and the `work` content collection (one markdown file
+ * per case study, ordered by its `order` frontmatter). Adding a file under
+ * src/content/work/ is enough to get a new row + case page.
  *
- * The contact section lives in the Base layout (it doubles as the footer
- * on every page).
+ * Every section uses the same two-column grid: title in the left margin,
+ * content on the right. The contact section lives in the Base layout (it
+ * doubles as the footer on every page).
  */
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import {
-	about,
-	certs,
-	education,
-	experience,
-	facts,
-	nextStop,
-	pitch,
-	profile,
-	skills,
-} from '../data/cv';
+import { about, award, certs, education, experience, facts, pitch, profile, skills } from '../data/cv';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
-const [lead, ...rest] = pitch;
-
-/**
- * Index numbering. A normal entry takes the next whole number; an entry
- * flagged `sub: true` hangs off the one above it as `NN.1`, which is how the
- * desk and FocusReef read as one system without either being demoted: same
- * row, same columns, same type size, adjacent numbers.
- */
-let major = 0;
-let minor = 0;
-const numbered = work.map((project) => {
-	if (project.data.sub) {
-		minor += 1;
-	} else {
-		major += 1;
-		minor = 0;
-	}
-	const pad = String(major).padStart(2, '0');
-	return { project, number: project.data.sub ? `${pad}.${minor}` : pad };
-});
+// The award panel is the Nordic AI Cup's entry on the home page, so the
+// project list skips it instead of showing it twice.
+const work = (await getCollection('work', (entry) => entry.id !== award.case)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
 ---
 
 <Base
 	title={`Javier Arévalo, ${profile.role}`}
-	description="Javier Arévalo, developer based in Vejle, Denmark, reading Computer Science at SDU. Kotlin and Java on Android, C# and Azure at Axazure. Heading into cloud and platform work."
+	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. 1st in Denmark and 2nd in the Nordics at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
 >
 	<!-- ================= HERO ================= -->
-	<section class="hero wrap">
-		<p class="hero__kicker">{profile.role}</p>
-		<h1 class="hero__name">
-			<span class="line">Javier</span>
-			<span class="line">Arévalo<span class="accent-dot">.</span></span>
-		</h1>
-
-		<div class="hero__grid">
-			<p class="hero__pitch"><strong>{lead}</strong> {rest.join(' ')}</p>
-			<figure class="hero__portrait">
-				<img src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
-			</figure>
+	<section class="hero wrap" aria-labelledby="hero-name">
+		<div class="hero__text">
+			<p class="hero__role">{profile.role}</p>
+			<h1 class="hero__name" id="hero-name">Javier Arévalo</h1>
+			<p class="hero__pitch">{pitch.join(' ')}</p>
+			<div class="hero__actions">
+				<a class="btn btn--accent" href="/cv.pdf" download>Download CV (PDF)</a>
+				<a class="btn" href={profile.github} rel="noopener">GitHub</a>
+				<a class="btn" href={profile.linkedin} rel="noopener">LinkedIn</a>
+				<a class="btn" href={`mailto:${profile.email}`}>Email</a>
+			</div>
 		</div>
+
+		<figure class="hero__portrait">
+			<img src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
+		</figure>
 
 		<dl class="facts">
 			{
 				facts.map((fact) => (
 					<div>
 						<dt>{fact.label}</dt>
-						<dd>{fact.dot && <span class="status-dot">● </span>}{fact.value}</dd>
+						<dd>
+							{fact.dot && <span class="status-dot" aria-hidden="true" />}
+							{fact.value}
+						</dd>
 					</div>
 				))
 			}
 		</dl>
 	</section>
 
-	<!-- ================= ABOUT ================= -->
-	<section class="section wrap" id="about" data-reveal>
-		<div class="section__head">
-			<span class="section__index">01</span>
-			<h2 class="section__title">About</h2>
+	<!-- ================= AWARD ================= -->
+	<section class="section section--highlight" id="award" aria-labelledby="award-title">
+		<div class="wrap section__inner">
+		<h2 class="section__title">Highlight</h2>
+		<div class="award">
+			<div>
+				<h3 class="award__title" id="award-title">{award.event}</h3>
+				<p class="award__text">
+					With team {award.team} from the {award.org}. Three AI challenges in four days, each
+					one a live service with a single graded attempt. I led the real-time drone detection
+					challenge.
+				</p>
+				<p class="award__next">{award.next}</p>
+				<div class="award__links">
+					<a class="btn btn--accent" href={`/work/${award.case}/`}>Read the case study</a>
+					<a class="btn" href="https://github.com/emermelada/nordic-ai-cup" rel="noopener">Repository</a>
+				</div>
+			</div>
+
+			<figure class="standings">
+				<table>
+					<thead>
+						<tr>
+							<th scope="col">Rank</th>
+							<th scope="col">Among teams</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							award.standings.map((row) => (
+								<tr>
+									<td class="standings__rank">{row.rank}</td>
+									<td class="standings__place">{row.place}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</figure>
 		</div>
-		<div class="about">
-			<p class="about__lede">{about}</p>
-			<aside class="next-card">
-				<span class="next-card__label">{nextStop.label}</span>
-				<h3 class="next-card__title">{nextStop.title}</h3>
-				<span class="next-card__org">{nextStop.org}</span>
-				<span class="next-card__when">{nextStop.when}</span>
-			</aside>
 		</div>
 	</section>
 
 	<!-- ================= WORK ================= -->
-	<section class="section wrap" id="work" data-reveal>
-		<div class="section__head">
-			<span class="section__index">02</span>
-			<h2 class="section__title">Work</h2>
-		</div>
+	<section class="section" id="work">
+		<div class="wrap section__inner">
+		<h2 class="section__title">Projects</h2>
 
-		<ol class="work-index">
+		<ol class="projects">
 			{
-				numbered.map(({ project, number }) => (
-					<li class={project.data.sub ? 'work-row work-row--sub' : 'work-row'} data-reveal>
-						<p class="work-row__num" aria-hidden="true">{number}</p>
-
-						<div class="work-row__main">
-							<h3 class="work-row__title">
-								<a href={`/work/${project.id}/`}>{project.data.title}</a>
-							</h3>
-							<p class="work-row__tagline">{project.data.tagline}</p>
-							{project.data.related && (
-								<p class="work-row__relation">
-									{project.data.related.prefix}{' '}
-									<a href={`/work/${project.data.related.slug}/`}>{project.data.related.name}</a>
-								</p>
+				work.map((project) => {
+					const shot = project.data.gallery[0];
+					const portrait = shot && shot.height > shot.width;
+					// Phone captures: two screens side by side, cropped to their top.
+					const thumbs = portrait ? project.data.gallery.slice(0, 2) : shot ? [shot] : [];
+					return (
+						<li class={project.data.sub ? 'project project--sub' : 'project'}>
+							{shot && (
+								<a class={portrait ? 'project__thumb project__thumb--portrait' : 'project__thumb'} href={`/work/${project.id}/`} tabindex="-1" aria-hidden="true">
+									{thumbs.map((t) => (
+										<img src={t.src} alt="" width={t.width} height={t.height} loading="lazy" decoding="async" />
+									))}
+								</a>
 							)}
-							<ul class="tags">
-								{project.data.stack.map((tech) => (
-									<li class="tag">{tech}</li>
-								))}
-							</ul>
-						</div>
-
-						<div class="work-row__meta">
-							<p class="work-row__year">{project.data.year}</p>
-							<p class={`status status--${project.data.status}`}>
-								<span class="status__dot" aria-hidden="true">●</span>
-								{project.data.status === 'shipped' ? 'Shipped' : 'In progress'}
-							</p>
-							{project.data.statusNote && <p class="work-row__note">{project.data.statusNote}</p>}
-							<ul class="work-row__links">
-								{project.data.links.map((link) => (
+							<div class="project__body">
+								<p class="project__meta">
+									<span>{project.data.year}</span>
+									<span class={`status status--${project.data.status}`}>
+										<span class="status-dot" aria-hidden="true" />
+										{project.data.status === 'shipped' ? 'Shipped' : 'In progress'}
+									</span>
+								</p>
+								<h3 class="project__title">
+									<a href={`/work/${project.id}/`}>{project.data.title}</a>
+								</h3>
+								<p class="project__tagline">{project.data.tagline}</p>
+								{project.data.related && (
+									<p class="project__relation">
+										{project.data.related.prefix}{' '}
+										<a href={`/work/${project.data.related.slug}/`}>{project.data.related.name}</a>
+									</p>
+								)}
+								<ul class="tags" aria-label="Stack">
+									{project.data.stack.map((tech) => (
+										<li class="tag">{tech}</li>
+									))}
+								</ul>
+								<ul class="project__links">
 									<li>
-										<a href={link.url} rel="noopener">{link.label} <span aria-hidden="true">↗</span></a>
+										<a href={`/work/${project.id}/`}>Case study</a>
 									</li>
-								))}
-								<li>
-									<a href={`/work/${project.id}/`}>Read the case <span aria-hidden="true">→</span></a>
-								</li>
-							</ul>
-						</div>
-					</li>
-				))
+									{project.data.links.map((link) => (
+										<li>
+											<a href={link.url} rel="noopener">{link.label}</a>
+										</li>
+									))}
+								</ul>
+							</div>
+						</li>
+					);
+				})
 			}
 		</ol>
+		</div>
 	</section>
 
 	<!-- ================= EXPERIENCE ================= -->
-	<section class="section wrap" id="experience" data-reveal>
-		<div class="section__head">
-			<span class="section__index">03</span>
-			<h2 class="section__title">Experience</h2>
-		</div>
+	<section class="section" id="experience">
+		<div class="wrap section__inner">
+		<h2 class="section__title">Experience</h2>
 
 		<div class="entries">
 			{
@@ -169,7 +182,7 @@ const numbered = work.map((project) => {
 							<ul class="entry__points">
 								{job.points?.map((point) => <li>{point}</li>)}
 							</ul>
-							<ul class="tags">
+							<ul class="tags" aria-label="Stack">
 								{job.tags?.map((tag) => (
 									<li class={tag.key ? 'tag tag--key' : 'tag'}>{tag.label}</li>
 								))}
@@ -179,70 +192,72 @@ const numbered = work.map((project) => {
 				))
 			}
 		</div>
-	</section>
-
-	<!-- ================= SKILLS ================= -->
-	<section class="section wrap" id="skills" data-reveal>
-		<div class="section__head">
-			<span class="section__index">04</span>
-			<h2 class="section__title">Skills</h2>
-		</div>
-
-		<div class="skill-cols">
-			{
-				skills.map((group) => (
-					<div class="skill-group">
-						<h3>{group.title}</h3>
-						<p>{group.items}</p>
-					</div>
-				))
-			}
 		</div>
 	</section>
 
 	<!-- ================= EDUCATION & CERTIFICATIONS ================= -->
-	<section class="section wrap" id="education" data-reveal>
-		<div class="section__head">
-			<span class="section__index">05</span>
-			<h2 class="section__title">Education</h2>
-		</div>
+	<section class="section" id="education">
+		<div class="wrap section__inner">
+		<h2 class="section__title">Education</h2>
 
-		<div class="entries">
+		<div>
+			<div class="entries">
+				{
+					education.map((step) => (
+						<article class="entry">
+							<p class="entry__when">{step.when}</p>
+							<div>
+								<h3 class="entry__role">{step.role}</h3>
+								<p class="entry__org">{step.org}</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+
+			<h3 class="subhead">Certifications</h3>
+			<ul class="certs">
+				{
+					certs.map((cert) => (
+						<li class="cert">
+							<span class="cert__name">{cert.name}</span>
+							<span class="cert__issuer">{cert.issuer}</span>
+							{cert.url && (
+								<a class="cert__verify" href={cert.url} rel="noopener">
+									Verify<span class="visually-hidden"> {cert.name}</span>
+								</a>
+							)}
+						</li>
+					))
+				}
+			</ul>
+		</div>
+		</div>
+	</section>
+
+	<!-- ================= SKILLS ================= -->
+	<section class="section" id="skills">
+		<div class="wrap section__inner">
+		<h2 class="section__title">Skills</h2>
+
+		<dl class="skills">
 			{
-				education.map((step) => (
-					<article class="entry">
-						<p class="entry__when">{step.when}</p>
-						<div>
-							<h3 class="entry__role">{step.role}</h3>
-							<p class="entry__org">{step.org}</p>
-						</div>
-					</article>
+				skills.map((group) => (
+					<div>
+						<dt>{group.title}</dt>
+						<dd>{group.items}</dd>
+					</div>
 				))
 			}
+		</dl>
 		</div>
+	</section>
 
-		<div class="section__head section__head--sub">
-			<span class="section__index">05.1</span>
-			<h2 class="section__title section__title--sub">Certifications</h2>
-		</div>
-
-		<div class="certs">
-			{
-				certs.map((cert) =>
-					cert.url ? (
-						<a class="cert cert--badge" href={cert.url} rel="noopener">
-							<span class="cert__name">{cert.name}</span>
-							<span class="cert__issuer">{cert.issuer}</span>
-							<span class="cert__verify">Verify credential →</span>
-						</a>
-					) : (
-						<div class="cert">
-							<span class="cert__name">{cert.name}</span>
-							<span class="cert__issuer">{cert.issuer}</span>
-						</div>
-					)
-				)
-			}
+	<!-- ================= ABOUT ================= -->
+	<section class="section" id="about">
+		<div class="wrap section__inner">
+		<h2 class="section__title">About</h2>
+		<p class="about">{about}</p>
 		</div>
 	</section>
 </Base>

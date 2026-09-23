@@ -26,12 +26,15 @@ export async function getStaticPaths() {
 
 const { entry, prev, next } = Astro.props;
 const { Content } = await render(entry);
+// Phone captures sit side by side; any landscape capture needs the full width.
+const shots = entry.data.gallery;
+const columns = shots.every((shot) => shot.height > shot.width) ? shots.length : 1;
 ---
 
 <Base title={`${entry.data.title} · Javier Arévalo`} description={entry.data.summary}>
 	<article class="wrap">
 		<header class="case-header">
-			<a class="case-header__back" href="/#work">← All work</a>
+			<a class="case-header__back" href="/#work">Back to all projects</a>
 			<h1 class="case-header__title">{entry.data.title}</h1>
 			<p class="case-header__tagline">{entry.data.tagline}</p>
 
@@ -46,13 +49,13 @@ const { Content } = await render(entry);
 				</div>
 				<div>
 					<dt>Stack</dt>
-					<dd>{entry.data.stack.join(' · ')}</dd>
+					<dd>{entry.data.stack.join(', ')}</dd>
 				</div>
 				<div>
 					<dt>Status</dt>
 					<dd>
 						<span class={`status status--${entry.data.status}`}>
-							<span class="status__dot" aria-hidden="true">●</span>
+							<span class="status-dot" aria-hidden="true" />
 							{entry.data.status === 'shipped' ? 'Shipped' : 'In progress'}
 						</span>
 						{entry.data.statusNote && <span class="case-facts__note">{entry.data.statusNote}</span>}
@@ -80,7 +83,7 @@ const { Content } = await render(entry);
 					/>
 				</div>
 			) : entry.data.gallery.length > 0 ? (
-				<div class="case-gallery" style={`--shots:${entry.data.gallery.length}`}>
+				<div class="case-gallery" style={`--shots:${columns}`}>
 					{entry.data.gallery.map((shot) => (
 						<figure class="case-shot">
 							<img
@@ -104,8 +107,8 @@ const { Content } = await render(entry);
 				entry.data.links.length > 0 && (
 					<p class="case-links">
 						{entry.data.links.map((link) => (
-							<a class="btn btn--accent" href={link.url} rel="noopener">
-								{link.label} <span class="arrow">→</span>
+							<a class="btn" href={link.url} rel="noopener">
+								{link.label}
 							</a>
 						))}
 					</p>
@@ -116,11 +119,11 @@ const { Content } = await render(entry);
 		<nav class="case-nav" aria-label="More work">
 			{
 				prev.id === next.id ? (
-					<a href={`/work/${next.id}/`}>Next case: {next.data.title} →</a>
+					<a href={`/work/${next.id}/`}>Next: {next.data.title}</a>
 				) : (
 					<>
-						<a href={`/work/${prev.id}/`}>← {prev.data.title}</a>
-						<a href={`/work/${next.id}/`}>{next.data.title} →</a>
+						<a href={`/work/${prev.id}/`}>Previous: {prev.data.title}</a>
+						<a href={`/work/${next.id}/`}>Next: {next.data.title}</a>
 					</>
 				)
 			}

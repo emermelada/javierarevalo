@@ -4,7 +4,7 @@
    Print-first: every size is in mm/pt so the A4 sheet is the
    unit of design, and the browser view is just that same sheet
    shown on the paper ground. Same vocabulary as the site
-   (Archivo Black, hairlines, one cobalt accent) at CV scale.
+   (IBM Plex Sans, hairlines, one blue accent) at CV scale.
 
    Hard constraint: the whole thing fits on ONE A4 page. If you
    add content and it spills, shrink --cv-body/--cv-gap before
@@ -13,19 +13,19 @@
    ============================================================ */
 
 :root {
-	--paper: #f4f1ea;
-	--ink: #141414;
-	--muted: #5f5b53;
-	--accent: #2b3ff2;
-	--hairline: rgba(20, 20, 20, 0.22);
+	--paper: #f4f5f3;
+	--ink: #14202e;
+	--muted: #5b6168;
+	--accent: #1d5b99;
+	--hairline: rgba(27, 31, 36, 0.22);
 
-	--font-display: 'Archivo Black', 'Archivo', sans-serif;
-	--font-body: 'Archivo', system-ui, sans-serif;
-	--font-mono: 'JetBrains Mono', ui-monospace, monospace;
+	--font-display: 'IBM Plex Sans', system-ui, sans-serif;
+	--font-body: 'IBM Plex Sans', system-ui, sans-serif;
+	--font-mono: 'IBM Plex Sans', system-ui, sans-serif;
 
 	/* The two dials to turn when the sheet is one line too long. */
-	--cv-body: 10pt;
-	--cv-gap: 3.2mm;
+	--cv-body: 9.7pt;
+	--cv-gap: 3mm;
 }
 
 @page {
@@ -108,9 +108,9 @@ a {
 .cv-name {
 	font-family: var(--font-display);
 	font-size: 23pt;
-	line-height: 0.95;
-	letter-spacing: -0.02em;
-	text-transform: uppercase;
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: -0.025em;
 }
 
 .cv-name .dot {
@@ -158,14 +158,13 @@ a {
    whole line each. Widen it before shrinking --cv-body. */
 .cv-body {
 	display: grid;
-	grid-template-columns: 1fr 59mm;
+	grid-template-columns: 1fr 66mm;
 	gap: 7mm;
 	padding-top: var(--cv-gap);
 }
 
 .cv-section {
 	margin-bottom: var(--cv-gap);
-	break-inside: avoid;
 }
 
 .cv-section:last-child {
@@ -175,6 +174,7 @@ a {
 .cv-section__title {
 	font-family: var(--font-display);
 	font-size: 9.5pt;
+	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.13em;
 	border-top: 0.5mm solid var(--ink);
@@ -298,6 +298,13 @@ a {
 }
 
 /* ---------- Sidebar blocks ---------- */
+/* The award leads the sidebar: the rank is the one line in accent. */
+.cv-award__rank {
+	font-weight: 600;
+	color: var(--accent);
+	line-height: 1.35;
+}
+
 .cv-skill {
 	margin-bottom: 2.6mm;
 }
@@ -320,30 +327,11 @@ a {
 	color: var(--muted);
 }
 
-/* Two languages do not deserve four rows on a sheet this tight, so they run as
-   one line separated by the same middot the stack lines use. */
-.cv-langs {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: baseline;
-}
-
-.cv-langs li {
-	display: flex;
-	gap: 1.4mm;
-	font-size: 9pt;
-}
-
-.cv-langs li + li::before {
-	content: '·';
-	color: var(--hairline);
-	margin-right: 1.4mm;
-}
-
-.cv-langs__level {
-	font-family: var(--font-mono);
-	font-size: 8pt;
-	color: var(--muted);
+/* Two languages do not deserve a sidebar block on a sheet this tight, so they
+   close the contact column, set apart by a little space. */
+.cv-contact__langs {
+	margin-top: 1.5mm;
+	color: var(--ink);
 }
 
 /* ---------- Screen-only chrome ---------- */

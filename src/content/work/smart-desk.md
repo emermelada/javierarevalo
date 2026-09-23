@@ -5,7 +5,8 @@ year: '2026'
 role: Personal project · hardware & firmware
 stack: [ESP32, FSM & ISR, PC817 Optocouplers, VL53L0X ToF, MQTT]
 summary: An ESP32 sits between the desk's keypad and its motor controller, so posture changes happen on a schedule instead of when I remember to press a button. Every block it runs gets recorded as well.
-order: 2
+order: 4
+cv: false
 status: in-progress
 statusNote: Architecture and components defined, firmware in progress
 related:

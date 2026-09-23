@@ -5,7 +5,7 @@ year: '2026'
 role: Personal project · Android app
 stack: [Kotlin, Android, NAS-hosted database, Time-series data]
 summary: The application half of the desk system. It reads the focus blocks the ESP32 controller publishes and turns them into an aquarium you spend them on.
-order: 3
+order: 5
 sub: true
 status: shipped
 statusNote: App complete; running on sample data until the desk firmware publishes real blocks

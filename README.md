@@ -11,15 +11,15 @@ one-page CV at `/cv/`, and `public/cv.pdf`, which is printed from that route.
 
 ## Design
 
-**Editorial Bold**: a light, typographic, magazine-style personal site. Warm
-paper ground (`#f4f1ea`), large Archivo Black display type, numbered sections,
-hairline rules and one electric cobalt accent (`#2b3ff2`). Facts are laid out
-as editorial columns (uppercase label over a bold value), skills as sober
-CV-style text groups. Motion is deliberately minimal, just hover states and a
-subtle scroll fade-in, all gated behind `prefers-reduced-motion`.
+Written for readers who check evidence, such as an admissions committee or a
+hiring engineer, so it borrows the conventions of a research paper rather than
+a landing page. White page, IBM Plex Sans for structure, Source Serif 4 for
+reading, one Nordic blue accent (`#1d5b99`). Sections are full-width bands,
+every other one tinted, and the Nordic AI Cup result sits in a dark band as a
+results table. No scroll animation, only hover and focus states.
 
-The site is one home page (hero → about → work → experience → skills →
-education and certifications → contact) plus a case-study page per project
+The site is one home page (hero → Nordic AI Cup result → work → about →
+experience → education and certifications → skills → contact) plus a case-study page per project
 (Problem → Solution → Result). A case page shows an embedded video if the
 project has one, otherwise real screenshots, otherwise no media at all.
 
@@ -30,10 +30,10 @@ project has one, otherwise real screenshots, otherwise no media at all.
 - **Hand-written CSS**: one token-driven design system in
   `src/styles/global.css`, organised with `@layer`, fluid type via `clamp()`.
   The printable CV has its own sheet, `src/styles/cv.css`.
-- **Vanilla JS, around 30 lines**: the copy-email button and the scroll reveal,
-  inlined in the base layout as progressive enhancement.
-- **Google Fonts**: Archivo Black (display), Archivo (body), JetBrains Mono
-  (small labels).
+- **Vanilla JS, around 15 lines**: the copy-email button, inlined in the base
+  layout as progressive enhancement.
+- **Google Fonts**: IBM Plex Sans (headings, labels, data) and Source Serif 4
+  (long-form text).
 
 ## Project structure
 
@@ -103,8 +103,9 @@ Push to `main`. The GitHub Actions workflow builds the site and publishes
 - **Project video**: set `youtube: <video id>` in the frontmatter (the part
   after `watch?v=`). The video takes precedence over the gallery and is
   embedded from the `youtube-nocookie` host.
-- **Colours and type**: the `:root` block of `src/styles/global.css`. Swap
-  `--accent` to `#ff4d00` for the documented orange variant.
+- **Colours and type**: the `:root` block of `src/styles/global.css`.
+- **Keeping a project off the PDF**: `cv: false` in its frontmatter. The site
+  still lists it; the one-page sheet does not.
 
 ## The CV PDF
 

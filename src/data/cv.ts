@@ -56,7 +56,7 @@ export const pitch = [
 	'Developer based in Vejle, Denmark.',
 	'C# and Azure at Axazure: Dynamics 365 plugins, APIs and automated workloads.',
 	'Kotlin and Android before that.',
-	'Now reading Computer Science at SDU, and working alongside it.',
+	'Now studying Computer Science at SDU.',
 ];
 
 /** About paragraph (home) and profile summary (PDF). */
@@ -66,7 +66,7 @@ export const about =
 	'Azure workloads. The second one is the one that stuck. I would rather work on ' +
 	'what a product runs on than on the product itself, which is also how Linux ' +
 	'ended up as my daily driver. In September 2026 I moved to Denmark, where I am ' +
-	'now reading Computer Science at SDU, and I am looking for work alongside the ' +
+	'now studying Computer Science at SDU, and I am looking for work alongside the ' +
 	'degree, part-time or as an intern.';
 
 export interface Fact {
@@ -142,7 +142,7 @@ export const skills = [
 		items: 'Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare',
 	},
 	{ title: 'Programming', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C# / .NET' },
-	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32, FSM / ISR design, sensors' },
+	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32' },
 	{ title: 'AI-assisted delivery', items: 'Prompt engineering, review of generated code, prototyping' },
 	/* Personal, not professional: its own group so it never reads as a claim of
 	   work experience with Linux. */
@@ -155,10 +155,19 @@ export const spokenLanguages = [
 	{ name: 'English', level: 'C1' },
 ];
 
-/** The one line under the highlight card on the home page. */
-export const nextStop = {
-	label: 'Right now',
-	title: 'BSc Computer Science',
-	org: 'University of Southern Denmark · Vejle',
-	when: 'Since Sep 2026',
+/**
+ * Competition result. The home page gives it its own band under the hero, and
+ * the PDF lists it as an award. `case` is the slug of the matching case study.
+ */
+export const award = {
+	event: 'Nordic AI Cup 2026',
+	team: "Elysa's Secret",
+	org: 'University of Southern Denmark',
+	when: 'Sep 2026',
+	standings: [
+		{ rank: '1st', place: 'in Denmark' },
+		{ rank: '2nd', place: 'across the Nordics' },
+	],
+	next: 'Qualified for the final in Iceland',
+	case: 'nordic-ai-cup',
 };

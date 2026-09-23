@@ -13,9 +13,11 @@
  */
 import { getCollection } from 'astro:content';
 import '../styles/cv.css';
-import { about, certs, education, experience, profile, skills, spokenLanguages } from '../data/cv';
+import { about, award, certs, education, experience, profile, skills, spokenLanguages } from '../data/cv';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work', (entry) => entry.data.cv)).sort(
+	(a, b) => a.data.order - b.data.order,
+);
 ---
 
 <!doctype html>
@@ -31,7 +33,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
@@ -45,7 +47,7 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 				<img class="cv-photo" src="/picture.jpeg" alt="Portrait of Javier Arévalo" width="300" height="375" />
 
 				<div class="cv-id">
-					<h1 class="cv-name">Javier Arévalo<span class="dot">.</span></h1>
+					<h1 class="cv-name">Javier Arévalo</h1>
 					<p class="cv-role">{profile.role}</p>
 					<p class="cv-summary">{about}</p>
 				</div>
@@ -57,6 +59,9 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 					<li><a href={profile.linkedin}>{profile.linkedinLabel}</a></li>
 					<li><a href={profile.github}>{profile.githubLabel}</a></li>
 					<li><a href={profile.site}>{profile.siteLabel}</a></li>
+					<li class="cv-contact__langs">
+						{spokenLanguages.map((lang) => `${lang.name} ${lang.level}`).join(', ')}
+					</li>
 				</ul>
 			</header>
 
@@ -116,6 +121,17 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 
 				<aside class="cv-side">
 					<section class="cv-section">
+						<h2 class="cv-section__title">Awards</h2>
+						<div class="cv-skill">
+							<h3 class="cv-skill__title">{award.event}</h3>
+							<p class="cv-award__rank">
+								{award.standings.map((row) => `${row.rank} ${row.place}`).join(', ')}
+							</p>
+							<p>{award.next}. Team {award.team}, SDU, {award.when}.</p>
+						</div>
+					</section>
+
+					<section class="cv-section">
 						<h2 class="cv-section__title">Education</h2>
 						{
 							education.map((step) => (
@@ -152,20 +168,6 @@ const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.
 								</div>
 							))
 						}
-					</section>
-
-					<section class="cv-section">
-						<h2 class="cv-section__title">Languages</h2>
-						<ul class="cv-langs">
-							{
-								spokenLanguages.map((lang) => (
-									<li>
-										<span>{lang.name}</span>
-										<span class="cv-langs__level">{lang.level}</span>
-									</li>
-								))
-							}
-						</ul>
 					</section>
 				</aside>
 			</div>

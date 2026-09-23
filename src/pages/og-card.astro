@@ -13,7 +13,7 @@
  * Nothing here is responsive on purpose, and the route is noindex because it
  * exists only to be screenshotted.
  */
-import { profile } from '../data/cv';
+import { award, profile } from '../data/cv';
 ---
 
 <!doctype html>
@@ -26,7 +26,7 @@ import { profile } from '../data/cv';
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+			href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400&display=swap"
 			rel="stylesheet"
 		/>
 
@@ -34,10 +34,10 @@ import { profile } from '../data/cv';
 			/* Same tokens as global.css. Duplicated deliberately: this page is
 			   captured on its own and must not depend on the site's cascade. */
 			:root {
-				--paper: #f4f1ea;
-				--ink: #141414;
-				--accent: #2b3ff2;
-				--muted: #6b6660;
+				--paper: #ffffff;
+				--ink: #14202e;
+				--accent: #1d5b99;
+				--muted: #5b6168;
 			}
 
 			* {
@@ -46,75 +46,65 @@ import { profile } from '../data/cv';
 				box-sizing: border-box;
 			}
 
-			body {
+			/* :root lifts this over Astro's scoped `*` reset, an attribute
+			   selector that would otherwise zero the padding. */
+			:root body {
 				width: 1200px;
 				height: 630px;
 				background: var(--paper);
 				color: var(--ink);
-				font-family: 'Archivo', system-ui, sans-serif;
+				font-family: 'IBM Plex Sans', system-ui, sans-serif;
 				display: grid;
 				grid-template-columns: 1fr auto;
 				align-items: center;
 				gap: 72px;
 				padding: 72px 80px;
-				/* The hairline frame the site uses around its own blocks. */
-				border: 10px solid var(--ink);
+				/* The site's accent rule, as on the award panel. */
+				border-top: 12px solid var(--accent);
 			}
 
 			.kicker {
-				font-family: 'JetBrains Mono', ui-monospace, monospace;
-				font-size: 22px;
+				font-size: 26px;
 				font-weight: 500;
-				letter-spacing: 0.14em;
-				text-transform: uppercase;
 				color: var(--accent);
 				margin-bottom: 28px;
 			}
 
 			.name {
-				font-family: 'Archivo Black', sans-serif;
-				font-size: 104px;
-				line-height: 0.92;
-				letter-spacing: -0.02em;
-			}
-
-			.name .dot {
-				color: var(--accent);
+				font-size: 100px;
+				font-weight: 600;
+				line-height: 1;
+				letter-spacing: -0.03em;
 			}
 
 			/* Hairline rule, the site's standard separator. */
 			.rule {
-				height: 2px;
+				height: 1px;
 				background: var(--ink);
 				margin: 32px 0 24px;
 			}
 
 			.line {
-				font-size: 25px;
-				line-height: 1.45;
-				color: var(--muted);
-				max-width: 34ch;
+				font-family: 'Source Serif 4', Georgia, serif;
+				font-size: 30px;
+				line-height: 1.4;
+				max-width: 30ch;
 			}
 
 			.url {
-				font-family: 'JetBrains Mono', ui-monospace, monospace;
-				font-size: 21px;
+				font-size: 22px;
+				color: var(--muted);
 				font-weight: 500;
 				margin-top: 28px;
 			}
 
-			/* Portrait treatment copied from the home page: ink border with an
-			   offset cobalt shadow, no blur, no rounding. */
+			/* Portrait treatment copied from the home page: small radius, no frame. */
 			.portrait {
 				width: 300px;
 				height: 375px;
 				object-fit: cover;
-				border: 3px solid var(--ink);
-				box-shadow: 16px 16px 0 var(--accent);
+				border-radius: 8px;
 				display: block;
-				/* The offset shadow is drawn outside the box and would other-
-				   wise be clipped by the frame, so it gets its own room. */
-				margin-right: 24px;
 			}
 		</style>
 	</head>
@@ -122,9 +112,9 @@ import { profile } from '../data/cv';
 	<body>
 		<div>
 			<p class="kicker">{profile.role}</p>
-			<h1 class="name">Javier<br />Arévalo<span class="dot">.</span></h1>
+			<h1 class="name">Javier<br />Arévalo</h1>
 			<div class="rule"></div>
-			<p class="line">Kotlin and Java on Android, C# and Azure in the cloud. Based in {profile.location}.</p>
+			<p class="line">{award.standings.map((row) => `${row.rank} ${row.place}`).join(', ')} at the {award.event}.</p>
 			<p class="url">{profile.siteLabel}</p>
 		</div>
 
