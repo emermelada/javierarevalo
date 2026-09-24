@@ -18,6 +18,19 @@ import { about, award, certs, education, experience, facts, pitch, profile, skil
 
 // The award panel is the Nordic AI Cup's entry on the home page, so the
 // project list skips it instead of showing it twice.
+/** schema.org Person, so search engines can tie the name to these profiles. */
+const person = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: profile.name,
+	jobTitle: 'Software Developer',
+	url: profile.site,
+	sameAs: [profile.github, profile.linkedin],
+	address: { '@type': 'PostalAddress', addressLocality: 'Vejle', addressCountry: 'DK' },
+	alumniOf: { '@type': 'CollegeOrUniversity', name: 'U-tad' },
+	affiliation: { '@type': 'CollegeOrUniversity', name: 'University of Southern Denmark' },
+};
+
 const work = (await getCollection('work', (entry) => entry.id !== award.case)).sort(
 	(a, b) => a.data.order - b.data.order,
 );
@@ -27,6 +40,8 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 	title={`Javier Arévalo, ${profile.role}`}
 	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. 1st in Denmark and 2nd in the Nordics at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
 >
+	<script type="application/ld+json" set:html={JSON.stringify(person)} />
+
 	<!-- ================= HERO ================= -->
 	<section class="hero wrap" aria-labelledby="hero-name">
 		<div class="hero__text">

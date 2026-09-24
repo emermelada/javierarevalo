@@ -1,0 +1,16 @@
+---
+/**
+ * GitHub Pages serves dist/404.html for any path it cannot find, so a
+ * mistyped or stale link lands on the site's own shell instead of GitHub's.
+ */
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page not found · Javier Arévalo" description="This page does not exist.">
+	<section class="section">
+		<div class="wrap">
+			<h1>Page not found</h1>
+			<p>The link may be old or mistyped. <a href="/">Go to the home page</a>.</p>
+		</div>
+	</section>
+</Base>
