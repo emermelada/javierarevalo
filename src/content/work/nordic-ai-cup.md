@@ -19,7 +19,8 @@ The Nordic AI Cup gives each team four days and three unrelated problems:
 answering questions about a recorded medical consultation, keeping a simulated
 colony alive, and spotting objects from a drone. Nothing is submitted as a
 file. Each solution is a web service the team hosts itself, the grader calls it
-live, and every challenge has exactly **one** graded attempt.
+live, and every challenge has exactly **one** graded attempt. This edition drew over
+430 participants: 112 teams submitted and 82 reached the final evaluation.
 
 My part was **Drone Flyby**. A drone films a synthetic landscape in 4K, and the
 service has to find sixteen kinds of object in each frame (tanks, hangars,

@@ -38,7 +38,7 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 
 <Base
 	title={`Javier Arévalo, ${profile.role}`}
-	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. 1st in Denmark and 2nd in the Nordics at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
+	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. National champions of Denmark at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(person)} />
 
@@ -84,7 +84,8 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 				<h3 class="award__title" id="award-title">{award.event}</h3>
 				<p class="award__text">
 					With team {award.team} from the {award.org}. Three AI challenges in four days, each
-					one a live service with a single graded attempt. I led the real-time drone detection
+					one a live service with a single graded attempt. Over 430 people took part: 112 teams submitted and
+					82 reached the final evaluation. I led the real-time drone detection
 					challenge.
 				</p>
 				<p class="award__next">{award.next}</p>
