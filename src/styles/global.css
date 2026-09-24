@@ -467,6 +467,11 @@
 		vertical-align: baseline;
 	}
 
+	/* Middle, not baseline: a wrapped place would otherwise hang below the row. */
+	.standings tbody td {
+		vertical-align: middle;
+	}
+
 	.standings thead th {
 		font-size: var(--text-caption);
 		font-weight: 500;
