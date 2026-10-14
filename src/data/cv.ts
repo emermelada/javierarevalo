@@ -165,8 +165,8 @@ export const award = {
 	org: 'University of Southern Denmark',
 	when: 'Sep 2026',
 	standings: [
-		{ rank: '1st', place: 'in Denmark, national champions' },
+		{ rank: '1st', place: 'in Denmark on points' },
 	],
-	next: 'Qualified for the final in Iceland',
+	next: '2nd across the Nordic region',
 	case: 'nordic-ai-cup',
 };

@@ -1,13 +1,13 @@
 ---
 title: Nordic AI Cup 2026
-tagline: Four days, three AI challenges and one graded attempt at each. Our SDU team finished 1st in Denmark and 2nd across the Nordics, and goes on to the final in Iceland.
+tagline: Four days, three AI challenges and one graded attempt at each. Our SDU team finished 1st in Denmark and 2nd across the Nordics.
 year: '2026'
 role: Team Elysa's Secret · lead on Drone Flyby
 stack: [Python, YOLO11, PyTorch, FastAPI, Docker, Kaggle, Cloudflare Tunnel]
 summary: A four-person team from the University of Southern Denmark. Each challenge was a live HTTP service the organisers' grader called in real time. I owned Drone Flyby, a real-time object detector steering its own camera.
 order: 1
-status: in-progress
-statusNote: 1st in Denmark, 2nd in the Nordics. The final in Iceland is next
+status: shipped
+statusNote: 1st in Denmark, 2nd in the Nordics
 links:
   - label: Repository
     url: https://github.com/emermelada/nordic-ai-cup
@@ -56,7 +56,7 @@ example of each class.
 ## Result
 
 Across the three challenges the team scored **45 points: 1st in Denmark and
-2nd in the Nordic region**, which qualifies us for the final in Iceland.
+2nd in the Nordic region**.
 
 | Challenge | Graded score | Denmark rank |
 |---|---|---|
@@ -82,6 +82,6 @@ All 249 evaluation frames were answered without errors, yet less than half of
 the validation score carried over. The likely cause is visible in the
 repository: about 60% of the training backgrounds were cut from the validation
 flight itself, so the detectors had learned its terrain. That is the lesson I
-am taking to Iceland: a validation score you tune against is not a score you
+take from it: a validation score you tune against is not a score you
 have earned. The repository documents exactly what was graded for each
 challenge, including what we tried and rejected.
