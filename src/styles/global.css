@@ -655,15 +655,14 @@
 		background: var(--accent);
 	}
 
-	/* ---------- Skills: a two-column table ---------- */
+	/* ---------- Skills: each group title above its items ---------- */
 	.skills {
 		margin: 0;
 	}
 
 	.skills div {
 		display: grid;
-		grid-template-columns: 11rem minmax(0, 1fr);
-		gap: 0.25rem 1.5rem;
+		gap: 0.25rem;
 		padding-block: 0.6rem;
 		border-bottom: 1px solid var(--line);
 	}
@@ -675,7 +674,6 @@
 	.skills dt {
 		font-weight: 600;
 		font-size: var(--text-small);
-		padding-top: 0.1rem;
 	}
 
 	.skills dd {
@@ -1043,8 +1041,7 @@
 			padding-block: 1.25rem;
 		}
 
-		.entry,
-		.skills div {
+		.entry {
 			grid-template-columns: 1fr;
 			gap: 0.25rem;
 		}
