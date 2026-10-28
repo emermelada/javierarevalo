@@ -27,7 +27,7 @@ builds and publishes to GitHub Pages (Pages source = GitHub Actions).
   over adding an override. Design language is **research paper**: white page,
   IBM Plex Sans for structure, Source Serif 4 for reading, one Nordic blue
   accent (`--accent`). Home sections are full-width bands (every other one
-  tinted, the award band dark), each with its title in a left margin column. Audience it is written for: admissions committees and engineers.
+  tinted, the award band dark), each with its title on top of its content. Audience it is written for: admissions committees and engineers.
 - `src/layouts/Base.astro`: `<head>`, sticky header, contact footer, and the
   only JavaScript (copy-email, degrades to `mailto:`).
 - `src/content/work/*.md`: one case study per project (`work` collection,

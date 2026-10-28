@@ -153,9 +153,9 @@
 	}
 
 	/*
-	 * Every home section shares one grid: its title sits in the left margin,
-	 * its content fills the right. That single
-	 * alignment is what keeps a long CV scroll reading as one document.
+	 * Every home section shares one layout: its title on top, under an accent
+	 * rule, and its content below at full width. That single alignment is
+	 * what keeps a long CV scroll reading as one document.
 	 */
 	/* Each section is a full-width band; every other one is tinted so the
 	   boundaries read at a glance. The highlight band is dark. */
@@ -170,8 +170,8 @@
 
 	.section__inner {
 		display: grid;
-		grid-template-columns: 11rem minmax(0, 1fr);
-		gap: 1rem clamp(1.5rem, 4vw, 3rem);
+		grid-template-columns: minmax(0, 1fr);
+		gap: 1rem;
 	}
 
 	.section__title {
@@ -180,10 +180,6 @@
 		padding-top: 0.9rem;
 		border-top: 2px solid var(--accent);
 		align-self: start;
-	}
-
-	.section__inner > :not(.section__title) {
-		padding-top: 0.9rem;
 	}
 
 	.subhead {
@@ -995,14 +991,6 @@
 	}
 
 	@media (max-width: 56rem) {
-		.section__inner {
-			grid-template-columns: minmax(0, 1fr);
-		}
-
-		.section__inner > :not(.section__title) {
-			padding-top: 0;
-		}
-
 		.facts {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
