@@ -121,13 +121,10 @@ const work = (await getCollection('work', (entry) => entry.data.cv)).sort(
 
 				<aside class="cv-side">
 					<section class="cv-section">
-						<h2 class="cv-section__title">Awards</h2>
+						<h2 class="cv-section__title">Competitions</h2>
 						<div class="cv-skill">
 							<h3 class="cv-skill__title">{award.event}</h3>
-							<p class="cv-award__rank">
-								{award.standings.map((row) => `${row.rank} ${row.place}`).join(', ')}
-							</p>
-							<p>{award.next}. Team {award.team}, SDU, {award.when}.</p>
+							<p>Team {award.team}, SDU, {award.when}. Led the real-time drone detection challenge.</p>
 						</div>
 					</section>
 

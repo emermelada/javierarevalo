@@ -38,7 +38,7 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 
 <Base
 	title={`Javier Arévalo, ${profile.role}`}
-	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. 1st in Denmark on points at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
+	description="Javier Arévalo, developer based in Vejle, Denmark, studying Computer Science at SDU. Led real-time drone detection for an SDU team at the Nordic AI Cup 2026. C# and Azure at Axazure, Kotlin on Android."
 >
 	<script type="application/ld+json" set:html={JSON.stringify(person)} />
 
@@ -88,33 +88,11 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 					82 reached the final evaluation. I led the real-time drone detection
 					challenge.
 				</p>
-				<p class="award__next">{award.next}</p>
 				<div class="award__links">
 					<a class="btn btn--accent" href={`/work/${award.case}/`}>Read the case study</a>
 					<a class="btn" href="https://github.com/emermelada/nordic-ai-cup" rel="noopener">Repository</a>
 				</div>
 			</div>
-
-			<figure class="standings">
-				<table>
-					<thead>
-						<tr>
-							<th scope="col">Rank</th>
-							<th scope="col">Among teams</th>
-						</tr>
-					</thead>
-					<tbody>
-						{
-							award.standings.map((row) => (
-								<tr>
-									<td class="standings__rank">{row.rank}</td>
-									<td class="standings__place">{row.place}</td>
-								</tr>
-							))
-						}
-					</tbody>
-				</table>
-			</figure>
 		</div>
 		</div>
 	</section>
@@ -133,13 +111,19 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 					const thumbs = portrait ? project.data.gallery.slice(0, 2) : shot ? [shot] : [];
 					return (
 						<li class={project.data.sub ? 'project project--sub' : 'project'}>
-							{shot && (
-								<a class={portrait ? 'project__thumb project__thumb--portrait' : 'project__thumb'} href={`/work/${project.id}/`} tabindex="-1" aria-hidden="true">
-									{thumbs.map((t) => (
-										<img src={t.src} alt="" width={t.width} height={t.height} loading="lazy" decoding="async" />
-									))}
-								</a>
-							)}
+							<div class="project__media">
+								{shot ? (
+									<a class={portrait ? 'project__thumb project__thumb--portrait' : 'project__thumb'} href={`/work/${project.id}/`} tabindex="-1" aria-hidden="true">
+										{thumbs.map((t) => (
+											<img src={t.src} alt="" width={t.width} height={t.height} loading="lazy" decoding="async" />
+										))}
+									</a>
+								) : (
+									// Nothing shot yet: a labelled empty frame, never a stand-in drawing.
+									<div class="project__thumb project__thumb--empty" aria-hidden="true">Photos to follow</div>
+								)}
+								{project.data.credit && <p class="project__credit">{project.data.credit}</p>}
+							</div>
 							<div class="project__body">
 								<p class="project__meta">
 									<span>{project.data.year}</span>

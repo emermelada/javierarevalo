@@ -4,15 +4,11 @@ tagline: A productivity app where 25-minute focus blocks become tokens, and toke
 year: '2026'
 role: Personal project · Android app
 stack: [Kotlin, Android, NAS-hosted database, Time-series data]
-summary: The application half of the desk system. It reads the focus blocks the ESP32 controller publishes and turns them into an aquarium you spend them on.
+summary: An Android app that reads completed focus blocks from a time-series database on my home NAS and turns them into tokens you spend on an aquarium.
 order: 5
-sub: true
+cv: false
 status: shipped
-statusNote: App complete; running on sample data until the desk firmware publishes real blocks
-related:
-  slug: smart-desk
-  prefix: Reads the focus blocks published by
-  name: the ESP32 desk
+statusNote: App complete; running on sample data for now
 gallery:
   - src: /work/focusreef-aquarium.jpg
     alt: The FocusReef aquarium screen, showing Tank 1 with 18 of its 24 slots filled by clownfish, a jellyfish and two larger fish over a sandy floor.
@@ -36,32 +32,30 @@ links:
 
 ## Problem
 
-Gamified focus apps rely on you being honest with them. You press start, you
-press stop, and nothing checks whether you were at the desk in between, so the
-score only means whatever you decide it means.
+Gamified focus apps usually keep everything on the phone: the timer, the record
+of what you did and the reward for it. The game and the evidence live in the
+same place, so the score only means whatever the app was told.
 
-The desk already knows. It runs the Pomodoro cadence, it moves at the start and
-end of a block, and it publishes what happened. Taking the reward from that
-record instead of from a button is what makes the score worth anything.
+I wanted the record kept outside the game. FocusReef reads focus blocks that
+are already stored somewhere else and only decides what they are worth.
 
 ## Solution
 
-An Android app in the Forest lineage, with the loop moved off the phone:
+An Android app in the Forest lineage, built on a read-only record:
 
 - A completed focus block is worth a number of tokens, and tokens buy fish and
   aquariums. The aquarium ends up being a picture of how much work has
   accumulated.
-- The blocks are read from a time-series database hosted on a NAS, which the
-  ESP32 controller writes to over MQTT. The app is the frontend of a system it
-  doesn't control.
-- The split is deliberate: the desk owns what happened and the app owns what
-  it's worth, so either side can be replaced without touching the other.
+- The blocks are read from a time-series database hosted on my NAS. The app
+  only reads it, so it can't inflate its own score.
+- The split is deliberate: the database owns what happened and the app owns
+  what it's worth, so whatever records the blocks can change without touching
+  the game.
 
 ## Where it stands
 
 The app is finished: the token economy, the shop and the aquarium all work.
-What it doesn't have yet is real input, because the desk firmware is still in
-progress, so for now it runs against sample data.
+What it doesn't have yet is real input, so for now it runs against sample data.
 
 The art is not final either. Every fish, background and icon in the screenshots
 above is a placeholder, enough to get the mechanics working and nothing more.
@@ -69,8 +63,8 @@ The visual design is the last thing I plan to settle.
 
 ## What's next
 
-A standalone mode with a built-in timer, for anyone who wants the aquarium
-without wiring an ESP32 to their desk. The app counts the block itself and
-feeds the same token economy, which makes FocusReef usable on its own instead
-of as one half of a system. It also improves the design, because it forces the
-block source to be an interface rather than an assumption.
+A standalone mode with a built-in timer, for anyone with nothing else
+recording their blocks. The app counts the block itself and feeds the same
+token economy, which gives FocusReef real input of its own. It also improves
+the design, because it forces the block source to be an interface rather than
+an assumption.

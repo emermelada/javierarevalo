@@ -9,7 +9,7 @@ export default defineConfig({
 	 */
 	site: 'https://cv.javierarevalo.dev',
 	/**
-	 * GitHub Pages serves /work/smart-desk and /work/smart-desk/ as the same
+	 * GitHub Pages serves /work/focusreef and /work/focusreef/ as the same
 	 * document, so neither form is treated as wrong in dev either.
 	 */
 	trailingSlash: 'ignore',

@@ -15,10 +15,9 @@ Written for readers who check evidence, such as an admissions committee or a
 hiring engineer, so it borrows the conventions of a research paper rather than
 a landing page. White page, IBM Plex Sans for structure, Source Serif 4 for
 reading, one Nordic blue accent (`#1d5b99`). Sections are full-width bands,
-every other one tinted, and the Nordic AI Cup result sits in a dark band as a
-results table. No scroll animation, only hover and focus states.
+every other one tinted, and the Nordic AI Cup sits in a dark band of its own. No scroll animation, only hover and focus states.
 
-The site is one home page (hero → Nordic AI Cup result → work → about →
+The site is one home page (hero → Nordic AI Cup → work → about →
 experience → education and certifications → skills → contact) plus a case-study page per project
 (Problem → Solution → Result). A case page shows an embedded video if the
 project has one, otherwise real screenshots, otherwise no media at all.

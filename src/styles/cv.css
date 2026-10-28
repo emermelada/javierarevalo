@@ -298,13 +298,6 @@ a {
 }
 
 /* ---------- Sidebar blocks ---------- */
-/* The award leads the sidebar: the rank is the one line in accent. */
-.cv-award__rank {
-	font-weight: 600;
-	color: var(--accent);
-	line-height: 1.35;
-}
-
 .cv-skill {
 	margin-bottom: 2.6mm;
 }

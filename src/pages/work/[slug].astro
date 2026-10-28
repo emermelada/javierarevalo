@@ -97,6 +97,7 @@ const columns = shots.every((shot) => shot.height > shot.width) ? shots.length :
 							{shot.caption && <figcaption>{shot.caption}</figcaption>}
 						</figure>
 					))}
+					{entry.data.credit && <p class="case-credit">{entry.data.credit}</p>}
 				</div>
 			) : null
 		}

@@ -79,7 +79,7 @@ export interface Fact {
 export const facts: Fact[] = [
 	{ label: 'Based in', value: 'Vejle, Denmark' },
 	{ label: 'Languages', value: 'English C1 · Spanish native' },
-	{ label: 'Focus', value: 'Azure · Java · Automation' },
+	{ label: 'Focus', value: 'Azure · Automation · Robotics' },
 	{ label: 'Status', value: 'Open to student jobs and internships', dot: true },
 ];
 
@@ -156,17 +156,13 @@ export const spokenLanguages = [
 ];
 
 /**
- * Competition result. The home page gives it its own band under the hero, and
- * the PDF lists it as an award. `case` is the slug of the matching case study.
+ * Competition entry. The home page gives it its own band under the hero, and
+ * the PDF lists it under competitions. `case` is the slug of the matching case study.
  */
 export const award = {
 	event: 'Nordic AI Cup 2026',
 	team: "Elysa's Secret",
 	org: 'University of Southern Denmark',
 	when: 'Sep 2026',
-	standings: [
-		{ rank: '1st', place: 'in Denmark on points' },
-	],
-	next: '2nd across the Nordic region',
 	case: 'nordic-ai-cup',
 };

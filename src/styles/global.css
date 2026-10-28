@@ -397,13 +397,6 @@
 		border-top-color: var(--accent-on-deep);
 	}
 
-	.award {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-		gap: 2rem clamp(2rem, 5vw, 4rem);
-		align-items: center;
-	}
-
 	.award__title {
 		font-size: var(--text-h1);
 		letter-spacing: -0.02em;
@@ -414,12 +407,6 @@
 		font-family: var(--font-serif);
 		font-size: 1.1rem;
 		color: var(--on-deep-muted);
-		margin-bottom: 1rem;
-	}
-
-	.award__next {
-		font-weight: 600;
-		color: var(--accent-on-deep);
 		margin-bottom: 1.25rem;
 	}
 
@@ -450,53 +437,6 @@
 		outline-color: var(--accent-on-deep);
 	}
 
-	.standings {
-		margin: 0;
-	}
-
-	.standings table {
-		width: 100%;
-		border-collapse: collapse;
-	}
-
-	.standings th,
-	.standings td {
-		text-align: left;
-		padding: 0.4rem 0;
-		border-bottom: 1px solid var(--line-on-deep);
-		vertical-align: baseline;
-	}
-
-	/* Middle, not baseline: a wrapped place would otherwise hang below the row. */
-	.standings tbody td {
-		vertical-align: middle;
-	}
-
-	.standings thead th {
-		font-size: var(--text-caption);
-		font-weight: 500;
-		color: var(--on-deep-muted);
-		border-bottom-color: var(--on-deep-muted);
-	}
-
-	/* The rank is the one oversized element on the page. */
-	.standings__rank {
-		font-family: var(--font-serif);
-		font-size: clamp(2.75rem, 6vw, 4.5rem);
-		font-weight: 600;
-		line-height: 1;
-		letter-spacing: -0.03em;
-		color: var(--accent-on-deep);
-		width: 1%;
-		white-space: nowrap;
-		padding-right: clamp(1rem, 3vw, 2rem) !important;
-	}
-
-	.standings__place {
-		font-size: var(--text-h3);
-		font-weight: 500;
-	}
-
 	figcaption {
 		margin-top: 0.75rem;
 		font-size: var(--text-caption);
@@ -513,7 +453,7 @@
 		border-top: 0;
 	}
 
-	/* Screenshot on the left when there is one; text alone otherwise. */
+	/* Screenshot on the left, or a labelled empty frame until there is one. */
 	.project {
 		display: grid;
 		grid-template-columns: 15rem minmax(0, 1fr);
@@ -524,20 +464,18 @@
 		border-radius: var(--radius);
 	}
 
-	.project:not(:has(.project__thumb)) {
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	/* A sibling project (FocusReef under the desk) hangs off a blue rule,
-	   so the two read as one system. */
+	/* A sibling project hangs off a blue rule, so the two read as one system. */
 	.project--sub {
 		margin-top: -0.5rem;
 		border-left: 3px solid var(--accent);
 	}
 
+	.project__media {
+		align-self: start;
+	}
+
 	.project__thumb {
 		display: block;
-		align-self: start;
 		aspect-ratio: 4 / 3;
 		border-radius: 4px;
 		overflow: hidden;
@@ -564,6 +502,20 @@
 	.project__thumb--portrait img {
 		border-radius: 4px;
 		object-position: top center;
+	}
+
+	.project__thumb--empty {
+		display: grid;
+		place-items: center;
+		font-size: var(--text-caption);
+		color: var(--muted);
+	}
+
+	.project__credit,
+	.case-credit {
+		font-size: var(--text-caption);
+		color: var(--muted);
+		margin: 0.5rem 0 0;
 	}
 
 	.project__meta {
@@ -909,6 +861,11 @@
 		margin: 0;
 	}
 
+	.case-credit {
+		grid-column: 1 / -1;
+		margin-top: -0.75rem;
+	}
+
 	/* Never upscaled: a small capture keeps its own size, left-aligned. */
 	.case-shot img {
 		width: auto;
@@ -1072,13 +1029,18 @@
 			width: 8rem;
 		}
 
-		.award,
 		.project {
 			grid-template-columns: minmax(0, 1fr);
 		}
 
 		.project__thumb {
 			aspect-ratio: 16 / 9;
+		}
+
+		/* An empty frame isn't worth a phone's first screen. */
+		.project__thumb--empty {
+			aspect-ratio: auto;
+			padding-block: 1.25rem;
 		}
 
 		.entry,

@@ -1,13 +1,12 @@
 ---
 title: Nordic AI Cup 2026
-tagline: Four days, three AI challenges and one graded attempt at each. Our SDU team finished 1st in Denmark and 2nd across the Nordics.
+tagline: Four days, three AI challenges and one graded attempt at each. I led our SDU team on the real-time drone detection challenge.
 year: '2026'
 role: Team Elysa's Secret · lead on Drone Flyby
 stack: [Python, YOLO11, PyTorch, FastAPI, Docker, Kaggle, Cloudflare Tunnel]
 summary: A four-person team from the University of Southern Denmark. Each challenge was a live HTTP service the organisers' grader called in real time. I owned Drone Flyby, a real-time object detector steering its own camera.
 order: 1
 status: shipped
-statusNote: 1st in Denmark, 2nd in the Nordics
 links:
   - label: Repository
     url: https://github.com/emermelada/nordic-ai-cup
@@ -55,14 +54,13 @@ example of each class.
 
 ## Result
 
-Across the three challenges the team scored **45 points: 1st in Denmark and
-2nd in the Nordic region**.
+The team's graded score in each of the three challenges:
 
-| Challenge | Graded score | Denmark rank |
-|---|---|---|
-| Medical Appointment | 0.822 | 1st |
-| Survival Simulator | 1405.3 | 4th |
-| Drone Flyby | 0.263 | 6th |
+| Challenge | Graded score |
+|---|---|
+| Medical Appointment | 0.822 |
+| Survival Simulator | 1405.3 |
+| Drone Flyby | 0.263 |
 
 How the Drone Flyby validation score moved (COCO mAP@0.5, macro over 16
 classes):

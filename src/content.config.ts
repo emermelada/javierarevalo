@@ -5,7 +5,7 @@
  * (src/content/work/*.md). The frontmatter below feeds the home-page
  * index row and the case header; the markdown body is the case narrative
  * (Problem → Solution → Result). The file name becomes the URL slug:
- * `smart-desk.md` → /work/smart-desk/.
+ * `artcenter.md` → /work/artcenter/.
  */
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
@@ -71,6 +71,11 @@ const work = defineCollection({
 				}),
 			)
 			.default([]),
+		/**
+		 * Copyright line for screenshots the author doesn't own alone. Shown
+		 * under the gallery and under the home-card thumbnail.
+		 */
+		credit: z.string().optional(),
 	}),
 });
 
