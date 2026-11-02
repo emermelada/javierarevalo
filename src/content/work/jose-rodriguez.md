@@ -13,11 +13,11 @@ links:
   - label: joserodriguez.mov
     url: https://joserodriguez.mov
 gallery:
-  - src: /work/jose-rodriguez-video.jpg
-    alt: The video section of joserodriguez.mov, showing a grid of stills from the short film Amapolas over a dark background.
-    caption: The video section, a grid of stills from the short film Amapolas
+  - src: /work/jose-rodriguez-photo.jpg
+    alt: The photography section of joserodriguez.mov, headed Atlético Madrileño, with match photos grouped by fixture in three columns.
+    caption: The photography section, match photos of Atlético Madrileño for Atlético Stats
     width: 1600
-    height: 798
+    height: 910
 ---
 
 ## Problem
