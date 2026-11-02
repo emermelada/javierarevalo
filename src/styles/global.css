@@ -870,6 +870,22 @@
 		background: var(--panel);
 	}
 
+	/* Own clip: native controls, never upscaled, capped so a portrait phone clip fits the screen. */
+	.case-clip {
+		margin: 0 0 var(--space-block);
+	}
+
+	.case-clip video {
+		display: block;
+		width: auto;
+		max-width: 100%;
+		height: auto;
+		max-height: 75vh;
+		border: 1px solid var(--line);
+		border-radius: var(--radius);
+		background: var(--panel);
+	}
+
 	.case-media {
 		margin-bottom: var(--space-block);
 		border-radius: var(--radius);

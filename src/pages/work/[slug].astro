@@ -65,7 +65,7 @@ const columns = shots.every((shot) => shot.height > shot.width) ? shots.length :
 		</header>
 
 		<!--
-			Media slot. Precedence: embedded video, then real screenshots, then
+			Media slot. Precedence: embedded video, own clip, real screenshots, then
 			nothing. A project with no photograph yet renders no media block at
 			all, since an empty space is more honest than a drawing standing in
 			for hardware that isn't built.
@@ -82,6 +82,22 @@ const columns = shots.every((shot) => shot.height > shot.width) ? shots.length :
 						allowfullscreen
 					/>
 				</div>
+			) : entry.data.video ? (
+				<figure class="case-clip">
+					<video
+						src={entry.data.video.src}
+						poster={entry.data.video.poster}
+						width={entry.data.video.width}
+						height={entry.data.video.height}
+						aria-label={entry.data.video.caption}
+						controls
+						muted
+						loop
+						playsinline
+						preload="metadata"
+					/>
+					<figcaption>{entry.data.video.caption}</figcaption>
+				</figure>
 			) : entry.data.gallery.length > 0 ? (
 				<div class="case-gallery" style={`--shots:${columns}`}>
 					{entry.data.gallery.map((shot) => (

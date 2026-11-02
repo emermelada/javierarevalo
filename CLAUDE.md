@@ -46,7 +46,7 @@ builds and publishes to GitHub Pages (Pages source = GitHub Actions).
   from `src/data/cv.ts`; re-run the script after changing the role.
 - `src/pages/work/[slug].astro`: case-study template. Its media slot renders,
   in order of precedence, an embedded YouTube video (`youtube` in frontmatter),
-  the real screenshots listed under `gallery`, or nothing at all. A project
+  a self-hosted clip from `public/work/` (`video`), the real screenshots listed under `gallery`, or nothing at all. A project
   with no imagery yet gets an empty space rather than a stand-in drawing.
   Phone captures sit side by side; any landscape capture stacks full width.
 

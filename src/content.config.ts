@@ -54,6 +54,20 @@ const work = defineCollection({
 		/** YouTube video ID. When set, the case media slot embeds the video. */
 		youtube: z.string().optional(),
 		/**
+		 * Self-hosted clip from public/work/, played muted and looped like a
+		 * moving screenshot. Width/height are the intrinsic size, so the page
+		 * reserves the right box before the video loads.
+		 */
+		video: z
+			.object({
+				src: z.string(),
+				poster: z.string(),
+				caption: z.string(),
+				width: z.number(),
+				height: z.number(),
+			})
+			.optional(),
+		/**
 		 * Real screenshots of the thing, served from public/work/. The media
 		 * slot renders these; a project with nothing shot yet leaves the list
 		 * empty and gets no media block at all, rather than a stand-in.
