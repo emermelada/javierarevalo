@@ -64,6 +64,8 @@ const columns = shots.every((shot) => shot.height > shot.width) ? shots.length :
 			</dl>
 		</header>
 
+		<!-- An own clip is a tall phone video: it sits beside the text instead of above it. -->
+		<div class={entry.data.video && !entry.data.youtube ? 'case-split' : undefined}>
 		<!--
 			Media slot. Precedence: embedded video, own clip, real screenshots, then
 			nothing. A project with no photograph yet renders no media block at
@@ -131,6 +133,7 @@ const columns = shots.every((shot) => shot.height > shot.width) ? shots.length :
 					</p>
 				)
 			}
+		</div>
 		</div>
 
 		<nav class="case-nav" aria-label="More work">

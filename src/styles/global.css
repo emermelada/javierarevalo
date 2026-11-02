@@ -886,6 +886,26 @@
 		background: var(--panel);
 	}
 
+	/* Clip left, text right; the clip stays in view while the text scrolls past. */
+	.case-split {
+		display: grid;
+		grid-template-columns: auto minmax(0, var(--measure));
+		gap: 3rem;
+		align-items: start;
+		margin-bottom: var(--space-block);
+	}
+
+	.case-split .case-clip {
+		position: sticky;
+		top: 6rem;
+		max-width: 22rem;
+		margin: 0;
+	}
+
+	.case-split .case-body > :first-child {
+		margin-top: 0;
+	}
+
 	.case-media {
 		margin-bottom: var(--space-block);
 		border-radius: var(--radius);
@@ -1035,8 +1055,14 @@
 			grid-template-columns: minmax(0, 1fr);
 		}
 
-		.project__thumb {
-			aspect-ratio: 16 / 9;
+		.case-split {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 1.5rem;
+		}
+
+		.case-split .case-clip {
+			position: static;
+			margin-inline: auto;
 		}
 
 		/* An empty frame isn't worth a phone's first screen. */
