@@ -8,7 +8,6 @@ summary: An Android app that reads completed focus blocks from a time-series dat
 order: 5
 cv: false
 status: shipped
-statusNote: App complete; running on sample data for now
 gallery:
   - src: /work/focusreef-aquarium.jpg
     alt: The FocusReef aquarium screen, showing Tank 1 with 18 of its 24 slots filled by clownfish, a jellyfish and two larger fish over a sandy floor.

@@ -7,7 +7,6 @@ stack: [Preact, htm, three.js, No build step, Deployxa]
 summary: A browser studio where anyone can design a ring, try it on at true scale and download a real STL or OBJ. Built with Franciszek Kossut for HyperBloom October 2026, a UI/UX and web design hackathon.
 order: 3
 status: shipped
-statusNote: Live; hackathon results pending
 links:
   - label: make-a-ring.deployxa.online
     url: https://make-a-ring.deployxa.online

@@ -8,7 +8,6 @@ summary: I wrote the brief, generated the UI with an AI assistant, reviewed and 
 order: 6
 cv: false
 status: shipped
-statusNote: Live since 2026
 links:
   - label: joserodriguez.mov
     url: https://joserodriguez.mov

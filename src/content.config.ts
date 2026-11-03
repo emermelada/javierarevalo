@@ -26,8 +26,6 @@ const work = defineCollection({
 		 * something the page is hiding.
 		 */
 		status: z.enum(['shipped', 'in-progress']),
-		/** Short qualifier shown next to the status, saying what is or isn't done. */
-		statusNote: z.string().optional(),
 		/**
 		 * External destinations (repo, live site, backend…). A list, because
 		 * one project can legitimately be two repositories.

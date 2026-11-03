@@ -69,20 +69,6 @@ export const about =
 	'now studying Computer Science at SDU, and I am looking for work alongside the ' +
 	'degree, part-time or as an intern.';
 
-export interface Fact {
-	label: string;
-	value: string;
-	/** Renders the accent bullet before the value (used for availability). */
-	dot?: boolean;
-}
-
-export const facts: Fact[] = [
-	{ label: 'Based in', value: 'Vejle, Denmark' },
-	{ label: 'Languages', value: 'English C1 · Spanish native' },
-	{ label: 'Focus', value: 'Azure · Automation · Robotics' },
-	{ label: 'Status', value: 'Open to student jobs and internships', dot: true },
-];
-
 export const experience: Entry[] = [
 	{
 		when: 'Mar–May 2026',

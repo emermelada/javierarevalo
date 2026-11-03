@@ -7,7 +7,6 @@ stack: [Kotlin, Jetpack Compose, MVVM, Hilt, Python, Flask, JWT, MySQL, Cloudina
 summary: A native Android client and the REST API behind it, built as my final project for the DAM degree at U-tad. Two repositories that make up one system.
 order: 4
 status: shipped
-statusNote: Delivered June 2025
 links:
   - label: Android app
     url: https://github.com/emermelada/ArtCenter

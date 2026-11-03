@@ -301,12 +301,6 @@
 		padding-block: clamp(2.5rem, 6vw, 4rem) var(--space-section);
 	}
 
-	.hero__role {
-		color: var(--accent);
-		font-weight: 500;
-		margin-bottom: 0.5rem;
-	}
-
 	.hero__name {
 		font-size: var(--text-display);
 		font-weight: 600;
@@ -341,37 +335,6 @@
 		border-radius: var(--radius);
 	}
 
-	/* Key facts: one ruled row of four columns across the hero. */
-	.facts {
-		grid-column: 1 / -1;
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
-		margin: 0;
-		border-block: 1px solid var(--line);
-	}
-
-	.facts div {
-		padding: 0.85rem 1rem;
-		border-left: 1px solid var(--line);
-		font-size: var(--text-small);
-	}
-
-	.facts div:first-child {
-		padding-left: 0;
-		border-left: 0;
-	}
-
-	.facts dt {
-		color: var(--muted);
-		font-size: var(--text-caption);
-		margin-bottom: 0.15rem;
-	}
-
-	.facts dd {
-		margin: 0;
-		font-weight: 500;
-	}
-
 	.status-dot {
 		display: inline-block;
 		width: 0.5em;
@@ -387,10 +350,6 @@
 		background: var(--deep) !important;
 		border: 0 !important;
 		color: var(--on-deep);
-	}
-
-	.section--highlight .section__title {
-		border-top-color: var(--accent-on-deep);
 	}
 
 	.award__title {
@@ -449,15 +408,19 @@
 		border-top: 0;
 	}
 
-	/* Screenshot on the left, or a labelled empty frame until there is one. */
+	/* Screenshot on the left; a project with nothing shot yet is text only. */
 	.project {
 		display: grid;
-		grid-template-columns: 15rem minmax(0, 1fr);
+		grid-template-columns: minmax(0, 1fr);
 		gap: 1.5rem;
 		padding: 1.25rem;
 		background: var(--page);
 		border: 1px solid var(--line);
 		border-radius: var(--radius);
+	}
+
+	.project:has(> .project__media) {
+		grid-template-columns: 15rem minmax(0, 1fr);
 	}
 
 	/* A sibling project hangs off a blue rule, so the two read as one system. */
@@ -498,13 +461,6 @@
 	.project__thumb--portrait img {
 		border-radius: 4px;
 		object-position: top center;
-	}
-
-	.project__thumb--empty {
-		display: grid;
-		place-items: center;
-		font-size: var(--text-caption);
-		color: var(--muted);
 	}
 
 	.project__credit,
@@ -569,28 +525,6 @@
 	.status--in-progress .status-dot {
 		background: transparent;
 		box-shadow: inset 0 0 0 2px var(--accent);
-	}
-
-	/* ---------- Tags ---------- */
-	.tags {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem;
-	}
-
-	.tag {
-		font-size: var(--text-caption);
-		line-height: 1.3;
-		padding: 0.2rem 0.5rem;
-		border-radius: 4px;
-		background: var(--panel);
-		color: var(--muted);
-	}
-
-	.tag--key {
-		background: var(--accent-soft);
-		color: var(--accent);
-		font-weight: 500;
 	}
 
 	/* ---------- Experience / education entries ---------- */
@@ -800,15 +734,7 @@
 	.case-header__title {
 		font-size: var(--text-h1);
 		letter-spacing: -0.025em;
-		margin-block: 1rem;
-	}
-
-	.case-header__tagline {
-		font-family: var(--font-serif);
-		font-size: var(--text-lede);
-		line-height: 1.5;
-		max-width: 36em;
-		margin-bottom: 2rem;
+		margin-block: 1rem 2rem;
 	}
 
 	.case-facts {
@@ -829,13 +755,6 @@
 	.case-facts dd {
 		margin: 0;
 		font-weight: 500;
-	}
-
-	.case-facts__note {
-		display: block;
-		font-weight: 400;
-		color: var(--muted);
-		margin-top: 0.2rem;
 	}
 
 	/*
@@ -1026,21 +945,6 @@
 		}
 	}
 
-	@media (max-width: 56rem) {
-		.facts {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-
-		.facts div:nth-child(3) {
-			padding-left: 0;
-			border-left: 0;
-		}
-
-		.facts div:nth-child(n + 3) {
-			border-top: 1px solid var(--line);
-		}
-	}
-
 	@media (max-width: 48rem) {
 		.hero {
 			grid-template-columns: 1fr;
@@ -1051,7 +955,7 @@
 			width: 8rem;
 		}
 
-		.project {
+		.project:has(> .project__media) {
 			grid-template-columns: minmax(0, 1fr);
 		}
 
@@ -1063,12 +967,6 @@
 		.case-split .case-clip {
 			position: static;
 			margin-inline: auto;
-		}
-
-		/* An empty frame isn't worth a phone's first screen. */
-		.project__thumb--empty {
-			aspect-ratio: auto;
-			padding-block: 1.25rem;
 		}
 
 		.entry {
@@ -1089,19 +987,6 @@
 
 		.site-nav {
 			gap: 0.9rem;
-		}
-
-		.facts {
-			grid-template-columns: 1fr;
-		}
-
-		.facts div {
-			padding-left: 0;
-			border-left: 0;
-		}
-
-		.facts div + div {
-			border-top: 1px solid var(--line);
 		}
 	}
 
