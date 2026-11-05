@@ -352,6 +352,29 @@
 		color: var(--on-deep);
 	}
 
+	/* Text on the left, the winning project's screenshot on the right. */
+	.award {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+		gap: 2rem clamp(2rem, 5vw, 4rem);
+		align-items: center;
+	}
+
+	.award__shot {
+		margin: 0;
+	}
+
+	.award__shot img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: var(--radius);
+	}
+
+	.award__shot figcaption {
+		color: var(--on-deep-muted);
+	}
+
 	.award__title {
 		font-size: var(--text-h1);
 		letter-spacing: -0.02em;
@@ -972,6 +995,10 @@
 		.entry {
 			grid-template-columns: 1fr;
 			gap: 0.25rem;
+		}
+
+		.award {
+			grid-template-columns: minmax(0, 1fr);
 		}
 
 		.case-facts,

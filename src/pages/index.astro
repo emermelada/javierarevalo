@@ -11,7 +11,7 @@
  * Every section uses the same layout: title on top, content below. The
  * contact section lives in the Base layout (it doubles as the footer).
  */
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import { about, award, certs, education, experience, pitch, profile, skills, spokenLanguages } from '../data/cv';
 
@@ -28,7 +28,10 @@ const person = {
 	affiliation: { '@type': 'CollegeOrUniversity', name: 'University of Southern Denmark' },
 };
 
-// The award band is Make-a-Ring's win, so the project list skips it.
+// The award band is Make-a-Ring's win, so the project list skips it and the
+// band shows the case's first screenshot instead.
+const awardCase = (await getEntry('work', award.case))!;
+const awardShot = awardCase.data.gallery[0];
 const work = (await getCollection('work', (entry) => entry.id !== award.case)).sort(
 	(a, b) => a.data.order - b.data.order,
 );
@@ -75,6 +78,14 @@ const work = (await getCollection('work', (entry) => entry.id !== award.case)).s
 					<a class="btn" href={award.repo} rel="noopener">Repository</a>
 				</div>
 			</div>
+			{awardShot && (
+				<figure class="award__shot">
+					<a href={`/work/${award.case}/`} tabindex="-1" aria-hidden="true">
+						<img src={awardShot.src} alt="" width={awardShot.width} height={awardShot.height} decoding="async" />
+					</a>
+					{awardCase.data.credit && <figcaption>{awardCase.data.credit}</figcaption>}
+				</figure>
+			)}
 		</div>
 		</div>
 	</section>
