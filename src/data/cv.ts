@@ -142,13 +142,16 @@ export const spokenLanguages = [
 ];
 
 /**
- * Competition entry. The home page gives it its own band under the hero, and
+ * Competition win. The home page gives it its own band under the hero, and
  * the PDF lists it under competitions. `case` is the slug of the matching case study.
  */
 export const award = {
-	event: 'Nordic AI Cup 2026',
-	team: "Elysa's Secret",
-	org: 'University of Southern Denmark',
-	when: 'Sep 2026',
-	case: 'nordic-ai-cup',
+	event: 'HyperBloom October 2026',
+	result: '1st place of 738 participants',
+	track: 'UI/UX and Web Design',
+	partner: 'Franciszek Kossut',
+	when: 'Oct 2026',
+	case: 'make-a-ring',
+	live: 'https://make-a-ring.deployxa.online',
+	repo: 'https://github.com/FearedLynx/make-a-ring',
 };

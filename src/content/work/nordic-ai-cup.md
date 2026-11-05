@@ -10,6 +10,12 @@ status: shipped
 links:
   - label: Repository
     url: https://github.com/emermelada/nordic-ai-cup
+gallery:
+  - src: /work/nordic-ai-cup-frame.jpg
+    alt: An aerial frame of a lakeshore with fields and forest, with yellow boxes around about forty small labelled objects such as planes, helicopters, launchers and towers.
+    caption: A Drone Flyby training frame, with every labelled object boxed
+    width: 1500
+    height: 844
 ---
 
 ## Problem
