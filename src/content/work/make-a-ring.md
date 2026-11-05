@@ -1,10 +1,10 @@
 ---
 title: Make-a-Ring
-tagline: 'A ring studio in the browser for people who aren''t jewellers: pick or draw a pattern, see it on a hand, and leave with a print-ready file.'
+tagline: '1st place of 738 participants at HyperBloom October 2026 (UI/UX and Web Design). A ring studio in the browser for people who aren''t jewellers: pick or draw a pattern, see it on a hand, and leave with a print-ready file.'
 year: '2026'
-role: Hackathon entry · co-built with Franciszek Kossut
+role: Hackathon winner, 1st of 738 · co-built with Franciszek Kossut
 stack: [Preact, htm, three.js, No build step, Deployxa]
-summary: A browser studio where anyone can design a ring, try it on at true scale and download a real STL or OBJ. Built with Franciszek Kossut for HyperBloom October 2026, a UI/UX and web design hackathon.
+summary: A browser studio where anyone can design a ring, try it on at true scale and download a real STL or OBJ. Built with Franciszek Kossut for HyperBloom October 2026, a UI/UX and web design hackathon, where it took 1st place out of 738 participants.
 order: 3
 status: shipped
 links:
@@ -67,8 +67,9 @@ the whole journey from idea to file happens in the browser.
 ## Result
 
 The studio is live at
-[make-a-ring.deployxa.online](https://make-a-ring.deployxa.online) and was
-submitted to HyperBloom. The results are still pending.
+[make-a-ring.deployxa.online](https://make-a-ring.deployxa.online) and
+took **1st place out of 738 participants** at HyperBloom October 2026, in the
+UI/UX and Web Design track.
 
 Accessibility was measured rather than assumed:
 
