@@ -7,7 +7,6 @@ stack: [Python, Deterministic simulation, Auctions, pydantic, Hypothesis, TypeSc
 summary: Five boats with no leader share a task table over a modelled radio and auction the work among themselves. I wrote that swarm brain, the shore's picture of the fleet and the message contract between the Python simulator and the TypeScript console.
 order: 1
 status: shipped
-cv: false
 gallery:
   - src: /work/pharos-contact.jpg
     alt: The operator console over a chart of the Great Belt. Five boats sit on cable and lane stations; a contact with no AIS match is circled on the HVDC cable, and a held decision on the right asks the operator to approve a closer look.
