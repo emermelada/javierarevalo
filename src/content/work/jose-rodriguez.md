@@ -5,7 +5,7 @@ year: '2026'
 role: Client work · build, review & deployment
 stack: [AI-assisted build, GitHub Pages, Cloudflare, Code review]
 summary: I wrote the brief, generated the UI with an AI assistant, reviewed and fixed the code myself, and handled the domain and deployment.
-order: 6
+order: 7
 cv: false
 status: shipped
 links:

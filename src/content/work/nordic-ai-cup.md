@@ -5,7 +5,7 @@ year: '2026'
 role: Team Elysa's Secret · lead on Drone Flyby
 stack: [Python, YOLO11, PyTorch, FastAPI, Docker, Kaggle, Cloudflare Tunnel]
 summary: A four-person team from the University of Southern Denmark. Each challenge was a live HTTP service the organisers' grader called in real time. I owned Drone Flyby, a real-time object detector steering its own camera.
-order: 1
+order: 2
 status: shipped
 links:
   - label: Repository

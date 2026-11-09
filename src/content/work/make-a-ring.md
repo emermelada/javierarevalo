@@ -5,7 +5,7 @@ year: '2026'
 role: Hackathon winner, 1st of 738 · co-built with Franciszek Kossut
 stack: [Preact, htm, three.js, No build step, Deployxa]
 summary: A browser studio where anyone can design a ring, try it on at true scale and download a real STL or OBJ. Built with Franciszek Kossut for HyperBloom October 2026, a UI/UX and web design hackathon, where it took 1st place out of 738 participants.
-order: 3
+order: 4
 status: shipped
 links:
   - label: make-a-ring.deployxa.online

@@ -5,7 +5,7 @@ year: '2025'
 role: Final degree project · Android app & REST API
 stack: [Kotlin, Jetpack Compose, MVVM, Hilt, Python, Flask, JWT, MySQL, Cloudinary]
 summary: A native Android client and the REST API behind it, built as my final project for the DAM degree at U-tad. Two repositories that make up one system.
-order: 4
+order: 5
 status: shipped
 links:
   - label: Android app

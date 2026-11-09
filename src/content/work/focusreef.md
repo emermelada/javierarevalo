@@ -5,7 +5,7 @@ year: '2026'
 role: Personal project · Android app
 stack: [Kotlin, Android, NAS-hosted database, Time-series data]
 summary: An Android app that reads completed focus blocks from a time-series database on my home NAS and turns them into tokens you spend on an aquarium.
-order: 5
+order: 6
 cv: false
 status: shipped
 gallery:
