@@ -18,7 +18,6 @@ gallery:
     caption: The relay boat switched off. Boats the shore cannot hear show the age of their last report
     width: 1500
     height: 844
-credit: Operator console by Alexandru, team Elysa's Secret
 ---
 
 ## Problem
@@ -69,25 +68,27 @@ part was built against.
 
 ## Result
 
-The evaluation scenario: a three-hour warm-up, then one boat runs low on
+The evaluation scenario: after a three-hour warm-up, one boat runs low on
 battery and heads home, a radio link is cut and an unidentified contact
-appears on a cable. The same 30 seeds were run with repair off and with it
-on, from identical starting states. Every number is the evaluator's ground
-truth, not what the shore believed.
+appears on a cable. Each of 30 seeds runs twice from the same warm state, once
+with repair off and once with Pharos, and the two runs differ in one setting.
+Every number is the evaluator's ground truth, not what the shore believed.
 
-| Measured over 30 seeds (median) | Repair off | Pharos |
-|---|---|---|
-| Cable left overdue at the end | 6.7 km | **1.4 km**, better in 30 of 30 |
-| Every task owned by a live boat again | never | **60 s** after the failure |
-| Worst time since a cable sample was seen | 16,558 s | **12,798 s** |
-| Real ship crossings within camera range (of 9) | **9** | 5, worse in 20 of 30 |
+| Median over 30 seeds (min to max) | Repair off | Pharos | Seeds |
+|---|---|---|---|
+| Cable overdue at the end | 6.8 km (0.0 to 10.7) | **2.5 km** (0.0 to 6.3) | 28 better, 2 equal |
+| Cable overdue on average, failure to end | 2.2 km | **0.4 km** | 28 better, 2 equal |
+| Every cable segment owned by a live boat again | never | **60 s** after the failure | 29 of 30 |
+| Worst time since a cable sample was seen | 16,726 s | **13,566 s** | 22 better, 8 equal |
+| A boat sent to keep the contact in view | never | **10 of 30** seeds | |
+| Real ship crossings within camera range (of 9) | **9** | 6 (3 to 8) | 28 worse, 2 equal |
 
-The last row is the cost, and it belongs on the same table. To keep the
-cables fresh, repair moves a boat off its lane picket, so fewer real ship
-crossings happen in view. With 4 km radios instead of the default range, the
-gain shrinks and the contact is never handed to a watcher. Five boats cannot
-cover everything. What a swarm can do is choose where the gap lands and
-show the person in charge exactly where it is.
+The last row is the price. To keep the cables fresh, repair pulls a boat off
+its picket on the shipping lane, so fewer real crossings happen in view. The
+contact is spotted in only 12 of the 30 seeds, depending on where a patrolling
+boat is in its loop when it appears. Five boats cannot cover everything. What
+a swarm can do is choose where the gap lands and show the person in charge
+exactly where it is.
 
-These numbers come from the Saturday build. The code changed after that, so
-they describe that build, not the final one.
+Measured on the final build. Every seed passed the evaluator's fairness
+checks.

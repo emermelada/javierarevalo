@@ -127,9 +127,8 @@ export const skills = [
 		title: 'Cloud & Microsoft',
 		items: 'Microsoft Azure, Dynamics 365, Customer Insights, GitHub Actions, Cloudflare',
 	},
-	{ title: 'Programming', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C# / .NET' },
+	{ title: 'Programming', items: 'Kotlin, Java, SQL / MySQL, Python, Swift, C#' },
 	{ title: 'Mobile & Embedded', items: 'Android SDK, iOS / Swift, ESP32' },
-	{ title: 'AI-assisted delivery', items: 'Prompt engineering, review of generated code, prototyping' },
 	/* Personal, not professional: its own group so it never reads as a claim of
 	   work experience with Linux. */
 	{ title: 'Linux', items: 'CachyOS daily; Debian, Mint, Arch, Raspberry Pi OS' },
